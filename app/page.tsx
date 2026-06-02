@@ -84,7 +84,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 -mt-6">
+      <div className="max-w-4xl mx-auto px-4 -mt-6">
 
         {/* Stats */}
         {hasStarted && (
@@ -184,3 +184,4 @@ export default function HomePage() {
     </div>
   );
 }
+
