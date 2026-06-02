@@ -160,6 +160,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "appraisal", pos: "n.", vi: "đánh giá nhân viên", example: "Annual appraisals help identify areas for growth." },
     ],
   }
+,
+  {
+    id: "equipment",
+    title: "Thiết bị & Máy móc",
+    emoji: "⚙️",
+    description: "Từ vựng về thiết bị, máy móc hay gặp trong TOEIC Part 1-4",
+    words: [
+      { en: "equipment", pos: "n.", vi: "thiết bị", example: "The factory has modern equipment." },
+      { en: "machinery", pos: "n.", vi: "máy móc", example: "The machinery needs regular maintenance." },
+      { en: "operate", pos: "v.", vi: "vận hành", example: "Only trained staff can operate this machine." },
+      { en: "repair", pos: "v.", vi: "sửa chữa", example: "The technician came to repair the printer." },
+      { en: "install", pos: "v.", vi: "lắp đặt", example: "They will install the new system tomorrow." },
+      { en: "malfunction", pos: "n.", vi: "sự cố", example: "A malfunction caused the delay in production." },
+      { en: "spare parts", pos: "n.", vi: "phụ tùng thay thế", example: "We need to order spare parts for the machine." },
+      { en: "assembly", pos: "n.", vi: "lắp ráp", example: "The assembly line runs 24 hours a day." },
+      { en: "capacity", pos: "n.", vi: "công suất", example: "The factory is running at full capacity." },
+      { en: "inspection", pos: "n.", vi: "kiểm tra, giám sát", example: "A safety inspection is required every month." },
+    ],
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
