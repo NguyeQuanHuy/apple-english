@@ -58,55 +58,55 @@ function IconGames() {
 const FEATURES = [
   {
     Icon: IconMatGoc,
-    title: "Mat goc",
-    subtitle: "Lo trinh A0 -> A2",
-    desc: "Tu bang chu cai den giao tiep co ban. Moi bai 5-10 phut, co giai thich tieng Viet.",
+    title: "Mất gốc",
+    subtitle: "Lộ trình A0 → A2",
+    desc: "Từ bảng chữ cái đến giao tiếp cơ bản. Mỗi bài 5–10 phút, có giải thích tiếng Việt.",
     href: "/learn/beginner",
-    badge: "Pho bien nhat",
+    badge: "Phổ biến nhất",
     badgeColor: "bg-sky-500 text-white",
     accent: "border-l-sky-400",
-    tag: "20 bai hoc",
+    tag: "20 bài học",
   },
   {
     Icon: IconToeic,
     title: "TOEIC",
-    subtitle: "Band 400-700",
-    desc: "Tu vung theo chu de cong so, de mini co bam gio. Chien luoc lam bai thuc te.",
+    subtitle: "Band 400–700",
+    desc: "Từ vựng theo chủ đề công sở, đề mini có bấm giờ. Chiến lược làm bài thực tế.",
     href: "/learn/toeic",
-    badge: "Co mock test",
+    badge: "Có mock test",
     badgeColor: "bg-indigo-500 text-white",
     accent: "border-l-indigo-400",
-    tag: "3 chu de · 2 de thi",
+    tag: "3 chủ đề · 2 đề thi",
   },
   {
     Icon: IconChuDe,
-    title: "Chu de",
-    subtitle: "Tinh huong thuc te",
-    desc: "Du lich, cong viec, doi song, cong nghe... Tu vung + cum giao tiep + quiz.",
+    title: "Chủ đề",
+    subtitle: "Tình huống thực tế",
+    desc: "Du lịch, công việc, đời sống, công nghệ... Từ vựng + cụm giao tiếp + quiz.",
     href: "/learn/topics",
     badge: null,
     badgeColor: "",
     accent: "border-l-teal-400",
-    tag: "4 chu de",
+    tag: "4 chủ đề",
   },
   {
     Icon: IconGames,
     title: "Mini Games",
-    subtitle: "Hoc ma vui",
-    desc: "Ghep tu, xep cau, quiz toc do, dien tu. Moi van ~1 phut, kiem XP nhanh nhat.",
+    subtitle: "Học mà vui",
+    desc: "Ghép từ, xếp câu, quiz tốc độ, điền từ. Mỗi ván ~1 phút, kiếm XP nhanh nhất.",
     href: "/games",
-    badge: "Vui nhat",
+    badge: "Vui nhất",
     badgeColor: "bg-violet-500 text-white",
     accent: "border-l-violet-400",
-    tag: "4 tro choi",
+    tag: "4 trò chơi",
   },
 ];
 
 const WHY_ITEMS = [
-  { icon: "VN", title: "Giai thich tieng Viet", desc: "Khong bi mat phuong huong khi hoc" },
-  { icon: "F", title: "Gamified moi ngay", desc: "Streak, XP, level - hoc nhu choi game" },
-  { icon: "Z", title: "Khong can dang ky", desc: "Mo trinh duyet la hoc ngay, khong rao can" },
-  { icon: "0", title: "Hoan toan mien phi", desc: "Khong quang cao, khong phi an" },
+  { icon: "VN", title: "Giải thích tiếng Việt", desc: "Không bị mất phương hướng khi học" },
+  { icon: "F", title: "Gamified mỗi ngày", desc: "Streak, XP, level — học như chơi game" },
+  { icon: "Z", title: "Không cần đăng ký", desc: "Mở trình duyệt là học ngay, không rào cản" },
+  { icon: "0", title: "Hoàn toàn miễn phí", desc: "Không quảng cáo, không phí ẩn" },
 ];
 export default function HomePage() {
   const { xp, streak, completedLessons } = useProgress();
@@ -118,22 +118,22 @@ export default function HomePage() {
       <div className="bg-gradient-to-br from-sky-500 via-sky-400 to-blue-600 text-white px-4 pt-12 pb-20">
         <div className="max-w-2xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full mb-6">
-            <Star size={12} fill="currentColor" /> Hoc tieng Anh cho nguoi Viet mat goc
+            <Star size={12} fill="currentColor" /> Học tiếng Anh cho người Việt mất gốc
           </div>
           <h1 className="font-display text-4xl md:text-5xl font-black leading-tight mb-4">
-            Hoc tieng Anh<br />
-            <span className="text-yellow-300">khong con so nua</span>
+            Học tiếng Anh<br />
+            <span className="text-yellow-300">không còn sợ nữa</span>
           </h1>
           <p className="text-sky-100 text-lg mb-8 leading-relaxed max-w-md mx-auto">
-            Tu A0 len giao tiep tu tin - theo lo trinh ro rang,<br />
-            giai thich tieng Viet, vui nhu choi game.
+            Từ A0 lên giao tiếp tự tin — theo lộ trình rõ ràng,<br />
+            giải thích tiếng Việt, vui như chơi game.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/learn/beginner" className="inline-flex items-center justify-center gap-2 bg-white text-sky-600 font-black px-8 py-4 rounded-chunky shadow-bump shadow-sky-700 active:shadow-none active:translate-y-1 transition-all text-base">
-              Bat dau hoc ngay <ChevronRight size={18} />
+              Bắt đầu học ngay <ChevronRight size={18} />
             </Link>
             <Link href="/learn/toeic" className="inline-flex items-center justify-center gap-2 bg-white/20 text-white font-bold px-8 py-4 rounded-chunky border-2 border-white/30 hover:bg-white/30 transition-all text-base">
-              Luyen TOEIC <Target size={16} />
+              Luyện TOEIC <Target size={16} />
             </Link>
           </div>
         </div>
@@ -141,23 +141,23 @@ export default function HomePage() {
       <div className="max-w-4xl mx-auto px-4 -mt-6">
         {hasStarted && (
           <div className="bg-white rounded-chunky border-2 border-sky-100 shadow-card p-5 mb-6">
-            <p className="text-xs font-bold text-sky-400 uppercase tracking-wide mb-3">Tien do cua ban</p>
+            <p className="text-xs font-bold text-sky-400 uppercase tracking-wide mb-3">Tiến độ của bạn</p>
             <div className="flex gap-6 flex-wrap">
-              <div className="flex items-center gap-2"><span className="text-2xl">🔥</span><div><p className="text-xl font-black text-sky-900">{streak}</p><p className="text-xs text-sky-400">ngay streak</p></div></div>
-              <div className="flex items-center gap-2"><span className="text-2xl">⚡</span><div><p className="text-xl font-black text-sky-900">{xp}</p><p className="text-xs text-sky-400">XP tich luy</p></div></div>
-              <div className="flex items-center gap-2"><span className="text-2xl">📖</span><div><p className="text-xl font-black text-sky-900">{completedLessons.length}</p><p className="text-xs text-sky-400">bai da hoc</p></div></div>
-              <div className="flex items-center gap-2"><span className="text-2xl">🏅</span><div><p className="text-xl font-black text-sky-900">{level.name}</p><p className="text-xs text-sky-400">cap do hien tai</p></div></div>
+              <div className="flex items-center gap-2"><span className="text-2xl">🔥</span><div><p className="text-xl font-black text-sky-900">{streak}</p><p className="text-xs text-sky-400">ngày streak</p></div></div>
+              <div className="flex items-center gap-2"><span className="text-2xl">⚡</span><div><p className="text-xl font-black text-sky-900">{xp}</p><p className="text-xs text-sky-400">XP tích lũy</p></div></div>
+              <div className="flex items-center gap-2"><span className="text-2xl">📖</span><div><p className="text-xl font-black text-sky-900">{completedLessons.length}</p><p className="text-xs text-sky-400">bài đã học</p></div></div>
+              <div className="flex items-center gap-2"><span className="text-2xl">🏅</span><div><p className="text-xl font-black text-sky-900">{level.name}</p><p className="text-xs text-sky-400">cấp độ hiện tại</p></div></div>
             </div>
             <div className="mt-4">
-              <div className="flex justify-between text-xs text-sky-400 mb-1"><span>Tien do len level tiep</span><span>{Math.round(level.progress * 100)}%</span></div>
+              <div className="flex justify-between text-xs text-sky-400 mb-1"><span>Tiến độ lên level tiếp</span><span>{Math.round(level.progress * 100)}%</span></div>
               <div className="h-2 bg-sky-50 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-sky-400 to-blue-500 rounded-full transition-all" style={{ width: `${level.progress * 100}%` }} /></div>
             </div>
           </div>
         )}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display text-2xl font-black text-sky-900">Chon cach hoc cua ban</h2>
-            <span className="text-xs text-sky-400 font-semibold">4 lo trinh</span>
+            <h2 className="font-display text-2xl font-black text-sky-900">Chọn cách học của bạn</h2>
+            <span className="text-xs text-sky-400 font-semibold">4 lộ trình</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FEATURES.map((f) => (
@@ -173,7 +173,7 @@ export default function HomePage() {
                   <p className="text-sky-500 text-sm leading-relaxed mb-2">{f.desc}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-sky-400 bg-sky-50 px-2 py-0.5 rounded-full">{f.tag}</span>
-                    <span className="flex items-center gap-0.5 text-xs font-bold text-sky-500 group-hover:text-sky-700">Vao hoc <ChevronRight size={12} /></span>
+                    <span className="flex items-center gap-0.5 text-xs font-bold text-sky-500 group-hover:text-sky-700">Vào học <ChevronRight size={12} /></span>
                   </div>
                 </div>
               </Link>
@@ -181,7 +181,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="mb-8">
-          <h2 className="font-display text-2xl font-black text-sky-900 mb-4">Tai sao chon Apple English?</h2>
+          <h2 className="font-display text-2xl font-black text-sky-900 mb-4">Tại sao chọn Apple English?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {WHY_ITEMS.map((item, i) => (
               <div key={i} className="flex flex-col items-center text-center gap-2 p-4 bg-white rounded-2xl border-2 border-sky-100 hover:border-sky-300 hover:shadow-card transition-all">
@@ -194,10 +194,10 @@ export default function HomePage() {
         </div>
         <div className="bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl p-8 text-center text-white">
           <p className="text-3xl mb-3">🚀</p>
-          <h2 className="font-display text-2xl font-black mb-2">San sang bat dau chua?</h2>
-          <p className="text-sky-100 mb-5 text-sm">Chi can 10 phut moi ngay - khong can dang ky, khong can tra phi.</p>
+          <h2 className="font-display text-2xl font-black mb-2">Sẵn sàng bắt đầu chưa?</h2>
+          <p className="text-sky-100 mb-5 text-sm">Chỉ cần 10 phút mỗi ngày — không cần đăng ký, không cần trả phí.</p>
           <Link href="/learn/beginner" className="inline-flex items-center gap-2 bg-white text-sky-600 font-black px-8 py-4 rounded-chunky shadow-bump shadow-sky-800 active:shadow-none active:translate-y-1 transition-all">
-            Bat dau ngay mien phi <ChevronRight size={18} />
+            Bắt đầu ngay miễn phí <ChevronRight size={18} />
           </Link>
         </div>
       </div>
