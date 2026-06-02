@@ -1,4 +1,4 @@
-﻿
+
 export const EXTRA_LESSONS = [
   {
     id: "b-11",
@@ -6,7 +6,7 @@ export const EXTRA_LESSONS = [
     order: 1,
     level: "A1",
     xpReward: 30,
-    title: "So sanh hon - Comparative",
+    title: "So sánh hơn — Comparative",
     subtitle: "Bigger, faster, more beautiful...",
     steps: [
       { kind: "intro", title: "So sanh trong tieng Anh", body: "Khi muon noi A hon B, ta them -er hoac dung more. Vi du: tall -> taller, beautiful -> more beautiful." },
@@ -34,7 +34,7 @@ export const EXTRA_LESSONS = [
     order: 2,
     level: "A1",
     xpReward: 30,
-    title: "So sanh nhat - Superlative",
+    title: "So sánh nhất — Superlative",
     subtitle: "The biggest, the best, the most...",
     steps: [
       { kind: "intro", title: "So sanh nhat", body: "Khi muon noi A la nhat trong nhom, ta dung the + tinh tu + est hoac the most + tinh tu." },
@@ -57,7 +57,7 @@ export const EXTRA_LESSONS = [
     order: 1,
     level: "A1",
     xpReward: 35,
-    title: "Hien tai tiep dien - Present Continuous",
+    title: "Hiện tại tiếp diễn — Present Continuous",
     subtitle: "I am eating. She is working.",
     steps: [
       { kind: "intro", title: "Dang lam gi luc nay?", body: "Present Continuous dung de noi ve viec dang xay ra ngay luc noi chuyen. Cong thuc: am/is/are + V-ing." },
@@ -242,8 +242,8 @@ export const EXTRA_LESSONS = [
 ];
 
 export const EXTRA_PATH = [
-  { unit: 6, title: "So sanh", description: "Hon, nhat - cach mo ta va so sanh", lessonIds: ["b-11", "b-12"] },
-  { unit: 7, title: "Thi tiep dien va tuong lai", description: "Dang lam gi? Se lam gi?", lessonIds: ["b-13", "b-14"] },
+  { unit: 6, title: "So sanh", description: "Hơn, nhất — cách mô tả và so sánh", lessonIds: ["b-11", "b-12"] },
+  { unit: 7, title: "Thì tiếp diễn và tương lai", description: "Đang làm gì? Sẽ làm gì?", lessonIds: ["b-13", "b-14"] },
   { unit: 8, title: "Dong tu khuyet thieu", description: "Can, should, must - kha nang va bat buoc", lessonIds: ["b-15", "b-16"] },
   { unit: 9, title: "Thi hoan thanh va bi dong", description: "Da lam gi? Duoc lam boi ai?", lessonIds: ["b-17", "b-18"] },
   { unit: 10, title: "Nang cao - Dieu kien & Viet", description: "If clauses va ky nang viet email", lessonIds: ["b-19", "b-20"] },
