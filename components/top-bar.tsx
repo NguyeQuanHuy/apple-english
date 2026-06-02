@@ -21,14 +21,13 @@ export function TopBar() {
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-1">
-          <NavLink href="/">Trang chu</NavLink>
-          <NavLink href="/learn/beginner">Mat goc</NavLink>
+          <NavLink href="/">Trang chủ</NavLink>
+          <NavLink href="/learn/beginner">Mất gốc</NavLink>
           <NavLink href="/learn/toeic">TOEIC</NavLink>
-          <NavLink href="/learn/topics">Chu de</NavLink>
+          <NavLink href="/learn/topics">Chủ đề</NavLink>
           <NavLink href="/games">Mini Games</NavLink>
           <NavLink href="/blog">Bài viết</NavLink>
-          <NavLink href="/blog">Bài viết</NavLink>
-          <NavLink href="/dashboard">Tien do</NavLink>
+          <NavLink href="/dashboard">Tiến độ</NavLink>
         </nav>
         <div className="flex items-center gap-2">
           {mounted && (
@@ -70,4 +69,5 @@ function Stat({ icon, value, label, color }: { icon: React.ReactNode; value: num
     </div>
   );
 }
+
 
