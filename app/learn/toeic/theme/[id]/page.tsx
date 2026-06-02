@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ export default function ThemePage() {
   const addXp = useProgress((s) => s.addXp);
   const router = useRouter();
 
-  if (!theme) return <div className="p-8">Không tìm thấy chủ đề.</div>;
+  if (!theme) return <div className="p-8">KhÃ´ng tÃ¬m tháº¥y chá»§ Ä‘á».</div>;
 
   const w = theme.words[idx];
   const isLast = idx === theme.words.length - 1;
@@ -23,7 +23,7 @@ export default function ThemePage() {
   function next() {
     setFlipped(false);
     if (isLast) {
-      addXp(15, `toeic-theme:${theme.id}`);
+      addXp(15, `toeic-theme:${theme?.id ?? "unknown"}`);
       router.push("/learn/toeic");
     } else setIdx(idx + 1);
   }
@@ -78,7 +78,7 @@ export default function ThemePage() {
                   <div className="font-display text-5xl md:text-6xl font-black">{w.en}</div>
                   <div className="text-sm text-ink-500 mt-6 inline-flex items-center gap-1.5">
                     <RotateCw className="w-3.5 h-3.5" />
-                    Bấm để xem nghĩa
+                    Báº¥m Ä‘á»ƒ xem nghÄ©a
                   </div>
                 </motion.div>
               ) : (
@@ -103,13 +103,14 @@ export default function ThemePage() {
 
       <div className="mt-6 flex items-center justify-between">
         <button onClick={prev} disabled={idx === 0} className="inline-flex items-center gap-1 text-sm font-bold text-ink-500 disabled:opacity-30">
-          <ArrowLeft className="w-4 h-4" /> Trước
+          <ArrowLeft className="w-4 h-4" /> TrÆ°á»›c
         </button>
         <button onClick={next} className="btn-bump-teal">
-          {isLast ? "Hoàn thành (+15 XP)" : "Từ tiếp theo"}
+          {isLast ? "HoÃ n thÃ nh (+15 XP)" : "Tá»« tiáº¿p theo"}
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
     </div>
   );
 }
+

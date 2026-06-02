@@ -14,11 +14,11 @@ export default function BlogPage() {
     <main className="min-h-screen">
       {/* Hero */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-14 pb-8 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ember-500/10 text-ember-600 text-xs font-bold uppercase tracking-widest mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 text-sky-600 text-xs font-bold uppercase tracking-widest mb-4">
           <BookOpen className="w-3.5 h-3.5" /> Bài viết
         </div>
         <h1 className="font-display text-4xl md:text-5xl font-black tracking-tight leading-tight mb-3">
-          Góc học tiếng Anh <span className="text-ember-500">thực tế</span>
+          Góc học tiếng Anh <span className="text-sky-500">thực tế</span>
         </h1>
         <p className="text-ink-500 dark:text-paper-200 text-lg leading-relaxed">
           Mẹo hay, kinh nghiệm thực chiến cho người Việt mất gốc muốn lấy lại tiếng Anh.
@@ -32,8 +32,8 @@ export default function BlogPage() {
             onClick={() => setActive(null)}
             className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
               active === null
-                ? "bg-ember-500 text-white"
-                : "bg-ink-900/5 dark:bg-paper-50/5 text-ink-700 dark:text-paper-100 hover:bg-ink-900/10"
+                ? "bg-sky-500 text-white"
+                : "bg-ink-900/5 dark:bg-paper-50/5 text-ink-700 dark:text-paper-100 hover:bg-sky-500/10"
             }`}
           >
             Tất cả
@@ -44,8 +44,8 @@ export default function BlogPage() {
               onClick={() => setActive(tag === active ? null : tag)}
               className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
                 active === tag
-                  ? "bg-ember-500 text-white"
-                  : "bg-ink-900/5 dark:bg-paper-50/5 text-ink-700 dark:text-paper-100 hover:bg-ink-900/10"
+                  ? "bg-sky-500 text-white"
+                  : "bg-ink-900/5 dark:bg-paper-50/5 text-ink-700 dark:text-paper-100 hover:bg-sky-500/10"
               }`}
             >
               {tag}
@@ -67,12 +67,12 @@ export default function BlogPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {post.tags?.map((tag) => (
-                      <span key={tag} className="px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-600 dark:text-teal-400 text-xs font-semibold">
+                      <span key={tag} className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h2 className="font-display text-xl font-black tracking-tight leading-snug mb-2 group-hover:text-ember-500 transition-colors">
+                  <h2 className="font-display text-xl font-black tracking-tight leading-snug mb-2 group-hover:text-sky-500 transition-colors">
                     {post.emoji} {post.title}
                   </h2>
                   <p className="text-ink-500 dark:text-paper-200 text-sm leading-relaxed line-clamp-2">
@@ -86,7 +86,7 @@ export default function BlogPage() {
                     {post.date && <span>{post.date}</span>}
                   </div>
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-ember-500/10 grid place-items-center text-ember-500 group-hover:bg-ember-500 group-hover:text-white transition-all">
+                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-ember-500/10 grid place-items-center text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-all">
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </div>
@@ -104,3 +104,4 @@ export default function BlogPage() {
     </main>
   );
 }
+

@@ -22,8 +22,8 @@ function renderBlock(block: ContentBlock, i: number) {
       return <h2 key={i} className="font-display text-2xl font-black tracking-tight mt-2">{block.text}</h2>;
     case "quote":
       return (
-        <blockquote key={i} className="border-l-4 border-ember-500 pl-4 py-1 bg-ember-500/5 rounded-r-xl">
-          <p className="text-ember-700 dark:text-ember-100 italic leading-relaxed">{block.text}</p>
+        <blockquote key={i} className="border-l-4 border-sky-500 pl-4 py-1 bg-sky-500/5 rounded-r-xl">
+          <p className="text-sky-700 dark:text-sky-100 italic leading-relaxed">{block.text}</p>
         </blockquote>
       );
     case "list":
@@ -31,7 +31,7 @@ function renderBlock(block: ContentBlock, i: number) {
         <ul key={i} className="space-y-2">
           {block.items.map((item, j) => (
             <li key={j} className="flex gap-2 text-ink-700 dark:text-paper-100 leading-relaxed">
-              <span className="text-ember-500 mt-1 flex-shrink-0">•</span>
+              <span className="text-sky-500 mt-1 flex-shrink-0">•</span>
               <span>{item}</span>
             </li>
           ))}
@@ -39,16 +39,16 @@ function renderBlock(block: ContentBlock, i: number) {
       );
     case "callout":
       return (
-        <div key={i} className="flex gap-3 p-4 bg-teal-500/10 border border-teal-500/20 rounded-2xl">
+        <div key={i} className="flex gap-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-2xl">
           <span className="text-2xl flex-shrink-0">{block.emoji ?? "💡"}</span>
-          <p className="text-teal-700 dark:text-teal-400 leading-relaxed font-medium">{block.text}</p>
+          <p className="text-blue-700 dark:text-blue-400 leading-relaxed font-medium">{block.text}</p>
         </div>
       );
     case "vocab":
       return (
         <div key={i} className="p-4 bg-white/70 dark:bg-ink-900/40 border border-ink-900/8 dark:border-paper-50/8 rounded-2xl">
           <div className="flex items-baseline gap-2 mb-1">
-            <span className="font-display text-lg font-black text-ember-500">{block.word}</span>
+            <span className="font-display text-lg font-black text-sky-500">{block.word}</span>
             <span className="text-ink-500 dark:text-paper-200 text-sm">— {block.meaning}</span>
           </div>
           {block.example && <p className="text-sm text-ink-500 dark:text-paper-200 italic">"{block.example}"</p>}
@@ -61,7 +61,7 @@ function renderBlock(block: ContentBlock, i: number) {
             <p className="text-xs font-bold text-rose-500 mb-1">{block.leftLabel ?? "❌ Sai"}</p>
             <p className="text-sm font-semibold text-ink-700 dark:text-paper-100">{block.left}</p>
           </div>
-          <div className="p-3 bg-teal-500/10 border border-teal-500/20 rounded-xl text-center">
+          <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-center">
             <p className="text-xs font-bold text-teal-500 mb-1">{block.rightLabel ?? "✅ Đúng"}</p>
             <p className="text-sm font-semibold text-ink-700 dark:text-paper-100">{block.right}</p>
           </div>
@@ -81,7 +81,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
     <main className="min-h-screen">
       {/* Back */}
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-8">
-        <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-500 dark:text-paper-200 hover:text-ember-500 transition-colors">
+        <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-500 dark:text-paper-200 hover:text-sky-500 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Quay lại bài viết
         </Link>
       </div>
@@ -112,11 +112,11 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
 
       {/* CTA */}
       <section className="max-w-2xl mx-auto px-4 sm:px-6 pb-20">
-        <div className="p-8 bg-gradient-to-br from-ember-500/10 to-teal-500/10 border border-ember-500/20 rounded-2xl text-center">
+        <div className="p-8 bg-gradient-to-br from-ember-500/10 to-teal-500/10 border border-sky-500/20 rounded-2xl text-center">
           <p className="text-2xl mb-2">🚀</p>
           <h3 className="font-display text-xl font-black mb-2">Sẵn sàng luyện tập chưa?</h3>
           <p className="text-ink-500 dark:text-paper-200 text-sm mb-5">Áp dụng ngay những gì bạn vừa đọc vào bài học thực tế.</p>
-          <Link href="/learn/beginner" className="btn-bump-ember inline-flex text-sm">
+          <Link href="/learn/beginner" className="btn-bump-sky inline-flex text-sm">
             Bắt đầu học ngay →
           </Link>
         </div>
@@ -124,3 +124,4 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
     </main>
   );
 }
+
