@@ -198,6 +198,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "currency", pos: "n.", vi: "tiền tệ", example: "Please exchange your currency before traveling." },
     ],
   }
+,
+  {
+    id: "shipping",
+    title: "Vận chuyển & Giao hàng",
+    emoji: "🚚",
+    description: "Từ vựng về vận chuyển, xuất nhập khẩu hay gặp trong TOEIC Part 4-7",
+    words: [
+      { en: "shipment", pos: "n.", vi: "lô hàng", example: "The shipment will arrive by Thursday." },
+      { en: "freight", pos: "n.", vi: "hàng hóa vận chuyển", example: "Freight costs have increased this year." },
+      { en: "customs", pos: "n.", vi: "hải quan", example: "The package is stuck at customs." },
+      { en: "tracking", pos: "n.", vi: "theo dõi đơn hàng", example: "You can use the tracking number to locate your order." },
+      { en: "dispatch", pos: "v.", vi: "gửi đi, xuất hàng", example: "The order was dispatched yesterday." },
+      { en: "warehouse", pos: "n.", vi: "kho hàng", example: "The goods are stored in our warehouse." },
+      { en: "invoice", pos: "n.", vi: "hóa đơn", example: "Please attach the invoice to the shipment." },
+      { en: "delivery", pos: "n.", vi: "giao hàng", example: "Free delivery is available for orders over ." },
+      { en: "import", pos: "v.", vi: "nhập khẩu", example: "They import raw materials from Vietnam." },
+      { en: "export", pos: "v.", vi: "xuất khẩu", example: "The company exports goods to 20 countries." },
+    ],
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
