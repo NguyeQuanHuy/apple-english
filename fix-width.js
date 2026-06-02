@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('app/learn/toeic/theme/[id]/page.tsx', 'utf8');
+const bt = String.fromCharCode(96);
+const bad = 'animate={{ width: % }}';
+const good = 'animate={{ width: ' + bt + '%' + bt + ' }}';
+c = c.replace(bad, good);
+fs.writeFileSync('app/learn/toeic/theme/[id]/page.tsx', c, 'utf8');
+const v = fs.readFileSync('app/learn/toeic/theme/[id]/page.tsx', 'utf8');
+const i = v.indexOf('animate={{ width');
+console.log(JSON.stringify(v.slice(i, i+80)));
