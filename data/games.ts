@@ -59,3 +59,16 @@ export const FAST_QUIZ = [
   { prompt: "Số 12 tiếng Anh?", options: ["twelve", "twenty", "twelfth", "ten"], correctIndex: 0 },
   { prompt: "'goodbye' nghĩa là?", options: ["xin chào", "tạm biệt", "cảm ơn", "xin lỗi"], correctIndex: 1 },
 ];
+
+export const FILL_BLANK = [
+  { sentence: "I ___ a student.", answer: "am", options: ["am", "is", "are", "be"], vi: "Tôi là sinh viên." },
+  { sentence: "She ___ my friend.", answer: "is", options: ["am", "is", "are", "be"], vi: "Cô ấy là bạn tôi." },
+  { sentence: "We ___ happy today.", answer: "are", options: ["am", "is", "are", "be"], vi: "Chúng tôi vui hôm nay." },
+  { sentence: "He ___ in Germany.", answer: "works", options: ["work", "works", "working", "worked"], vi: "Anh ấy làm việc ở Đức." },
+  { sentence: "I ___ coffee every morning.", answer: "drink", options: ["drink", "drinks", "drinking", "drank"], vi: "Tôi uống cà phê mỗi sáng." },
+  { sentence: "They ___ to school by bike.", answer: "go", options: ["go", "goes", "going", "went"], vi: "Họ đi học bằng xe đạp." },
+  { sentence: "She ___ English very well.", answer: "speaks", options: ["speak", "speaks", "speaking", "spoke"], vi: "Cô ấy nói tiếng Anh rất giỏi." },
+  { sentence: "We ___ football on Sunday.", answer: "play", options: ["play", "plays", "playing", "played"], vi: "Chúng tôi đá bóng vào Chủ nhật." },
+  { sentence: "I ___ tired after work.", answer: "feel", options: ["feel", "feels", "feeling", "felt"], vi: "Tôi cảm thấy mệt sau giờ làm." },
+  { sentence: "He ___ a book right now.", answer: "is reading", options: ["read", "reads", "is reading", "reading"], vi: "Anh ấy đang đọc sách." },
+];
