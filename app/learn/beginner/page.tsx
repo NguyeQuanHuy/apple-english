@@ -25,19 +25,19 @@ export default function BeginnerIndex() {
       {/* Hero */}
       <div className="bg-gradient-to-br from-sky-500 to-blue-600 text-white px-4 pt-10 pb-10">
         <div className="max-w-2xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-sky-200 mb-2">Lo trinh A0 - A2</p>
-          <h1 className="font-display text-3xl font-black mb-2">Mat goc tieng Anh</h1>
-          <p className="text-sky-100 text-sm mb-6">Di tu chu cai den cau hoan chinh. Moi bai 5-10 phut. {totalLessons} bai hoc day du.</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-sky-200 mb-2">Lộ trình A0 – A2</p>
+          <h1 className="font-display text-3xl font-black mb-2">Mất gốc tiếng Anh</h1>
+          <p className="text-sky-100 text-sm mb-6">Từ chữ cái đến câu hoàn chỉnh. Mỗi bài 5–10 phút. {totalLessons} bài học đầy đủ.</p>
 
           <div className="bg-white/15 rounded-xl p-4">
             <div className="flex justify-between text-sm font-bold mb-2">
-              <span>Tien do</span>
-              <span>{doneCount}/{totalLessons} bai</span>
+              <span>Tiến độ</span>
+              <span>{doneCount}/{totalLessons} bài</span>
             </div>
             <div className="h-2.5 bg-white/20 rounded-full overflow-hidden">
               <div className="h-full bg-yellow-300 rounded-full transition-all" style={{ width: `${percent}%` }} />
             </div>
-            <p className="text-sky-200 text-xs mt-1.5">{percent}% hoan thanh</p>
+            <p className="text-sky-200 text-xs mt-1.5">{percent}% hoàn thành</p>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function BeginnerIndex() {
         {/* Label A0-A1 */}
         <div className="flex items-center gap-3 mb-6">
           <div className="h-px flex-1 bg-sky-200" />
-          <span className="text-xs font-bold text-sky-400 uppercase tracking-widest">Trinh do A0 - A1 (Co ban)</span>
+          <span className="text-xs font-bold text-sky-400 uppercase tracking-widest">Trình độ A0 – A1 (Cơ bản)</span>
           <div className="h-px flex-1 bg-sky-200" />
         </div>
 
@@ -65,7 +65,7 @@ export default function BeginnerIndex() {
         <div className="flex items-center gap-3 mb-6">
           <div className="h-px flex-1 bg-sky-200" />
           <span className="text-xs font-bold text-sky-400 uppercase tracking-widest flex items-center gap-1">
-            <Star size={10} /> Trinh do A2 (Nang cao)
+            <Star size={10} /> Trình độ A2 (Nâng cao)
           </span>
           <div className="h-px flex-1 bg-sky-200" />
         </div>
@@ -132,7 +132,7 @@ function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; don
       </div>
       {!locked && (
         <div className="flex items-center gap-0.5 text-xs font-bold text-sky-500 flex-shrink-0">
-          {done ? "Hoc lai" : "Hoc"} <ChevronRight size={14} />
+          {done ? "Học lại" : "Học"} <ChevronRight size={14} />
         </div>
       )}
     </div>

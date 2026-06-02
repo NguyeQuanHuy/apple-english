@@ -1,0 +1,15 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('app/learn/beginner/page.tsx', 'utf8');
+c = c.replace('Lo trinh A0 - A2', 'L\u1ed9 tr\u00ecnh A0 \u2013 A2');
+c = c.replace('Mat goc tieng Anh', 'M\u1ea5t g\u1ed1c ti\u1ebfng Anh');
+c = c.replace('Di tu chu cai den cau hoan chinh. Moi bai 5-10 phut.', 'T\u1eeb ch\u1eef c\u00e1i \u0111\u1ebfn c\u00e2u ho\u00e0n ch\u1ec9nh. M\u1ed7i b\u00e0i 5\u201310 ph\u00fat.');
+c = c.replace('bai hoc day du.', 'b\u00e0i h\u1ecdc \u0111\u1ea7y \u0111\u1ee7.');
+c = c.replace('<span>Tien do</span>', '<span>Ti\u1ebfn \u0111\u1ed9</span>');
+c = c.replace('/{totalLessons} bai</span>', '/{totalLessons} b\u00e0i</span>');
+c = c.replace('{percent}% hoan thanh', '{percent}% ho\u00e0n th\u00e0nh');
+c = c.replace('Trinh do A0 - A1 (Co ban)', 'Tr\u00ecnh \u0111\u1ed9 A0 \u2013 A1 (C\u01a1 b\u1ea3n)');
+c = c.replace('Trinh do A2 (Nang cao)', 'Tr\u00ecnh \u0111\u1ed9 A2 (N\u00e2ng cao)');
+c = c.replace('"Hoc lai"', '"H\u1ecdc l\u1ea1i"');
+c = c.replace('"Hoc"', '"H\u1ecdc"');
+fs.writeFileSync('app/learn/beginner/page.tsx', c, 'utf8');
+console.log('Done');
