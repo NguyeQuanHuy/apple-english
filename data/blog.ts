@@ -3,260 +3,141 @@
   title: string;
   emoji: string;
   summary: string;
-  tags?: string[
-  ,{
-    slug: "toeic-450-trong-2-thang",
-    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
-    emoji: "🎯",
-    summary: "Không cần trung tâm đắt tiền. Đây là kế hoạch ôn TOEIC 450 điểm trong 2 tháng dành cho người mất gốc, học được ngay hôm nay.",
-    tags: ["TOEIC", "Lộ trình"],
-    date: "03/06/2026",
-    readingTime: "6 phút đọc",
-    content: [
-      { type: "paragraph", text: "TOEIC 450 điểm là mức điểm tối thiểu nhiều công ty Việt Nam yêu cầu. Tin tốt là: đây không phải mức điểm khó nếu bạn có kế hoạch đúng và học đều đặn 2 tháng." },
-      { type: "callout", emoji: "📌", text: "Bài viết này dành cho người hiện tại chưa thi TOEIC bao giờ hoặc đã thi dưới 300 điểm. Nếu bạn đang ở 350-400, lộ trình này vẫn áp dụng được — chỉ cần bớt thời gian ở phần nền tảng." },
-      { type: "heading", text: "TOEIC 450 cần gì?" },
-      { type: "paragraph", text: "TOEIC gồm 2 phần: Listening (495 điểm) và Reading (495 điểm). Để đạt 450 tổng, bạn cần khoảng 200-250 mỗi phần — tức là trả lời đúng khoảng 45-50% số câu. Không cần hoàn hảo, chỉ cần vượt ngưỡng." },
-      { type: "list", items: [
-        "Listening: 100 câu — Part 1 (ảnh), Part 2 (hỏi-đáp), Part 3 (hội thoại), Part 4 (bài nói)",
-        "Reading: 100 câu — Part 5 (điền từ), Part 6 (đoạn văn ngắn), Part 7 (đọc hiểu)",
-        "Thời gian: 2 tiếng đồng hồ thi liên tục",
-        "Mục tiêu 450: đúng ~45/100 Listening + ~45/100 Reading"
-      ]},
-      { type: "heading", text: "Tháng 1 — Xây nền tảng (tuần 1-4)" },
-      { type: "paragraph", text: "Đừng vội làm đề ngay. Tháng đầu tập trung xây vocabulary và làm quen format đề thi." },
-      { type: "list", items: [
-        "Tuần 1-2: Học 200 từ vựng TOEIC cơ bản (nhóm văn phòng, tài chính, du lịch). Mỗi ngày 15 từ.",
-        "Tuần 2-3: Luyện nghe Part 1 và Part 2 — đây là phần dễ nhất, phải chắc chắn lấy điểm tối đa.",
-        "Tuần 3-4: Luyện Part 5 (điền từ) — ôn lại ngữ pháp cơ bản: to be, thì hiện tại, quá khứ đơn."
-      ]},
-      { type: "callout", emoji: "⏰", text: "Thời gian học tháng 1: 30-40 phút/ngày. Không cần nhiều hơn. Quan trọng là HỌC ĐỀU mỗi ngày, không bỏ ngày nào." },
-      { type: "heading", text: "Tháng 2 — Luyện đề và chiến thuật (tuần 5-8)" },
-      { type: "paragraph", text: "Tháng 2 chuyển sang làm đề thật. Mục tiêu là quen với áp lực thời gian và biết cách phân bổ thời gian hợp lý." },
-      { type: "list", items: [
-        "Tuần 5-6: Làm 2-3 mini test mỗi tuần, phân tích từng câu sai.",
-        "Tuần 6-7: Tập trung Part 3, Part 4 (Listening) và Part 7 (Reading) — đây là phần quyết định điểm cao.",
-        "Tuần 7-8: Làm 2 full mock test có đồng hồ bấm giờ. Tập quản lý thời gian."
-      ]},
-      { type: "heading", text: "Chiến thuật làm bài quan trọng" },
-      { type: "vocab", word: "Part 5 — Điền từ", meaning: "Đọc cả câu trước, xác định loại từ cần điền (danh từ/động từ/tính từ), rồi mới nhìn đáp án.", example: "The meeting was ___. (postponed / postpone / postponing) → cần tính từ/quá khứ phân từ → postponed" },
-      { type: "vocab", word: "Part 7 — Đọc hiểu", meaning: "Đọc câu hỏi TRƯỚC, rồi mới đọc bài. Tìm keyword trong câu hỏi, scan trong bài để tìm vùng chứa đáp án.", example: "Câu hỏi: 'When is the deadline?' → scan tìm từ 'deadline', 'due date', 'by' trong bài" },
-      { type: "compare", left: "Đọc hết bài rồi mới đọc câu hỏi", right: "Đọc câu hỏi trước, scan bài tìm đáp án", leftLabel: "❌ Chậm, dễ hết giờ", rightLabel: "✅ Tiết kiệm 30%" },
-      { type: "heading", text: "Lịch học cụ thể mỗi tuần" },
-      { type: "list", items: [
-        "Thứ 2, 4, 6: Học từ vựng mới (15 từ/ngày) + luyện 1 part nghe (15 phút)",
-        "Thứ 3, 5: Làm 20 câu Part 5 + xem giải thích câu sai",
-        "Thứ 7: Làm 1 mini test (50 câu) có bấm giờ",
-        "Chủ nhật: Ôn lại từ vựng tuần + nghỉ ngơi"
-      ]},
-      { type: "callout", emoji: "🏆", text: "Mẹo cuối: Đăng ký thi sớm (trước 3 tuần). Có deadline thi thật sẽ giúp bạn học nghiêm túc hơn hẳn so với học không có mục tiêu." },
-      { type: "quote", text: "2 tháng × 30 phút/ngày = 60 tiếng học. Đủ để đạt 450 nếu bạn học đúng hướng." }
-    ]
-  }
-];
+  tags?: string[];
   date?: string;
   readingTime?: string;
-  content: object[
-  ,{
-    slug: "toeic-450-trong-2-thang",
-    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
-    emoji: "🎯",
-    summary: "Không cần trung tâm đắt tiền. Đây là kế hoạch ôn TOEIC 450 điểm trong 2 tháng dành cho người mất gốc, học được ngay hôm nay.",
-    tags: ["TOEIC", "Lộ trình"],
-    date: "03/06/2026",
-    readingTime: "6 phút đọc",
-    content: [
-      { type: "paragraph", text: "TOEIC 450 điểm là mức điểm tối thiểu nhiều công ty Việt Nam yêu cầu. Tin tốt là: đây không phải mức điểm khó nếu bạn có kế hoạch đúng và học đều đặn 2 tháng." },
-      { type: "callout", emoji: "📌", text: "Bài viết này dành cho người hiện tại chưa thi TOEIC bao giờ hoặc đã thi dưới 300 điểm. Nếu bạn đang ở 350-400, lộ trình này vẫn áp dụng được — chỉ cần bớt thời gian ở phần nền tảng." },
-      { type: "heading", text: "TOEIC 450 cần gì?" },
-      { type: "paragraph", text: "TOEIC gồm 2 phần: Listening (495 điểm) và Reading (495 điểm). Để đạt 450 tổng, bạn cần khoảng 200-250 mỗi phần — tức là trả lời đúng khoảng 45-50% số câu. Không cần hoàn hảo, chỉ cần vượt ngưỡng." },
-      { type: "list", items: [
-        "Listening: 100 câu — Part 1 (ảnh), Part 2 (hỏi-đáp), Part 3 (hội thoại), Part 4 (bài nói)",
-        "Reading: 100 câu — Part 5 (điền từ), Part 6 (đoạn văn ngắn), Part 7 (đọc hiểu)",
-        "Thời gian: 2 tiếng đồng hồ thi liên tục",
-        "Mục tiêu 450: đúng ~45/100 Listening + ~45/100 Reading"
-      ]},
-      { type: "heading", text: "Tháng 1 — Xây nền tảng (tuần 1-4)" },
-      { type: "paragraph", text: "Đừng vội làm đề ngay. Tháng đầu tập trung xây vocabulary và làm quen format đề thi." },
-      { type: "list", items: [
-        "Tuần 1-2: Học 200 từ vựng TOEIC cơ bản (nhóm văn phòng, tài chính, du lịch). Mỗi ngày 15 từ.",
-        "Tuần 2-3: Luyện nghe Part 1 và Part 2 — đây là phần dễ nhất, phải chắc chắn lấy điểm tối đa.",
-        "Tuần 3-4: Luyện Part 5 (điền từ) — ôn lại ngữ pháp cơ bản: to be, thì hiện tại, quá khứ đơn."
-      ]},
-      { type: "callout", emoji: "⏰", text: "Thời gian học tháng 1: 30-40 phút/ngày. Không cần nhiều hơn. Quan trọng là HỌC ĐỀU mỗi ngày, không bỏ ngày nào." },
-      { type: "heading", text: "Tháng 2 — Luyện đề và chiến thuật (tuần 5-8)" },
-      { type: "paragraph", text: "Tháng 2 chuyển sang làm đề thật. Mục tiêu là quen với áp lực thời gian và biết cách phân bổ thời gian hợp lý." },
-      { type: "list", items: [
-        "Tuần 5-6: Làm 2-3 mini test mỗi tuần, phân tích từng câu sai.",
-        "Tuần 6-7: Tập trung Part 3, Part 4 (Listening) và Part 7 (Reading) — đây là phần quyết định điểm cao.",
-        "Tuần 7-8: Làm 2 full mock test có đồng hồ bấm giờ. Tập quản lý thời gian."
-      ]},
-      { type: "heading", text: "Chiến thuật làm bài quan trọng" },
-      { type: "vocab", word: "Part 5 — Điền từ", meaning: "Đọc cả câu trước, xác định loại từ cần điền (danh từ/động từ/tính từ), rồi mới nhìn đáp án.", example: "The meeting was ___. (postponed / postpone / postponing) → cần tính từ/quá khứ phân từ → postponed" },
-      { type: "vocab", word: "Part 7 — Đọc hiểu", meaning: "Đọc câu hỏi TRƯỚC, rồi mới đọc bài. Tìm keyword trong câu hỏi, scan trong bài để tìm vùng chứa đáp án.", example: "Câu hỏi: 'When is the deadline?' → scan tìm từ 'deadline', 'due date', 'by' trong bài" },
-      { type: "compare", left: "Đọc hết bài rồi mới đọc câu hỏi", right: "Đọc câu hỏi trước, scan bài tìm đáp án", leftLabel: "❌ Chậm, dễ hết giờ", rightLabel: "✅ Tiết kiệm 30%" },
-      { type: "heading", text: "Lịch học cụ thể mỗi tuần" },
-      { type: "list", items: [
-        "Thứ 2, 4, 6: Học từ vựng mới (15 từ/ngày) + luyện 1 part nghe (15 phút)",
-        "Thứ 3, 5: Làm 20 câu Part 5 + xem giải thích câu sai",
-        "Thứ 7: Làm 1 mini test (50 câu) có bấm giờ",
-        "Chủ nhật: Ôn lại từ vựng tuần + nghỉ ngơi"
-      ]},
-      { type: "callout", emoji: "🏆", text: "Mẹo cuối: Đăng ký thi sớm (trước 3 tuần). Có deadline thi thật sẽ giúp bạn học nghiêm túc hơn hẳn so với học không có mục tiêu." },
-      { type: "quote", text: "2 tháng × 30 phút/ngày = 60 tiếng học. Đủ để đạt 450 nếu bạn học đúng hướng." }
-    ]
-  }
-];
+  content: object[];
 };
 
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "tai-sao-hoc-tieng-anh-mai-khong-gioi",
-    title: "Tại sao học tiếng Anh mãi mà không giỏi?",
+    title: "Tai sao hoc tieng Anh mai ma khong gioi?",
     emoji: "🤔",
-    summary: "Bạn học tiếng Anh nhiều năm nhưng vẫn không nói được? Đây là lý do thật sự và cách fix.",
-    tags: ["Kinh nghiệm", "Mất gốc"],
+    summary: "Ban hoc tieng Anh nhieu nam nhung van khong noi duoc? Day la ly do that su va cach fix.",
+    tags: ["Kinh nghiem", "Mat goc"],
     date: "01/06/2026",
-    readingTime: "4 phút đọc",
+    readingTime: "4 phut doc",
     content: [
-      { type: "paragraph", text: "Nhiều người học tiếng Anh 7-10 năm ở trường nhưng ra đường gặp người nước ngoài vẫn... đứng hình. Không phải vì bạn kém, mà vì cách học có vấn đề." },
-      { type: "heading", text: "1. Học để thi, không học để dùng" },
-      { type: "paragraph", text: "Hệ thống giáo dục Việt Nam tập trung vào ngữ pháp và dịch thuật. Bạn có thể làm bài thi tốt nhưng không thể nói chuyện được vì não chưa quen xử lý tiếng Anh theo thời gian thực." },
-      { type: "callout", emoji: "💡", text: "Fix: Mỗi ngày dành 10 phút nói to bằng tiếng Anh, dù chỉ nói một mình. Não cần luyện phản xạ, không chỉ lý thuyết." },
-      { type: "heading", text: "2. Học từng từ riêng lẻ, không học theo ngữ cảnh" },
-      { type: "paragraph", text: "Học 50 từ vựng nhưng không biết dùng trong câu nào. Từ vựng cần gắn với tình huống thực tế mới nhớ lâu." },
-      { type: "compare", left: "Học: 'happy = vui'", right: "Học: 'I feel happy when I eat pho'", leftLabel: "❌ Dễ quên", rightLabel: "✅ Nhớ lâu" },
-      { type: "heading", text: "3. Sợ sai nên không dám nói" },
-      { type: "paragraph", text: "Đây là lý do lớn nhất. Người Việt thường sợ nói sai bị cười. Nhưng thực tế, người bản ngữ không quan tâm bạn sai ngữ pháp — họ chỉ cần hiểu ý bạn." },
-      { type: "quote", text: "Nói sai mà người ta hiểu còn hơn im lặng vì sợ sai." },
-    ],
+      { type: "paragraph", text: "Nhieu nguoi hoc tieng Anh 7-10 nam o truong nhung ra duong gap nguoi nuoc ngoai van... dung hinh. Khong phai vi ban kem, ma vi cach hoc co van de." },
+      { type: "heading", text: "1. Hoc de thi, khong hoc de dung" },
+      { type: "paragraph", text: "He thong giao duc Viet Nam tap trung vao ngu phap va dich thuat. Ban co the lam bai thi tot nhung khong the noi chuyen duoc vi nao chua quen xu ly tieng Anh theo thoi gian thuc." },
+      { type: "callout", emoji: "💡", text: "Fix: Moi ngay danh 10 phut noi to bang tieng Anh, du chi noi mot minh. Nao can luyen phan xa, khong chi ly thuyet." },
+      { type: "heading", text: "2. Hoc tung tu rieng le, khong hoc theo ngu canh" },
+      { type: "paragraph", text: "Hoc 50 tu vung nhung khong biet dung trong cau nao. Tu vung can gan voi tinh huong thuc te moi nho lau." },
+      { type: "compare", left: "Hoc: happy = vui", right: "Hoc: I feel happy when I eat pho", leftLabel: "De quen", rightLabel: "Nho lau" },
+      { type: "heading", text: "3. So sai nen khong dam noi" },
+      { type: "paragraph", text: "Nguoi Viet thuong so noi sai bi cuoi. Nhung thuc te, nguoi ban ngu khong quan tam ban sai ngu phap — ho chi can hieu y ban." },
+      { type: "quote", text: "Noi sai ma nguoi ta hieu con hon im lang vi so sai." }
+    ]
   },
   {
     slug: "10-phut-hoc-tieng-anh-moi-ngay",
-    title: "Chỉ cần 10 phút mỗi ngày để cải thiện tiếng Anh",
+    title: "Chi can 10 phut moi ngay de cai thien tieng Anh",
     emoji: "⏰",
-    summary: "Không cần học 2-3 tiếng mỗi ngày. 10 phút đúng cách còn hiệu quả hơn 1 tiếng học sai phương pháp.",
-    tags: ["Phương pháp", "Mất gốc"],
+    summary: "Khong can hoc 2-3 tieng moi ngay. 10 phut dung cach con hieu qua hon 1 tieng hoc sai phuong phap.",
+    tags: ["Phuong phap", "Mat goc"],
     date: "28/05/2026",
-    readingTime: "3 phút đọc",
+    readingTime: "3 phut doc",
     content: [
-      { type: "paragraph", text: "Bạn bận đi làm, đi học, không có thời gian ngồi học 2 tiếng mỗi ngày. Tin tốt là bạn không cần nhiều đến vậy." },
-      { type: "heading", text: "Lịch 10 phút mỗi ngày" },
-      { type: "list", items: ["Phút 1-3: Ôn 5 từ vựng hôm qua", "Phút 4-6: Học 3 từ mới có ví dụ câu", "Phút 7-9: Đọc to 1 đoạn văn ngắn hoặc làm 1 mini quiz", "Phút 10: Viết 1 câu tiếng Anh về ngày hôm nay của bạn"] },
-      { type: "callout", emoji: "🔥", text: "Quan trọng nhất: làm ĐÚNG GIỜ ĐÓ mỗi ngày. Sáng sau khi thức dậy, hoặc tối trước khi ngủ. Biến nó thành thói quen như đánh răng." },
-      { type: "paragraph", text: "Sau 30 ngày, bạn sẽ học được khoảng 90 từ vựng mới và có phản xạ đọc tiếng Anh tốt hơn đáng kể." },
-      { type: "quote", text: "Consistency beats intensity. Học ít mỗi ngày thắng học nhiều một lần." },
-    ],
+      { type: "paragraph", text: "Ban ban di lam, di hoc, khong co thoi gian ngoi hoc 2 tieng moi ngay. Tin tot la ban khong can nhieu den vay." },
+      { type: "heading", text: "Lich 10 phut moi ngay" },
+      { type: "list", items: ["Phut 1-3: On 5 tu vung hom qua", "Phut 4-6: Hoc 3 tu moi co vi du cau", "Phut 7-9: Doc to 1 doan van ngan hoac lam 1 mini quiz", "Phut 10: Viet 1 cau tieng Anh ve ngay hom nay cua ban"] },
+      { type: "callout", emoji: "🔥", text: "Quan trong nhat: lam DUNG GIO DO moi ngay. Sang sau khi thuc day, hoac toi truoc khi ngu. Bien no thanh thoi quen nhu danh rang." },
+      { type: "quote", text: "Consistency beats intensity. Hoc it moi ngay thang hoc nhieu mot lan." }
+    ]
   },
   {
     slug: "tu-vung-toeic-can-biet",
-    title: "100 từ vựng TOEIC người mất gốc cần biết nhất",
+    title: "100 tu vung TOEIC nguoi mat goc can biet nhat",
     emoji: "📚",
-    summary: "Không cần học hết 10.000 từ. Đây là 100 từ xuất hiện nhiều nhất trong đề TOEIC mà bạn nên học trước.",
-    tags: ["TOEIC", "Từ vựng"],
+    summary: "Khong can hoc het 10.000 tu. Day la 100 tu xuat hien nhieu nhat trong de TOEIC ma ban nen hoc truoc.",
+    tags: ["TOEIC", "Tu vung"],
     date: "25/05/2026",
-    readingTime: "5 phút đọc",
+    readingTime: "5 phut doc",
     content: [
-      { type: "paragraph", text: "TOEIC có khoảng 600-800 từ vựng hay xuất hiện. Trong đó, 100 từ dưới đây chiếm khoảng 40% tần suất. Học chúng trước là chiến lược khôn ngoan." },
-      { type: "heading", text: "Nhóm 1: Công việc văn phòng" },
-      { type: "vocab", word: "schedule", meaning: "lịch trình, sắp xếp", example: "Please schedule a meeting for Monday." },
-      { type: "vocab", word: "deadline", meaning: "hạn chót", example: "The deadline is this Friday." },
-      { type: "vocab", word: "submit", meaning: "nộp, gửi", example: "Please submit your report by 5 PM." },
-      { type: "vocab", word: "approve", meaning: "phê duyệt", example: "The manager approved the budget." },
-      { type: "heading", text: "Nhóm 2: Tài chính" },
-      { type: "vocab", word: "budget", meaning: "ngân sách", example: "We need to cut the budget this quarter." },
-      { type: "vocab", word: "invoice", meaning: "hóa đơn", example: "Please send the invoice to accounting." },
+      { type: "paragraph", text: "TOEIC co khoang 600-800 tu vung hay xuat hien. Trong do, 100 tu duoi day chiem khoang 40% tan suat. Hoc chung truoc la chien luoc khon ngoan." },
+      { type: "heading", text: "Nhom 1: Cong viec van phong" },
+      { type: "vocab", word: "schedule", meaning: "lich trinh, sap xep", example: "Please schedule a meeting for Monday." },
+      { type: "vocab", word: "deadline", meaning: "han chot", example: "The deadline is this Friday." },
+      { type: "vocab", word: "submit", meaning: "nop, gui", example: "Please submit your report by 5 PM." },
+      { type: "vocab", word: "approve", meaning: "phe duyet", example: "The manager approved the budget." },
+      { type: "heading", text: "Nhom 2: Tai chinh" },
+      { type: "vocab", word: "budget", meaning: "ngan sach", example: "We need to cut the budget this quarter." },
+      { type: "vocab", word: "invoice", meaning: "hoa don", example: "Please send the invoice to accounting." },
       { type: "vocab", word: "revenue", meaning: "doanh thu", example: "Revenue increased by 20% this year." },
-      { type: "callout", emoji: "📝", text: "Mẹo: Học mỗi từ kèm 1 câu ví dụ. Đừng chỉ học nghĩa. Não sẽ nhớ ngữ cảnh tốt hơn là định nghĩa trần." },
-    ],
+      { type: "callout", emoji: "📝", text: "Meo: Hoc moi tu kem 1 cau vi du. Dung chi hoc nghia. Nao se nho ngu canh tot hon la dinh nghia tran." }
+    ]
   },
   {
     slug: "loi-phat-am-nguoi-viet-hay-mac",
-    title: "5 lỗi phát âm tiếng Anh người Việt hay mắc nhất",
+    title: "5 loi phat am tieng Anh nguoi Viet hay mac nhat",
     emoji: "🗣️",
-    summary: "Phát âm sai khiến người nghe không hiểu dù grammar đúng. Kiểm tra xem bạn có đang mắc lỗi nào không.",
-    tags: ["Phát âm", "Kinh nghiệm"],
+    summary: "Phat am sai khien nguoi nghe khong hieu du grammar dung. Kiem tra xem ban co dang mac loi nao khong.",
+    tags: ["Phat am", "Kinh nghiem"],
     date: "20/05/2026",
-    readingTime: "4 phút đọc",
+    readingTime: "4 phut doc",
     content: [
-      { type: "paragraph", text: "Tiếng Việt và tiếng Anh có hệ thống âm hoàn toàn khác nhau. Vì vậy người Việt thường mắc một số lỗi phát âm đặc trưng mà chính mình không nhận ra." },
-      { type: "heading", text: "Lỗi 1: Không đọc âm cuối" },
-      { type: "paragraph", text: "Tiếng Việt ít có phụ âm cuối mạnh, nên người Việt hay nuốt âm cuối trong tiếng Anh." },
-      { type: "compare", left: "\"stop\" đọc thành \"sto\"", right: "\"stop\" — rõ âm /p/ cuối", leftLabel: "❌ Sai", rightLabel: "✅ Đúng" },
-      { type: "heading", text: "Lỗi 2: Nhầm /l/ và /n/ cuối câu" },
-      { type: "compare", left: "\"final\" đọc thành \"finan\"", right: "\"final\" — âm /l/ rõ ràng", leftLabel: "❌ Sai", rightLabel: "✅ Đúng" },
-      { type: "heading", text: "Lỗi 3: Đọc 'th' thành 't' hoặc 'd'" },
-      { type: "vocab", word: "th (có thanh)", meaning: "đặt lưỡi giữa 2 hàng răng, thổi hơi — như 'this', 'that'", example: "This is my friend." },
-      { type: "callout", emoji: "🎯", text: "Cách luyện: Đứng trước gương, tập đặt đầu lưỡi chạm nhẹ vào răng trên khi đọc 'th'. Làm 5 phút mỗi ngày trong 1 tuần." },
-    ],
+      { type: "paragraph", text: "Tieng Viet va tieng Anh co he thong am hoan toan khac nhau. Vi vay nguoi Viet thuong mac mot so loi phat am dac trung ma chinh minh khong nhan ra." },
+      { type: "heading", text: "Loi 1: Khong doc am cuoi" },
+      { type: "compare", left: "stop doc thanh sto", right: "stop - ro am /p/ cuoi", leftLabel: "Sai", rightLabel: "Dung" },
+      { type: "heading", text: "Loi 2: Nham /l/ va /n/ cuoi cau" },
+      { type: "compare", left: "final doc thanh finan", right: "final - am /l/ ro rang", leftLabel: "Sai", rightLabel: "Dung" },
+      { type: "callout", emoji: "🎯", text: "Cach luyen: Dung truoc guong, tap dat dau luoi cham nhe vao rang tren khi doc th. Lam 5 phut moi ngay trong 1 tuan." }
+    ]
   },
   {
     slug: "cach-hoc-ngu-phap-khong-chan",
-    title: "Cách học ngữ pháp tiếng Anh mà không bị chán",
+    title: "Cach hoc ngu phap tieng Anh ma khong bi chan",
     emoji: "✏️",
-    summary: "Ngữ pháp không nhàm chán nếu bạn học đúng cách. Bí quyết là học qua câu chuyện, không học qua bảng quy tắc.",
-    tags: ["Ngữ pháp", "Phương pháp"],
+    summary: "Ngu phap khong nham chan neu ban hoc dung cach. Bi quyet la hoc qua cau chuyen, khong hoc qua bang quy tac.",
+    tags: ["Ngu phap", "Phuong phap"],
     date: "15/05/2026",
-    readingTime: "3 phút đọc",
+    readingTime: "3 phut doc",
     content: [
-      { type: "paragraph", text: "Hầu hết mọi người học ngữ pháp bằng cách đọc bảng quy tắc rồi làm bài tập điền vào chỗ trống. Cách này chán và không hiệu quả." },
-      { type: "heading", text: "Học ngữ pháp qua ví dụ thực tế" },
-      { type: "paragraph", text: "Thay vì học 'Simple Present = V/V+s', hãy học qua tình huống: 'I drink coffee every morning. She drinks tea.' — Rồi tự hỏi tại sao she dùng 'drinks' còn I dùng 'drink'?" },
-      { type: "callout", emoji: "💡", text: "Não người học theo pattern (mẫu), không học theo quy tắc. Khi bạn thấy đủ ví dụ, não tự rút ra quy tắc mà không cần bạn cố nhớ." },
-      { type: "heading", text: "3 cấu trúc nền tảng cần nắm trước" },
+      { type: "paragraph", text: "Hau het moi nguoi hoc ngu phap bang cach doc bang quy tac roi lam bai tap dien vao cho trong. Cach nay chan va khong hieu qua." },
+      { type: "callout", emoji: "💡", text: "Nao nguoi hoc theo pattern (mau), khong hoc theo quy tac. Khi ban thay du vi du, nao tu rut ra quy tac ma khong can ban co nho." },
       { type: "list", items: ["To be (am/is/are): I am a student. She is happy.", "Simple Present: I work in Germany. He works at a cafe.", "Present Continuous: I am studying English right now."] },
-      { type: "quote", text: "Học ngữ pháp đủ để không hiểu sai, đừng học để hoàn hảo. Người bản ngữ cũng nói sai ngữ pháp." },
-    ],
+      { type: "quote", text: "Hoc ngu phap du de khong hieu sai, dung hoc de hoan hao. Nguoi ban ngu cung noi sai ngu phap." }
+    ]
   },
-
-  ,{
+  {
     slug: "toeic-450-trong-2-thang",
-    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
+    title: "TOEIC 450 diem trong 2 thang — ke hoach on thi thuc te",
     emoji: "🎯",
-    summary: "Không cần trung tâm đắt tiền. Đây là kế hoạch ôn TOEIC 450 điểm trong 2 tháng dành cho người mất gốc, học được ngay hôm nay.",
-    tags: ["TOEIC", "Lộ trình"],
+    summary: "Khong can trung tam dat tien. Day la ke hoach on TOEIC 450 diem trong 2 thang danh cho nguoi mat goc, hoc duoc ngay hom nay.",
+    tags: ["TOEIC", "Lo trinh"],
     date: "03/06/2026",
-    readingTime: "6 phút đọc",
+    readingTime: "6 phut doc",
     content: [
-      { type: "paragraph", text: "TOEIC 450 điểm là mức điểm tối thiểu nhiều công ty Việt Nam yêu cầu. Tin tốt là: đây không phải mức điểm khó nếu bạn có kế hoạch đúng và học đều đặn 2 tháng." },
-      { type: "callout", emoji: "📌", text: "Bài viết này dành cho người hiện tại chưa thi TOEIC bao giờ hoặc đã thi dưới 300 điểm. Nếu bạn đang ở 350-400, lộ trình này vẫn áp dụng được — chỉ cần bớt thời gian ở phần nền tảng." },
-      { type: "heading", text: "TOEIC 450 cần gì?" },
-      { type: "paragraph", text: "TOEIC gồm 2 phần: Listening (495 điểm) và Reading (495 điểm). Để đạt 450 tổng, bạn cần khoảng 200-250 mỗi phần — tức là trả lời đúng khoảng 45-50% số câu. Không cần hoàn hảo, chỉ cần vượt ngưỡng." },
+      { type: "paragraph", text: "TOEIC 450 diem la muc diem toi thieu nhieu cong ty Viet Nam yeu cau. Tin tot la: day khong phai muc diem kho neu ban co ke hoach dung va hoc deu dan 2 thang." },
+      { type: "callout", emoji: "📌", text: "Bai viet nay danh cho nguoi hien tai chua thi TOEIC bao gio hoac da thi duoi 300 diem. Neu ban dang o 350-400, lo trinh nay van ap dung duoc." },
+      { type: "heading", text: "TOEIC 450 can gi?" },
+      { type: "paragraph", text: "TOEIC gom 2 phan: Listening (495 diem) va Reading (495 diem). De dat 450 tong, ban can khoang 200-250 moi phan — tuc la tra loi dung khoang 45-50% so cau." },
       { type: "list", items: [
-        "Listening: 100 câu — Part 1 (ảnh), Part 2 (hỏi-đáp), Part 3 (hội thoại), Part 4 (bài nói)",
-        "Reading: 100 câu — Part 5 (điền từ), Part 6 (đoạn văn ngắn), Part 7 (đọc hiểu)",
-        "Thời gian: 2 tiếng đồng hồ thi liên tục",
-        "Mục tiêu 450: đúng ~45/100 Listening + ~45/100 Reading"
+        "Listening: 100 cau — Part 1 (anh), Part 2 (hoi-dap), Part 3 (hoi thoai), Part 4 (bai noi)",
+        "Reading: 100 cau — Part 5 (dien tu), Part 6 (doan van ngan), Part 7 (doc hieu)",
+        "Thoi gian: 2 tieng dong ho thi lien tuc",
+        "Muc tieu 450: dung ~45/100 Listening + ~45/100 Reading"
       ]},
-      { type: "heading", text: "Tháng 1 — Xây nền tảng (tuần 1-4)" },
-      { type: "paragraph", text: "Đừng vội làm đề ngay. Tháng đầu tập trung xây vocabulary và làm quen format đề thi." },
+      { type: "heading", text: "Thang 1 — Xay nen tang (tuan 1-4)" },
       { type: "list", items: [
-        "Tuần 1-2: Học 200 từ vựng TOEIC cơ bản (nhóm văn phòng, tài chính, du lịch). Mỗi ngày 15 từ.",
-        "Tuần 2-3: Luyện nghe Part 1 và Part 2 — đây là phần dễ nhất, phải chắc chắn lấy điểm tối đa.",
-        "Tuần 3-4: Luyện Part 5 (điền từ) — ôn lại ngữ pháp cơ bản: to be, thì hiện tại, quá khứ đơn."
+        "Tuan 1-2: Hoc 200 tu vung TOEIC co ban. Moi ngay 15 tu.",
+        "Tuan 2-3: Luyen nghe Part 1 va Part 2 — day la phan de nhat, phai chac chan lay diem toi da.",
+        "Tuan 3-4: Luyen Part 5 (dien tu) — on lai ngu phap co ban: to be, thi hien tai, qua khu don."
       ]},
-      { type: "callout", emoji: "⏰", text: "Thời gian học tháng 1: 30-40 phút/ngày. Không cần nhiều hơn. Quan trọng là HỌC ĐỀU mỗi ngày, không bỏ ngày nào." },
-      { type: "heading", text: "Tháng 2 — Luyện đề và chiến thuật (tuần 5-8)" },
-      { type: "paragraph", text: "Tháng 2 chuyển sang làm đề thật. Mục tiêu là quen với áp lực thời gian và biết cách phân bổ thời gian hợp lý." },
+      { type: "callout", emoji: "⏰", text: "Thoi gian hoc thang 1: 30-40 phut/ngay. Khong can nhieu hon. Quan trong la HOC DEU moi ngay." },
+      { type: "heading", text: "Thang 2 — Luyen de va chien thuat (tuan 5-8)" },
       { type: "list", items: [
-        "Tuần 5-6: Làm 2-3 mini test mỗi tuần, phân tích từng câu sai.",
-        "Tuần 6-7: Tập trung Part 3, Part 4 (Listening) và Part 7 (Reading) — đây là phần quyết định điểm cao.",
-        "Tuần 7-8: Làm 2 full mock test có đồng hồ bấm giờ. Tập quản lý thời gian."
+        "Tuan 5-6: Lam 2-3 mini test moi tuan, phan tich tung cau sai.",
+        "Tuan 6-7: Tap trung Part 3, Part 4 (Listening) va Part 7 (Reading).",
+        "Tuan 7-8: Lam 2 full mock test co dong ho bam gio. Tap quan ly thoi gian."
       ]},
-      { type: "heading", text: "Chiến thuật làm bài quan trọng" },
-      { type: "vocab", word: "Part 5 — Điền từ", meaning: "Đọc cả câu trước, xác định loại từ cần điền (danh từ/động từ/tính từ), rồi mới nhìn đáp án.", example: "The meeting was ___. (postponed / postpone / postponing) → cần tính từ/quá khứ phân từ → postponed" },
-      { type: "vocab", word: "Part 7 — Đọc hiểu", meaning: "Đọc câu hỏi TRƯỚC, rồi mới đọc bài. Tìm keyword trong câu hỏi, scan trong bài để tìm vùng chứa đáp án.", example: "Câu hỏi: 'When is the deadline?' → scan tìm từ 'deadline', 'due date', 'by' trong bài" },
-      { type: "compare", left: "Đọc hết bài rồi mới đọc câu hỏi", right: "Đọc câu hỏi trước, scan bài tìm đáp án", leftLabel: "❌ Chậm, dễ hết giờ", rightLabel: "✅ Tiết kiệm 30%" },
-      { type: "heading", text: "Lịch học cụ thể mỗi tuần" },
-      { type: "list", items: [
-        "Thứ 2, 4, 6: Học từ vựng mới (15 từ/ngày) + luyện 1 part nghe (15 phút)",
-        "Thứ 3, 5: Làm 20 câu Part 5 + xem giải thích câu sai",
-        "Thứ 7: Làm 1 mini test (50 câu) có bấm giờ",
-        "Chủ nhật: Ôn lại từ vựng tuần + nghỉ ngơi"
-      ]},
-      { type: "callout", emoji: "🏆", text: "Mẹo cuối: Đăng ký thi sớm (trước 3 tuần). Có deadline thi thật sẽ giúp bạn học nghiêm túc hơn hẳn so với học không có mục tiêu." },
-      { type: "quote", text: "2 tháng × 30 phút/ngày = 60 tiếng học. Đủ để đạt 450 nếu bạn học đúng hướng." }
+      { type: "heading", text: "Chien thuat lam bai quan trong" },
+      { type: "vocab", word: "Part 5 — Dien tu", meaning: "Doc ca cau truoc, xac dinh loai tu can dien, roi moi nhin dap an.", example: "The meeting was ___. (postponed/postpone/postponing) — can qua khu phan tu — postponed" },
+      { type: "compare", left: "Doc het bai roi moi doc cau hoi", right: "Doc cau hoi truoc, scan bai tim dap an", leftLabel: "Cham, de het gio", rightLabel: "Tiet kiem 30% thoi gian" },
+      { type: "callout", emoji: "🏆", text: "Meo cuoi: Dang ky thi som (truoc 3 tuan). Co deadline thi that se giup ban hoc nghiem tuc hon han." },
+      { type: "quote", text: "2 thang x 30 phut/ngay = 60 tieng hoc. Du de dat 450 neu ban hoc dung huong." }
     ]
   }
 ];
-
