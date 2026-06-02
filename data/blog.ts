@@ -3,10 +3,110 @@
   title: string;
   emoji: string;
   summary: string;
-  tags?: string[];
+  tags?: string[
+  ,{
+    slug: "toeic-450-trong-2-thang",
+    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
+    emoji: "🎯",
+    summary: "Không cần trung tâm đắt tiền. Đây là kế hoạch ôn TOEIC 450 điểm trong 2 tháng dành cho người mất gốc, học được ngay hôm nay.",
+    tags: ["TOEIC", "Lộ trình"],
+    date: "03/06/2026",
+    readingTime: "6 phút đọc",
+    content: [
+      { type: "paragraph", text: "TOEIC 450 điểm là mức điểm tối thiểu nhiều công ty Việt Nam yêu cầu. Tin tốt là: đây không phải mức điểm khó nếu bạn có kế hoạch đúng và học đều đặn 2 tháng." },
+      { type: "callout", emoji: "📌", text: "Bài viết này dành cho người hiện tại chưa thi TOEIC bao giờ hoặc đã thi dưới 300 điểm. Nếu bạn đang ở 350-400, lộ trình này vẫn áp dụng được — chỉ cần bớt thời gian ở phần nền tảng." },
+      { type: "heading", text: "TOEIC 450 cần gì?" },
+      { type: "paragraph", text: "TOEIC gồm 2 phần: Listening (495 điểm) và Reading (495 điểm). Để đạt 450 tổng, bạn cần khoảng 200-250 mỗi phần — tức là trả lời đúng khoảng 45-50% số câu. Không cần hoàn hảo, chỉ cần vượt ngưỡng." },
+      { type: "list", items: [
+        "Listening: 100 câu — Part 1 (ảnh), Part 2 (hỏi-đáp), Part 3 (hội thoại), Part 4 (bài nói)",
+        "Reading: 100 câu — Part 5 (điền từ), Part 6 (đoạn văn ngắn), Part 7 (đọc hiểu)",
+        "Thời gian: 2 tiếng đồng hồ thi liên tục",
+        "Mục tiêu 450: đúng ~45/100 Listening + ~45/100 Reading"
+      ]},
+      { type: "heading", text: "Tháng 1 — Xây nền tảng (tuần 1-4)" },
+      { type: "paragraph", text: "Đừng vội làm đề ngay. Tháng đầu tập trung xây vocabulary và làm quen format đề thi." },
+      { type: "list", items: [
+        "Tuần 1-2: Học 200 từ vựng TOEIC cơ bản (nhóm văn phòng, tài chính, du lịch). Mỗi ngày 15 từ.",
+        "Tuần 2-3: Luyện nghe Part 1 và Part 2 — đây là phần dễ nhất, phải chắc chắn lấy điểm tối đa.",
+        "Tuần 3-4: Luyện Part 5 (điền từ) — ôn lại ngữ pháp cơ bản: to be, thì hiện tại, quá khứ đơn."
+      ]},
+      { type: "callout", emoji: "⏰", text: "Thời gian học tháng 1: 30-40 phút/ngày. Không cần nhiều hơn. Quan trọng là HỌC ĐỀU mỗi ngày, không bỏ ngày nào." },
+      { type: "heading", text: "Tháng 2 — Luyện đề và chiến thuật (tuần 5-8)" },
+      { type: "paragraph", text: "Tháng 2 chuyển sang làm đề thật. Mục tiêu là quen với áp lực thời gian và biết cách phân bổ thời gian hợp lý." },
+      { type: "list", items: [
+        "Tuần 5-6: Làm 2-3 mini test mỗi tuần, phân tích từng câu sai.",
+        "Tuần 6-7: Tập trung Part 3, Part 4 (Listening) và Part 7 (Reading) — đây là phần quyết định điểm cao.",
+        "Tuần 7-8: Làm 2 full mock test có đồng hồ bấm giờ. Tập quản lý thời gian."
+      ]},
+      { type: "heading", text: "Chiến thuật làm bài quan trọng" },
+      { type: "vocab", word: "Part 5 — Điền từ", meaning: "Đọc cả câu trước, xác định loại từ cần điền (danh từ/động từ/tính từ), rồi mới nhìn đáp án.", example: "The meeting was ___. (postponed / postpone / postponing) → cần tính từ/quá khứ phân từ → postponed" },
+      { type: "vocab", word: "Part 7 — Đọc hiểu", meaning: "Đọc câu hỏi TRƯỚC, rồi mới đọc bài. Tìm keyword trong câu hỏi, scan trong bài để tìm vùng chứa đáp án.", example: "Câu hỏi: 'When is the deadline?' → scan tìm từ 'deadline', 'due date', 'by' trong bài" },
+      { type: "compare", left: "Đọc hết bài rồi mới đọc câu hỏi", right: "Đọc câu hỏi trước, scan bài tìm đáp án", leftLabel: "❌ Chậm, dễ hết giờ", rightLabel: "✅ Tiết kiệm 30%" },
+      { type: "heading", text: "Lịch học cụ thể mỗi tuần" },
+      { type: "list", items: [
+        "Thứ 2, 4, 6: Học từ vựng mới (15 từ/ngày) + luyện 1 part nghe (15 phút)",
+        "Thứ 3, 5: Làm 20 câu Part 5 + xem giải thích câu sai",
+        "Thứ 7: Làm 1 mini test (50 câu) có bấm giờ",
+        "Chủ nhật: Ôn lại từ vựng tuần + nghỉ ngơi"
+      ]},
+      { type: "callout", emoji: "🏆", text: "Mẹo cuối: Đăng ký thi sớm (trước 3 tuần). Có deadline thi thật sẽ giúp bạn học nghiêm túc hơn hẳn so với học không có mục tiêu." },
+      { type: "quote", text: "2 tháng × 30 phút/ngày = 60 tiếng học. Đủ để đạt 450 nếu bạn học đúng hướng." }
+    ]
+  }
+];
   date?: string;
   readingTime?: string;
-  content: object[];
+  content: object[
+  ,{
+    slug: "toeic-450-trong-2-thang",
+    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
+    emoji: "🎯",
+    summary: "Không cần trung tâm đắt tiền. Đây là kế hoạch ôn TOEIC 450 điểm trong 2 tháng dành cho người mất gốc, học được ngay hôm nay.",
+    tags: ["TOEIC", "Lộ trình"],
+    date: "03/06/2026",
+    readingTime: "6 phút đọc",
+    content: [
+      { type: "paragraph", text: "TOEIC 450 điểm là mức điểm tối thiểu nhiều công ty Việt Nam yêu cầu. Tin tốt là: đây không phải mức điểm khó nếu bạn có kế hoạch đúng và học đều đặn 2 tháng." },
+      { type: "callout", emoji: "📌", text: "Bài viết này dành cho người hiện tại chưa thi TOEIC bao giờ hoặc đã thi dưới 300 điểm. Nếu bạn đang ở 350-400, lộ trình này vẫn áp dụng được — chỉ cần bớt thời gian ở phần nền tảng." },
+      { type: "heading", text: "TOEIC 450 cần gì?" },
+      { type: "paragraph", text: "TOEIC gồm 2 phần: Listening (495 điểm) và Reading (495 điểm). Để đạt 450 tổng, bạn cần khoảng 200-250 mỗi phần — tức là trả lời đúng khoảng 45-50% số câu. Không cần hoàn hảo, chỉ cần vượt ngưỡng." },
+      { type: "list", items: [
+        "Listening: 100 câu — Part 1 (ảnh), Part 2 (hỏi-đáp), Part 3 (hội thoại), Part 4 (bài nói)",
+        "Reading: 100 câu — Part 5 (điền từ), Part 6 (đoạn văn ngắn), Part 7 (đọc hiểu)",
+        "Thời gian: 2 tiếng đồng hồ thi liên tục",
+        "Mục tiêu 450: đúng ~45/100 Listening + ~45/100 Reading"
+      ]},
+      { type: "heading", text: "Tháng 1 — Xây nền tảng (tuần 1-4)" },
+      { type: "paragraph", text: "Đừng vội làm đề ngay. Tháng đầu tập trung xây vocabulary và làm quen format đề thi." },
+      { type: "list", items: [
+        "Tuần 1-2: Học 200 từ vựng TOEIC cơ bản (nhóm văn phòng, tài chính, du lịch). Mỗi ngày 15 từ.",
+        "Tuần 2-3: Luyện nghe Part 1 và Part 2 — đây là phần dễ nhất, phải chắc chắn lấy điểm tối đa.",
+        "Tuần 3-4: Luyện Part 5 (điền từ) — ôn lại ngữ pháp cơ bản: to be, thì hiện tại, quá khứ đơn."
+      ]},
+      { type: "callout", emoji: "⏰", text: "Thời gian học tháng 1: 30-40 phút/ngày. Không cần nhiều hơn. Quan trọng là HỌC ĐỀU mỗi ngày, không bỏ ngày nào." },
+      { type: "heading", text: "Tháng 2 — Luyện đề và chiến thuật (tuần 5-8)" },
+      { type: "paragraph", text: "Tháng 2 chuyển sang làm đề thật. Mục tiêu là quen với áp lực thời gian và biết cách phân bổ thời gian hợp lý." },
+      { type: "list", items: [
+        "Tuần 5-6: Làm 2-3 mini test mỗi tuần, phân tích từng câu sai.",
+        "Tuần 6-7: Tập trung Part 3, Part 4 (Listening) và Part 7 (Reading) — đây là phần quyết định điểm cao.",
+        "Tuần 7-8: Làm 2 full mock test có đồng hồ bấm giờ. Tập quản lý thời gian."
+      ]},
+      { type: "heading", text: "Chiến thuật làm bài quan trọng" },
+      { type: "vocab", word: "Part 5 — Điền từ", meaning: "Đọc cả câu trước, xác định loại từ cần điền (danh từ/động từ/tính từ), rồi mới nhìn đáp án.", example: "The meeting was ___. (postponed / postpone / postponing) → cần tính từ/quá khứ phân từ → postponed" },
+      { type: "vocab", word: "Part 7 — Đọc hiểu", meaning: "Đọc câu hỏi TRƯỚC, rồi mới đọc bài. Tìm keyword trong câu hỏi, scan trong bài để tìm vùng chứa đáp án.", example: "Câu hỏi: 'When is the deadline?' → scan tìm từ 'deadline', 'due date', 'by' trong bài" },
+      { type: "compare", left: "Đọc hết bài rồi mới đọc câu hỏi", right: "Đọc câu hỏi trước, scan bài tìm đáp án", leftLabel: "❌ Chậm, dễ hết giờ", rightLabel: "✅ Tiết kiệm 30%" },
+      { type: "heading", text: "Lịch học cụ thể mỗi tuần" },
+      { type: "list", items: [
+        "Thứ 2, 4, 6: Học từ vựng mới (15 từ/ngày) + luyện 1 part nghe (15 phút)",
+        "Thứ 3, 5: Làm 20 câu Part 5 + xem giải thích câu sai",
+        "Thứ 7: Làm 1 mini test (50 câu) có bấm giờ",
+        "Chủ nhật: Ôn lại từ vựng tuần + nghỉ ngơi"
+      ]},
+      { type: "callout", emoji: "🏆", text: "Mẹo cuối: Đăng ký thi sớm (trước 3 tuần). Có deadline thi thật sẽ giúp bạn học nghiêm túc hơn hẳn so với học không có mục tiêu." },
+      { type: "quote", text: "2 tháng × 30 phút/ngày = 60 tiếng học. Đủ để đạt 450 nếu bạn học đúng hướng." }
+    ]
+  }
+];
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -108,4 +208,55 @@ export const BLOG_POSTS: BlogPost[] = [
       { type: "quote", text: "Học ngữ pháp đủ để không hiểu sai, đừng học để hoàn hảo. Người bản ngữ cũng nói sai ngữ pháp." },
     ],
   },
+
+  ,{
+    slug: "toeic-450-trong-2-thang",
+    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
+    emoji: "🎯",
+    summary: "Không cần trung tâm đắt tiền. Đây là kế hoạch ôn TOEIC 450 điểm trong 2 tháng dành cho người mất gốc, học được ngay hôm nay.",
+    tags: ["TOEIC", "Lộ trình"],
+    date: "03/06/2026",
+    readingTime: "6 phút đọc",
+    content: [
+      { type: "paragraph", text: "TOEIC 450 điểm là mức điểm tối thiểu nhiều công ty Việt Nam yêu cầu. Tin tốt là: đây không phải mức điểm khó nếu bạn có kế hoạch đúng và học đều đặn 2 tháng." },
+      { type: "callout", emoji: "📌", text: "Bài viết này dành cho người hiện tại chưa thi TOEIC bao giờ hoặc đã thi dưới 300 điểm. Nếu bạn đang ở 350-400, lộ trình này vẫn áp dụng được — chỉ cần bớt thời gian ở phần nền tảng." },
+      { type: "heading", text: "TOEIC 450 cần gì?" },
+      { type: "paragraph", text: "TOEIC gồm 2 phần: Listening (495 điểm) và Reading (495 điểm). Để đạt 450 tổng, bạn cần khoảng 200-250 mỗi phần — tức là trả lời đúng khoảng 45-50% số câu. Không cần hoàn hảo, chỉ cần vượt ngưỡng." },
+      { type: "list", items: [
+        "Listening: 100 câu — Part 1 (ảnh), Part 2 (hỏi-đáp), Part 3 (hội thoại), Part 4 (bài nói)",
+        "Reading: 100 câu — Part 5 (điền từ), Part 6 (đoạn văn ngắn), Part 7 (đọc hiểu)",
+        "Thời gian: 2 tiếng đồng hồ thi liên tục",
+        "Mục tiêu 450: đúng ~45/100 Listening + ~45/100 Reading"
+      ]},
+      { type: "heading", text: "Tháng 1 — Xây nền tảng (tuần 1-4)" },
+      { type: "paragraph", text: "Đừng vội làm đề ngay. Tháng đầu tập trung xây vocabulary và làm quen format đề thi." },
+      { type: "list", items: [
+        "Tuần 1-2: Học 200 từ vựng TOEIC cơ bản (nhóm văn phòng, tài chính, du lịch). Mỗi ngày 15 từ.",
+        "Tuần 2-3: Luyện nghe Part 1 và Part 2 — đây là phần dễ nhất, phải chắc chắn lấy điểm tối đa.",
+        "Tuần 3-4: Luyện Part 5 (điền từ) — ôn lại ngữ pháp cơ bản: to be, thì hiện tại, quá khứ đơn."
+      ]},
+      { type: "callout", emoji: "⏰", text: "Thời gian học tháng 1: 30-40 phút/ngày. Không cần nhiều hơn. Quan trọng là HỌC ĐỀU mỗi ngày, không bỏ ngày nào." },
+      { type: "heading", text: "Tháng 2 — Luyện đề và chiến thuật (tuần 5-8)" },
+      { type: "paragraph", text: "Tháng 2 chuyển sang làm đề thật. Mục tiêu là quen với áp lực thời gian và biết cách phân bổ thời gian hợp lý." },
+      { type: "list", items: [
+        "Tuần 5-6: Làm 2-3 mini test mỗi tuần, phân tích từng câu sai.",
+        "Tuần 6-7: Tập trung Part 3, Part 4 (Listening) và Part 7 (Reading) — đây là phần quyết định điểm cao.",
+        "Tuần 7-8: Làm 2 full mock test có đồng hồ bấm giờ. Tập quản lý thời gian."
+      ]},
+      { type: "heading", text: "Chiến thuật làm bài quan trọng" },
+      { type: "vocab", word: "Part 5 — Điền từ", meaning: "Đọc cả câu trước, xác định loại từ cần điền (danh từ/động từ/tính từ), rồi mới nhìn đáp án.", example: "The meeting was ___. (postponed / postpone / postponing) → cần tính từ/quá khứ phân từ → postponed" },
+      { type: "vocab", word: "Part 7 — Đọc hiểu", meaning: "Đọc câu hỏi TRƯỚC, rồi mới đọc bài. Tìm keyword trong câu hỏi, scan trong bài để tìm vùng chứa đáp án.", example: "Câu hỏi: 'When is the deadline?' → scan tìm từ 'deadline', 'due date', 'by' trong bài" },
+      { type: "compare", left: "Đọc hết bài rồi mới đọc câu hỏi", right: "Đọc câu hỏi trước, scan bài tìm đáp án", leftLabel: "❌ Chậm, dễ hết giờ", rightLabel: "✅ Tiết kiệm 30%" },
+      { type: "heading", text: "Lịch học cụ thể mỗi tuần" },
+      { type: "list", items: [
+        "Thứ 2, 4, 6: Học từ vựng mới (15 từ/ngày) + luyện 1 part nghe (15 phút)",
+        "Thứ 3, 5: Làm 20 câu Part 5 + xem giải thích câu sai",
+        "Thứ 7: Làm 1 mini test (50 câu) có bấm giờ",
+        "Chủ nhật: Ôn lại từ vựng tuần + nghỉ ngơi"
+      ]},
+      { type: "callout", emoji: "🏆", text: "Mẹo cuối: Đăng ký thi sớm (trước 3 tuần). Có deadline thi thật sẽ giúp bạn học nghiêm túc hơn hẳn so với học không có mục tiêu." },
+      { type: "quote", text: "2 tháng × 30 phút/ngày = 60 tiếng học. Đủ để đạt 450 nếu bạn học đúng hướng." }
+    ]
+  }
 ];
+
