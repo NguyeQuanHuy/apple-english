@@ -141,6 +141,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "warranty", pos: "n.", vi: "bảo hành", example: "The product comes with a one-year warranty." },
     ],
   }
+,
+  {
+    id: "hr",
+    title: "Nhân sự & Tuyển dụng",
+    emoji: "👥",
+    description: "Từ vựng về HR, tuyển dụng hay gặp trong TOEIC Part 4-7",
+    words: [
+      { en: "recruit", pos: "v.", vi: "tuyển dụng", example: "We are recruiting for a new sales manager." },
+      { en: "resume", pos: "n.", vi: "hồ sơ xin việc", example: "Please send your resume by Friday." },
+      { en: "interview", pos: "n.", vi: "phỏng vấn", example: "She has a job interview tomorrow morning." },
+      { en: "candidate", pos: "n.", vi: "ứng viên", example: "We have shortlisted five candidates." },
+      { en: "salary", pos: "n.", vi: "lương", example: "The salary will be discussed at the interview." },
+      { en: "benefits", pos: "n.", vi: "phúc lợi", example: "The company offers great benefits." },
+      { en: "probation", pos: "n.", vi: "thử việc", example: "There is a 3-month probation period." },
+      { en: "resignation", pos: "n.", vi: "đơn nghỉ việc", example: "She submitted her resignation last week." },
+      { en: "performance", pos: "n.", vi: "hiệu suất làm việc", example: "His performance has improved this quarter." },
+      { en: "appraisal", pos: "n.", vi: "đánh giá nhân viên", example: "Annual appraisals help identify areas for growth." },
+    ],
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
