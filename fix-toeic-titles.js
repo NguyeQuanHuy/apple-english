@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('data/toeic.ts', 'utf8');
+c = c.replace('Cong nghe & Thiet bi', 'C\u00f4ng ngh\u1ec7 & Thi\u1ebft b\u1ecb');
+c = c.replace('Tu vung ve IT hay gap trong TOEIC', 'T\u1eeb v\u1ef1ng v\u1ec1 IT hay g\u1eb7p trong TOEIC');
+c = c.replace('Giao duc & Dao tao', 'Gi\u00e1o d\u1ee5c & \u0110\u00e0o t\u1ea1o');
+c = c.replace('Tu vung ve dao tao hay gap trong TOEIC Part 4-7', 'T\u1eeb v\u1ef1ng v\u1ec1 \u0111\u00e0o t\u1ea1o hay g\u1eb7p trong TOEIC Part 4\u20137');
+c = c.replace('Suc khoe & Y te', 'S\u1ee9c kh\u1ecfe & Y t\u1ebf');
+c = c.replace('Tu vung ve bao hiem, benh vien hay gap trong TOEIC', 'T\u1eeb v\u1ef1ng v\u1ec1 b\u1ea3o hi\u1ec3m, b\u1ec7nh vi\u1ec7n hay g\u1eb7p trong TOEIC');
+fs.writeFileSync('data/toeic.ts', c, 'utf8');
+console.log('Done');

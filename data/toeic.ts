@@ -71,9 +71,9 @@ export const TOEIC_THEMES: ToeicTheme[] = [
 ,
   {
     id: "technology",
-    title: "Cong nghe & Thiet bi",
+    title: "Công nghệ & Thiết bị",
     emoji: "💻",
-    description: "Tu vung ve IT hay gap trong TOEIC",
+    description: "Từ vựng về IT hay gặp trong TOEIC",
     words: [
       { en: "install", pos: "v.", vi: "cài đặt", example: "Please install the latest software update." },
       { en: "upgrade", pos: "v.", vi: "nâng cấp", example: "We need to upgrade the server." },
@@ -89,9 +89,9 @@ export const TOEIC_THEMES: ToeicTheme[] = [
   },
   {
     id: "education",
-    title: "Giao duc & Dao tao",
+    title: "Giáo dục & Đào tạo",
     emoji: "🎓",
-    description: "Tu vung ve dao tao hay gap trong TOEIC Part 4-7",
+    description: "Từ vựng về đào tạo hay gặp trong TOEIC Part 4–7",
     words: [
       { en: "training", pos: "n.", vi: "đào tạo", example: "All staff must complete training." },
       { en: "seminar", pos: "n.", vi: "hội thảo", example: "We attended a leadership seminar." },
@@ -107,9 +107,9 @@ export const TOEIC_THEMES: ToeicTheme[] = [
   },
   {
     id: "health",
-    title: "Suc khoe & Y te",
+    title: "Sức khỏe & Y tế",
     emoji: "🏥",
-    description: "Tu vung ve bao hiem, benh vien hay gap trong TOEIC",
+    description: "Từ vựng về bảo hiểm, bệnh viện hay gặp trong TOEIC",
     words: [
       { en: "insurance", pos: "n.", vi: "bảo hiểm", example: "Does your company provide health insurance?" },
       { en: "prescription", pos: "n.", vi: "đơn thuốc", example: "You need a prescription for this medicine." },
