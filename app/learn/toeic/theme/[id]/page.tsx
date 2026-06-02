@@ -42,7 +42,7 @@ export default function ThemePage() {
         <h1 className="font-display text-3xl font-black">{theme.title}</h1>
       </div>
       <div className="mt-2 h-2 rounded-full bg-ink-900/8 dark:bg-paper-50/8 overflow-hidden">
-        <motion.div className="h-full bg-teal-500" initial={false} animate={{ width: ${((idx + 1) / theme.words.length) * 100}% }} />
+        <motion.div className="h-full bg-teal-500" initial={false} animate={{ width: `%` }} />
       </div>
       <div className="text-xs font-bold text-ink-500 mt-2">{idx + 1}/{theme.words.length}</div>
       <div className="mt-8 perspective-1000">
