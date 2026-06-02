@@ -1,0 +1,16 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('app/games/page.tsx', 'utf8');
+c = c.replace('Ghep tu', 'Gh\u00e9p t\u1eeb');
+c = c.replace('Noi tu tieng Anh voi nghia tieng Viet. 30 giay.', 'N\u1ed1i t\u1eeb ti\u1ebfng Anh v\u1edbi ngh\u0129a ti\u1ebfng Vi\u1ec7t. 30 gi\u00e2y.');
+c = c.replace('Xep cau', 'X\u1ebfp c\u00e2u');
+c = c.replace('Keo tha cac tu thanh cau dung.', 'K\u00e9o th\u1ea3 c\u00e1c t\u1eeb th\u00e0nh c\u00e2u \u0111\u00fang.');
+c = c.replace('Quiz toc do', 'Quiz t\u1ed1c \u0111\u1ed9');
+c = c.replace('10 cau, moi cau 8 giay. Phan xa nhanh!', '10 c\u00e2u, m\u1ed7i c\u00e2u 8 gi\u00e2y. Ph\u1ea3n x\u1ea1 nhanh!');
+c = c.replace('De nhat', 'D\u1ec5 nh\u1ea5t');
+c = c.replace('Pho bien', 'Ph\u1ed5 bi\u1ebfn');
+c = c.replace('Dien tu vao cho trong', '\u0110i\u1ec1n t\u1eeb v\u00e0o ch\u1ed7 tr\u1ed1ng');
+c = c.replace('Chon dap an dung de hoan thanh cau. Luyen ngu phap.', 'Ch\u1ecdn \u0111\u00e1p \u00e1n \u0111\u00fang \u0111\u1ec3 ho\u00e0n th\u00e0nh c\u00e2u. Luy\u1ec7n ng\u1eef ph\u00e1p.');
+c = c.replace('Choi de hoc', 'Ch\u01a1i \u0111\u1ec3 h\u1ecdc');
+c = c.replace('4 tro choi don gian. Moi van ~1 phut. Kiem XP nhanh nhat o day.', '4 tr\u00f2 ch\u01a1i \u0111\u01a1n gi\u1ea3n. M\u1ed7i v\u00e1n ~1 ph\u00fat. Ki\u1ebfm XP nhanh nh\u1ea5t \u1edf \u0111\u00e2y.');
+fs.writeFileSync('app/games/page.tsx', c, 'utf8');
+console.log('Done');
