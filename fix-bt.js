@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('app/learn/toeic/theme/[id]/page.tsx', 'utf8');
+const bt = String.fromCharCode(96);
+const i = c.indexOf('addXp(15,');
+const end = c.indexOf('\n', i);
+const newLine = '      addXp(15, ' + bt + 'toeic-theme:' + bt + ');';
+c = c.slice(0, i) + newLine + c.slice(end);
+fs.writeFileSync('app/learn/toeic/theme/[id]/page.tsx', c, 'utf8');
+const v = fs.readFileSync('app/learn/toeic/theme/[id]/page.tsx', 'utf8');
+console.log('Result:', v.slice(v.indexOf('addXp(15'), v.indexOf('addXp(15')+60));

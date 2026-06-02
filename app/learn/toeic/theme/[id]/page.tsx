@@ -23,7 +23,7 @@ export default function ThemePage() {
   function next() {
     setFlipped(false);
     if (isLast) {
-      addXp(15, 	oeic-theme:)
+            addXp(15, `toeic-theme:`);
       router.push("/learn/toeic");
     } else setIdx(idx + 1);
   }
