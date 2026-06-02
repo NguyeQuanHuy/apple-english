@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('components/top-bar.tsx', 'utf8');
+c = c.replace('Trang chu', 'Trang ch\u1ee7');
+c = c.replace('Mat goc', 'M\u1ea5t g\u1ed1c');
+c = c.replace('Chu de', 'Ch\u1ee7 \u0111\u1ec1');
+c = c.replace('Tien do', 'Ti\u1ebfn \u0111\u1ed9');
+c = c.replace('<NavLink href="/dashboard">Tien do</NavLink>', '<NavLink href="/dashboard">Ti\u1ebfn \u0111\u1ed9</NavLink>');
+c = c.replace('<NavLink href="/dashboard">Ti\u1ebfn \u0111\u1ed9</NavLink>', '<NavLink href="/dashboard">Ti\u1ebfn \u0111\u1ed9</NavLink>\n          <NavLink href="/blog">B\u00e0i vi\u1ebft</NavLink>');
+fs.writeFileSync('components/top-bar.tsx', c, 'utf8');
+console.log('Done');
