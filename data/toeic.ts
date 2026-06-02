@@ -68,7 +68,6 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "cancel", pos: "v.", vi: "huỷ", example: "I'd like to cancel my reservation." },
     ],
   },
-,
   {
     id: "technology",
     title: "Công nghệ & Thiết bị",
