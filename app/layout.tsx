@@ -18,7 +18,6 @@ const sans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
-  icons: { icon: "/favicon.svg" },
   title: "Apple English — Học tiếng Anh từ con số 0",
   description:
     "Nền tảng học tiếng Anh cho người Việt mất gốc. Lộ trình A0→A2, TOEIC, và mini games để học mỗi ngày 10 phút.",
@@ -36,4 +35,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
 
