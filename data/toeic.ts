@@ -122,6 +122,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "recovery", pos: "n.", vi: "sự hồi phục", example: "The patient made a full recovery." },
     ],
   }
+,
+  {
+    id: "shopping",
+    title: "Mua sắm & Bán lẻ",
+    emoji: "🛒",
+    description: "Từ vựng về mua sắm, giá cả hay gặp trong TOEIC Part 1-7",
+    words: [
+      { en: "purchase", pos: "v.", vi: "mua", example: "She purchased a new laptop online." },
+      { en: "discount", pos: "n.", vi: "giảm giá", example: "There is a 20% discount on all items." },
+      { en: "receipt", pos: "n.", vi: "biên lai", example: "Please keep your receipt for returns." },
+      { en: "refund", pos: "n.", vi: "hoàn tiền", example: "I would like a refund for this product." },
+      { en: "exchange", pos: "v.", vi: "đổi hàng", example: "Can I exchange this for a different size?" },
+      { en: "retail", pos: "n.", vi: "bán lẻ", example: "The retail price is higher than wholesale." },
+      { en: "wholesale", pos: "n.", vi: "bán buôn", example: "They buy wholesale and sell retail." },
+      { en: "inventory", pos: "n.", vi: "hàng tồn kho", example: "We need to check the inventory." },
+      { en: "checkout", pos: "n.", vi: "thanh toán", example: "Please proceed to the checkout counter." },
+      { en: "warranty", pos: "n.", vi: "bảo hành", example: "The product comes with a one-year warranty." },
+    ],
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
