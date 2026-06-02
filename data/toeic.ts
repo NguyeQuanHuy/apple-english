@@ -179,6 +179,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "inspection", pos: "n.", vi: "kiểm tra, giám sát", example: "A safety inspection is required every month." },
     ],
   }
+,
+  {
+    id: "banking",
+    title: "Ngân hàng & Tài khoản",
+    emoji: "🏦",
+    description: "Từ vựng về ngân hàng, giao dịch hay gặp trong TOEIC Part 4-7",
+    words: [
+      { en: "deposit", pos: "v.", vi: "gử tiền", example: "I need to deposit this check into my account." },
+      { en: "withdraw", pos: "v.", vi: "rút tiền", example: "She withdrew  from the ATM." },
+      { en: "transaction", pos: "n.", vi: "giao dịch", example: "All transactions are recorded automatically." },
+      { en: "interest rate", pos: "n.", vi: "lãi suất", example: "The interest rate on this loan is 5% per year." },
+      { en: "loan", pos: "n.", vi: "khoản vay", example: "He applied for a loan to buy a house." },
+      { en: "balance", pos: "n.", vi: "số dư tài khoản", example: "Please check your account balance before transferring." },
+      { en: "transfer", pos: "v.", vi: "chuyển khoản", example: "I will transfer the money by end of day." },
+      { en: "statement", pos: "n.", vi: "sao kê tài khoản", example: "Your monthly statement is available online." },
+      { en: "mortgage", pos: "n.", vi: "vay thế chấp", example: "They took out a mortgage to buy the apartment." },
+      { en: "currency", pos: "n.", vi: "tiền tệ", example: "Please exchange your currency before traveling." },
+    ],
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
