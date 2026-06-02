@@ -1,0 +1,255 @@
+export type ToeicVocab = {
+  en: string;
+  vi: string;
+  pos: string; // part of speech
+  example: string;
+};
+
+export type ToeicTheme = {
+  id: string;
+  title: string;
+  emoji: string;
+  description: string;
+  words: ToeicVocab[];
+};
+
+export const TOEIC_THEMES: ToeicTheme[] = [
+  {
+    id: "office",
+    title: "Văn phòng",
+    emoji: "💼",
+    description: "Từ vựng xuất hiện hàng ngày trong môi trường công sở",
+    words: [
+      { en: "schedule", pos: "n.", vi: "lịch trình", example: "Please check the schedule before the meeting." },
+      { en: "deadline", pos: "n.", vi: "hạn chót", example: "The deadline for this report is Friday." },
+      { en: "colleague", pos: "n.", vi: "đồng nghiệp", example: "My colleague will help with the project." },
+      { en: "agenda", pos: "n.", vi: "chương trình họp", example: "What's on the agenda today?" },
+      { en: "approve", pos: "v.", vi: "phê duyệt", example: "The manager approved my request." },
+      { en: "submit", pos: "v.", vi: "nộp", example: "Submit your report by 5 PM." },
+      { en: "supervisor", pos: "n.", vi: "người giám sát", example: "Talk to your supervisor about the issue." },
+      { en: "department", pos: "n.", vi: "phòng ban", example: "She works in the marketing department." },
+      { en: "reschedule", pos: "v.", vi: "dời lịch", example: "We need to reschedule the meeting." },
+      { en: "memo", pos: "n.", vi: "thông báo nội bộ", example: "Did you read the memo about parking?" },
+    ],
+  },
+  {
+    id: "finance",
+    title: "Tài chính",
+    emoji: "💰",
+    description: "Từ TOEIC Part 7 thường xuyên xuất hiện",
+    words: [
+      { en: "invoice", pos: "n.", vi: "hoá đơn", example: "Please send the invoice by email." },
+      { en: "refund", pos: "n./v.", vi: "hoàn tiền", example: "You can request a refund within 14 days." },
+      { en: "expense", pos: "n.", vi: "chi phí", example: "Travel expenses will be reimbursed." },
+      { en: "revenue", pos: "n.", vi: "doanh thu", example: "Q3 revenue increased by 15%." },
+      { en: "budget", pos: "n.", vi: "ngân sách", example: "We need to stay within budget." },
+      { en: "discount", pos: "n.", vi: "giảm giá", example: "Members get a 20% discount." },
+      { en: "transaction", pos: "n.", vi: "giao dịch", example: "The transaction failed. Please try again." },
+      { en: "estimate", pos: "n./v.", vi: "ước tính", example: "Can you give me an estimate by tomorrow?" },
+      { en: "purchase", pos: "n./v.", vi: "mua / sự mua hàng", example: "Thank you for your purchase." },
+      { en: "warranty", pos: "n.", vi: "bảo hành", example: "The product has a 2-year warranty." },
+    ],
+  },
+  {
+    id: "travel",
+    title: "Du lịch / Công tác",
+    emoji: "✈️",
+    description: "TOEIC Part 3 và Part 4 hay xuất hiện ở chủ đề này",
+    words: [
+      { en: "reservation", pos: "n.", vi: "đặt chỗ", example: "I'd like to make a reservation for two." },
+      { en: "boarding pass", pos: "n.", vi: "thẻ lên máy bay", example: "Please show your boarding pass." },
+      { en: "luggage", pos: "n.", vi: "hành lý", example: "Your luggage is overweight." },
+      { en: "departure", pos: "n.", vi: "khởi hành", example: "Departure is at 9:45 AM." },
+      { en: "arrival", pos: "n.", vi: "đến nơi", example: "Estimated arrival: 3:30 PM." },
+      { en: "delay", pos: "n./v.", vi: "trì hoãn", example: "Flight 203 has been delayed." },
+      { en: "itinerary", pos: "n.", vi: "lịch trình chuyến đi", example: "I'll email you the itinerary." },
+      { en: "accommodation", pos: "n.", vi: "chỗ ở", example: "The company will provide accommodation." },
+      { en: "confirm", pos: "v.", vi: "xác nhận", example: "Please confirm your booking by Monday." },
+      { en: "cancel", pos: "v.", vi: "huỷ", example: "I'd like to cancel my reservation." },
+    ],
+  },
+];
+
+// ─── Mock tests ────────────────────────────────────────────────
+export type ToeicQuestion = {
+  id: string;
+  part: 5 | 6 | 7;
+  passage?: string; // for part 6/7
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explain?: string;
+};
+
+export type ToeicTest = {
+  id: string;
+  title: string;
+  description: string;
+  timeLimitSec: number;
+  questions: ToeicQuestion[];
+};
+
+export const TOEIC_TESTS: ToeicTest[] = [
+  {
+    id: "toeic-mini-1",
+    title: "Mini Test 1 — Part 5 căn bản",
+    description: "10 câu Part 5 (incomplete sentences). Thời gian: 8 phút.",
+    timeLimitSec: 8 * 60,
+    questions: [
+      {
+        id: "t1-1",
+        part: 5,
+        question: "The manager ___ the report before sending it to the client.",
+        options: ["review", "reviews", "reviewed", "reviewing"],
+        correctIndex: 2,
+        explain: "Past simple (action completed before another past action).",
+      },
+      {
+        id: "t1-2",
+        part: 5,
+        question: "All employees must ___ the safety guidelines.",
+        options: ["follow", "follows", "following", "followed"],
+        correctIndex: 0,
+        explain: "After 'must' → bare infinitive (động từ nguyên thể, không thêm s).",
+      },
+      {
+        id: "t1-3",
+        part: 5,
+        question: "The new policy will take effect ___ January 1st.",
+        options: ["in", "at", "on", "by"],
+        correctIndex: 2,
+        explain: "On + ngày cụ thể.",
+      },
+      {
+        id: "t1-4",
+        part: 5,
+        question: "Our department is responsible ___ customer support.",
+        options: ["for", "of", "to", "with"],
+        correctIndex: 0,
+        explain: "Collocation: responsible FOR something.",
+      },
+      {
+        id: "t1-5",
+        part: 5,
+        question: "Please ___ the attached document carefully.",
+        options: ["review", "reviewing", "to review", "reviewed"],
+        correctIndex: 0,
+        explain: "Câu mệnh lệnh dùng động từ nguyên thể.",
+      },
+      {
+        id: "t1-6",
+        part: 5,
+        question: "The training session was ___ informative.",
+        options: ["high", "highly", "height", "higher"],
+        correctIndex: 1,
+        explain: "Trạng từ (adverb) bổ nghĩa cho tính từ → 'highly'.",
+      },
+      {
+        id: "t1-7",
+        part: 5,
+        question: "We received many ___ about the new product.",
+        options: ["complain", "complained", "complaints", "complaining"],
+        correctIndex: 2,
+        explain: "Sau 'many' cần danh từ đếm được số nhiều.",
+      },
+      {
+        id: "t1-8",
+        part: 5,
+        question: "If you have any questions, please ___ contact me.",
+        options: ["do not hesitate to", "not hesitate to", "no hesitate", "hesitate not"],
+        correctIndex: 0,
+        explain: "Cụm cố định công sở: 'do not hesitate to + V'.",
+      },
+      {
+        id: "t1-9",
+        part: 5,
+        question: "The conference will be held ___ the Hilton Hotel.",
+        options: ["in", "at", "on", "to"],
+        correctIndex: 1,
+        explain: "At + địa điểm cụ thể.",
+      },
+      {
+        id: "t1-10",
+        part: 5,
+        question: "Sales have increased ___ 20% this quarter.",
+        options: ["by", "on", "in", "of"],
+        correctIndex: 0,
+        explain: "Increase BY + số liệu (mức tăng).",
+      },
+    ],
+  },
+  {
+    id: "toeic-mini-2",
+    title: "Mini Test 2 — Reading Part 7",
+    description: "5 câu đọc hiểu một email công việc. Thời gian: 6 phút.",
+    timeLimitSec: 6 * 60,
+    questions: [
+      {
+        id: "t2-1",
+        part: 7,
+        passage:
+          "From: Sarah Chen <s.chen@globaltech.com>\nTo: All Marketing Team\nSubject: Q4 Campaign Kickoff Meeting\n\nHi team,\n\nI'd like to schedule our Q4 campaign kickoff meeting for next Thursday, October 28th, at 2:00 PM in Conference Room B. The meeting should last approximately 90 minutes.\n\nPlease come prepared with:\n• Your preliminary campaign ideas\n• Budget estimates from your respective channels\n• A brief update on Q3 performance\n\nIf you cannot attend in person, please join via the Zoom link I'll send tomorrow. Please confirm your attendance by Tuesday EOD.\n\nThanks,\nSarah",
+        question: "What is the main purpose of this email?",
+        options: [
+          "To cancel a meeting",
+          "To announce a meeting and request preparation",
+          "To report Q3 results",
+          "To introduce a new team member",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "t2-2",
+        part: 7,
+        passage:
+          "From: Sarah Chen <s.chen@globaltech.com>\nTo: All Marketing Team\nSubject: Q4 Campaign Kickoff Meeting\n\nHi team,\n\nI'd like to schedule our Q4 campaign kickoff meeting for next Thursday, October 28th, at 2:00 PM in Conference Room B. The meeting should last approximately 90 minutes.\n\nPlease come prepared with:\n• Your preliminary campaign ideas\n• Budget estimates from your respective channels\n• A brief update on Q3 performance\n\nIf you cannot attend in person, please join via the Zoom link I'll send tomorrow. Please confirm your attendance by Tuesday EOD.\n\nThanks,\nSarah",
+        question: "When is the meeting scheduled?",
+        options: [
+          "Tuesday at 2:00 PM",
+          "Thursday, October 28th at 2:00 PM",
+          "Thursday at 9:00 AM",
+          "October 28th at 9:00 PM",
+        ],
+        correctIndex: 1,
+      },
+      {
+        id: "t2-3",
+        part: 7,
+        passage:
+          "From: Sarah Chen <s.chen@globaltech.com>\nTo: All Marketing Team\nSubject: Q4 Campaign Kickoff Meeting\n\nHi team,\n\nI'd like to schedule our Q4 campaign kickoff meeting for next Thursday, October 28th, at 2:00 PM in Conference Room B. The meeting should last approximately 90 minutes.\n\nPlease come prepared with:\n• Your preliminary campaign ideas\n• Budget estimates from your respective channels\n• A brief update on Q3 performance\n\nIf you cannot attend in person, please join via the Zoom link I'll send tomorrow. Please confirm your attendance by Tuesday EOD.\n\nThanks,\nSarah",
+        question: "Which of the following is NOT mentioned as a preparation item?",
+        options: [
+          "Campaign ideas",
+          "Budget estimates",
+          "Q3 performance update",
+          "Customer feedback report",
+        ],
+        correctIndex: 3,
+      },
+      {
+        id: "t2-4",
+        part: 7,
+        passage:
+          "From: Sarah Chen <s.chen@globaltech.com>\nTo: All Marketing Team\nSubject: Q4 Campaign Kickoff Meeting\n\nHi team,\n\nI'd like to schedule our Q4 campaign kickoff meeting for next Thursday, October 28th, at 2:00 PM in Conference Room B. The meeting should last approximately 90 minutes.\n\nPlease come prepared with:\n• Your preliminary campaign ideas\n• Budget estimates from your respective channels\n• A brief update on Q3 performance\n\nIf you cannot attend in person, please join via the Zoom link I'll send tomorrow. Please confirm your attendance by Tuesday EOD.\n\nThanks,\nSarah",
+        question: "By when must team members confirm attendance?",
+        options: ["Monday morning", "Tuesday end of day", "Wednesday", "Thursday before meeting"],
+        correctIndex: 1,
+        explain: "'EOD' = End of Day = cuối ngày làm việc.",
+      },
+      {
+        id: "t2-5",
+        part: 7,
+        passage:
+          "From: Sarah Chen <s.chen@globaltech.com>\nTo: All Marketing Team\nSubject: Q4 Campaign Kickoff Meeting\n\nHi team,\n\nI'd like to schedule our Q4 campaign kickoff meeting for next Thursday, October 28th, at 2:00 PM in Conference Room B. The meeting should last approximately 90 minutes.\n\nPlease come prepared with:\n• Your preliminary campaign ideas\n• Budget estimates from your respective channels\n• A brief update on Q3 performance\n\nIf you cannot attend in person, please join via the Zoom link I'll send tomorrow. Please confirm your attendance by Tuesday EOD.\n\nThanks,\nSarah",
+        question: "What option is given to those who cannot attend in person?",
+        options: [
+          "Send a written report",
+          "Reschedule the meeting",
+          "Join via Zoom",
+          "Send a colleague",
+        ],
+        correctIndex: 2,
+      },
+    ],
+  },
+];

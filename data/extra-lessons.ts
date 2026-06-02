@@ -1,0 +1,250 @@
+﻿
+export const EXTRA_LESSONS = [
+  {
+    id: "b-11",
+    unit: 6,
+    order: 1,
+    level: "A1",
+    xpReward: 30,
+    title: "So sanh hon - Comparative",
+    subtitle: "Bigger, faster, more beautiful...",
+    steps: [
+      { kind: "intro", title: "So sanh trong tieng Anh", body: "Khi muon noi A hon B, ta them -er hoac dung more. Vi du: tall -> taller, beautiful -> more beautiful." },
+      { kind: "vocab", items: [
+        { en: "taller", vi: "cao hon", example: "He is taller than me.", exampleVi: "Anh ay cao hon toi." },
+        { en: "faster", vi: "nhanh hon", example: "Cars are faster than bicycles.", exampleVi: "Xe hoi nhanh hon xe dap." },
+        { en: "more expensive", vi: "dat hon", example: "Gold is more expensive than silver.", exampleVi: "Vang dat hon bac." },
+        { en: "better", vi: "tot hon", example: "This is better than that.", exampleVi: "Cai nay tot hon cai kia." },
+        { en: "worse", vi: "te hon", example: "My English is worse than yours.", exampleVi: "Tieng Anh cua toi te hon cua ban." },
+      ]},
+      { kind: "grammar", title: "Quy tac so sanh hon", explanation: "Tinh tu ngan (1 am) + er. Tinh tu dai (2+ am) dung more + tinh tu. Bat quy tac: good->better, bad->worse, far->farther.", examples: [
+        { en: "She is smarter than her brother.", vi: "Co ay thong minh hon anh trai." },
+        { en: "This phone is more modern than that one.", vi: "Dien thoai nay hien dai hon cai kia." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "He is ___ than me. (tall)", options: ["more tall", "taller", "tallest", "tall"], correctIndex: 1 },
+        { prompt: "This bag is ___ than that one. (expensive)", options: ["expensiver", "more expensive", "most expensive", "expensivest"], correctIndex: 1 },
+        { prompt: "So sanh cua 'good' la?", options: ["gooder", "more good", "better", "best"], correctIndex: 2 },
+      ]},
+    ],
+  },
+  {
+    id: "b-12",
+    unit: 6,
+    order: 2,
+    level: "A1",
+    xpReward: 30,
+    title: "So sanh nhat - Superlative",
+    subtitle: "The biggest, the best, the most...",
+    steps: [
+      { kind: "intro", title: "So sanh nhat", body: "Khi muon noi A la nhat trong nhom, ta dung the + tinh tu + est hoac the most + tinh tu." },
+      { kind: "vocab", items: [
+        { en: "the tallest", vi: "cao nhat", example: "She is the tallest in class.", exampleVi: "Co ay cao nhat lop." },
+        { en: "the fastest", vi: "nhanh nhat", example: "He is the fastest runner.", exampleVi: "Anh ay la nguoi chay nhanh nhat." },
+        { en: "the most beautiful", vi: "dep nhat", example: "This is the most beautiful city.", exampleVi: "Day la thanh pho dep nhat." },
+        { en: "the best", vi: "tot nhat", example: "She is the best student.", exampleVi: "Co ay la hoc sinh gioi nhat." },
+        { en: "the worst", vi: "te nhat", example: "This is the worst day ever.", exampleVi: "Day la ngay te nhat tu truoc den nay." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "Mount Everest is ___ mountain. (high)", options: ["higher", "the highest", "most high", "the most high"], correctIndex: 1 },
+        { prompt: "She is ___ student in class. (good)", options: ["the goodest", "the most good", "the best", "better"], correctIndex: 2 },
+      ]},
+    ],
+  },
+  {
+    id: "b-13",
+    unit: 7,
+    order: 1,
+    level: "A1",
+    xpReward: 35,
+    title: "Hien tai tiep dien - Present Continuous",
+    subtitle: "I am eating. She is working.",
+    steps: [
+      { kind: "intro", title: "Dang lam gi luc nay?", body: "Present Continuous dung de noi ve viec dang xay ra ngay luc noi chuyen. Cong thuc: am/is/are + V-ing." },
+      { kind: "grammar", title: "Cong thuc Present Continuous", explanation: "I am + V-ing. He/She/It is + V-ing. We/You/They are + V-ing. Them -ing vao dong tu: work->working, run->running, sit->sitting.", examples: [
+        { en: "I am studying English now.", vi: "Toi dang hoc tieng Anh." },
+        { en: "She is cooking dinner.", vi: "Co ay dang nau com toi." },
+        { en: "They are playing football.", vi: "Ho dang da bong." },
+      ]},
+      { kind: "fill-blank", items: [
+        { sentence: "I ___ TV right now. (watch)", answer: "am watching", vi: "Toi dang xem TV.", hint: "(am + watching)" },
+        { sentence: "She ___ to music. (listen)", answer: "is listening", vi: "Co ay dang nghe nhac.", hint: "(is + listening)" },
+        { sentence: "They ___ in the park. (run)", answer: "are running", vi: "Ho dang chay trong cong vien.", hint: "(are + running)" },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "I ___ dinner now. (cook)", options: ["cook", "am cooking", "is cooking", "are cooking"], correctIndex: 1 },
+        { prompt: "She ___ a book. (read)", options: ["read", "reads", "is reading", "are reading"], correctIndex: 2 },
+        { prompt: "They ___ football. (play)", options: ["play", "plays", "is playing", "are playing"], correctIndex: 3 },
+      ]},
+    ],
+  },
+  {
+    id: "b-14",
+    unit: 7,
+    order: 2,
+    level: "A1",
+    xpReward: 30,
+    title: "Thi tuong lai - Will & Shall",
+    subtitle: "Quyet dinh tuc thi va du doan",
+    steps: [
+      { kind: "intro", title: "Noi ve tuong lai voi Will", body: "Will dung khi quyet dinh ngay luc noi, du doan, hoac hua hen. Cong thuc: will + dong tu nguyen mau." },
+      { kind: "vocab", items: [
+        { en: "I will call you.", vi: "Toi se goi cho ban.", example: "I will call you tonight.", exampleVi: "Toi se goi cho ban toi nay." },
+        { en: "It will rain.", vi: "Troi se mua.", example: "I think it will rain tomorrow.", exampleVi: "Toi nghi ngay mai troi se mua." },
+        { en: "I won't", vi: "Toi se khong", example: "I won't be late.", exampleVi: "Toi se khong den muon." },
+        { en: "Will you?", vi: "Ban co...khong?", example: "Will you help me?", exampleVi: "Ban co giup toi khong?" },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "I ___ help you tomorrow.", options: ["am", "was", "will", "have"], correctIndex: 2 },
+        { prompt: "'Will not' viet tat la?", options: ["willn't", "won't", "will't", "wont"], correctIndex: 1 },
+        { prompt: "Dung will khi nao?", options: ["Ke chuyen qua khu", "Quyet dinh tuc thi", "Mo ta hien tai", "Hanh dong da hoan thanh"], correctIndex: 1 },
+      ]},
+    ],
+  },
+  {
+    id: "b-15",
+    unit: 8,
+    order: 1,
+    level: "A1",
+    xpReward: 35,
+    title: "Modal verbs - Can, Could, Should",
+    subtitle: "Kha nang, kha nang qua khu, loi khuyen",
+    steps: [
+      { kind: "intro", title: "Dong tu khuyet thieu", body: "Can = co the (kha nang hien tai). Could = co the (lich su hoac qua khu). Should = nen (loi khuyen). Deu dung voi dong tu nguyen mau." },
+      { kind: "grammar", title: "Can / Could / Should", explanation: "Can: I can swim. Could: I could swim when I was 5. Should: You should study more. Phu dinh: cannot/can not, could not, should not.", examples: [
+        { en: "Can you speak English?", vi: "Ban co the noi tieng Anh khong?" },
+        { en: "You should sleep early.", vi: "Ban nen ngu som." },
+        { en: "I could not come yesterday.", vi: "Hom qua toi khong the den." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "I ___ swim very well.", options: ["can", "am", "have", "do"], correctIndex: 0 },
+        { prompt: "You ___ eat more vegetables.", options: ["can", "could", "should", "will"], correctIndex: 2 },
+        { prompt: "'Cannot' viet tat la?", options: ["cant", "can't", "cant'", "ca'nt"], correctIndex: 1 },
+      ]},
+    ],
+  },
+  {
+    id: "b-16",
+    unit: 8,
+    order: 2,
+    level: "A2",
+    xpReward: 35,
+    title: "Must & Have to",
+    subtitle: "Bat buoc va can thiet",
+    steps: [
+      { kind: "intro", title: "Dien dat su bat buoc", body: "Must va have to deu co nghia la 'phai'. Must: bat buoc tu chinh minh hoac quy tac. Have to: hoan canh ben ngoai bat buoc." },
+      { kind: "vocab", items: [
+        { en: "must", vi: "phai (bat buoc)", example: "You must wear a seatbelt.", exampleVi: "Ban phai that day an toan." },
+        { en: "have to", vi: "phai (hoan canh)", example: "I have to work on weekends.", exampleVi: "Toi phai lam viec cuoi tuan." },
+        { en: "must not", vi: "khong duoc phep", example: "You must not smoke here.", exampleVi: "Ban khong duoc hut thuoc o day." },
+        { en: "do not have to", vi: "khong can thiet", example: "You don't have to come.", exampleVi: "Ban khong can phai den." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "Students ___ wear uniforms at school.", options: ["can", "must", "should not", "could"], correctIndex: 1 },
+        { prompt: "'Must not' co nghia la?", options: ["Khong can", "Khong duoc phep", "Nen khong", "Co the khong"], correctIndex: 1 },
+        { prompt: "I don't have to go. Nghia la?", options: ["Toi khong duoc di", "Toi khong can phai di", "Toi khong the di", "Toi phai di"], correctIndex: 1 },
+      ]},
+    ],
+  },
+  {
+    id: "b-17",
+    unit: 9,
+    order: 1,
+    level: "A2",
+    xpReward: 40,
+    title: "Hien tai hoan thanh - Present Perfect",
+    subtitle: "Have you ever...? I have just...",
+    steps: [
+      { kind: "intro", title: "Hien tai hoan thanh", body: "Present Perfect dung khi hanh dong xay ra trong qua khu nhung con lien quan den hien tai. Cong thuc: have/has + phan tu qua khu (V3)." },
+      { kind: "grammar", title: "Cong thuc Present Perfect", explanation: "I/We/You/They + have + V3. He/She/It + has + V3. Hay gap voi: just, already, yet, ever, never. V3 cua regular verbs: + ed. Irregular: go->gone, eat->eaten, see->seen.", examples: [
+        { en: "I have just eaten lunch.", vi: "Toi vua an trua xong." },
+        { en: "She has never been to Japan.", vi: "Co ay chua bao gio den Nhat." },
+        { en: "Have you ever tried sushi?", vi: "Ban co bao gio an sushi chua?" },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "I ___ just finished my homework.", options: ["have", "has", "had", "am"], correctIndex: 0 },
+        { prompt: "She ___ never eaten pizza.", options: ["have", "has", "had", "is"], correctIndex: 1 },
+        { prompt: "Have you ___ to Paris? (go)", options: ["go", "went", "gone", "going"], correctIndex: 2 },
+      ]},
+    ],
+  },
+  {
+    id: "b-18",
+    unit: 9,
+    order: 2,
+    level: "A2",
+    xpReward: 35,
+    title: "Cau bi dong - Passive Voice",
+    subtitle: "The letter was written by him.",
+    steps: [
+      { kind: "intro", title: "Cau bi dong la gi?", body: "Cau bi dong dung khi hanh dong quan trong hon chu the. Cong thuc: am/is/are + V3 (hien tai) hoac was/were + V3 (qua khu)." },
+      { kind: "grammar", title: "Bi dong hien tai va qua khu", explanation: "Chu dong: The chef cooks the food. Bi dong: The food is cooked by the chef. Qua khu bi dong: The food was cooked by the chef.", examples: [
+        { en: "English is spoken worldwide.", vi: "Tieng Anh duoc noi tren toan the gioi." },
+        { en: "The letter was written yesterday.", vi: "Buc thu duoc viet hom qua." },
+        { en: "Mistakes were made.", vi: "Nhung sai lam da duoc tao ra." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "The cake ___ by my mother. (make - past)", options: ["make", "makes", "was made", "is made"], correctIndex: 2 },
+        { prompt: "English ___ in many countries. (speak - present)", options: ["speak", "spoke", "is spoken", "was spoken"], correctIndex: 2 },
+      ]},
+    ],
+  },
+  {
+    id: "b-19",
+    unit: 10,
+    order: 1,
+    level: "A2",
+    xpReward: 40,
+    title: "Cau dieu kien - If Clauses",
+    subtitle: "If it rains, I will stay home.",
+    steps: [
+      { kind: "intro", title: "Cau dieu kien loai 1", body: "Dieu kien co the xay ra trong tuong lai. Cong thuc: If + hien tai don, will + dong tu." },
+      { kind: "grammar", title: "If clause Type 1", explanation: "If + S + V (hien tai), S + will + V. Vi du: If it rains, I will bring an umbrella. Neu troi mua, toi se mang o.", examples: [
+        { en: "If I study hard, I will pass the exam.", vi: "Neu toi hoc cham chi, toi se dau ki thi." },
+        { en: "If you are hungry, I will cook for you.", vi: "Neu ban doi, toi se nau an cho ban." },
+        { en: "If it is sunny, we will go to the beach.", vi: "Neu troi nang, chung toi se di bien." },
+      ]},
+      { kind: "sentence-builder", puzzles: [
+        { target: "If it rains, I will stay home.", pieces: ["If", "it", "rains,", "I", "will", "stay", "home."], vi: "Neu troi mua, toi se o nha." },
+        { target: "If you study, you will pass.", pieces: ["If", "you", "study,", "you", "will", "pass."], vi: "Neu ban hoc, ban se dau." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "If I ___ money, I will buy a car.", options: ["have", "had", "will have", "having"], correctIndex: 0 },
+        { prompt: "If it rains, she ___ bring an umbrella.", options: ["will", "would", "can", "is"], correctIndex: 0 },
+      ]},
+    ],
+  },
+  {
+    id: "b-20",
+    unit: 10,
+    order: 2,
+    level: "A2",
+    xpReward: 40,
+    title: "Ky nang viet email co ban",
+    subtitle: "Dear Sir/Madam, I am writing to...",
+    steps: [
+      { kind: "intro", title: "Viet email tieng Anh", body: "Email tieng Anh co cau truc ro rang: Loi chao (Greeting), Noi dung chinh (Body), Loi ket (Closing). Giu giong van lich su, ro rang." },
+      { kind: "vocab", items: [
+        { en: "Dear Sir/Madam", vi: "Kinh gui Ong/Ba", example: "Dear Sir/Madam, I am writing to...", exampleVi: "Kinh gui, Toi viet email nay de..." },
+        { en: "I am writing to", vi: "Toi viet de", example: "I am writing to inquire about...", exampleVi: "Toi viet de hoi ve..." },
+        { en: "I would like to", vi: "Toi muon", example: "I would like to apply for...", exampleVi: "Toi muon ung tuyen vi tri..." },
+        { en: "Please find attached", vi: "Vui long xem file dinh kem", example: "Please find attached my CV.", exampleVi: "Vui long xem CV dinh kem." },
+        { en: "Yours sincerely", vi: "Tran trong", example: "Yours sincerely, John", exampleVi: "Tran trong, John" },
+        { en: "I look forward to", vi: "Toi mong cho", example: "I look forward to hearing from you.", exampleVi: "Toi mong nhan duoc hoi am cua ban." },
+      ]},
+      { kind: "quiz", questions: [
+        { prompt: "Email ket thuc bang tu nao?", options: ["Dear", "Hello", "Yours sincerely", "Hi there"], correctIndex: 2 },
+        { prompt: "'I look forward to hearing from you' co nghia la?", options: ["Toi se nghe ban", "Toi mong nhan tin tu ban", "Toi da nghe ban", "Ban hay nghe toi"], correctIndex: 1 },
+        { prompt: "Phan dau email la?", options: ["Closing", "Body", "Greeting", "Subject"], correctIndex: 2 },
+      ]},
+    ],
+  },
+];
+
+export const EXTRA_PATH = [
+  { unit: 6, title: "So sanh", description: "Hon, nhat - cach mo ta va so sanh", lessonIds: ["b-11", "b-12"] },
+  { unit: 7, title: "Thi tiep dien va tuong lai", description: "Dang lam gi? Se lam gi?", lessonIds: ["b-13", "b-14"] },
+  { unit: 8, title: "Dong tu khuyet thieu", description: "Can, should, must - kha nang va bat buoc", lessonIds: ["b-15", "b-16"] },
+  { unit: 9, title: "Thi hoan thanh va bi dong", description: "Da lam gi? Duoc lam boi ai?", lessonIds: ["b-17", "b-18"] },
+  { unit: 10, title: "Nang cao - Dieu kien & Viet", description: "If clauses va ky nang viet email", lessonIds: ["b-19", "b-20"] },
+];

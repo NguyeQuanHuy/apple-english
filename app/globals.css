@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 251 247 240;
+    --fg: 26 24 20;
+  }
+
+  .dark {
+    --bg: 22 20 17;
+    --fg: 245 239 227;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--fg));
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(26, 24, 20, 0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  }
+}
+
+@layer components {
+
+  /* "Bump" button: chunky button with bottom shadow that compresses on press,
+     inspired by Duolingo but executed with our palette */
+  .btn-bump {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-chunky px-6 py-3 font-bold uppercase tracking-wide transition-all duration-100 active:translate-y-1 active:shadow-none disabled:opacity-50 disabled:cursor-not-allowed;
+    box-shadow: 0 4px 0 0 currentColor;
+  }
+
+  .btn-bump-ember {
+    @apply btn-bump bg-ember-500 text-white;
+    box-shadow: 0 4px 0 0 #A53D08;
+  }
+
+  .btn-bump-ember:active {
+    box-shadow: 0 0 0 0 #A53D08;
+  }
+
+  .btn-bump-teal {
+    @apply btn-bump bg-teal-500 text-white;
+    box-shadow: 0 4px 0 0 #155049;
+  }
+
+  .btn-bump-teal:active {
+    box-shadow: 0 0 0 0 #155049;
+  }
+
+  .btn-bump-ghost {
+    @apply btn-bump bg-paper-50 text-ink-900 border-2 border-ink-900/10;
+    box-shadow: 0 4px 0 0 rgba(26, 24, 20, 0.12);
+  }
+
+  .btn-bump-ghost:active {
+    box-shadow: 0 0 0 0 rgba(26, 24, 20, 0.12);
+  }
+
+  .dark .btn-bump-ghost {
+    @apply bg-ink-700 text-paper-50 border-paper-50/10;
+    box-shadow: 0 4px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .card-paper {
+    @apply rounded-chunky bg-paper-50 border shadow-card;
+    /* Sử dụng biến --fg (màu ink) với độ mờ 8% */
+    border-color: rgba(var(--fg), 0.08);
+  }
+
+  .dark .card-paper {
+    @apply bg-ink-700;
+    /* Ở chế độ dark, nó tự động lấy biến --fg của dark luôn */
+    border-color: rgba(var(--fg), 0.08);
+  }
+
+  /* hand-drawn underline accent under headings */
+  .ink-underline {
+    background-image: linear-gradient(transparent 65%, rgba(242, 107, 31, 0.35) 65%, rgba(242, 107, 31, 0.35) 92%, transparent 92%);
+    background-position: 0 0.05em;
+    padding: 0 0.1em;
+  }
+}
