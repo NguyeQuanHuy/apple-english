@@ -217,6 +217,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "export", pos: "v.", vi: "xuất khẩu", example: "The company exports goods to 20 countries." },
     ],
   }
+,
+  {
+    id: "weather",
+    title: "Thời tiết & Khí hậu",
+    emoji: "⛅",
+    description: "Từ vựng về thời tiết hay gặp trong TOEIC Part 1-4",
+    words: [
+      { en: "forecast", pos: "n.", vi: "dự báo thời tiết", example: "The forecast shows rain for the next three days." },
+      { en: "temperature", pos: "n.", vi: "nhiệt độ", example: "Temperatures will drop below zero tonight." },
+      { en: "humidity", pos: "n.", vi: "độ ẩm", example: "High humidity makes it feel hotter than it is." },
+      { en: "precipitation", pos: "n.", vi: "lượng mưa", example: "Heavy precipitation is expected this weekend." },
+      { en: "flood", pos: "n.", vi: "lũ lụt", example: "The flood damaged many homes in the area." },
+      { en: "drought", pos: "n.", vi: "hạn hán", example: "The drought has affected crop production." },
+      { en: "storm", pos: "n.", vi: "bão", example: "A tropical storm is approaching the coast." },
+      { en: "visibility", pos: "n.", vi: "tầm nhìn", example: "Poor visibility caused flight delays." },
+      { en: "celsius", pos: "n.", vi: "độ C", example: "The temperature is 35 degrees Celsius today." },
+      { en: "climate", pos: "n.", vi: "khí hậu", example: "Vietnam has a tropical climate." },
+    ],
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
