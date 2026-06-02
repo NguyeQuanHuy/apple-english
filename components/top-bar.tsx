@@ -27,6 +27,7 @@ export function TopBar() {
           <NavLink href="/learn/topics">Chu de</NavLink>
           <NavLink href="/games">Mini Games</NavLink>
           <NavLink href="/blog">Bài viết</NavLink>
+          <NavLink href="/blog">Bài viết</NavLink>
           <NavLink href="/dashboard">Tien do</NavLink>
         </nav>
         <div className="flex items-center gap-2">
@@ -69,3 +70,4 @@ function Stat({ icon, value, label, color }: { icon: React.ReactNode; value: num
     </div>
   );
 }
+
