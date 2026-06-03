@@ -78,7 +78,7 @@ function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allL
   );
 }
 
-function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; done: boolean }) {
+function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; done: boolean }): JSX.Element {
 
 function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allLessons }: any) {
   return (
