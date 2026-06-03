@@ -1,9 +1,126 @@
-﻿export type BlogPost = {
+export type BlogPost = {
   slug: string;
   title: string;
   emoji: string;
   summary: string;
-  tags?: string[];
+  tags?: string[,
+  {
+    "slug": "cach-phat-am-tieng-anh-ro-rang",
+    "title": "Cách phát âm tiếng Anh rõ ràng",
+    "emoji": "🎤",
+    "summary": "Phát âm sai khiến người nghe không hiểu dù ngữ pháp đúng. Hướng dẫn từng bước để phát âm chuẩn.",
+    "tags": [
+      "Phát âm",
+      "Phương pháp"
+    ],
+    "date": "04/06/2026",
+    "readingTime": "6 phút đọc",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Phát âm tốt không có nghĩa là phải nói giọng Mỹ hoàn hảo. Phát âm tốt có nghĩa là người nghe hiểu bạn ngay lần đầu."
+      },
+      {
+        "type": "heading",
+        "text": "Lỗi 1: Nuốt âm cuối"
+      },
+      {
+        "type": "paragraph",
+        "text": "Người Việt hay nuốt âm cuối vì tiếng Việt ít phụ âm cuối mạnh."
+      },
+      {
+        "type": "compare",
+        "left": "I need your hel",
+        "right": "I need your help",
+        "leftLabel": "❌ Nuốt âm /p/",
+        "rightLabel": "✅ Rõ âm cuối"
+      },
+      {
+        "type": "list",
+        "items": [
+          "/p/ cuối: stop, help — môi chạm nhau",
+          "/t/ cuối: cat, not — lưỡi chạm răng trên",
+          "/k/ cuối: back, work — ngừng hơi ở họ ngực"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Lỗi 2: Âm /th/ đọc sai"
+      },
+      {
+        "type": "vocab",
+        "word": "/th/ không thanh",
+        "meaning": "Lưỡi giữa 2 hàng răng, thổi hơi",
+        "example": "think, three, thank, thin"
+      },
+      {
+        "type": "vocab",
+        "word": "/th/ có thanh",
+        "meaning": "Giống trên nhưng dây thanh rung",
+        "example": "this, that, the, them"
+      },
+      {
+        "type": "callout",
+        "emoji": "💡",
+        "text": "Cách luyện: Đặt gương trước mặt. Lưỡi phải thấy giữa 2 hàng răng khi đọc /th/."
+      },
+      {
+        "type": "heading",
+        "text": "Lỗi 3: Sai trọng âm"
+      },
+      {
+        "type": "compare",
+        "left": "pho-TO-graph",
+        "right": "PHO-to-graph",
+        "leftLabel": "❌ Sai",
+        "rightLabel": "✅ Đúng"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Danh từ 2 âm tiết: nhấn âm đầu — TA-ble, MO-ney, PEO-ple",
+          "Động từ 2 âm tiết: nhấn âm sau — be-GIN, de-CIDE, re-LAX"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Lỗi 4: Không nối âm"
+      },
+      {
+        "type": "paragraph",
+        "text": "Người bản ngữ nói nhanh vì họ nối âm giữa các từ. Nếu bạn ngắt từng từ, nghe rất cơ học."
+      },
+      {
+        "type": "vocab",
+        "word": "Phụ âm + Nguyên âm",
+        "meaning": "Nối liền giữa 2 từ",
+        "example": "turn off → tur-NOFF | pick up → pi-CUP | get in → ge-TIN"
+      },
+      {
+        "type": "heading",
+        "text": "Lịch luyện 10 phút mỗi ngày"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Phút 1-2: Đọc to 10 từ có âm cuối khó (stop, help, back, ask)",
+          "Phút 3-4: Luyện /th/ — đọc 5 câu có the, this, think, three",
+          "Phút 5-6: Shadowing 1 đoạn phim ngắn có phụ đề tiếng Anh",
+          "Phút 7-10: Ghi âm bản thân nói 5 câu, nghe lại và so sánh"
+        ]
+      },
+      {
+        "type": "callout",
+        "emoji": "🌟",
+        "text": "Công cụ miễn phí nên dùng: ELSA Speak (app luyện phát âm AI), YouGlish (nghe phát âm trong video thực tế), Forvo (nghe phát âm chuẩn theo từng từ)."
+      },
+      {
+        "type": "quote",
+        "text": "Phát âm không cần hoàn hảo — cần đủ rõ để người ta hiểu ngay. Và điều đó chỉ cần 10 phút luyện mỗi ngày trong 1 tháng."
+      }
+    ]
+  }
+];
   date?: string;
   readingTime?: string;
   content: object[];
