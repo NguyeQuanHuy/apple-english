@@ -79,7 +79,6 @@ function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allL
 }
 
 
-function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allLessons }: any) {
   return (
     <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: unitIdx * 0.06 }}>
       <div className="flex items-center gap-3 mb-3"><div className="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 text-white grid place-items-center font-black text-sm flex-shrink-0">{String(unit.unit).padStart(2, "0")}</div><div><h2 className="font-display text-lg font-bold text-sky-900 leading-tight">{unit.title}</h2><p className="text-xs text-sky-400">{unit.description}</p></div></div>
