@@ -94,3 +94,4 @@ function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; don
   if (locked) return <div className="cursor-not-allowed">{inner}</div>;
   return <Link href={`/learn/beginner/${lesson.id}`}>{inner}</Link>;
 }
+}
