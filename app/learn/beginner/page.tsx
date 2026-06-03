@@ -78,7 +78,6 @@ function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allL
   );
 }
 
-function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; done: boolean }): JSX.Element {
 
 function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allLessons }: any) {
   return (
@@ -93,5 +92,4 @@ function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; don
   const inner = (<div className={`rounded-xl p-4 flex items-center gap-3 transition-all border-2 ${done ? "bg-sky-50 border-sky-300" : locked ? "bg-white border-sky-100 opacity-50" : "bg-white border-sky-200 hover:border-sky-400 hover:shadow-card"}`}><div className="flex-shrink-0">{done ? <CheckCircle2 className="w-6 h-6 text-sky-500" /> : locked ? <Lock className="w-6 h-6 text-sky-300" /> : <Circle className="w-6 h-6 text-sky-400" />}</div><div className="flex-1 min-w-0"><div className="flex items-center gap-2 mb-0.5"><span className="text-xs font-bold text-sky-300 uppercase">{lesson.level}</span><span className="text-xs font-bold text-sky-500">+{lesson.xpReward} XP</span></div><p className="font-bold text-sky-900 text-sm leading-tight">{lesson.title}</p><p className="text-xs text-sky-400 truncate mt-0.5">{lesson.subtitle}</p></div>{!locked && (<div className="flex items-center gap-0.5 text-xs font-bold text-sky-500 flex-shrink-0">{done ? "Học lại" : "Học"} <ChevronRight size={14} /></div>)}</div>);
   if (locked) return <div className="cursor-not-allowed">{inner}</div>;
   return <Link href={`/learn/beginner/${lesson.id}`}>{inner}</Link>;
-}
 }
