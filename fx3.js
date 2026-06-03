@@ -1,0 +1,12 @@
+﻿const fs = require('fs');
+const bt = String.fromCharCode(96);
+const d = ' ';
+let c = fs.readFileSync('app/layout.tsx', 'utf8');
+const i = c.indexOf('html lang');
+const start = c.indexOf('className={', i);
+const end = c.indexOf('} suppressHydrationWarning', start);
+console.log('replacing:', JSON.stringify(c.slice(start, end+1)));
+const newStr = 'className={' + bt + d + bt + '}';
+c = c.slice(0, start) + newStr + ' ' + c.slice(end+1);
+fs.writeFileSync('app/layout.tsx', c, 'utf8');
+console.log('result:', JSON.stringify(fs.readFileSync('app/layout.tsx','utf8').slice(i, i+100)));
