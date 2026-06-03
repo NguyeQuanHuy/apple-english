@@ -3,5 +3,8 @@ export type BlogPost = {
   title: string;
   emoji: string;
   summary: string;
-  tags?: string[
-];
+  tags?: string[];
+  date?: string;
+  readingTime?: string;
+  content: object[];
+};
