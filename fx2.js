@@ -1,0 +1,11 @@
+﻿const fs = require('fs');
+const bt = String.fromCharCode(96);
+let c = fs.readFileSync('app/layout.tsx', 'utf8');
+const i = c.indexOf('html lang');
+const start = c.indexOf('className={', i);
+const end = c.indexOf('}', start) + 1;
+console.log('replacing:', JSON.stringify(c.slice(start, end)));
+const newStr = 'className={' + bt + ' ' + bt + '}';
+c = c.slice(0, start) + newStr + c.slice(end);
+fs.writeFileSync('app/layout.tsx', c, 'utf8');
+console.log('result:', JSON.stringify(fs.readFileSync('app/layout.tsx','utf8').slice(i, i+90)));

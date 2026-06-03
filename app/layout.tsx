@@ -82,7 +82,7 @@ function Footer() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={${display.variable} } suppressHydrationWarning>
+    <html lang="vi" className={` `} } suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col">
         <ThemeProvider>
           <TopBar />
