@@ -79,14 +79,6 @@ function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allL
 }
 
 
-  return (
-    <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: unitIdx * 0.06 }}>
-      <div className="flex items-center gap-3 mb-3"><div className="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 text-white grid place-items-center font-black text-sm flex-shrink-0">{String(unit.unit).padStart(2, "0")}</div><div><h2 className="font-display text-lg font-bold text-sky-900 leading-tight">{unit.title}</h2><p className="text-xs text-sky-400">{unit.description}</p></div></div>
-      <div className="space-y-2 pl-12">{lessons.map((lesson: any, idx: number) => { if (!lesson) return null; const allPrev = allPath.flatMap((u: any) => u.unit < unit.unit ? u.lessonIds : u.unit === unit.unit ? u.lessonIds.slice(0, idx) : []); const locked = mounted && allPrev.length > 0 && !allPrev.every((id: string) => completed.includes(id)); const done = mounted && completed.includes(lesson.id); return <LessonRow key={lesson.id} lesson={lesson} locked={locked} done={done} />; })}</div>
-    </motion.section>
-  );
-}
-
 function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; done: boolean }) {
   const inner = (<div className={`rounded-xl p-4 flex items-center gap-3 transition-all border-2 ${done ? "bg-sky-50 border-sky-300" : locked ? "bg-white border-sky-100 opacity-50" : "bg-white border-sky-200 hover:border-sky-400 hover:shadow-card"}`}><div className="flex-shrink-0">{done ? <CheckCircle2 className="w-6 h-6 text-sky-500" /> : locked ? <Lock className="w-6 h-6 text-sky-300" /> : <Circle className="w-6 h-6 text-sky-400" />}</div><div className="flex-1 min-w-0"><div className="flex items-center gap-2 mb-0.5"><span className="text-xs font-bold text-sky-300 uppercase">{lesson.level}</span><span className="text-xs font-bold text-sky-500">+{lesson.xpReward} XP</span></div><p className="font-bold text-sky-900 text-sm leading-tight">{lesson.title}</p><p className="text-xs text-sky-400 truncate mt-0.5">{lesson.subtitle}</p></div>{!locked && (<div className="flex items-center gap-0.5 text-xs font-bold text-sky-500 flex-shrink-0">{done ? "Học lại" : "Học"} <ChevronRight size={14} /></div>)}</div>);
   if (locked) return <div className="cursor-not-allowed">{inner}</div>;
