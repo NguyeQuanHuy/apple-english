@@ -179,7 +179,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { type: "heading", text: "Lộ trình học đề xuất" },
       { type: "list", items: ["Tháng 1-2: Xây vốn từ cơ bản qua flashcard (Anki, Quizlet) — không cần nói.", "Tháng 3-4: Luyện đọc hiểu — bài báo đơn giản, blog, news.", "Tháng 5-6: Luyện viết — bắt đầu từ 3 câu/ngày, tăng dần.", "Tháng 7+: Giao tiếp văn bản với người thật — HelloTalk, Reddit, forum."] },
       { type: "compare", left: "Không nói được nên không học", right: "Học viết, đọc, nghe — vẫn đạt TOEIC, làm việc quốc tế", leftLabel: "❌ Suy nghĩ sai", rightLabel: "✅ Thực tế" },
-      { type: "callout", emoji: "🌟", text: "Nguồn lực miễn phí: National Stuttering Association (stutter.org), AAC Learning Center, YouTube channel "Stutter With Me", "Disability After Dark"." },
+      { type: "callout", emoji: "🌟", text: "Nguồn lực miễn phí: National Stuttering Association (stutter.org), AAC Learning Center, YouTube channel 'Stutter With Me', 'Disability After Dark'." },
       { type: "quote", text: "Ngôn ngữ là cầu nối — không chỉ qua âm thanh mà còn qua chữ viết, ánh mắt, tay, và công nghệ. Bạn có quyền kết nối với thế giới theo cách của mình." }
     ]
   }
