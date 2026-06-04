@@ -1,11 +1,11 @@
-export type ToeicVocab = {
+export interface  {
   en: string;
   vi: string;
   pos: string; // part of speech
   example: string;
 };
 
-export type ToeicTheme = {
+export interface  {
   id: string;
   title: string;
   emoji: string;
@@ -258,7 +258,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
-export type ToeicQuestion = {
+export interface  {
   id: string;
   part: 5 | 6 | 7;
   passage?: string; // for part 6/7
@@ -268,7 +268,7 @@ export type ToeicQuestion = {
   explain?: string;
 };
 
-export type ToeicTest = {
+export interface  {
   id: string;
   title: string;
   description: string;
