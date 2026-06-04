@@ -3,7 +3,44 @@ export type BlogPost = {
   title: string;
   emoji: string;
   summary: string;
-  tags?: string[];
+  tags?: string[,
+  {
+    slug: "hoc-tieng-anh-khi-bi-khuyet-tat-giong-noi",
+    title: "Học tiếng Anh khi bị khiếm khuyết về giọng nói — bạn vẫn làm được",
+    emoji: "📝",
+    summary: "Không nói được hoặc nói khó khăn không có nghĩa là bạn không học được tiếng Anh. Hướng dẫn đầy đủ cho người khó khăn về ngôn ngữ, âm thanh, đam mê.",
+    tags: ["Kinh nghiệm", "Phương pháp"],
+    date: "04/06/2026",
+    readingTime: "7 phút đọc",
+    content: [
+      { type: "paragraph", text: "Tiếng Anh không chỉ là ngôn ngữ nói. Đó là một hệ thống giao tiếp đa dạng — viết, đọc, nghe, ký hiệu, công nghệ hỗ trợ. Bạn có thể học và sử dụng tiếng Anh dù không nói được một tiếng nào." },
+      { type: "callout", emoji: "💙", text: "Bài viết này dành cho: người ngu tật nói (stuttering), bại não ảnh hưởng giọng nói, khó nói do yết hầu, người không có thanh quản, và bất kỳ ai cảm thấy nói tiếng Anh là rào cản quá lớn." },
+      { type: "heading", text: "Tiếng Anh viết và đọc hiểu — cánh cửa rộng mở nhất" },
+      { type: "paragraph", text: "Nhiều người tưởng tiếng Anh = nói tiếng Anh. Nhưng trong thế giới công việc hiện đại, 70-80% giao tiếp tiếng Anh xảy ra qua email, chat, văn bản, báo cáo. Viết tốt là kỹ năng quan trọng nhất." },
+      { type: "list", items: ["Email công việc với đồng nghiệp quốc tế", "Chat trên Slack, Teams với team nước ngoài", "Viết code comments và documentation", "Tham gia cộng đồng kỹ thuật trên GitHub, Stack Overflow", "Học khóa học online bằng tiếng Anh"] },
+      { type: "callout", emoji: "💼", text: "Thực tế: Nhiều kỹ sư phần mềm Việt Nam làm việc cho công ty Mỹ, Âu mà chưa bắo giờ phải gọi điện hay gặp trực tiếp. Toàn bộ giao tiếp qua text." },
+      { type: "heading", text: "Nếu bạn bị nói lắp (stuttering)" },
+      { type: "paragraph", text: "Nói lắp không ảnh hưởng khả năng tư duy hay vốn từ của bạn. Nhiều người nói lắp có vốn tiếng Anh rất phong phú và viết rất xuất sắc." },
+      { type: "list", items: ["Tập trung vào reading và writing trước — xây vốn từ mạnh.", "Nếu muốn luyện nói: tập đọc to một mình — không có áp lực xã hội.", "Slow speech therapy + tiếng Anh: đọc chậm rõ từng từ, không cần tốc độ.", "App ELSA Speak có chế độ luyện phát âm từng từ đơn lẻ, rất phù hợp.", "Giao tiếp văn bản qua HelloTalk — không cần voice call."] },
+      { type: "heading", text: "Nếu bạn không có thanh quản hoặc dùng thiết bị hỗ trợ giọng nói" },
+      { type: "paragraph", text: "Công nghệ AAC (Augmentative and Alternative Communication) ngày nay hỗ trợ tiếng Anh rất tốt. Nhiều người dùng thiết bị này giao tiếp thành công với cả thế giới." },
+      { type: "list", items: ["Stephen Hawking — nhà vật lý vĩ đại — giao tiếp toàn bộ bằng thiết bị điệu khiển bằng cơ mặt.", "Thiết bị AAC tiếng Anh: Proloquo2Go, TouchChat, Snap Core First.", "Text-to-speech iOS/Android hỗ trợ tiếng Anh có thể làm voice output.", "Tập giao tiếp qua text trước — xây vốn từ và tự tin trước."] },
+      { type: "heading", text: "Nếu bạn bị khó khăn phát âm do bại não hoặc bệnh lý" },
+      { type: "paragraph", text: "Dysarthria (khó phát âm do tổn thương thần kinh) nhưng không ảnh hưởng trí tuệ. Rất nhiều người có dysarthria đọc tiếng Anh rất tốt." },
+      { type: "list", items: ["Học ngữ pháp và từ vựng không cần nói — chỉ cần đọc và viết.", "Speech therapy bằng tiếng Anh: có nhiều app luyện đặc biệt.", "Tập trung vào TOEIC Reading — không yêu cầu nói.", "Nghe podcast chậm — luyện nghe hiểu mà không cần nói lại."] },
+      { type: "heading", text: "Các công cụ công nghệ hỗ trợ" },
+      { type: "vocab", word: "Google Voice Typing", meaning: "Chuyển giọng nói thành văn bản — hỗ trợ tiếng Anh", example: "Phù hợp cho người có thể nói nhưng gõ phím khó" },
+      { type: "vocab", word: "Microsoft Dictate", meaning: "Ra lệnh bằng giọng nói trong Word/Outlook", example: "Viết email tiếng Anh bằng giọng nói" },
+      { type: "vocab", word: "Otter.ai", meaning: "Ghi chép tự động cuộc họn bằng tiếng Anh", example: "Dùng trong cuộc họn video call, không cần tự nhiều" },
+      { type: "vocab", word: "Read&Write", meaning: "Hỗ trợ đọc văn bản tiếng Anh bằng giọng nói", example: "Phù hợp cho người khó đọc" },
+      { type: "heading", text: "Lộ trình học đề xuất" },
+      { type: "list", items: ["Tháng 1-2: Xây vốn từ cơ bản qua flashcard (Anki, Quizlet) — không cần nói.", "Tháng 3-4: Luyện đọc hiểu — bài báo đơn giản, blog, news.", "Tháng 5-6: Luyện viết — bắt đầu từ 3 câu/ngày, tăng dần.", "Tháng 7+: Giao tiếp văn bản với người thật — HelloTalk, Reddit, forum."] },
+      { type: "compare", left: "Không nói được nên không học", right: "Học viết, đọc, nghe — vẫn đạt TOEIC, làm việc quốc tế", leftLabel: "❌ Suy nghĩ sai", rightLabel: "✅ Thực tế" },
+      { type: "callout", emoji: "🌟", text: "Nguồn lực miễn phí: National Stuttering Association (stutter.org), AAC Learning Center, YouTube channel "Stutter With Me", "Disability After Dark"." },
+      { type: "quote", text: "Ngôn ngữ là cầu nối — không chỉ qua âm thanh mà còn qua chữ viết, ánh mắt, tay, và công nghệ. Bạn có quyền kết nối với thế giới theo cách của mình." }
+    ]
+  }
+];
   date?: string;
   readingTime?: string;
   content: object[];
