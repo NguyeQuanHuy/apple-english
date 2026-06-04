@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+let buf = fs.readFileSync('data/toeic.ts');
+if (buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) buf = buf.slice(3);
+let c = buf.toString('utf8');
+c = c.replace('export interface  {\n  en: string;', 'export interface ToeicVocab {\n  en: string;');
+c = c.replace('export interface  {\n  id: string;\n  title: string;\n  emoji: string;\n  description: string;', 'export interface ToeicTheme {\n  id: string;\n  title: string;\n  emoji: string;\n  description: string;');
+c = c.replace('export interface  {\n  id: string;\n  part:', 'export interface ToeicQuestion {\n  id: string;\n  part:');
+c = c.replace('export interface  {\n  id: string;\n  title: string;\n  description:', 'export interface ToeicTest {\n  id: string;\n  title: string;\n  description:');
+fs.writeFileSync('data/toeic.ts', c, 'utf8');
+console.log('Done:', fs.readFileSync('data/toeic.ts','utf8').slice(0,100));
