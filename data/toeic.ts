@@ -221,6 +221,25 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "climate", pos: "n.", vi: "khí hậu", example: "Vietnam has a tropical climate." },
     ],
   }
+,
+  {
+    id: "toeic-mini-3",
+    title: "Mini Test 3 — Listening Part 2",
+    description: "10 câu hỏi đáp ngắn (Part 2). Thời gian: 6 phút.",
+    timeLimitSec: 6 * 60,
+    questions: [
+      { id: "t3-1", part: 5, question: "Where is the meeting room?", options: ["It starts at 3 PM.", "It is on the second floor.", "There are 10 people.", "Yes, I will attend."], correctIndex: 1, explain: "Câu hỏi Where → trả lời bằng vị trí." },
+      { id: "t3-2", part: 5, question: "When will the package arrive?", options: ["By tomorrow morning.", "At the post office.", "From the supplier.", "It weighs 5 kg."], correctIndex: 0, explain: "Câu hỏi When → trả lời bằng thời gian." },
+      { id: "t3-3", part: 5, question: "Who is responsible for the budget?", options: ["Last quarter.", "The finance team.", "In the main office.", "Yes, it was approved."], correctIndex: 1, explain: "Câu hỏi Who → trả lời bằng người/bộ phận." },
+      { id: "t3-4", part: 5, question: "How did you get to the conference?", options: ["It was very informative.", "I took the subway.", "Next Monday.", "About 200 people."], correctIndex: 1, explain: "Câu hỏi How → trả lời bằng cách thức." },
+      { id: "t3-5", part: 5, question: "Could you send me the report?", options: ["Yes, I will email it now.", "It is on my desk.", "No, I did not write it.", "The report was late."], correctIndex: 0, explain: "Could you...? là yêu cầu lịch sự → trả lời Yes/No + hành động." },
+      { id: "t3-6", part: 5, question: "Why was the meeting postponed?", options: ["In the conference room.", "Because the manager is traveling.", "At 2 PM tomorrow.", "For one hour."], correctIndex: 1, explain: "Câu hỏi Why → trả lời bằng lý do." },
+      { id: "t3-7", part: 5, question: "Have you reviewed the contract yet?", options: ["Yes, I finished it this morning.", "The contract is 10 pages.", "No, the meeting is tomorrow.", "It was signed last week."], correctIndex: 0, explain: "Have you...yet? → trả lời Yes/No + kết quả." },
+      { id: "t3-8", part: 5, question: "Which printer should I use?", options: ["It needs more paper.", "Use the one on the third floor.", "I printed 50 copies.", "The printer was repaired."], correctIndex: 1, explain: "Câu hỏi Which → trả lời bằng lựa chọn cụ thể." },
+      { id: "t3-9", part: 5, question: "Do you know when Mr. Kim will be back?", options: ["He went to Seoul.", "He should return by Friday.", "Yes, he called this morning.", "His office is on the 5th floor."], correctIndex: 1, explain: "Hỏi về thời gian quay lại → trả lời bằng thời gian cụ thể." },
+      { id: "t3-10", part: 5, question: "Is there a parking lot near the office?", options: ["Yes, just around the corner.", "I drive to work every day.", "The office opens at 9.", "No, I do not have a car."], correctIndex: 0, explain: "Câu hỏi Yes/No về vị trí → trả lời Yes/No + thông tin bổ sung." },
+    ]
+  }
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
