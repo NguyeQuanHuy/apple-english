@@ -1,4 +1,4 @@
-export type BlogPost = {
+export interface BlogPost {
   slug: string;
   title: string;
   emoji: string;
@@ -44,7 +44,7 @@ export type BlogPost = {
   date?: string;
   readingTime?: string;
   content: object[];
-};
+}
 
 export const BLOG_POSTS: BlogPost[] = [
   {
