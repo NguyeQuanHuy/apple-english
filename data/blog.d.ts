@@ -6,5 +6,5 @@
   tags?: string[];
   date?: string;
   readingTime?: string;
-  content: any[];
+  content: Record<string, any>[];
 }
