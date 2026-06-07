@@ -80,9 +80,7 @@ export default function BlogPage() {
               boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
               cursor: "pointer",
               transition: "transform .2s, box-shadow .2s",
-            }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 24px rgba(0,0,0,0.08)"; }}
+            }}}}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" as const }}>
                 <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#f97316" }}>✦ Bài nổi bật</span>
