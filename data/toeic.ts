@@ -1,5 +1,5 @@
 export type ToeicWord = { en: string; pos: string; vi: string; example: string };
-export type ToeicQuestion = { id: string; part: number; question: string; options: string[]; correctIndex: number; explain: string; passage?: string };
+export type ToeicQuestion = { id: string; part: number; question: string; options: string[]; correctIndex: number; explain?: string; passage?: string };
 export type ToeicTheme = { id: string; title: string; emoji?: string; description: string; words?: ToeicWord[]; questions?: ToeicQuestion[]; timeLimitSec?: number };
 
 export const TOEIC_THEMES: ToeicTheme[] = [
