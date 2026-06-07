@@ -17,8 +17,8 @@ export default function ThemePage() {
 
   if (!theme) return <div className="p-8">Không tìm thấy chủ đề.</div>;
 
-  const w = theme.words[idx];
-  const isLast = idx === theme.words.length - 1;
+  const w = (theme.words ?? [])[idx];
+  const isLast = idx === (theme.words ?? []).length - 1;
 
   function next() {
     setFlipped(false);
