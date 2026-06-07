@@ -117,7 +117,7 @@ export default function ToeicIndex() {
                 <p className="text-sky-500 text-xs leading-relaxed mb-3">{t.description}</p>
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1 bg-sky-50 text-sky-600 text-xs font-bold px-2 py-1 rounded-full">
-                    <Hash size={10} /> {t.words.length} từ
+                    <Hash size={10} /> {t.words?.length ?? 0} từ
                   </span>
                   <ChevronRight size={14} className="text-sky-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all" />
                 </div>
