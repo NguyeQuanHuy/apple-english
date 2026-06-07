@@ -1,3 +1,6 @@
+export type ToeicWord = { en: string; pos: string; vi: string; example: string };
+export type ToeicTheme = { id: string; title: string; emoji: string; description: string; words: ToeicWord[] };
+
 export const TOEIC_THEMES: ToeicTheme[] = [
   {
     id: "office",
