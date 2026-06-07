@@ -248,15 +248,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
 ];
 
 // ─── Mock tests ────────────────────────────────────────────────
-export interface ToeicQuestion {
-  id: string;
-  part: 5 | 6 | 7;
-  passage?: string; // for part 6/7
-  question: string;
-  options: string[];
-  correctIndex: number;
-  explain?: string;
-};
+;
 
 export interface ToeicTest {
   id: string;
