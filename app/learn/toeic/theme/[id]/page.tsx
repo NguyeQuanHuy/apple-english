@@ -44,7 +44,7 @@ export default function ThemePage() {
       <div className="mt-2 h-2 rounded-full bg-ink-900/8 dark:bg-paper-50/8 overflow-hidden">
         <motion.div className="h-full bg-teal-500" initial={false} animate={{ width: `%` }} />
       </div>
-      <div className="text-xs font-bold text-ink-500 mt-2">{idx + 1}/{theme.words.length}</div>
+      <div className="text-xs font-bold text-ink-500 mt-2">{idx + 1}/{(theme.words ?? []).length}</div>
       <div className="mt-8 perspective-1000">
         <AnimatePresence mode="wait">
           <motion.button key={idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
