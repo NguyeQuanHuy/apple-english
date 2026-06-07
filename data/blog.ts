@@ -1,4 +1,6 @@
-﻿export const BLOG_POSTS: BlogPost[] = [
+import type { BlogPost } from "../blog";
+
+export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "tai-sao-hoc-tieng-anh-mai-khong-gioi",
     title: "Tại sao học tiếng Anh mãi mà không giỏi?",
