@@ -171,6 +171,78 @@ export default function ToeicIndex() {
           </ul>
         </div>
 
+
+        {/* TOEIC Advice */}
+        <div className="space-y-4">
+          <h2 className="font-display text-xl font-black text-sky-900">📋 Lời khuyên thi TOEIC từ A → Z</h2>
+
+          {[
+            {
+              icon: "📚",
+              title: "1. Hiểu rõ cấu trúc đề thi",
+              color: "from-sky-50 to-blue-50 border-sky-200",
+              titleColor: "text-sky-800",
+              textColor: "text-sky-700",
+              items: [
+                "TOEIC gồm 2 phần: Listening (100 câu) và Reading (100 câu), tổng 200 câu trong 120 phút.",
+                "Listening: Part 1 (Photographs), Part 2 (Question-Response), Part 3 (Conversations), Part 4 (Talks).",
+                "Reading: Part 5 (Incomplete Sentences), Part 6 (Text Completion), Part 7 (Reading Comprehension).",
+                "Mỗi câu trả lời đúng khoảng 5 điểm. Điểm tối đa 990.",
+              ],
+            },
+            {
+              icon: "⏰",
+              title: "2. Chiến lược quản lý thời gian",
+              color: "from-indigo-50 to-violet-50 border-indigo-200",
+              titleColor: "text-indigo-800",
+              textColor: "text-indigo-700",
+              items: [
+                "Part 5: trung bình 20 giây/câu — không được dừng lâu, đoán và đi tiếp.",
+                "Part 7: đọc câu hỏi trước, sau đó mới lướt qua bài để tìm đáp án.",
+                "Nếu không chắc, đánh dấu và bỏ qua — không để một câu ăn hết thời gian.",
+                "Luôn điền đáp án dù không biết — không có điểm trừ trong TOEIC.",
+              ],
+            },
+            {
+              icon: "🧠",
+              title: "3. Mẹo tăng điểm nhanh",
+              color: "from-emerald-50 to-teal-50 border-emerald-200",
+              titleColor: "text-emerald-800",
+              textColor: "text-emerald-700",
+              items: [
+                "Học 500 từ TOEIC thông dụng trước — chúng xuất hiện lặp đi lặp lại trong đề.",
+                "Part 2 Listening: chú ý từ WH đầu câu (Where/When/Who...) để loại đáp án sai nhanh.",
+                "Part 5 Grammar: nhận diện dạng câu (từ loại, thì, mệnh đề) rồi đánh đáp án đúng mà không cần dịch.",
+                "Nghe Listening mỗi ngày 15 phút, đặc biệt giọng Mỹ và Anh.",
+              ],
+            },
+            {
+              icon: "📅",
+              title: "4. Lộ trình 2 tháng lên 450+",
+              color: "from-rose-50 to-pink-50 border-rose-200",
+              titleColor: "text-rose-800",
+              textColor: "text-rose-700",
+              items: [
+                "Tuần 1–2: Nạp từ vựng chủ đề (văn phòng, du lịch, tài chính) + nghe Part 1–2.",
+                "Tuần 3–4: Luyện grammar Part 5, làm mini test có bấm giờ mỗi ngày.",
+                "Tuần 5–6: Tập trung Part 7 — đọc nhanh, tìm ý chính, trả lời câu hỏi.",
+                "Tuần 7–8: Giải đề full 200 câu có thiếu thời gian, rút kinh nghiệm.",
+              ],
+            },
+          ].map((block) => (
+            <div key={block.title} className={`bg-gradient-to-br ${block.color} border-2 rounded-2xl p-5`}>
+              <p className={`font-black ${block.titleColor} mb-3 text-base`}>{block.icon} {block.title}</p>
+              <ul className="space-y-2">
+                {block.items.map((item, i) => (
+                  <li key={i} className={`flex gap-2 text-sm ${block.textColor}`}>
+                    <span className="mt-0.5 flex-shrink-0">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
