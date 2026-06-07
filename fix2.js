@@ -1,0 +1,1 @@
+﻿const fs=require("fs");const p="app/blog/page.tsx";let c=fs.readFileSync(p,"utf8");while(c.includes("}}}}"))c=c.replace("}}}}","}}");fs.writeFileSync(p,c,"utf8");console.log("}}}} count:",c.split("}}}}").length-1);

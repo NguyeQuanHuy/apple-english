@@ -223,4 +223,151 @@
       { type: "quote", text: "Bạn không cần học nhiều hơn — cần học đúng cách hơn." }
     ]
   }
+,
+  {
+    "slug": "50-cau-tieng-anh-dau-tien-cho-nguoi-mat-goc",
+    "title": "Học tiếng Anh từ A0: 50 câu đầu tiên cần nhớ",
+    "emoji": "💬",
+    "summary": "Chưa biết bắt đầu từ đâu? Đây là 50 câu tiếng Anh cơ bản nhất — đủ để chào hỏi, tự giới thiệu, mua đồ và sống sót trong mọi tình huống cơ bản.",
+    "tags": [
+      "Mất gốc",
+      "Từ vỽng"
+    ],
+    "date": "07/06/2026",
+    "readingTime": "8 phút đọc",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Nếu bạn đang ở mức A0 — tức là chưa biết gì cả hoặc học rồi quên hết — thì đây là bài viết dành riêng cho bạn. Không cần ngữ pháp phức tạp, không cần thuộc lòng 1000 từ. Chỉ cần 50 câu này là bạn đã sống sót được trong hầu hết tình huống cơ bản."
+      },
+      {
+        "type": "heading",
+        "text": "👋 Nhóm 1: Chào hỏi và giới thiệu (10 câu)"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Hello! — Xin chào!",
+          "Hi! — Chào! (thân mật)",
+          "Good morning! — Chào buổi sáng!",
+          "Good afternoon! — Chào buổi chiều!",
+          "Good evening! — Chào buổi tối!",
+          "How are you? — Bạn khỏe không?",
+          "I am fine, thank you! — Tôi khỏe, cảm ơn!",
+          "My name is... — Tôi tên là...",
+          "Nice to meet you! — Rất vui được gặp bạn!",
+          "Goodbye! / Bye! — Tạm biệt!"
+        ]
+      },
+      {
+        "type": "callout",
+        "emoji": "💡",
+        "text": "Mỹ thuật nhớ: Hãy nói to từng câu 5 lần khi học. Cơ miệng quen rồi sẽ tự động nói đúng mà không cần suy nghĩ."
+      },
+      {
+        "type": "heading",
+        "text": "🛒 Nhóm 2: Mua sắm và ăn uống (10 câu)"
+      },
+      {
+        "type": "list",
+        "items": [
+          "How much is this? — Cái này giá bao nhiêu?",
+          "I want this. — Tôi muốn cái này.",
+          "Can I have the menu? — Cho tôi xem thực đơn được không?",
+          "I would like... — Tôi muốn gọi...",
+          "Water, please. — Cho tôi nước, làm ơn.",
+          "The bill, please. — Tính tiền giúp tôi.",
+          "Do you have...? — Bạn có... không?",
+          "It is delicious! — Ngon quá!",
+          "Too expensive. — Đắt quá.",
+          "A little cheaper, please. — Rẻ hơn một chút được không?"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "🗺️ Nhóm 3: Hỏi đường và di chuyển (10 câu)"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Where is...? — ... ở đâu?",
+          "How do I get to...? — Tôi đi đến... bằng cách nào?",
+          "Turn left. — Rẽ trái.",
+          "Turn right. — Rẽ phải.",
+          "Go straight. — Đi thẳng.",
+          "Is it far? — Có xa không?",
+          "I am lost. — Tôi bị lạc.",
+          "Take me to this address. — Đưa tôi đến địa chỉ này.",
+          "Stop here, please. — Dừng ở đây.",
+          "How long does it take? — Mất bao lâu?"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "🏥 Nhóm 4: Khẩn cấp và cần giúp đỡ (10 câu)"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Help! — Cứu tôi với!",
+          "Call the police! — Gọi cảnh sát!",
+          "I need a doctor. — Tôi cần bác sĩ.",
+          "I am sick. — Tôi đang bị bệnh.",
+          "I have an allergy to... — Tôi bị dị ứng với...",
+          "Where is the hospital? — Bệnh viện ở đâu?",
+          "Please speak slowly. — Làm ơn nói chậm thôi.",
+          "I do not understand. — Tôi không hiểu.",
+          "Can you repeat that? — Bạn có thể nhắc lại không?",
+          "Do you speak Vietnamese? — Bạn nói tiếng Việt không?"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "💼 Nhóm 5: Công việc và học tập (10 câu)"
+      },
+      {
+        "type": "list",
+        "items": [
+          "I am a student. — Tôi là sinh viên.",
+          "I work at... — Tôi làm việc tại...",
+          "I am learning English. — Tôi đang học tiếng Anh.",
+          "Can you help me? — Bạn có thể giúp tôi không?",
+          "I have a question. — Tôi có một câu hỏi.",
+          "I don’t know. — Tôi không biết.",
+          "I understand. — Tôi hiểu rồi.",
+          "Please wait. — Xin hãy chờ.",
+          "Excuse me. — Xin lỗi (xín phép).",
+          "Thank you very much! — Cảm ơn rất nhiều!"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "🎯 Cách luyện 50 câu này hiệu quả nhất"
+      },
+      {
+        "type": "paragraph",
+        "text": "Không cần học hết 50 câu trong một ngày. Hãy học theo nhóm: mỗi ngày 1 nhóm 10 câu, luyện đi luyện lại trong 5 ngày. Đến ngày thứ 6, bạn sẽ nhớ từ 70–80% mà không cần cố gắng."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Ngày 1: Học nhóm Chào hỏi — nói to 5 lần mỗi câu.",
+          "Ngày 2: Học nhóm Mua sắm — đóng vai tự hỏi đáp.",
+          "Ngày 3: Học nhóm Đường sá — tưởng tượng bạn đang hỏi đường thật.",
+          "Ngày 4: Học nhóm Khẩn cấp — quan trọng nhất, cần thuộc lòng.",
+          "Ngày 5: Học nhóm Công việc — dùng hàng ngày.",
+          "Ngày 6+: Ôn toàn bộ, ghép các câu thành hội thoại ngắn."
+        ]
+      },
+      {
+        "type": "callout",
+        "emoji": "🔥",
+        "text": "Tip quan trọng: Hãy ghi mỗi câu ra giấy nhới dán quanh nhà — trên gương, cạnh bàn phím, tủ lạnh. Mỗi ngày nhìn thấy là một lần nhớ."
+      },
+      {
+        "type": "quote",
+        "text": "Hành trình ngàn dặm bắt đầu từ một bước chân. Hành trình tiếng Anh của bạn bắt đầu từ câu đầu tiên: Hello!"
+      }
+    ]
+  }
 ];
