@@ -182,84 +182,45 @@
       { type: "callout", emoji: "🌟", text: "Nguồn lực miễn phí: National Stuttering Association (stutter.org), AAC Learning Center, YouTube channel 'Stutter With Me', 'Disability After Dark'." },
       { type: "quote", text: "Ngôn ngữ là cầu nối — không chỉ qua âm thanh mà còn qua chữ viết, ánh mắt, tay, và công nghệ. Bạn có quyền kết nối với thế giới theo cách của mình." }
     ]
-  },`n  {
-    slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
-    title: "Tại sao não bạn quên từ vựng sau 24 giờ — và cách khắc phục",
-    excerpt: "Học 20 từ hôm nay, sáng mai quên sạch? Đây không phải lỗi của bạn — đây là cách não hoạt động. Hiểu đúng cơ chế, bạn sẽ biết học thế nào để nhớ mãi.",
-    category: "Phương pháp học",
-    readTime: "6 phút",
-    publishedAt: "2025-06-07",
-    content: `## Đường cong quên lãng
-
-Năm 1885, Hermann Ebbinghaus phát hiện ra **Đường cong quên lãng (Forgetting Curve)**:
-
-- Sau **20 phút**: quên khoảng 40%
-- Sau **1 giờ**: quên gần 60%
-- Sau **24 giờ**: quên khoảng 70%
-- Sau **1 tuần**: quên tới 90% nếu không ôn lại
-
-Tức là nếu tối nay bạn học 20 từ, sáng mai chỉ còn nhớ khoảng **6 từ**. Đây không phải bạn học kém — đây là sinh học.
-
-## Tại sao não làm vậy?
-
-Não người được thiết kế để **lọc ra những gì quan trọng**. Khi bạn học từ mới, não hỏi: *"Từ này có cần thiết không?"*
-
-Nếu không chắc chắn, não cho từ đó vào bộ nhớ ngắn hạn rồi xóa dần. Chỉ khi thấy thông tin **nhiều lần, nhiều ngữ cảnh**, não mới chuyển vào **bộ nhớ dài hạn**.
-
-## 4 cách khắc phục
-
-### 1. Spaced Repetition — Ôn đúng thời điểm
-
-| Lần ôn | Thời điểm |
-|--------|-----------|
-| Lần 1 | Sau 20 phút |
-| Lần 2 | Sau 1 ngày |
-| Lần 3 | Sau 3 ngày |
-| Lần 4 | Sau 1 tuần |
-| Lần 5 | Sau 2 tuần |
-
-### 2. Gắn từ vào câu thật của bạn
-
-Học từ "ambitious" một mình → não quên. Học câu *"I am ambitious about building my own website"* → não nhớ vì có hình ảnh liên quan đến bạn.
-
-### 3. Dùng nhiều giác quan
-
-Chỉ đọc từ → 1 kênh → quên nhanh. Đọc + nghe + viết + nói = 4 kênh → não ghi nhớ chắc hơn nhiều lần.
-
-### 4. Ngủ đủ giấc
-
-Bộ nhớ dài hạn được **củng cố trong khi ngủ**. Học đến 2 giờ sáng mà ngủ 4 tiếng sẽ quên nhanh hơn người ngủ đủ 7–8 tiếng.
-
-## Áp dụng ngay
-
-**Bước 1:** Học 10–15 từ mới mỗi ngày.
-
-**Bước 2:** Ôn lại sau 20 phút → 1 ngày → 3 ngày → 1 tuần.
-
-**Bước 3:** Với mỗi từ, viết 1 câu liên quan đến cuộc sống của bạn.
-
-## Tổng kết
-
-Quên từ vựng không phải lỗi của bạn. Bạn không cần học nhiều hơn — bạn cần **học đúng cách hơn**. Bộ nhớ dài hạn được xây qua nhiều ngày học đều đặn, mỗi ngày một ít.`,
-  },,
+  },
   {
     slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
     title: "T\u1EA1i sao n\u00E3o b\u1EA1n qu\u00EAn t\u1EEB v\u1EFDng sau 24 gi\u1EDD \u2014 v\u00E0 c\u00E1ch kh\u1EAFc ph\u1EE5c",
     emoji: "\uD83E\uDDE0",
-    summary: "H\u1ECDc 20 t\u1EEB h\u00F4m nay, s\u00E1ng mai qu\u00EAn s\u1EA1ch? \u0110\u00E2y kh\u00F4ng ph\u1EA3i l\u1ED7i c\u1EE7a b\u1EA1n \u2014 \u0111\u00E2y l\u00E0 c\u00E1ch n\u00E3o ho\u1EA1t \u0111\u1ED9ng. Hi\u1EC3u \u0111\u00FAng c\u01A1 ch\u1EBF, b\u1EA1n s\u1EBD bi\u1EBFt h\u1ECDc th\u1EBF n\u00E0o \u0111\u1EC3 nh\u1EDB m\u00E3i.",
+    summary: "H\u1ECDc 20 t\u1EEB h\u00F4m nay, s\u00E1ng mai qu\u00EAn s\u1EA1ch? \u0110\u00E2y kh\u00F4ng ph\u1EA3i l\u1ED7i c\u1EE7a b\u1EA1n \u2014 \u0111\u00E2y l\u00E0 c\u00E1ch n\u00E3o ho\u1EA1t \u0111\u1ED9ng.",
     tags: ["Ph\u01B0\u01A1ng ph\u00E1p", "T\u1EEB v\u1EFDng"],
     date: "07/06/2026",
     readingTime: "6 ph\u00FAt \u0111\u1ECDc",
     content: [
-      { type: "paragraph", text: "B\u1EA1n \u0111\u00E3 t\u1EEBng ng\u1ED3i h\u1ECDc 30 t\u1EEB v\u1EFDng bu\u1ED5i t\u1ED1i, c\u1EA3m gi\u00E1c nh\u1EDB h\u1EBFt r\u1ED3i \u2014 r\u1ED3i s\u00E1ng h\u00F4m sau m\u1EDF v\u1EDF ra, nh\u00ECn nh\u01B0 ng\u01B0\u1EDDi m\u1EDBi ch\u01B0a h\u1ECDc bao gi\u1EDD?" },
-      { type: "heading", text: "\u0110\u01B0\u1EDDng cong qu\u00EAn l\u00E3ng: K\u1EBB th\u00F9 th\u1EA7m l\u1EB7ng" },
-      { type: "paragraph", text: "N\u0103m 1885, Hermann Ebbinghaus ph\u00E1t hi\u1EC7n ra \u0110\u01B0\u1EDDng cong qu\u00EAn l\u00E3ng: sau 24 gi\u1EDD b\u1EA1n qu\u00EAn ~70% n\u1EBFu kh\u00F4ng \u00F4n l\u1EA1i. Sau 1 tu\u1EA7n: m\u1EA5t g\u1EA7n 90%. \u0110\u00E2y kh\u00F4ng ph\u1EA3i b\u1EA1n h\u1ECDc k\u00E9m \u2014 \u0111\u00E2y l\u00E0 sinh h\u1ECDc." },
+      { type: "paragraph", text: "B\u1EA1n \u0111\u00E3 t\u1EEBng ng\u1ED3i h\u1ECDc 30 t\u1EEB v\u1EFDng bu\u1ED5i t\u1ED1i, c\u1EA3m gi\u00E1c nh\u1EDB h\u1EBFt r\u1ED3i \u2014 r\u1ED3i s\u00E1ng h\u00F4m sau m\u1EDF v\u1EDF ra nh\u00ECn nh\u01B0 ng\u01B0\u1EDDi ch\u01B0a h\u1ECDc bao gi\u1EDD?" },
+      { type: "heading", text: "\u0110\u01B0\u1EDDng cong qu\u00EAn l\u00E3ng" },
+      { type: "paragraph", text: "N\u0103m 1885, Ebbinghaus ph\u00E1t hi\u1EC7n: sau 24h b\u1EA1n qu\u00EAn ~70%, sau 1 tu\u1EA7n m\u1EA5t ~90% n\u1EBFu kh\u00F4ng \u00F4n. \u0110\u00E2y kh\u00F4ng ph\u1EA3i b\u1EA1n h\u1ECDc k\u00E9m \u2014 \u0111\u00E2y l\u00E0 sinh h\u1ECDc." },
       { type: "heading", text: "T\u1EA1i sao n\u00E3o l\u00E0m v\u1EADy?" },
-      { type: "paragraph", text: "N\u00E3o \u0111\u01B0\u1EE3c thi\u1EBFt k\u1EBF \u0111\u1EC3 l\u1ECDc ra nh\u1EEFng g\u00EC quan tr\u1ECDng. N\u1EBFu n\u00F3 kh\u00F4ng th\u1EA5y t\u1EEB \u0111\u00F3 xu\u1EA5t hi\u1EC7n nhi\u1EC1u l\u1EA7n, n\u00F3 s\u1EBD x\u00F3a \u0111i \u0111\u1EC3 d\u00E0nh ch\u1ED7." },
+      { type: "paragraph", text: "N\u00E3o \u0111\u01B0\u1EE3c thi\u1EBFt k\u1EBF \u0111\u1EC3 l\u1ECDc ra nh\u1EEFng g\u00EC quan tr\u1ECDng. N\u1EBFu kh\u00F4ng th\u1EA5y t\u1EEB xu\u1EA5t hi\u1EC7n nhi\u1EC1u l\u1EA7n, n\u00F3 s\u1EBD x\u00F3a \u0111i." },
       { type: "heading", text: "4 c\u00E1ch kh\u1EAFc ph\u1EE5c" },
-      { type: "list", items: ["Spaced Repetition: \u00D4n sau 20 ph\u00FAt \u2192 1 ng\u00E0y \u2192 3 ng\u00E0y \u2192 1 tu\u1EA7n \u2192 2 tu\u1EA7n.", "G\u1EAFn t\u1EEB v\u00E0o c\u00E2u th\u1EADt: M\u1ED7i t\u1EEB m\u1EDBi vi\u1EBFt 1 c\u00E2u v\u1EC1 cu\u1ED9c s\u1ED1ng c\u1EE7a b\u1EA1n.", "D\u00F9ng nhi\u1EC1u gi\u00E1c quan: \u0110\u1ECDc + nghe + vi\u1EBFt + n\u00F3i to.", "Ng\u1EE7 \u0111\u1EE7 gi\u1EA5c: B\u1ED9 nh\u1EDB d\u00E0i h\u1EA1n \u0111\u01B0\u1EE3c c\u1EE7ng c\u1ED1 trong khi ng\u1EE7."] },
-      { type: "callout", emoji: "\uD83D\uDCA1", text: "B\u1EAFt \u0111\u1EA7u t\u1EEB h\u00F4m nay: H\u1ECDc 10 t\u1EEB, \u00F4n l\u1EA1i sau 20 ph\u00FAt, r\u1ED3i ng\u00E0y mai \u00F4n ti\u1EBFp." },
+      { type: "list", items: ["\u00D4n theo Spaced Repetition: 20 ph\u00FAt \u2192 1 ng\u00E0y \u2192 3 ng\u00E0y \u2192 1 tu\u1EA7n \u2192 2 tu\u1EA7n.", "M\u1ED7i t\u1EEB m\u1EDBi vi\u1EBFt 1 c\u00E2u g\u1EAFn v\u1EDBi cu\u1ED9c s\u1ED1ng c\u1EE7a b\u1EA1n.", "\u0110\u1ECDc + nghe + vi\u1EBFt + n\u00F3i to \u2014 d\u00F9ng nhi\u1EC1u gi\u00E1c quan.", "Ng\u1EE7 \u0111\u1EE7 7\u20138 ti\u1EBFng: b\u1ED9 nh\u1EDB d\u00E0i h\u1EA1n \u0111\u01B0\u1EE3c c\u1EE7ng c\u1ED1 khi ng\u1EE7."] },
+      { type: "callout", emoji: "\uD83D\uDCA1", text: "B\u1EAFt \u0111\u1EA7u ngay: H\u1ECDc 10 t\u1EEB, \u00F4n l\u1EA1i sau 20 ph\u00FAt, ng\u00E0y mai \u00F4n ti\u1EBFp." },
       { type: "quote", text: "B\u1EA1n kh\u00F4ng c\u1EA7n h\u1ECDc nhi\u1EC1u h\u01A1n \u2014 b\u1EA1n c\u1EA7n h\u1ECDc \u0111\u00FAng c\u00E1ch h\u01A1n." }
+    ]
+  },
+  {
+    slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
+    title: "Tai sao nao ban quen tu vung sau 24 gio va cach khac phuc",
+    emoji: "🧠",
+    summary: "Hoc 20 tu hom nay, sang mai quen sach? Day khong phai loi cua ban.",
+    tags: ["Phuong phap","Tu vung"],
+    date: "07/06/2026",
+    readingTime: "6 phut doc",
+    content: [
+      { type: "paragraph", text: "Bạn đã từng ngồi học 30 từ vỽng buổi tối, nhớ hết rồi — rồi sáng hôm sau mở vở ra như người chưa học bao giờ?" },
+      { type: "heading", text: "Đường cong quên lãng" },
+      { type: "paragraph", text: "Năm 1885, Ebbinghaus phát hiện: sau 24h bạn quên ~70%, sau 1 tuần mất ~90% nếu không ôn. Đây không phải bạn học kém — đây là sinh học." },
+      { type: "heading", text: "Tại sao não làm vậy?" },
+      { type: "paragraph", text: "Não được thiết kế để lọc những gì quan trọng. Nếu không thấy từ nhiều lần, nó xóa đi." },
+      { type: "heading", text: "4 cách khắc phục" },
+      { type: "list", items: ["Ôn Spaced Repetition: 20 phút → 1 ngày → 3 ngày → 1 tuần.", "Mỗi từ mới viết 1 câu về cuộc sống bạn.", "Đọc + nghe + viết + nói to.", "Ngủ đủ 7-8 tiếng."] },
+      { type: "callout", emoji: "💡", text: "Bắt đầu ngay: Học 10 từ, ôn sau 20 phút, ngày mai ôn tiếp." },
+      { type: "quote", text: "Bạn không cần học nhiều hơn — cần học đúng cách hơn." }
     ]
   }
 ];
