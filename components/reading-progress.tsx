@@ -18,7 +18,7 @@ export function ReadingProgress() {
   if (progress <= 0) return null;
 
   return (
-    <div className="fixed top-0 left-0 z-50 h-1 w-full bg-transparent pointer-events-none">
+    <div className="fixed top-16 left-0 z-30 h-1 w-full bg-transparent pointer-events-none">
       <div
         className="h-full bg-gradient-to-r from-sky-400 to-blue-600 transition-all duration-100 ease-out"
         style={{ width: `${progress}%` }}
