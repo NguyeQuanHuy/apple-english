@@ -62,7 +62,7 @@ export default function ToeicIndex() {
             </div>
             <div className="w-px bg-white/20" />
             <div className="text-center">
-              <p className="text-4xl font-black">{TOEIC_THEMES.reduce((a, t) => a + t.words.length, 0)}</p>
+              <p className="text-4xl font-black">{TOEIC_THEMES.reduce((a, t) => a + (t.words?.length ?? 0), 0)}</p>
               <p className="text-sky-200 text-sm mt-1">Từ vựng</p>
             </div>
             <div className="w-px bg-white/20" />
