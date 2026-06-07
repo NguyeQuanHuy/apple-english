@@ -1,4 +1,4 @@
-export interface BlogPost {
+﻿export interface BlogPost {
   slug: string;
   title: string;
   emoji: string;
@@ -6,5 +6,5 @@ export interface BlogPost {
   tags?: string[];
   date?: string;
   readingTime?: string;
-  content: object[];
+  content: any[];
 }
