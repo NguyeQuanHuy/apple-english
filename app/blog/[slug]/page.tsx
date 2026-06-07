@@ -3,14 +3,38 @@ import Link from "next/link";
 import { BLOG_POSTS } from "@/data/blog";
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
+  return BLOG_POSTS.map((p: any) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = BLOG_POSTS.find((p: any) => p.slug === slug) as any;
   if (!post) return {};
-  return { title: `${post.title} | EnglishStart`, description: post.excerpt };
+  return { title: `${post.title} | EnglishStart`, description: post.summary ?? post.excerpt };
+}
+
+function formatDate(raw: string) {
+  if (!raw) return "";
+  const parts = raw.split("/");
+  if (parts.length === 3) {
+    const [d, m, y] = parts;
+    return new Date(Number(y), Number(m) - 1, Number(d)).toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" });
+  }
+  const date = new Date(raw);
+  if (isNaN(date.getTime())) return raw;
+  return date.toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function renderArrayContent(content: any[]): string {
+  return content.map((block) => {
+    if (block.type === "heading") return `<h2>${block.text}</h2>`;
+    if (block.type === "paragraph") return `<p>${block.text}</p>`;
+    if (block.type === "quote") return `<blockquote>${block.text}</blockquote>`;
+    if (block.type === "callout") return `<div class="callout"><span>${block.emoji ?? ""}</span><span>${block.text}</span></div>`;
+    if (block.type === "list") return `<ul>${(block.items ?? []).map((i: string) => `<li>${i}</li>`).join("")}</ul>`;
+    if (block.type === "compare") return `<div class="compare"><div class="compare-left"><div class="compare-label">${block.leftLabel ?? ""}</div><div>${block.left}</div></div><div class="compare-right"><div class="compare-label">${block.rightLabel ?? ""}</div><div>${block.right}</div></div></div>`;
+    return "";
+  }).join("\n");
 }
 
 function renderMarkdown(md: string): string {
@@ -38,9 +62,13 @@ function renderMarkdown(md: string): string {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = BLOG_POSTS.find((p: any) => p.slug === slug) as any;
   if (!post) notFound();
-  const html = renderMarkdown(post.content);
+
+  const html = Array.isArray(post.content)
+    ? renderArrayContent(post.content)
+    : renderMarkdown(post.content ?? "");
+
   return (
     <main className="min-h-screen bg-[var(--paper)] px-4 py-12">
       <div className="max-w-2xl mx-auto">
@@ -48,11 +76,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           ← Tất cả bài viết
         </Link>
         <div className="flex items-center gap-2 mb-4 flex-wrap">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--ember-light)] text-[var(--ember)]">{post.category}</span>
-          <span className="text-xs text-[var(--ink-muted)]">{post.readTime} đọc · {new Date(post.publishedAt).toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" })}</span>
+          {(post.tags ?? []).map((t: string) => (
+            <span key={t} className="text-xs font-medium px-2 py-0.5 rounded-full border bg-[var(--ember-light)] text-[var(--ember)] border-orange-200">{t}</span>
+          ))}
+          <span className="text-xs text-[var(--ink-muted)]">{post.readingTime ?? post.readTime} · {formatDate(post.date ?? post.publishedAt)}</span>
         </div>
-        <h1 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)] leading-tight mb-4">{post.title}</h1>
-        <p className="text-[var(--ink-muted)] text-lg leading-relaxed mb-10 border-l-4 border-[var(--ember)] pl-4">{post.excerpt}</p>
+        <div className="flex items-start gap-3 mb-6">
+          {post.emoji && <span className="text-4xl leading-none mt-1">{post.emoji}</span>}
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)] leading-tight">{post.title}</h1>
+        </div>
+        <p className="text-[var(--ink-muted)] text-lg leading-relaxed mb-10 border-l-4 border-[var(--ember)] pl-4">
+          {post.summary ?? post.excerpt}
+        </p>
         <article className="prose-blog" dangerouslySetInnerHTML={{ __html: html }} />
         <div className="mt-12 p-6 bg-white border border-[var(--paper-border)] rounded-2xl text-center">
           <p className="font-display text-xl font-bold text-[var(--ink)] mb-2">Sẵn sàng luyện từ vựng đúng cách?</p>
