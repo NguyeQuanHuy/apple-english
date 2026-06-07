@@ -3,6 +3,7 @@ import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TopBar } from "@/components/top-bar";
+import { ReadingProgress } from "@/components/reading-progress";
 
 const display = Fraunces({ subsets: ["latin", "vietnamese"], variable: "--font-display", display: "swap" });
 const sans = Plus_Jakarta_Sans({ subsets: ["latin", "vietnamese"], variable: "--font-sans", display: "swap" });
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="vi" className={` `}  suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col">
         <ThemeProvider>
+          <ReadingProgress />
           <TopBar />
           <main className="flex-1">{children}</main>
           <Footer />
