@@ -92,3 +92,5 @@
     padding: 0 0.1em;
   }
 }
+/* Blog prose */
+.prose-blog h2{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--ink);margin-top:2.5rem;margin-bottom:.75rem}.prose-blog h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--ink);margin-top:2rem;margin-bottom:.5rem}.prose-blog p{color:var(--ink);line-height:1.8;margin-bottom:1.25rem}.prose-blog strong{font-weight:700}.prose-blog em{font-style:italic;color:var(--ink-muted)}.prose-blog ul{margin:1rem 0 1.25rem 1.5rem;list-style:disc}.prose-blog li{color:var(--ink);line-height:1.8;margin-bottom:.3rem}.prose-blog blockquote{border-left:4px solid var(--teal);padding-left:1rem;color:var(--ink-muted);font-style:italic;margin:1.5rem 0}.prose-blog table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem}.prose-blog th{background:var(--ember-light);color:var(--ember);font-weight:700;padding:.6rem 1rem;text-align:left;border:1px solid var(--paper-border)}.prose-blog td{padding:.6rem 1rem;border:1px solid var(--paper-border);color:var(--ink)}.prose-blog tr:nth-child(even) td{background:var(--paper)}

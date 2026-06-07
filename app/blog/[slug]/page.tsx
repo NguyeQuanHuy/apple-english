@@ -1,127 +1,68 @@
-﻿"use client";
-import { BLOG_POSTS } from "@/data/blog";
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Clock, BookOpen } from "lucide-react";
-import { use } from "react";
+import { BLOG_POSTS } from "@/data/blog";
 
-type ContentBlock =
-  | { type: "paragraph"; text: string }
-  | { type: "heading"; text: string }
-  | { type: "quote"; text: string }
-  | { type: "list"; items: string[] }
-  | { type: "callout"; text: string; emoji?: string }
-  | { type: "vocab"; word: string; meaning: string; example?: string }
-  | { type: "compare"; left: string; right: string; leftLabel?: string; rightLabel?: string };
-
-function renderBlock(block: ContentBlock, i: number) {
-  switch (block.type) {
-    case "paragraph":
-      return <p key={i} className="text-ink-700 dark:text-paper-100 leading-relaxed text-[1.05rem]">{block.text}</p>;
-    case "heading":
-      return <h2 key={i} className="font-display text-2xl font-black tracking-tight mt-2">{block.text}</h2>;
-    case "quote":
-      return (
-        <blockquote key={i} className="border-l-4 border-sky-500 pl-4 py-1 bg-sky-500/5 rounded-r-xl">
-          <p className="text-sky-700 dark:text-sky-100 italic leading-relaxed">{block.text}</p>
-        </blockquote>
-      );
-    case "list":
-      return (
-        <ul key={i} className="space-y-2">
-          {block.items.map((item, j) => (
-            <li key={j} className="flex gap-2 text-ink-700 dark:text-paper-100 leading-relaxed">
-              <span className="text-sky-500 mt-1 flex-shrink-0">•</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      );
-    case "callout":
-      return (
-        <div key={i} className="flex gap-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-2xl">
-          <span className="text-2xl flex-shrink-0">{block.emoji ?? "💡"}</span>
-          <p className="text-blue-700 dark:text-blue-400 leading-relaxed font-medium">{block.text}</p>
-        </div>
-      );
-    case "vocab":
-      return (
-        <div key={i} className="p-4 bg-white/70 dark:bg-ink-900/40 border border-ink-900/8 dark:border-paper-50/8 rounded-2xl">
-          <div className="flex items-baseline gap-2 mb-1">
-            <span className="font-display text-lg font-black text-sky-500">{block.word}</span>
-            <span className="text-ink-500 dark:text-paper-200 text-sm">— {block.meaning}</span>
-          </div>
-          {block.example && <p className="text-sm text-ink-500 dark:text-paper-200 italic">"{block.example}"</p>}
-        </div>
-      );
-    case "compare":
-      return (
-        <div key={i} className="grid grid-cols-2 gap-3">
-          <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-center">
-            <p className="text-xs font-bold text-rose-500 mb-1">{block.leftLabel ?? "❌ Sai"}</p>
-            <p className="text-sm font-semibold text-ink-700 dark:text-paper-100">{block.left}</p>
-          </div>
-          <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-center">
-            <p className="text-xs font-bold text-teal-500 mb-1">{block.rightLabel ?? "✅ Đúng"}</p>
-            <p className="text-sm font-semibold text-ink-700 dark:text-paper-100">{block.right}</p>
-          </div>
-        </div>
-      );
-    default:
-      return null;
-  }
+export async function generateStaticParams() {
+  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
 }
 
-export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  if (!post) return {};
+  return { title: `${post.title} | EnglishStart`, description: post.excerpt };
+}
+
+function renderMarkdown(md: string): string {
+  return md
+    .replace(/\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)*)/g, (_m: string, header: string, body: string) => {
+      const ths = header.split("|").filter(Boolean).map((c: string) => `<th>${c.trim()}</th>`).join("");
+      const rows = body.trim().split("\n").map((row: string) => {
+        const tds = row.split("|").filter(Boolean).map((c: string) => `<td>${c.trim()}</td>`).join("");
+        return `<tr>${tds}</tr>`;
+      }).join("");
+      return `<table><thead><tr>${ths}</tr></thead><tbody>${rows}</tbody></table>`;
+    })
+    .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+    .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.+?)\*/g, "<em>$1</em>")
+    .replace(/`(.+?)`/g, "<code>$1</code>")
+    .replace(/^- (.+)$/gm, "<li>$1</li>")
+    .replace(/(<li>.*<\/li>\n?)+/g, (m: string) => `<ul>${m}</ul>`)
+    .replace(/^> (.+)$/gm, "<blockquote>$1</blockquote>")
+    .split(/\n\n+/)
+    .map((block: string) => block.startsWith("<") ? block : `<p>${block}</p>`)
+    .join("\n");
+}
+
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) notFound();
-
+  const html = renderMarkdown(post.content);
   return (
-    <main className="min-h-screen">
-      {/* Back */}
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-8">
-        <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-500 dark:text-paper-200 hover:text-sky-500 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Quay lại bài viết
+    <main className="min-h-screen bg-[var(--paper)] px-4 py-12">
+      <div className="max-w-2xl mx-auto">
+        <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[var(--ink-muted)] hover:text-[var(--ember)] mb-8 transition-colors">
+          ← Tất cả bài viết
         </Link>
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--ember-light)] text-[var(--ember)]">{post.category}</span>
+          <span className="text-xs text-[var(--ink-muted)]">{post.readTime} đọc · {new Date(post.publishedAt).toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" })}</span>
+        </div>
+        <h1 className="font-display text-3xl md:text-4xl font-bold text-[var(--ink)] leading-tight mb-4">{post.title}</h1>
+        <p className="text-[var(--ink-muted)] text-lg leading-relaxed mb-10 border-l-4 border-[var(--ember)] pl-4">{post.excerpt}</p>
+        <article className="prose-blog" dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="mt-12 p-6 bg-white border border-[var(--paper-border)] rounded-2xl text-center">
+          <p className="font-display text-xl font-bold text-[var(--ink)] mb-2">Sẵn sàng luyện từ vựng đúng cách?</p>
+          <p className="text-[var(--ink-muted)] text-sm mb-4">Áp dụng ngay Spaced Repetition với flashcard TOEIC của EnglishStart.</p>
+          <div className="flex gap-3 justify-center flex-wrap">
+            <Link href="/learn/toeic" className="px-5 py-2.5 bg-[var(--ember)] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">Flashcard TOEIC →</Link>
+            <Link href="/learn/beginner" className="px-5 py-2.5 bg-white border border-[var(--paper-border)] text-[var(--ink)] rounded-xl text-sm font-semibold hover:shadow-sm transition-shadow">Lộ trình Beginner</Link>
+          </div>
+        </div>
       </div>
-
-      {/* Header */}
-      <header className="max-w-2xl mx-auto px-4 sm:px-6 pt-8 pb-10">
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {post.tags?.map((tag) => (
-            <span key={tag} className="px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-600 dark:text-teal-400 text-xs font-bold">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h1 className="font-display text-3xl md:text-4xl font-black tracking-tight leading-tight mb-4">
-          {post.emoji} {post.title}
-        </h1>
-        <p className="text-ink-500 dark:text-paper-200 text-lg leading-relaxed mb-5">{post.summary}</p>
-        <div className="flex items-center gap-4 text-sm text-ink-300 pb-6 border-b border-ink-900/8 dark:border-paper-50/8">
-          <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{post.readingTime ?? "3 phút đọc"}</span>
-          <span className="flex items-center gap-1.5"><BookOpen className="w-4 h-4" />{post.date ?? ""}</span>
-        </div>
-      </header>
-
-      {/* Content */}
-      <article className="max-w-2xl mx-auto px-4 sm:px-6 pb-12 space-y-5">
-        {(post.content as ContentBlock[]).map((block, i) => renderBlock(block, i))}
-      </article>
-
-      {/* CTA */}
-      <section className="max-w-2xl mx-auto px-4 sm:px-6 pb-20">
-        <div className="p-8 bg-gradient-to-br from-ember-500/10 to-teal-500/10 border border-sky-500/20 rounded-2xl text-center">
-          <p className="text-2xl mb-2">🚀</p>
-          <h3 className="font-display text-xl font-black mb-2">Sẵn sàng luyện tập chưa?</h3>
-          <p className="text-ink-500 dark:text-paper-200 text-sm mb-5">Áp dụng ngay những gì bạn vừa đọc vào bài học thực tế.</p>
-          <Link href="/learn/beginner" className="btn-bump-sky inline-flex text-sm">
-            Bắt đầu học ngay →
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }
-

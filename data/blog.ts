@@ -1,4 +1,4 @@
-export const BLOG_POSTS: BlogPost[] = [
+﻿export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "tai-sao-hoc-tieng-anh-mai-khong-gioi",
     title: "Tại sao học tiếng Anh mãi mà không giỏi?",
@@ -183,4 +183,64 @@ export const BLOG_POSTS: BlogPost[] = [
       { type: "quote", text: "Ngôn ngữ là cầu nối — không chỉ qua âm thanh mà còn qua chữ viết, ánh mắt, tay, và công nghệ. Bạn có quyền kết nối với thế giới theo cách của mình." }
     ]
   }
-];
+
+  {
+    slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
+    title: "Tại sao não bạn quên từ vựng sau 24 giờ — và cách khắc phục",
+    excerpt: "Học 20 từ hôm nay, sáng mai quên sạch? Đây không phải lỗi của bạn — đây là cách não hoạt động. Hiểu đúng cơ chế, bạn sẽ biết học thế nào để nhớ mãi.",
+    category: "Phương pháp học",
+    readTime: "6 phút",
+    publishedAt: "2025-06-07",
+    content: `## Đường cong quên lãng
+
+Năm 1885, Hermann Ebbinghaus phát hiện ra **Đường cong quên lãng (Forgetting Curve)**:
+
+- Sau **20 phút**: quên khoảng 40%
+- Sau **1 giờ**: quên gần 60%
+- Sau **24 giờ**: quên khoảng 70%
+- Sau **1 tuần**: quên tới 90% nếu không ôn lại
+
+Tức là nếu tối nay bạn học 20 từ, sáng mai chỉ còn nhớ khoảng **6 từ**. Đây không phải bạn học kém — đây là sinh học.
+
+## Tại sao não làm vậy?
+
+Não người được thiết kế để **lọc ra những gì quan trọng**. Khi bạn học từ mới, não hỏi: *"Từ này có cần thiết không?"*
+
+Nếu không chắc chắn, não cho từ đó vào bộ nhớ ngắn hạn rồi xóa dần. Chỉ khi thấy thông tin **nhiều lần, nhiều ngữ cảnh**, não mới chuyển vào **bộ nhớ dài hạn**.
+
+## 4 cách khắc phục
+
+### 1. Spaced Repetition — Ôn đúng thời điểm
+
+| Lần ôn | Thời điểm |
+|--------|-----------|
+| Lần 1 | Sau 20 phút |
+| Lần 2 | Sau 1 ngày |
+| Lần 3 | Sau 3 ngày |
+| Lần 4 | Sau 1 tuần |
+| Lần 5 | Sau 2 tuần |
+
+### 2. Gắn từ vào câu thật của bạn
+
+Học từ "ambitious" một mình → não quên. Học câu *"I am ambitious about building my own website"* → não nhớ vì có hình ảnh liên quan đến bạn.
+
+### 3. Dùng nhiều giác quan
+
+Chỉ đọc từ → 1 kênh → quên nhanh. Đọc + nghe + viết + nói = 4 kênh → não ghi nhớ chắc hơn nhiều lần.
+
+### 4. Ngủ đủ giấc
+
+Bộ nhớ dài hạn được **củng cố trong khi ngủ**. Học đến 2 giờ sáng mà ngủ 4 tiếng sẽ quên nhanh hơn người ngủ đủ 7–8 tiếng.
+
+## Áp dụng ngay
+
+**Bước 1:** Học 10–15 từ mới mỗi ngày.
+
+**Bước 2:** Ôn lại sau 20 phút → 1 ngày → 3 ngày → 1 tuần.
+
+**Bước 3:** Với mỗi từ, viết 1 câu liên quan đến cuộc sống của bạn.
+
+## Tổng kết
+
+Quên từ vựng không phải lỗi của bạn. Bạn không cần học nhiều hơn — bạn cần **học đúng cách hơn**. Bộ nhớ dài hạn được xây qua nhiều ngày học đều đặn, mỗi ngày một ít.`,
+  },];
