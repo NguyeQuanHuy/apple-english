@@ -182,9 +182,7 @@
       { type: "callout", emoji: "🌟", text: "Nguồn lực miễn phí: National Stuttering Association (stutter.org), AAC Learning Center, YouTube channel 'Stutter With Me', 'Disability After Dark'." },
       { type: "quote", text: "Ngôn ngữ là cầu nối — không chỉ qua âm thanh mà còn qua chữ viết, ánh mắt, tay, và công nghệ. Bạn có quyền kết nối với thế giới theo cách của mình." }
     ]
-  }
-
-  {
+  },`n  {
     slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
     title: "Tại sao não bạn quên từ vựng sau 24 giờ — và cách khắc phục",
     excerpt: "Học 20 từ hôm nay, sáng mai quên sạch? Đây không phải lỗi của bạn — đây là cách não hoạt động. Hiểu đúng cơ chế, bạn sẽ biết học thế nào để nhớ mãi.",
