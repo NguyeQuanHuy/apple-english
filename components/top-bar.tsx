@@ -15,8 +15,10 @@ export function TopBar() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper-50/80 dark:bg-ink-900/80 border-b border-ink-900/8 dark:border-paper-50/8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <Image src="/logo.png" alt="Apple English" width={220} height={64} className="h-16 w-auto object-contain" priority />
+        <Link href="/" className="flex items-center group">
+          <div className="px-3 py-1.5 rounded-2xl border border-sky-200 dark:border-sky-800 bg-white/80 dark:bg-ink-900/80 shadow-sm hover:shadow-md hover:border-sky-400 transition-all duration-200">
+            <Image src="/logo.png" alt="Apple English" width={260} height={72} className="h-14 w-auto object-contain" priority />
+          </div>
         </Link>
         <nav className="hidden md:flex items-center gap-1">
           <NavLink href="/">Trang chủ</NavLink>
