@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Flame, Moon, Sparkles, Sun } from "lucide-react";
 import { useTheme } from "./theme-provider";
+import { UserMenu } from "./UserMenu";
 import { useProgress } from "@/lib/store";
 import { useEffect, useState } from "react";
 
@@ -36,11 +37,8 @@ export function TopBar() {
               <Stat icon={<Sparkles className="w-4 h-4" />} value={xp} label="XP" color="text-gold-500" />
             </>
           )}
-          <button
-            onClick={toggle}
-            aria-label="Doi giao dien"
-            className="p-2 rounded-xl hover:bg-ink-900/5 dark:hover:bg-paper-50/5 transition-colors"
-          >
+          <UserMenu />
+          <button onClick={toggle} aria-label="Doi giao dien" className="p-2 rounded-xl hover:bg-ink-900/5 dark:hover:bg-paper-50/5 transition-colors">
             {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
         </div>
