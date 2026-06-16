@@ -124,7 +124,7 @@ export default function BlogPage() {
         {/* ── Post list ── */}
         <div style={{ display: "flex", flexDirection: "column" as const }}>
           {rest.map((post: any, i: number) => (
-            <BlogPostItem key={post.slug} post={post} isLast={i === rest.length - 1} formatDate={formatDate}>
+            <BlogPostItem key={post.slug} post={post} isLast={i === rest.length - 1}>
               </BlogPostItem>
           ))}
         </div>

@@ -14,7 +14,19 @@ function TagBadge({ tag }: { tag: string }) {
   return <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${cls}`}>{tag}</span>;
 }
 
-export function BlogPostItem({ post, isLast, formatDate }: { post: any; isLast: boolean; formatDate: (d: string) => string }) {
+function formatDate(raw: string) {
+  if (!raw) return "";
+  const parts = raw.split("/");
+  if (parts.length === 3) {
+    const [d, m, y] = parts;
+    return new Date(Number(y), Number(m) - 1, Number(d)).toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" });
+  }
+  const date = new Date(raw);
+  if (isNaN(date.getTime())) return raw;
+  return date.toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" });
+}
+
+export function BlogPostItem({ post, isLast }: { post: any; isLast: boolean }) {
   return (
     <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
       <article
