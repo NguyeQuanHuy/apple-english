@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -89,6 +89,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ReadingProgress />
           <TopBar />
           <main className="flex-1">{children}</main>
+          <a href="/learn/topics" title="T\u1eeb v\u1ef1ng theo ch\u1ee7 \u0111\u1ec1" className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white dark:bg-ink-900 border border-sky-200 dark:border-sky-800 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
+            <span className="text-2xl">📚</span>
+            <span className="text-sm font-bold text-sky-600 dark:text-sky-400 hidden sm:block">T\u1eeb v\u1ef1ng</span>
+          </a>
           <Footer />
         </ThemeProvider>
       </body>
