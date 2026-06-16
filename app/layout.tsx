@@ -89,9 +89,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ReadingProgress />
           <TopBar />
           <main className="flex-1">{children}</main>
-          <a href="/learn/beginner" title="Ng\u1eef ph\u00e1p c\u01a1 b\u1ea3n" className="fixed bottom-24 left-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white dark:bg-ink-900 border border-sky-200 dark:border-sky-800 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
+          <a href="/learn/beginner" title="Ngữ pháp cơ bản" className="fixed bottom-24 left-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white dark:bg-ink-900 border border-sky-200 dark:border-sky-800 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
             <span className="text-2xl">\uD83D\uDCDA</span>
-            <span className="text-sm font-bold text-sky-600 dark:text-sky-400 hidden sm:block">Ng\u1eef ph\u00e1p</span>
+            <span className="text-sm font-bold text-sky-600 dark:text-sky-400 hidden sm:block">Ngữ pháp</span>
           </a>
           <a href="/learn/topics" title="Từ vựng theo chủ đề" className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white dark:bg-ink-900 border border-sky-200 dark:border-sky-800 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
             <span className="text-2xl">📚</span>
