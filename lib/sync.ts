@@ -1,5 +1,5 @@
-import { supabase } from "./supabase";
-export async function syncToCloud(data) {
+﻿import { supabase } from "./supabase";
+export async function syncToCloud(data: any) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return;
   await supabase.from("user_progress").upsert({
@@ -12,7 +12,7 @@ export async function syncToCloud(data) {
     updated_at: new Date().toISOString(),
   }, { onConflict: "user_id" });
 }
-export async function loadFromCloud() {
+export async function loadFromCloud(): Promise<any> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
   const { data } = await supabase.from("user_progress").select("*").eq("user_id", user.id).single();
