@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import { BlogPostItem } from "./BlogPostItem";
 import { BLOG_POSTS } from "@/data/blog";
 
 export const metadata = {
@@ -123,46 +124,8 @@ export default function BlogPage() {
         {/* ── Post list ── */}
         <div style={{ display: "flex", flexDirection: "column" as const }}>
           {rest.map((post: any, i: number) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
-              <article style={{
-                display: "flex",
-                gap: 16,
-                alignItems: "flex-start",
-                padding: "1.25rem 1rem",
-                borderBottom: i < rest.length - 1 ? "1px solid #f0ebe3" : "none",
-                cursor: "pointer",
-                borderRadius: 16,
-                transition: "all 0.2s ease",
-                border: "1.5px solid transparent",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = "#38bdf8";
-                (e.currentTarget as HTMLElement).style.background = "#f0f9ff";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(56,189,248,0.15)";
-                (e.currentTarget as HTMLElement).style.transform = "translateX(4px)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = "transparent";
-                (e.currentTarget as HTMLElement).style.background = "transparent";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                (e.currentTarget as HTMLElement).style.transform = "translateX(0)";
-              }}>
-                <span style={{ fontSize: "2rem", lineHeight: 1, flexShrink: 0, marginTop: 2 }}>{post.emoji ?? "📄"}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 6 }}>
-                    {(post.tags ?? []).slice(0, 2).map((t: string) => <TagBadge key={t} tag={t} />)}
-                    <span style={{ fontSize: 12, color: "#9b8ea0" }}>{post.readingTime ?? post.readTime} · {formatDate(post.date ?? post.publishedAt)}</span>
-                  </div>
-                  <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "1.1rem", fontWeight: 700, color: "#1a1a1a", lineHeight: 1.35, marginBottom: 4 }}>
-                    {post.title}
-                  </h2>
-                  <p style={{ fontSize: "0.85rem", color: "#6b6068", lineHeight: 1.6, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical" as const }}>
-                    {post.summary ?? post.excerpt}
-                  </p>
-                </div>
-                <span style={{ fontSize: 18, color: "#d1c9be", flexShrink: 0, marginTop: 4 }}>→</span>
-              </article>
-            </Link>
+            <BlogPostItem key={post.slug} post={post} isLast={i === rest.length - 1} formatDate={formatDate}>
+              </BlogPostItem>
           ))}
         </div>
 
