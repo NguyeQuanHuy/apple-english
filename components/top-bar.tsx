@@ -17,8 +17,9 @@ export function TopBar() {
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper-50/80 dark:bg-ink-900/80 border-b border-ink-900/8 dark:border-paper-50/8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center group">
-          <div className="px-4 pt-4 pb-2 mt-2 border-2 border-sky-200 dark:border-sky-700 bg-white dark:bg-ink-900 shadow-md">
-            <Image src="/logo.png" alt="Apple English" width={600} height={140} className="h-32 w-auto object-contain" priority />
+          <div className="flex flex-col leading-none gap-0.5">
+            <span className="text-[11px] font-semibold tracking-[0.25em] text-sky-400 uppercase">Learn English</span>
+            <span className="font-display text-[22px] font-black tracking-tight bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Apple English</span>
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-1">
