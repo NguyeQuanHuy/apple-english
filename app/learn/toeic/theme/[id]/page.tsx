@@ -16,7 +16,7 @@ export default function ThemePage() {
   const addXp = useProgress((s) => s.addXp);
   const router = useRouter();
 
-  if (!theme) return <div className="p-8">Kh\u00f4ng t\u00ecm th\u1ea5y ch\u1ee7 \u0111\u1ec1.</div>;
+  if (!theme) return <div className="p-8">Không tìm thấy chủ đề.</div>;
 
   const w = (theme.words ?? [])[idx];
   const isLast = idx === (theme.words ?? []).length - 1;
@@ -61,7 +61,7 @@ export default function ThemePage() {
                   </div>
                   <div className="text-sm text-ink-500 mt-4 inline-flex items-center gap-1.5">
                     <RotateCw className="w-3.5 h-3.5" />
-                    B\u1ea5m \u0111\u1ec3 xem ngh\u0129a
+                    Bấm để xem nghĩa
                   </div>
                 </motion.div>
               ) : (
@@ -80,10 +80,10 @@ export default function ThemePage() {
 
       <div className="mt-6 flex items-center justify-between">
         <button onClick={prev} disabled={idx === 0} className="inline-flex items-center gap-1 text-sm font-bold text-ink-500 disabled:opacity-30">
-          <ArrowLeft className="w-4 h-4" /> Tr\u01b0\u1edbc
+          <ArrowLeft className="w-4 h-4" /> Trước
         </button>
         <button onClick={next} className="btn-bump-teal">
-          {isLast ? "Ho\u00e0n th\u00e0nh (+15 XP)" : "T\u1eeb ti\u1ebfp theo"}
+          {isLast ? "Hoàn thành (+15 XP)" : "Từ tiếp theo"}
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
