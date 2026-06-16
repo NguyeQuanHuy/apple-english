@@ -128,9 +128,24 @@ export default function BlogPage() {
                 display: "flex",
                 gap: 16,
                 alignItems: "flex-start",
-                padding: "1.25rem 0",
+                padding: "1.25rem 1rem",
                 borderBottom: i < rest.length - 1 ? "1px solid #f0ebe3" : "none",
                 cursor: "pointer",
+                borderRadius: 16,
+                transition: "all 0.2s ease",
+                border: "1.5px solid transparent",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = "#38bdf8";
+                (e.currentTarget as HTMLElement).style.background = "#f0f9ff";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(56,189,248,0.15)";
+                (e.currentTarget as HTMLElement).style.transform = "translateX(4px)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = "transparent";
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                (e.currentTarget as HTMLElement).style.transform = "translateX(0)";
               }}>
                 <span style={{ fontSize: "2rem", lineHeight: 1, flexShrink: 0, marginTop: 2 }}>{post.emoji ?? "📄"}</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
