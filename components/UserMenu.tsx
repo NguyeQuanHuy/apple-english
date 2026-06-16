@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { loadFromCloud, syncToCloud } from "@/lib/sync";
@@ -6,7 +6,7 @@ import { useProgress } from "@/lib/store";
 import { AuthModal } from "./AuthModal";
 import { LogOut, User } from "lucide-react";
 export function UserMenu() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [showModal, setShowModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const progress = useProgress();
