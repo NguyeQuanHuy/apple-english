@@ -53,8 +53,8 @@ export default function YearlyTestPage() {
   function handleSubmit(auto = false) {
     clearInterval(timerRef.current);
     let correct = 0;
-    test.questions.forEach((q, i) => { if (answers[i] === q.correctIndex) correct++; });
-    recordTestScore(test.id, correct, totalQ);
+    test!.questions.forEach((q, i) => { if (answers[i] === q.correctIndex) correct++; });
+    recordTestScore(test!.id, correct, totalQ);
     addXp(correct * 5 + 20);
     setPhase("submitted");
   }
