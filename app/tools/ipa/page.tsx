@@ -26,10 +26,14 @@ export default function IPAPage() {
 
   function speak(t:string) {
     if (typeof window==="undefined") return;
-    window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t);
-    u.lang="en-US"; u.rate=0.85;
-    window.speechSynthesis.speak(u);
+    const url="https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q="+encodeURIComponent(t);
+    const audio=new Audio(url);
+    audio.play().catch(()=>{
+      window.speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(t);
+      u.lang="en-US"; u.rate=0.85;
+      window.speechSynthesis.speak(u);
+    });
   }
 
   return (
