@@ -2,6 +2,7 @@
   id: string;
   year: number;
   title: string;
+  timeLimitSec: number;
   questions: {
     id: number;
     part: number;
