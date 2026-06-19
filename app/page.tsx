@@ -43,6 +43,18 @@ function IconChuDe() {
   );
 }
 
+function IconIPA() {
+  return (
+    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-md flex-shrink-0">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="4" y="6" width="20" height="16" rx="2" stroke="white" strokeWidth="1.8" fill="rgba(255,255,255,0.1)"/>
+        <path d="M8 11 L8 17 M10 11 L10 17 M12 11 L12 14 M14 14 L14 17 M16 11 L16 17 M18 11 L18 17" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M12 11 L14 11" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    </div>
+  );
+}
+
 function IconGames() {
   return (
     <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center shadow-md flex-shrink-0">
@@ -99,6 +111,17 @@ const FEATURES = [
     badgeColor: "bg-violet-500 text-white",
     accent: "border-l-violet-400",
     tag: "4 trò chơi",
+  },
+  {
+    Icon: IconIPA,
+    title: "Kiểm tra IPA",
+    subtitle: "Phân tích phát âm",
+    desc: "Dán bất kỳ văn bản tiếng Anh — AI trả về bảng IPA từng từ và audio đọc chuẩn.",
+    href: "/tools/ipa",
+    badge: "AI",
+    badgeColor: "bg-emerald-500 text-white",
+    accent: "border-l-emerald-400",
+    tag: "Mới",
   },
 ];
 
