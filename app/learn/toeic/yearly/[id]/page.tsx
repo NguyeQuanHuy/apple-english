@@ -60,7 +60,7 @@ export default function YearlyTestPage() {
   }
 
   async function fetchAIExplain(idx: number) {
-    const q = test.questions[idx];
+    const q = test!.questions[idx];
     if (aiExplain[idx] || aiLoading[idx]) return;
     setAiLoading((p) => ({ ...p, [idx]: true }));
     try {
