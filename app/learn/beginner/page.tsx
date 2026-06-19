@@ -54,7 +54,7 @@ export default function BeginnerIndex() {
             <div className="space-y-8 mb-10">{BEGINNER_PATH.map((unit, unitIdx) => { const lessons = unit.lessonIds.map((id) => ALL_LESSONS.find((l) => l.id === id)!); return <UnitSection key={unit.unit} unit={unit} lessons={lessons} unitIdx={unitIdx} completed={completed} mounted={mounted} allPath={ALL_PATH} allLessons={ALL_LESSONS} />; })}</div>
             <div className="flex items-center gap-3 mb-6"><div className="h-px flex-1 bg-sky-200" /><span className="text-xs font-bold text-sky-400 uppercase tracking-widest flex items-center gap-1"><Star size={10} /> Trình độ A2 (Nâng cao)</span><div className="h-px flex-1 bg-sky-200" /></div>
             <div className="space-y-8">{EXTRA_PATH.map((unit, unitIdx) => { const lessons = unit.lessonIds.map((id) => ALL_LESSONS.find((l) => l.id === id)!); return <UnitSection key={unit.unit} unit={unit} lessons={lessons} unitIdx={unitIdx + BEGINNER_PATH.length} completed={completed} mounted={mounted} allPath={ALL_PATH} allLessons={ALL_LESSONS} />; })}</div>
-          </div>
+          </div></>
         )}
         {activeTab === "pronunciation" && (
           <div>
