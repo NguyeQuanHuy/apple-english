@@ -1,15 +1,17 @@
-﻿export type ToeicYearlySet = {
+export type ToeicYearlySet = {
   id: string;
   year: number;
   title: string;
+  description?: string;
   timeLimitSec: number;
   questions: {
     id: number;
     part: number;
     question: string;
     options: string[];
-    answer: string;
-    explanation?: string;
+    correctIndex: number;
+    explain?: string;
+    passage?: string;
   }[];
 };
 
