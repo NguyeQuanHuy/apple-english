@@ -48,7 +48,7 @@ export default function BeginnerIndex() {
             <Mic size={15} /> Phát âm
           </button>
         </div>
-        {activeTab === "lessons" && (
+        {activeTab === "lessons" && (<><a href="/learn/alphabet" className="flex items-center gap-3 mb-6 bg-indigo-50 border-2 border-indigo-200 hover:border-indigo-400 rounded-2xl p-4 transition-all cursor-pointer"><div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl">🔤</div><div className="flex-1"><p className="font-bold text-indigo-800">Bảng chữ cái A-Z</p><p className="text-xs text-indigo-500 mt-0.5">Nghe phát âm 26 chữ + từ ví dụ</p></div><span className="text-xs bg-indigo-200 text-indigo-700 px-2 py-0.5 rounded-full font-bold">A0</span></a>
           <div>
             <div className="flex items-center gap-3 mb-6"><div className="h-px flex-1 bg-sky-200" /><span className="text-xs font-bold text-sky-400 uppercase tracking-widest">Trình độ A0 – A1 (Cơ bản)</span><div className="h-px flex-1 bg-sky-200" /></div>
             <div className="space-y-8 mb-10">{BEGINNER_PATH.map((unit, unitIdx) => { const lessons = unit.lessonIds.map((id) => ALL_LESSONS.find((l) => l.id === id)!); return <UnitSection key={unit.unit} unit={unit} lessons={lessons} unitIdx={unitIdx} completed={completed} mounted={mounted} allPath={ALL_PATH} allLessons={ALL_LESSONS} />; })}</div>
