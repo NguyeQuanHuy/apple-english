@@ -111,7 +111,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "recovery", pos: "n.", vi: "sự hồi phục", example: "The patient made a full recovery." },
     ],
   }
-,
+  ,
   {
     id: "shopping",
     title: "Mua sắm & Bán lẻ",
@@ -130,7 +130,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "warranty", pos: "n.", vi: "bảo hành", example: "The product comes with a one-year warranty." },
     ],
   }
-,
+  ,
   {
     id: "hr",
     title: "Nhân sự & Tuyển dụng",
@@ -149,7 +149,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "appraisal", pos: "n.", vi: "đánh giá nhân viên", example: "Annual appraisals help identify areas for growth." },
     ],
   }
-,
+  ,
   {
     id: "equipment",
     title: "Thiết bị & Máy móc",
@@ -168,7 +168,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "inspection", pos: "n.", vi: "kiểm tra, giám sát", example: "A safety inspection is required every month." },
     ],
   }
-,
+  ,
   {
     id: "banking",
     title: "Ngân hàng & Tài khoản",
@@ -187,7 +187,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "currency", pos: "n.", vi: "tiền tệ", example: "Please exchange your currency before traveling." },
     ],
   }
-,
+  ,
   {
     id: "shipping",
     title: "Vận chuyển & Giao hàng",
@@ -206,7 +206,7 @@ export const TOEIC_THEMES: ToeicTheme[] = [
       { en: "export", pos: "v.", vi: "xuất khẩu", example: "The company exports goods to 20 countries." },
     ],
   }
-,
+  ,
   {
     id: "weather",
     title: "Thời tiết & Khí hậu",
@@ -226,26 +226,10 @@ export const TOEIC_THEMES: ToeicTheme[] = [
     ],
   }
 
-,
-  {
-    id: "toeic-mini-3",
-    title: "Mini Test 3 — Listening Part 2",
-    description: "10 câu hỏi đáp ngắn (Part 2). Thời gian: 6 phút.",
-    timeLimitSec: 360,
-    questions: [
-      { id: "t3-1", part: 5, question: "Where is the meeting room?", options: ["It starts at 3 PM.", "It is on the second floor.", "There are 10 people.", "Yes, I will attend."], correctIndex: 1, explain: "Where → trả lời vị trí." },
-      { id: "t3-2", part: 5, question: "When will the package arrive?", options: ["By tomorrow morning.", "At the post office.", "From the supplier.", "It weighs 5 kg."], correctIndex: 0, explain: "When → trả lời thời gian." },
-      { id: "t3-3", part: 5, question: "Who is responsible for the budget?", options: ["Last quarter.", "The finance team.", "In the main office.", "Yes, it was approved."], correctIndex: 1, explain: "Who → trả lời người/bộ phận." },
-      { id: "t3-4", part: 5, question: "How did you get to the conference?", options: ["It was very informative.", "I took the subway.", "Next Monday.", "About 200 people."], correctIndex: 1, explain: "How → trả lời cách thức." },
-      { id: "t3-5", part: 5, question: "Could you send me the report?", options: ["Yes, I will email it now.", "It is on my desk.", "No, I did not write it.", "The report was late."], correctIndex: 0, explain: "Could you...? → Yes/No + hành động." },
-      { id: "t3-6", part: 5, question: "Why was the meeting postponed?", options: ["In the conference room.", "Because the manager is traveling.", "At 2 PM tomorrow.", "For one hour."], correctIndex: 1, explain: "Why → trả lời lý do." },
-      { id: "t3-7", part: 5, question: "Have you reviewed the contract yet?", options: ["Yes, I finished it this morning.", "The contract is 10 pages.", "No, the meeting is tomorrow.", "It was signed last week."], correctIndex: 0, explain: "Have you...yet? → Yes/No + kết quả." },
-      { id: "t3-8", part: 5, question: "Which printer should I use?", options: ["It needs more paper.", "Use the one on the third floor.", "I printed 50 copies.", "The printer was repaired."], correctIndex: 1, explain: "Which → lựa chọn cụ thể." },
-      { id: "t3-9", part: 5, question: "Do you know when Mr. Kim will be back?", options: ["He went to Seoul.", "He should return by Friday.", "Yes, he called this morning.", "His office is on the 5th floor."], correctIndex: 1, explain: "Hỏi thời gian → trả lời thời gian cụ thể." },
-      { id: "t3-10", part: 5, question: "Is there a parking lot near the office?", options: ["Yes, just around the corner.", "I drive to work every day.", "The office opens at 9.", "No, I do not have a car."], correctIndex: 0, explain: "Yes/No về vị trí → Yes/No + thông tin bổ sung." },
-    ]
-  }
+
 ];
+
+
 
 // ─── Mock tests ────────────────────────────────────────────────
 ;
@@ -421,4 +405,22 @@ export const TOEIC_TESTS: ToeicTest[] = [
       },
     ],
   },
+  {
+    id: "toeic-mini-3",
+    title: "Mini Test 3 — Listening Part 2",
+    description: "10 câu hỏi đáp ngắn (Part 2). Thời gian: 6 phút.",
+    timeLimitSec: 360,
+    questions: [
+      { id: "t3-1", part: 2, question: "Where is the meeting room?", options: ["It starts at 3 PM.", "It is on the second floor.", "There are 10 people.", "Yes, I will attend."], correctIndex: 1 },
+      { id: "t3-2", part: 2, question: "When will the package arrive?", options: ["By tomorrow morning.", "At the post office.", "From the supplier.", "It weighs 5 kg."], correctIndex: 0 },
+      { id: "t3-3", part: 2, question: "Who is responsible for the budget?", options: ["Last quarter.", "The finance team.", "In the main office.", "Yes, it was approved."], correctIndex: 1 },
+      { id: "t3-4", part: 2, question: "How did you get to the conference?", options: ["It was very informative.", "I took the subway.", "Next Monday.", "About 200 people."], correctIndex: 1 },
+      { id: "t3-5", part: 2, question: "Could you send me the report?", options: ["Yes, I will email it now.", "It is on my desk.", "No, I did not write it.", "The report was late."], correctIndex: 0 },
+      { id: "t3-6", part: 2, question: "Why was the meeting postponed?", options: ["In the conference room.", "Because the manager is traveling.", "At 2 PM tomorrow.", "For one hour."], correctIndex: 1 },
+      { id: "t3-7", part: 2, question: "Have you reviewed the contract yet?", options: ["Yes, I finished it this morning.", "The contract is 10 pages.", "No, the meeting is tomorrow.", "It was signed last week."], correctIndex: 0 },
+      { id: "t3-8", part: 2, question: "Which printer should I use?", options: ["It needs more paper.", "Use the one on the third floor.", "I printed 50 copies.", "The printer was repaired."], correctIndex: 1 },
+      { id: "t3-9", part: 2, question: "Do you know when Mr. Kim will be back?", options: ["He went to Seoul.", "He should return by Friday.", "Yes, he called this morning.", "His office is on the 5th floor."], correctIndex: 1 },
+      { id: "t3-10", part: 2, question: "Is there a parking lot near the office?", options: ["Yes, just around the corner.", "I drive to work every day.", "The office opens at 9.", "No, I do not have a car."], correctIndex: 0 },
+    ]
+  }
 ];
