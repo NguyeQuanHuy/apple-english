@@ -1,136 +1,249 @@
-﻿import Link from "next/link";
-import { BlogPostItem } from "./BlogPostItem";
-import { BLOG_POSTS } from "@/data/blog";
+"use client";
 
-export const metadata = {
-  title: "Blog học tiếng Anh | EnglishStart",
-  description: "Bài viết về phương pháp học tiếng Anh hiệu quả cho người Việt mất gốc.",
+import { useState } from "react";
+import Link from "next/link";
+
+// ========== Types & Data ==========
+
+type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  tags: string[];
+  readTime: number;
+  date: string;
+  emoji: string;
+  thumbColor: string;
+  thumbAccent: string;
+  featured?: boolean;
 };
 
-function formatDate(raw: string) {
-  if (!raw) return "";
-  const parts = raw.split("/");
-  if (parts.length === 3) {
-    const [d, m, y] = parts;
-    return new Date(Number(y), Number(m) - 1, Number(d)).toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" });
-  }
-  const date = new Date(raw);
-  if (isNaN(date.getTime())) return raw;
-  return date.toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" });
-}
-
-const TAG_COLORS: Record<string, string> = {
-  "Phương pháp": "bg-teal-50 text-teal-700 border-teal-200",
-  "Từ vựng":     "bg-amber-50 text-amber-700 border-amber-200",
-  "Kinh nghiệm": "bg-violet-50 text-violet-700 border-violet-200",
-  "Mất gốc":     "bg-rose-50 text-rose-700 border-rose-200",
-  "TOEIC":       "bg-blue-50 text-blue-700 border-blue-200",
-  "Ngữ pháp":    "bg-green-50 text-green-700 border-green-200",
+// Tag color map — match với theme của Apple English
+const TAG_STYLES: Record<string, string> = {
+  "Từ vựng":     "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300",
+  "Phương pháp": "bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300",
+  "TOEIC":       "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
+  "Mất gốc":     "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
+  "Phát âm":     "bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300",
+  "Ngữ pháp":    "bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300",
+  "Giao tiếp":   "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
+  "Lộ trình":    "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-700",
+  "Kinh nghiệm": "bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300",
 };
+
+const ALL_TAGS = ["Từ vựng", "Phương pháp", "TOEIC", "Mất gốc", "Phát âm", "Ngữ pháp", "Giao tiếp"];
+
+// Thumbnail background & accent per category
+const THUMB_THEMES: Record<string, { bg: string; text: string; pill: string }> = {
+  vocab:   { bg: "bg-sky-50 dark:bg-sky-950/50",    text: "text-sky-700 dark:text-sky-300",    pill: "bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300" },
+  method:  { bg: "bg-teal-50 dark:bg-teal-950/50",  text: "text-teal-700 dark:text-teal-300",  pill: "bg-teal-100 text-teal-800 dark:bg-teal-900/60 dark:text-teal-300" },
+  toeic:   { bg: "bg-amber-50 dark:bg-amber-950/50",text: "text-amber-700 dark:text-amber-300",pill: "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300" },
+  speak:   { bg: "bg-violet-50 dark:bg-violet-950/50",text: "text-violet-700 dark:text-violet-300",pill: "bg-violet-100 text-violet-800 dark:bg-violet-900/60 dark:text-violet-300" },
+  pronun:  { bg: "bg-orange-50 dark:bg-orange-950/50",text: "text-orange-700 dark:text-orange-300",pill: "bg-orange-100 text-orange-800 dark:bg-orange-900/60 dark:text-orange-300" },
+  exp:     { bg: "bg-emerald-50 dark:bg-emerald-950/50",text: "text-emerald-700 dark:text-emerald-300",pill: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300" },
+};
+
+// Sample posts — thay bằng BLOG_POSTS thực của bạn
+const POSTS: BlogPost[] = [
+  {
+    slug: "tai-sao-quen-tu-vung",
+    title: "Tại sao nao bạn quên từ vựng sau 24 giờ và cách khắc phục",
+    excerpt: "Học 20 từ hôm nay, sang mai quên sạch? Đây không phải lỗi của bạn.",
+    tags: ["Phương pháp", "Từ vựng"],
+    readTime: 6,
+    date: "7 tháng 6, 2026",
+    emoji: "🧠",
+    thumbColor: "method",
+    thumbAccent: "Spaced Repetition",
+    featured: true,
+  },
+  {
+    slug: "hoc-tieng-anh-tu-a0",
+    title: "Học tiếng Anh từ A0: 50 câu đầu tiên cần nhớ",
+    excerpt: "Chưa biết bắt đầu từ đâu? Đây là 50 câu tiếng Anh cơ bản nhất.",
+    tags: ["Mất gốc", "Từ vựng"],
+    readTime: 8,
+    date: "7 tháng 6, 2026",
+    emoji: "💬",
+    thumbColor: "speak",
+    thumbAccent: "A0 → A1",
+  },
+  {
+    slug: "cach-phat-am-ro-rang",
+    title: "Cách phát âm tiếng Anh rõ ràng",
+    excerpt: "Phát âm sai khiến người nghe không hiểu. Hướng dẫn từng bước để phát âm chuẩn.",
+    tags: ["Phát âm", "Phương pháp"],
+    readTime: 6,
+    date: "4 tháng 6, 2026",
+    emoji: "🎤",
+    thumbColor: "pronun",
+    thumbAccent: "IPA · Chuẩn giọng",
+  },
+  {
+    slug: "toeic-450-trong-2-thang",
+    title: "TOEIC 450 điểm trong 2 tháng — kế hoạch ôn thi thực tế",
+    excerpt: "Kế hoạch ôn TOEIC 450 trong 2 tháng dành cho người mất gốc.",
+    tags: ["TOEIC", "Lộ trình"],
+    readTime: 6,
+    date: "3 tháng 6, 2026",
+    emoji: "🎯",
+    thumbColor: "toeic",
+    thumbAccent: "450+ điểm",
+  },
+  {
+    slug: "30-thanh-ngu-pho-bien",
+    title: "30 thành ngữ phổ biến nhất trong tiếng Anh",
+    excerpt: "Nói chuyện như người bản ngữ với 30 idioms thường dùng nhất.",
+    tags: ["Từ vựng", "Giao tiếp"],
+    readTime: 7,
+    date: "3 tháng 6, 2026",
+    emoji: "🗣️",
+    thumbColor: "speak",
+    thumbAccent: "30 idioms",
+  },
+  {
+    slug: "hoc-khi-khi-khuyet-giong-noi",
+    title: "Học tiếng Anh khi bị khiếm khuyết về giọng nói — bạn vẫn làm được",
+    excerpt: "Không nói được hoặc nói khó khăn không có nghĩa là bạn không học được.",
+    tags: ["Kinh nghiệm", "Phương pháp"],
+    readTime: 7,
+    date: "4 tháng 6, 2026",
+    emoji: "♿",
+    thumbColor: "exp",
+    thumbAccent: "Accessibility",
+  },
+];
+
+// ========== Sub-components ==========
 
 function TagBadge({ tag }: { tag: string }) {
-  const cls = TAG_COLORS[tag] ?? "bg-gray-100 text-gray-600 border-gray-200";
   return (
-    <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${cls}`}>{tag}</span>
+    <span className={`inline-block text-xs font-medium px-2.5 py-1 rounded-full ${TAG_STYLES[tag] ?? "bg-gray-100 text-gray-700"}`}>
+      {tag}
+    </span>
   );
 }
 
-export default function BlogPage() {
-  const sorted = [...BLOG_POSTS].sort((a: any, b: any) => {
-    const parse = (d: string) => {
-      const p = d?.split("/");
-      if (p?.length === 3) return new Date(+p[2], +p[1]-1, +p[0]).getTime();
-      return new Date(d ?? 0).getTime();
-    };
-    return parse(b.date ?? b.publishedAt) - parse(a.date ?? a.publishedAt);
-  });
-
-  const [featured, ...rest] = sorted;
-
+function CardThumbnail({ post, featured }: { post: BlogPost; featured?: boolean }) {
+  const theme = THUMB_THEMES[post.thumbColor] ?? THUMB_THEMES.method;
   return (
-    <main className="min-h-screen" style={{ background: "#faf8f4" }}>
+    <div
+      className={`${theme.bg} flex flex-col items-center justify-center gap-2 w-full
+        ${featured ? "aspect-[2/1]" : "aspect-square"}`}
+    >
+      <span className={`${featured ? "text-5xl" : "text-4xl"}`}>{post.emoji}</span>
+      <span className={`text-xs font-medium px-3 py-1 rounded-full ${theme.pill}`}>
+        {post.thumbAccent}
+      </span>
+    </div>
+  );
+}
 
-      {/* ── Hero ── */}
-      <div style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a2a1a 100%)", padding: "4rem 1rem 5rem" }}>
-        <div style={{ maxWidth: 680, margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-            <span style={{ width: 28, height: 2, background: "#f97316", display: "inline-block", borderRadius: 2 }}></span>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#f97316" }}>EnglishStart Blog</span>
-          </div>
-          <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(2.5rem, 6vw, 3.75rem)", fontWeight: 800, color: "#fff", lineHeight: 1.1, marginBottom: "1rem" }}>
-            Blog học<br />tiếng Anh
-          </h1>
-          <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.55)", maxWidth: 420, lineHeight: 1.6 }}>
-            Phương pháp, mẹo học và kiến thức thực tế cho người Việt mất gốc.
-          </p>
+function BlogCard({ post, featured }: { post: BlogPost; featured?: boolean }) {
+  return (
+    <Link
+      href={`/blog/${post.slug}`}
+      className={`group flex flex-col bg-white dark:bg-paper-50/5 border border-ink-300/20
+        rounded-2xl overflow-hidden hover:border-ink-300/40 hover:shadow-sm
+        transition-all duration-200 ${featured ? "col-span-2" : ""}`}
+    >
+      <CardThumbnail post={post} featured={featured} />
+      <div className="flex flex-col flex-1 gap-2.5 p-4">
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {post.tags.map((t) => <TagBadge key={t} tag={t} />)}
+        </div>
+
+        {/* Title */}
+        <h2 className={`font-semibold leading-snug text-ink-700 dark:text-paper-100
+          group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors
+          ${featured ? "text-base" : "text-sm"}`}>
+          {post.title}
+        </h2>
+
+        {/* Meta */}
+        <div className="mt-auto flex items-center gap-1.5 text-xs text-ink-300 dark:text-ink-300">
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />
+          </svg>
+          <span>{post.readTime} phút đọc</span>
+          <span className="w-1 h-1 rounded-full bg-ink-300/50 inline-block" />
+          <span>{post.date}</span>
         </div>
       </div>
+    </Link>
+  );
+}
 
-      <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 1rem 4rem" }}>
+// ========== Main Page ==========
 
-        {/* ── Featured card ── */}
-        {featured && (
-          <Link href={`/blog/${(featured as any).slug}`} style={{ textDecoration: "none" }}>
-            <article style={{
-              background: "#fff",
-              borderRadius: 20,
-              border: "1.5px solid #e8e2d9",
-              padding: "1.75rem",
-              marginTop: "-2.5rem",
-              marginBottom: "2.5rem",
-              boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-              cursor: "pointer",
-              transition: "transform .2s, box-shadow .2s",
-            }}
+export default function BlogPage() {
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const filtered = activeTag
+    ? POSTS.filter((p) => p.tags.includes(activeTag))
+    : POSTS;
+
+  const featured = filtered.find((p) => p.featured && !activeTag);
+  const rest = activeTag ? filtered : filtered.filter((p) => !p.featured);
+
+  return (
+    <main className="min-h-screen bg-paper-50 dark:bg-paper-50/5 pt-10 pb-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
+        {/* Header */}
+        <div className="mb-8">
+          <p className="text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-1">
+            Apple English
+          </p>
+          <h1 className="text-3xl font-bold text-ink-700 dark:text-paper-100 mb-2">
+            Bài viết
+          </h1>
+          <p className="text-ink-500 dark:text-ink-300 text-sm">
+            Kiến thức tiếng Anh thực tế, dễ hiểu cho người mất gốc tiếng Anh
+          </p>
+        </div>
+
+        {/* Filter bar */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          <button
+            onClick={() => setActiveTag(null)}
+            className={`text-sm px-4 py-1.5 rounded-full border transition-all duration-150
+              ${!activeTag
+                ? "bg-teal-500 text-white border-teal-500 font-medium"
+                : "bg-white dark:bg-paper-50/5 text-ink-500 dark:text-ink-300 border-ink-300/30 hover:border-ink-300/60"
+              }`}
+          >
+            Tất cả
+          </button>
+          {ALL_TAGS.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(tag === activeTag ? null : tag)}
+              className={`text-sm px-4 py-1.5 rounded-full border transition-all duration-150
+                ${activeTag === tag
+                  ? "bg-teal-500 text-white border-teal-500 font-medium"
+                  : "bg-white dark:bg-paper-50/5 text-ink-500 dark:text-ink-300 border-ink-300/30 hover:border-ink-300/60"
+                }`}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" as const }}>
-                <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#f97316" }}>✦ Bài nổi bật</span>
-                <span style={{ color: "#d1c9be" }}>·</span>
-                <span style={{ fontSize: 12, color: "#9b8ea0" }}>{(featured as any).readingTime ?? (featured as any).readTime}</span>
-                <span style={{ color: "#d1c9be" }}>·</span>
-                <span style={{ fontSize: 12, color: "#9b8ea0" }}>{formatDate((featured as any).date ?? (featured as any).publishedAt)}</span>
-              </div>
-
-              <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                <span style={{ fontSize: "2.75rem", lineHeight: 1, flexShrink: 0, marginTop: 2 }}>{(featured as any).emoji ?? "📖"}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "1.5rem", fontWeight: 800, color: "#1a1a1a", lineHeight: 1.25, marginBottom: 10 }}>
-                    {(featured as any).title}
-                  </h2>
-                  <p style={{ fontSize: "0.9rem", color: "#6b6068", lineHeight: 1.7, marginBottom: 14 }}>
-                    {(featured as any).summary ?? (featured as any).excerpt}
-                  </p>
-                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const }}>
-                    {((featured as any).tags ?? []).map((t: string) => <TagBadge key={t} tag={t} />)}
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid #f0ebe3", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ fontSize: 14, fontWeight: 700, color: "#f97316" }}>Đọc bài viết →</span>
-              </div>
-            </article>
-          </Link>
-        )}
-
-        {/* ── Section label ── */}
-        {rest.length > 0 && (
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 4 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#9b8ea0" }}>Tất cả bài viết</span>
-            <div style={{ flex: 1, height: 1, background: "#e8e2d9" }}></div>
-          </div>
-        )}
-
-        {/* ── Post list ── */}
-        <div style={{ display: "flex", flexDirection: "column" as const }}>
-          {rest.map((post: any, i: number) => (
-            <BlogPostItem key={post.slug} post={post} isLast={i === rest.length - 1}>
-              </BlogPostItem>
+              {tag}
+            </button>
           ))}
         </div>
 
-        {sorted.length === 0 && (
-          <p style={{ textAlign: "center", color: "#9b8ea0", padding: "5rem 0" }}>Chưa có bài viết nào.</p>
+        {/* Card grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {featured && <BlogCard post={featured} featured />}
+          {rest.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-20 text-ink-300">
+            <p className="text-4xl mb-3">🔍</p>
+            <p className="text-sm">Chưa có bài viết nào trong danh mục này.</p>
+          </div>
         )}
       </div>
     </main>
