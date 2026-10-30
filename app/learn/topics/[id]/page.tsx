@@ -30,7 +30,7 @@ export default function TopicDetail() {
     { id: "advanced", label: "Nâng cao", icon: Sparkles, count: topic.advancedVocab.length },
     { id: "phrases", label: "Cụm giao tiếp", icon: MessageCircle, count: topic.phrases.length },
     { id: "quiz", label: "Quiz", icon: Brain, count: topic.quiz.length },
-  ];
+  ].filter((t) => t.count > 0) as { id: TabId; label: string; icon: typeof BookOpen; count: number }[];
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6">
@@ -55,7 +55,7 @@ export default function TopicDetail() {
       </div>
 
       {/* Tip */}
-      <div className="mt-4 card-paper p-4 border-l-4 border-gold-400 flex gap-3">
+      {topic.tip && <div className="mt-4 card-paper p-4 border-l-4 border-gold-400 flex gap-3">
         <Lightbulb className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
         <div>
           <div className="text-xs font-bold uppercase tracking-widest text-gold-500 mb-1">
@@ -63,7 +63,7 @@ export default function TopicDetail() {
           </div>
           <p className="text-sm leading-relaxed text-ink-700 dark:text-paper-100">{topic.tip}</p>
         </div>
-      </div>
+      </div>}
 
       {/* Tabs */}
       <div className="mt-6 sticky top-16 z-30 bg-paper-50/95 dark:bg-ink-900/95 backdrop-blur-sm py-2 -mx-4 sm:-mx-6 px-4 sm:px-6 border-b border-ink-900/8 dark:border-paper-50/8">
@@ -121,7 +121,7 @@ function VocabList({ items, accent }: { items: VocabItem[]; accent: "ember" | "t
     ember: "text-ember-500 border-ember-500",
     teal: "text-teal-600 dark:text-teal-400 border-teal-500",
   };
-  const posLabel: Record<VocabItem["pos"], string> = {
+  const posLabel: Record<NonNullable<VocabItem["pos"]>, string> = {
     n: "danh từ",
     v: "động từ",
     adj: "tính từ",
@@ -143,16 +143,18 @@ function VocabList({ items, accent }: { items: VocabItem[]; accent: "ember" | "t
             {w.ipa && (
               <span className="text-sm text-ink-500 font-mono">{w.ipa}</span>
             )}
-            <span className="text-[10px] font-bold uppercase tracking-wider text-ink-300 px-1.5 py-0.5 rounded bg-ink-900/5 dark:bg-paper-50/5">
-              {posLabel[w.pos]}
-            </span>
+            {w.pos && (
+              <span className="text-[10px] font-bold uppercase tracking-wider text-ink-300 px-1.5 py-0.5 rounded bg-ink-900/5 dark:bg-paper-50/5">
+                {posLabel[w.pos]}
+              </span>
+            )}
           </div>
           <div className={`text-sm font-bold mt-1 ${accentMap[accent].split(" ")[0]}`}>
             {w.vi}
           </div>
           <div className={`mt-3 border-l-2 pl-3 ${accentMap[accent].split(" ")[1]}`}>
             <div className="text-sm font-semibold italic">"{w.example}"</div>
-            <div className="text-xs text-ink-500 mt-0.5">{w.exampleVi}</div>
+            {w.exampleVi && <div className="text-xs text-ink-500 mt-0.5">{w.exampleVi}</div>}
           </div>
         </motion.div>
       ))}

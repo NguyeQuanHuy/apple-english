@@ -1,13 +1,46 @@
-export type Topic = {
+export interface VocabItem {
+  en: string;
+  vi: string;
+  example?: string;
+  exampleVi?: string;
+  ipa?: string;
+  pos?: "n" | "v" | "adj" | "adv" | "phr";
+}
+
+export interface Phrase {
+  en: string;
+  vi: string;
+  when: string;
+}
+
+export interface QuizQ {
+  prompt: string;
+  options: string[];
+  correctIndex: number;
+  explain?: string;
+}
+
+// Raw data as written below
+interface RawTopic {
   id: string;
   title: string;
   emoji: string;
   tagline: string;
-  vocab: { en: string; vi: string; example: string }[];
-  miniQuiz: { prompt: string; options: string[]; correctIndex: number }[];
-};
+  tip?: string;
+  vocab: VocabItem[];
+  phrases?: Phrase[];
+  miniQuiz: QuizQ[];
+}
 
-export const TOPICS: Topic[] = [
+// Shape the topic pages use
+export interface Topic extends RawTopic {
+  basicVocab: VocabItem[];
+  advancedVocab: VocabItem[];
+  phrases: Phrase[];
+  quiz: QuizQ[];
+}
+
+const RAW_TOPICS: RawTopic[] = [
   {
     id: "travel",
     title: "Du lịch",
@@ -486,3 +519,12 @@ export const TOPICS: Topic[] = [
     ],
   },
 ];
+
+// First 10 words of each topic are "basic", the rest "advanced"
+export const TOPICS: Topic[] = RAW_TOPICS.map((t) => ({
+  ...t,
+  basicVocab: t.vocab.slice(0, 10),
+  advancedVocab: t.vocab.slice(10),
+  phrases: t.phrases ?? [],
+  quiz: t.miniQuiz,
+}));
