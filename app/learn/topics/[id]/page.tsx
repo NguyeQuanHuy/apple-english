@@ -1,198 +1,187 @@
 "use client";
-import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, BookOpen, Sparkles, MessageCircle, Brain, Lightbulb } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Lightbulb, RotateCcw, X } from "lucide-react";
 import { TOPICS, type VocabItem, type Phrase, type QuizQ } from "@/data/topics";
 import { useProgress } from "@/lib/store";
+import { SpeakButton } from "@/components/SpeakButton";
 
 type TabId = "basic" | "advanced" | "phrases" | "quiz";
+
+const POS_LABEL: Record<NonNullable<VocabItem["pos"]>, string> = {
+  n: "danh từ",
+  v: "động từ",
+  adj: "tính từ",
+  adv: "trạng từ",
+  phr: "cụm từ",
+};
 
 export default function TopicDetail() {
   const params = useParams<{ id: string }>();
   const topic = TOPICS.find((t) => t.id === params.id);
   const [tab, setTab] = useState<TabId>("basic");
+  const testScores = useProgress((s) => s.testScores);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   if (!topic) {
     return (
-      <div className="max-w-md mx-auto px-4 pt-16 text-center">
-        <p>Không tìm thấy chủ đề.</p>
-        <Link href="/learn/topics" className="btn-bump-ghost mt-4 inline-flex">
-          Quay lại
+      <div className="max-w-md mx-auto px-4 pt-16 pb-24 text-center">
+        <p className="text-lg text-navy-700 dark:text-paper-100 mb-4">Không tìm thấy chủ đề này.</p>
+        <Link href="/learn/topics" className="inline-flex items-center gap-2 font-bold text-apple-600 dark:text-apple-500">
+          <ArrowLeft className="w-4 h-4" /> Xem tất cả chủ đề
         </Link>
       </div>
     );
   }
 
-  const tabs: { id: TabId; label: string; icon: typeof BookOpen; count: number }[] = [
-    { id: "basic", label: "Cơ bản", icon: BookOpen, count: topic.basicVocab.length },
-    { id: "advanced", label: "Nâng cao", icon: Sparkles, count: topic.advancedVocab.length },
-    { id: "phrases", label: "Cụm giao tiếp", icon: MessageCircle, count: topic.phrases.length },
-    { id: "quiz", label: "Quiz", icon: Brain, count: topic.quiz.length },
-  ].filter((t) => t.count > 0) as { id: TabId; label: string; icon: typeof BookOpen; count: number }[];
+  const tabs = (
+    [
+      { id: "basic", label: "Cơ bản", count: topic.basicVocab.length },
+      { id: "advanced", label: "Nâng cao", count: topic.advancedVocab.length },
+      { id: "phrases", label: "Cụm giao tiếp", count: topic.phrases.length },
+      { id: "quiz", label: "Quiz", count: topic.quiz.length },
+    ] as { id: TabId; label: string; count: number }[]
+  ).filter((t) => t.count > 0);
+
+  const tabIndex = tabs.findIndex((t) => t.id === tab);
+  const nextTab = tabs[tabIndex + 1];
+  const lastQuiz = mounted ? testScores[`topic-${topic.id}`] : undefined;
+  const idx = TOPICS.findIndex((t) => t.id === topic.id);
+  const nextTopic = TOPICS[(idx + 1) % TOPICS.length];
+
+  function go(t: TabId) {
+    setTab(t);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6">
-      <Link
-        href="/learn/topics"
-        className="text-sm text-ink-500 font-bold inline-flex items-center gap-1"
-      >
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-24 md:pb-12">
+      <Link href="/learn/topics" className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-500 dark:text-paper-200 hover:text-navy-900 dark:hover:text-white">
         <ArrowLeft className="w-4 h-4" /> Tất cả chủ đề
       </Link>
 
       {/* Header */}
-      <div className="mt-5 card-paper p-6 relative overflow-hidden">
-        <div
-          className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-gold-400/20 blur-3xl"
-          aria-hidden
-        />
-        <div className="relative">
-          <div className="text-5xl">{topic.emoji}</div>
-          <h1 className="font-display text-3xl md:text-4xl font-black mt-3">{topic.title}</h1>
-          <p className="text-ink-500 mt-1">{topic.tagline}</p>
+      <header className="mt-6 flex items-start gap-5">
+        <span className="text-5xl sm:text-6xl leading-none mt-1" aria-hidden="true">{topic.emoji}</span>
+        <div className="min-w-0">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.02em] text-navy-900 dark:text-white">{topic.title}</h1>
+          <p className="text-lg text-navy-500 dark:text-paper-200 mt-1">{topic.tagline}</p>
+          {lastQuiz && (
+            <p className="text-sm text-navy-400 mt-2">
+              Quiz lần gần nhất: <span className="font-bold text-navy-700 dark:text-paper-100">{lastQuiz.score}/{lastQuiz.total}</span>
+            </p>
+          )}
         </div>
-      </div>
+      </header>
 
-      {/* Tip */}
-      {topic.tip && <div className="mt-4 card-paper p-4 border-l-4 border-gold-400 flex gap-3">
-        <Lightbulb className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-        <div>
-          <div className="text-xs font-bold uppercase tracking-widest text-gold-500 mb-1">
-            Mẹo thực dụng
-          </div>
-          <p className="text-sm leading-relaxed text-ink-700 dark:text-paper-100">{topic.tip}</p>
+      {topic.tip && (
+        <div className="mt-6 rounded-2xl bg-hl-200/60 dark:bg-hl-300/10 border border-hl-300 dark:border-hl-300/20 p-4 flex gap-3">
+          <Lightbulb className="w-5 h-5 text-amber-700 dark:text-hl-300 shrink-0 mt-0.5" />
+          <p className="text-[15px] leading-relaxed text-navy-700 dark:text-paper-100">{topic.tip}</p>
         </div>
-      </div>}
+      )}
 
       {/* Tabs */}
-      <div className="mt-6 sticky top-16 z-30 bg-paper-50/95 dark:bg-ink-900/95 backdrop-blur-sm py-2 -mx-4 sm:-mx-6 px-4 sm:px-6 border-b border-ink-900/8 dark:border-paper-50/8">
-        <div className="flex gap-1 overflow-x-auto no-scrollbar">
-          {tabs.map((t) => {
+      <div className="mt-7 sticky top-16 z-30 bg-[rgb(var(--bg)/0.92)] backdrop-blur-sm py-3 -mx-4 sm:-mx-6 px-4 sm:px-6 border-b border-navy-900/[0.07] dark:border-white/10">
+        <div role="tablist" aria-label="Phần học" className="flex gap-1.5 overflow-x-auto">
+          {tabs.map((t, i) => {
             const active = tab === t.id;
             return (
               <button
                 key={t.id}
+                role="tab"
+                aria-selected={active}
                 onClick={() => setTab(t.id)}
-                className={`shrink-0 px-3 py-2 rounded-lg text-sm font-bold inline-flex items-center gap-1.5 transition-all ${
-                  active
-                    ? "bg-ember-500 text-white shadow-sm"
-                    : "text-ink-500 hover:bg-ink-900/5 dark:hover:bg-paper-50/5"
+                className={`shrink-0 px-4 py-2 rounded-xl text-[15px] font-semibold inline-flex items-center gap-2 transition-colors ${
+                  active ? "bg-navy-900 text-white dark:bg-white dark:text-navy-900" : "text-navy-500 dark:text-paper-200 hover:bg-navy-900/[0.05] dark:hover:bg-white/10"
                 }`}
               >
-                <t.icon className="w-3.5 h-3.5" />
-                <span>{t.label}</span>
-                <span
-                  className={`ml-1 text-[10px] font-black px-1.5 py-0.5 rounded-full ${
-                    active ? "bg-white/20" : "bg-ink-900/10 dark:bg-paper-50/10"
-                  }`}
-                >
-                  {t.count}
-                </span>
+                <span className={`text-xs font-bold ${active ? "opacity-70" : "text-navy-400"}`}>{i + 1}</span>
+                {t.label}
+                <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${active ? "bg-white/15 dark:bg-navy-900/10" : "bg-navy-900/[0.06] dark:bg-white/10"}`}>{t.count}</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* Content */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={tab}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-          className="mt-6"
-        >
-          {tab === "basic" && <VocabList items={topic.basicVocab} accent="ember" />}
-          {tab === "advanced" && <VocabList items={topic.advancedVocab} accent="teal" />}
-          {tab === "phrases" && <PhrasesList items={topic.phrases} />}
-          {tab === "quiz" && <QuizRunner questions={topic.quiz} topicId={topic.id} />}
-        </motion.div>
-      </AnimatePresence>
+      <div className="mt-6" role="tabpanel">
+        {tab === "basic" && <VocabList items={topic.basicVocab} />}
+        {tab === "advanced" && <VocabList items={topic.advancedVocab} />}
+        {tab === "phrases" && <PhrasesList items={topic.phrases} />}
+        {tab === "quiz" && <QuizRunner questions={topic.quiz} topicId={topic.id} nextTopic={nextTopic} />}
+
+        {tab !== "quiz" && nextTab && (
+          <button
+            onClick={() => go(nextTab.id)}
+            className="mt-6 w-full flex items-center justify-between gap-4 rounded-2xl bg-navy-900 dark:bg-white/[0.06] text-white px-5 py-4 hover:bg-navy-700 dark:hover:bg-white/10 transition-colors"
+          >
+            <span className="text-left">
+              <span className="block text-sm text-white/60">Học xong phần này?</span>
+              <span className="block font-bold">Sang phần {nextTab.label.toLowerCase()}</span>
+            </span>
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        )}
+      </div>
     </div>
   );
 }
 
 // ─── Vocab list ────────────────────────────────────────────────
-function VocabList({ items, accent }: { items: VocabItem[]; accent: "ember" | "teal" }) {
-  const accentMap = {
-    ember: "text-ember-500 border-ember-500",
-    teal: "text-teal-600 dark:text-teal-400 border-teal-500",
-  };
-  const posLabel: Record<NonNullable<VocabItem["pos"]>, string> = {
-    n: "danh từ",
-    v: "động từ",
-    adj: "tính từ",
-    adv: "trạng từ",
-    phr: "cụm từ",
-  };
+function VocabList({ items }: { items: VocabItem[] }) {
   return (
-    <div className="space-y-3 pb-10">
+    <ul className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 divide-y divide-navy-900/[0.07] dark:divide-white/10 overflow-hidden">
       {items.map((w, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.03 }}
-          className="card-paper p-4"
-        >
-          <div className="flex items-baseline gap-2 flex-wrap">
-            <span className="font-display text-2xl font-black">{w.en}</span>
-            {w.ipa && (
-              <span className="text-sm text-ink-500 font-mono">{w.ipa}</span>
+        <li key={i} className="p-4 sm:p-5 flex gap-4">
+          <SpeakButton text={w.en} size="md" className="flex-shrink-0 mt-0.5" />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-baseline gap-x-2 gap-y-0.5 flex-wrap">
+              <span className="text-xl font-bold text-navy-900 dark:text-white">{w.en}</span>
+              {w.ipa && <span className="text-sm text-navy-400">{w.ipa}</span>}
+              {w.pos && <span className="text-xs font-semibold text-navy-400">{POS_LABEL[w.pos]}</span>}
+            </div>
+            <p className="text-[15px] font-semibold text-apple-600 dark:text-apple-500">{w.vi}</p>
+            {w.example && (
+              <div className="mt-2 flex items-start gap-2">
+                <div className="flex-1 border-l-2 border-navy-900/10 dark:border-white/15 pl-3">
+                  <p className="text-[15px] italic text-navy-700 dark:text-paper-100">{w.example}</p>
+                  {w.exampleVi && <p className="text-sm text-navy-400 mt-0.5">{w.exampleVi}</p>}
+                </div>
+                <SpeakButton text={w.example} size="sm" className="flex-shrink-0" />
+              </div>
             )}
-            {w.pos && (
-              <span className="text-[10px] font-bold uppercase tracking-wider text-ink-300 px-1.5 py-0.5 rounded bg-ink-900/5 dark:bg-paper-50/5">
-                {posLabel[w.pos]}
-              </span>
-            )}
           </div>
-          <div className={`text-sm font-bold mt-1 ${accentMap[accent].split(" ")[0]}`}>
-            {w.vi}
-          </div>
-          <div className={`mt-3 border-l-2 pl-3 ${accentMap[accent].split(" ")[1]}`}>
-            <div className="text-sm font-semibold italic">"{w.example}"</div>
-            {w.exampleVi && <div className="text-xs text-ink-500 mt-0.5">{w.exampleVi}</div>}
-          </div>
-        </motion.div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
 // ─── Phrases list ──────────────────────────────────────────────
 function PhrasesList({ items }: { items: Phrase[] }) {
   return (
-    <div className="space-y-3 pb-10">
+    <ul className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 divide-y divide-navy-900/[0.07] dark:divide-white/10 overflow-hidden">
       {items.map((p, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.04 }}
-          className="card-paper p-4"
-        >
-          <div className="font-display text-lg font-bold leading-snug">"{p.en}"</div>
-          <div className="text-sm font-bold text-teal-600 dark:text-teal-400 mt-1">
-            {p.vi}
+        <li key={i} className="p-4 sm:p-5 flex gap-4">
+          <SpeakButton text={p.en} size="md" className="flex-shrink-0 mt-0.5" />
+          <div className="min-w-0">
+            <p className="text-lg font-bold text-navy-900 dark:text-white leading-snug">{p.en}</p>
+            <p className="text-[15px] font-semibold text-apple-600 dark:text-apple-500">{p.vi}</p>
+            <p className="text-sm text-navy-500 dark:text-paper-200 mt-1">Dùng khi: {p.when}</p>
           </div>
-          <div className="text-xs text-ink-500 mt-2 inline-flex items-center gap-1">
-            <span className="px-1.5 py-0.5 rounded bg-gold-400/15 text-gold-500 font-bold uppercase tracking-wider text-[10px]">
-              Khi nào dùng
-            </span>
-            <span>{p.when}</span>
-          </div>
-        </motion.div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
 // ─── Quiz runner ───────────────────────────────────────────────
-function QuizRunner({ questions, topicId }: { questions: QuizQ[]; topicId: string }) {
+function QuizRunner({ questions, topicId, nextTopic }: { questions: QuizQ[]; topicId: string; nextTopic: (typeof TOPICS)[number] }) {
   const addXp = useProgress((s) => s.addXp);
+  const recordTestScore = useProgress((s) => s.recordTestScore);
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [reveal, setReveal] = useState(false);
@@ -212,8 +201,8 @@ function QuizRunner({ questions, topicId }: { questions: QuizQ[]; topicId: strin
     setPicked(null);
     if (idx < questions.length - 1) setIdx(idx + 1);
     else {
-      const earned = correct * 5 + 15;
-      addXp(earned, `topic-quiz:${topicId}`);
+      addXp(correct * 5 + 15, `topic-quiz:${topicId}`);
+      recordTestScore(`topic-${topicId}`, correct, questions.length);
       setDone(true);
     }
   }
@@ -228,110 +217,79 @@ function QuizRunner({ questions, topicId }: { questions: QuizQ[]; topicId: strin
   if (done) {
     const pct = Math.round((correct / questions.length) * 100);
     return (
-      <div className="text-center pt-6 pb-16">
-        <div className="text-6xl mb-3">{pct >= 80 ? "🏆" : pct >= 50 ? "👍" : "📚"}</div>
-        <div className="font-display text-5xl font-black">
-          {correct}<span className="text-ink-300">/{questions.length}</span>
-        </div>
-        <p className="text-ink-500 mt-2">
-          {pct >= 80 ? "Xuất sắc!" : pct >= 50 ? "Khá ổn, làm lại để chắc hơn nhé!" : "Cần ôn lại từ vựng. Đừng nản!"}
+      <div className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 p-8 text-center">
+        <p className="font-display text-6xl font-extrabold text-navy-900 dark:text-white">
+          {correct}<span className="text-navy-400">/{questions.length}</span>
         </p>
-        <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-400/15 text-gold-500 font-bold">
-          <Sparkles className="w-4 h-4" />
-          +{correct * 5 + 15} XP
-        </div>
-        <div className="mt-8 flex justify-center gap-3">
-          <button onClick={retry} className="btn-bump-ghost">Làm lại</button>
-          <Link href="/learn/topics" className="btn-bump-ember">Chủ đề khác</Link>
+        <p className="text-lg text-navy-500 dark:text-paper-200 mt-2">
+          {pct === 100 ? "Đúng hết! Chủ đề này bạn nắm chắc rồi." : pct >= 50 ? "Khá ổn. Xem lại từ sai rồi làm lại cho chắc nhé." : "Cần ôn thêm. Quay lại phần từ vựng rồi thử lại."}
+        </p>
+        <p className="mt-4 inline-block px-4 py-1.5 rounded-full bg-hl-200 dark:bg-hl-300/15 text-amber-800 dark:text-hl-300 font-bold">+{correct * 5 + 15} XP</p>
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+          <button onClick={retry} className="inline-flex items-center justify-center gap-2 font-bold px-6 py-3 rounded-2xl border-2 border-navy-900/10 dark:border-white/15 text-navy-700 dark:text-paper-50 hover:bg-navy-900/[0.04] dark:hover:bg-white/5">
+            <RotateCcw className="w-4 h-4" /> Làm lại
+          </button>
+          <Link href={`/learn/topics/${nextTopic.id}`} className="inline-flex items-center justify-center gap-2 font-bold px-6 py-3 rounded-2xl bg-apple-500 hover:bg-apple-600 text-white shadow-[0_4px_0_0_#A51F25] active:shadow-none active:translate-y-1 transition-all">
+            Chủ đề tiếp: {nextTopic.emoji} {nextTopic.title} <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="pb-10">
-      <div className="flex items-center justify-between mb-4">
-        <div className="text-xs font-bold uppercase tracking-widest text-ember-500">
-          Câu {idx + 1}/{questions.length}
-        </div>
-        <div className="text-xs font-bold text-ink-500">
-          Đúng: {correct}
-        </div>
+    <div>
+      <div className="flex items-center justify-between mb-3 text-sm font-semibold">
+        <span className="text-navy-500 dark:text-paper-200">Câu {idx + 1}/{questions.length}</span>
+        <span className="text-navy-400">Đúng {correct}</span>
+      </div>
+      <div className="h-2 rounded-full bg-navy-900/[0.07] dark:bg-white/10 overflow-hidden mb-6">
+        <div className="h-full bg-apple-500 rounded-full transition-all duration-300" style={{ width: `${((idx + (reveal ? 1 : 0)) / questions.length) * 100}%` }} />
       </div>
 
-      <div className="h-2 rounded-full bg-ink-900/8 dark:bg-paper-50/8 overflow-hidden mb-5">
-        <motion.div
-          className="h-full bg-ember-500"
-          animate={{ width: `${((idx + (reveal ? 1 : 0)) / questions.length) * 100}%` }}
-        />
-      </div>
-
-      <h2 className="font-display text-xl md:text-2xl font-black leading-snug">
-        {q.prompt}
-      </h2>
+      <h2 className="font-display text-2xl font-extrabold leading-snug text-navy-900 dark:text-white">{q.prompt}</h2>
 
       <div className="mt-5 space-y-2.5">
         {q.options.map((opt, i) => {
           const isPicked = picked === i;
           const isAns = i === q.correctIndex;
-          let cls = "card-paper p-3.5 text-left font-semibold w-full transition-all";
-          if (reveal) {
-            if (isAns) cls += " ring-2 ring-teal-500 bg-teal-50 dark:bg-teal-700/20";
-            else if (isPicked) cls += " ring-2 ring-rose-500 bg-rose-400/10";
-            else cls += " opacity-50";
-          } else if (isPicked) cls += " ring-2 ring-ember-500";
-          else cls += " hover:-translate-y-0.5";
+          let state = "border-navy-900/10 dark:border-white/15 bg-white dark:bg-navy-900 hover:border-navy-900/30 dark:hover:border-white/30";
+          let badge = "bg-navy-900/[0.06] dark:bg-white/10 text-navy-700 dark:text-paper-100";
+          if (reveal && isAns) { state = "border-leaf-500 bg-leaf-50 dark:bg-leaf-500/15"; badge = "bg-leaf-500 text-white"; }
+          else if (reveal && isPicked) { state = "border-apple-500 bg-apple-50 dark:bg-apple-500/15"; badge = "bg-apple-500 text-white"; }
+          else if (reveal) { state = "border-navy-900/10 dark:border-white/10 bg-white dark:bg-navy-900 opacity-50"; }
+          else if (isPicked) { state = "border-navy-900 dark:border-white bg-white dark:bg-navy-900"; badge = "bg-navy-900 text-white dark:bg-white dark:text-navy-900"; }
           return (
             <button
               key={i}
               disabled={reveal}
               onClick={() => setPicked(i)}
-              className={cls}
+              className={`w-full text-left flex items-center gap-3 p-4 rounded-2xl border-2 font-semibold text-navy-900 dark:text-white transition-colors ${state}`}
             >
-              <div className="flex items-center gap-3">
-                <span
-                  className={`w-6 h-6 rounded-md grid place-items-center text-xs font-black ${
-                    isPicked && !reveal
-                      ? "bg-ember-500 text-white"
-                      : reveal && isAns
-                      ? "bg-teal-500 text-white"
-                      : reveal && isPicked
-                      ? "bg-rose-500 text-white"
-                      : "bg-ink-900/8 dark:bg-paper-50/8"
-                  }`}
-                >
-                  {String.fromCharCode(65 + i)}
-                </span>
-                <span>{opt}</span>
-              </div>
+              <span className={`w-8 h-8 rounded-full grid place-items-center text-sm font-bold flex-shrink-0 ${badge}`}>
+                {reveal && isAns ? <Check className="w-4 h-4" strokeWidth={3} /> : reveal && isPicked ? <X className="w-4 h-4" strokeWidth={3} /> : String.fromCharCode(65 + i)}
+              </span>
+              <span>{opt}</span>
             </button>
           );
         })}
       </div>
 
       {reveal && (
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`mt-4 p-4 rounded-chunky ${
-            isCorrect
-              ? "bg-teal-50 dark:bg-teal-700/20 text-teal-700 dark:text-teal-50"
-              : "bg-rose-400/10 text-rose-600 dark:text-rose-400"
-          }`}
-        >
-          <div className="font-bold mb-1">{isCorrect ? "✓ Chính xác!" : "✗ Chưa đúng"}</div>
-          {q.explain && <div className="text-sm">{q.explain}</div>}
-        </motion.div>
+        <div className={`mt-4 p-4 rounded-2xl ${isCorrect ? "bg-leaf-50 dark:bg-leaf-500/15 text-leaf-700 dark:text-leaf-500" : "bg-apple-50 dark:bg-apple-500/15 text-apple-700 dark:text-apple-500"}`}>
+          <p className="font-bold">{isCorrect ? "Chính xác!" : `Chưa đúng. Đáp án là ${String.fromCharCode(65 + q.correctIndex)}: ${q.options[q.correctIndex]}`}</p>
+          {q.explain && <p className="text-[15px] mt-1 text-navy-700 dark:text-paper-100">{q.explain}</p>}
+        </div>
       )}
 
       <div className="mt-6 flex justify-end">
         {!reveal ? (
-          <button onClick={submit} disabled={picked === null} className="btn-bump-ember">
+          <button onClick={submit} disabled={picked === null} className="font-bold px-7 py-3.5 rounded-2xl bg-apple-500 hover:bg-apple-600 text-white shadow-[0_4px_0_0_#A51F25] active:shadow-none active:translate-y-1 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none">
             Kiểm tra
           </button>
         ) : (
-          <button onClick={nextQ} className="btn-bump-teal">
-            {idx < questions.length - 1 ? "Câu tiếp" : "Xem kết quả"}
+          <button onClick={nextQ} className="inline-flex items-center gap-2 font-bold px-7 py-3.5 rounded-2xl bg-navy-900 hover:bg-navy-700 text-white dark:bg-white dark:text-navy-900 dark:hover:bg-paper-100 transition-colors">
+            {idx < questions.length - 1 ? "Câu tiếp" : "Xem kết quả"} <ArrowRight className="w-4 h-4" />
           </button>
         )}
       </div>
