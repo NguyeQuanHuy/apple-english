@@ -1,12 +1,13 @@
 ﻿import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TopBar } from "@/components/top-bar";
 import { ReadingProgress } from "@/components/reading-progress";
+import { Inter } from "next/font/google";
+const display = Inter({ subsets: ["latin", "vietnamese"], weight: ["400", "500", "600"], variable: "--font-display", display: "swap" });
+const sans = Inter({ subsets: ["latin", "vietnamese"], weight: ["400", "500"], variable: "--font-sans", display: "swap" });
 
-const display = Fraunces({ subsets: ["latin", "vietnamese"], variable: "--font-display", display: "swap" });
-const sans = Plus_Jakarta_Sans({ subsets: ["latin", "vietnamese"], variable: "--font-sans", display: "swap" });
+
 
 export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
@@ -22,7 +23,7 @@ function Footer() {
           <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 grid place-items-center shadow-md flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="white" strokeWidth="1.5" fill="none"/><ellipse cx="11" cy="11" rx="4" ry="9" stroke="white" strokeWidth="1.2" fill="none"/><line x1="2" y1="11" x2="20" y2="11" stroke="white" strokeWidth="1.2"/><line x1="4" y1="7" x2="18" y2="7" stroke="white" strokeWidth="1"/><line x1="4" y1="15" x2="18" y2="15" stroke="white" strokeWidth="1"/><circle cx="14" cy="5" r="3.5" fill="#4ade80"/></svg>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="white" strokeWidth="1.5" fill="none" /><ellipse cx="11" cy="11" rx="4" ry="9" stroke="white" strokeWidth="1.2" fill="none" /><line x1="2" y1="11" x2="20" y2="11" stroke="white" strokeWidth="1.2" /><line x1="4" y1="7" x2="18" y2="7" stroke="white" strokeWidth="1" /><line x1="4" y1="15" x2="18" y2="15" stroke="white" strokeWidth="1" /><circle cx="14" cy="5" r="3.5" fill="#4ade80" /></svg>
               </div>
               <span className="font-display text-lg font-black"><span className="text-sky-600">Apple</span> <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">English</span></span>
             </div>
@@ -83,7 +84,7 @@ function Footer() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={` `}  suppressHydrationWarning>
+    <html lang="vi" className={` `} suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col">
         <ThemeProvider>
           <ReadingProgress />

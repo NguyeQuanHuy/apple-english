@@ -20,28 +20,29 @@ type BlogPost = {
 
 // Tag color map — match với theme của Apple English
 const TAG_STYLES: Record<string, string> = {
-  "Từ vựng":     "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300",
-  "Phương pháp": "bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300",
-  "TOEIC":       "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
-  "Mất gốc":     "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
-  "Phát âm":     "bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300",
-  "Ngữ pháp":    "bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300",
-  "Giao tiếp":   "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "Lộ trình":    "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-700",
-  "Kinh nghiệm": "bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300",
+  "Từ vựng": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Phương pháp": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "TOEIC": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Mất gốc": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Phát âm": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Ngữ pháp": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Giao tiếp": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Lộ trình": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
+  "Kinh nghiệm": "bg-ember-50 text-ember-400 dark:bg-ember-50 dark:text-ember-400",
 };
 
 const ALL_TAGS = ["Từ vựng", "Phương pháp", "TOEIC", "Mất gốc", "Phát âm", "Ngữ pháp", "Giao tiếp"];
 
 // Thumbnail background & accent per category
 const THUMB_THEMES: Record<string, { bg: string; text: string; pill: string }> = {
-  vocab:   { bg: "bg-sky-50 dark:bg-sky-950/50",    text: "text-sky-700 dark:text-sky-300",    pill: "bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-300" },
-  method:  { bg: "bg-teal-50 dark:bg-teal-950/50",  text: "text-teal-700 dark:text-teal-300",  pill: "bg-teal-100 text-teal-800 dark:bg-teal-900/60 dark:text-teal-300" },
-  toeic:   { bg: "bg-amber-50 dark:bg-amber-950/50",text: "text-amber-700 dark:text-amber-300",pill: "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300" },
-  speak:   { bg: "bg-violet-50 dark:bg-violet-950/50",text: "text-violet-700 dark:text-violet-300",pill: "bg-violet-100 text-violet-800 dark:bg-violet-900/60 dark:text-violet-300" },
-  pronun:  { bg: "bg-orange-50 dark:bg-orange-950/50",text: "text-orange-700 dark:text-orange-300",pill: "bg-orange-100 text-orange-800 dark:bg-orange-900/60 dark:text-orange-300" },
-  exp:     { bg: "bg-emerald-50 dark:bg-emerald-950/50",text: "text-emerald-700 dark:text-emerald-300",pill: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300" },
+  vocab: { bg: "bg-paper-100", text: "text-ember-400", pill: "bg-ember-100 text-ember-400" },
+  method: { bg: "bg-paper-100", text: "text-ember-400", pill: "bg-ember-100 text-ember-400" },
+  toeic: { bg: "bg-paper-100", text: "text-ember-400", pill: "bg-ember-100 text-ember-400" },
+  speak: { bg: "bg-paper-100", text: "text-ember-400", pill: "bg-ember-100 text-ember-400" },
+  pronun: { bg: "bg-paper-100", text: "text-ember-400", pill: "bg-ember-100 text-ember-400" },
+  exp: { bg: "bg-paper-100", text: "text-ember-400", pill: "bg-ember-100 text-ember-400" },
 };
+
 
 // Sample posts — thay bằng BLOG_POSTS thực của bạn
 const POSTS: BlogPost[] = [
@@ -143,8 +144,7 @@ function BlogCard({ post, featured }: { post: BlogPost; featured?: boolean }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className={`group flex flex-col bg-white dark:bg-paper-50/5 border border-ink-300/20
-        rounded-2xl overflow-hidden hover:border-ink-300/40 hover:shadow-sm
+      className={`group flex flex-col bg-paper-50 border border-ink-300/20        rounded-2xl overflow-hidden hover:border-ink-300/40 hover:shadow-sm
         transition-all duration-200 ${featured ? "col-span-2" : ""}`}
     >
       <CardThumbnail post={post} featured={featured} />
@@ -156,7 +156,7 @@ function BlogCard({ post, featured }: { post: BlogPost; featured?: boolean }) {
 
         {/* Title */}
         <h2 className={`font-semibold leading-snug text-ink-700 dark:text-paper-100
-          group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors
+          group-hover:text-ember-400 dark:group-hover:text-ember-400 transition-colors
           ${featured ? "text-base" : "text-sm"}`}>
           {post.title}
         </h2>
@@ -193,7 +193,7 @@ export default function BlogPage() {
 
         {/* Header */}
         <div className="mb-8">
-          <p className="text-xs font-semibold tracking-widest uppercase text-teal-600 dark:text-teal-400 mb-1">
+          <p className="text-xs font-semibold tracking-widest uppercase text-ember-400 mb-1">
             Apple English
           </p>
           <h1 className="text-3xl font-bold text-ink-700 dark:text-paper-100 mb-2">
@@ -210,8 +210,8 @@ export default function BlogPage() {
             onClick={() => setActiveTag(null)}
             className={`text-sm px-4 py-1.5 rounded-full border transition-all duration-150
               ${!activeTag
-                ? "bg-teal-500 text-white border-teal-500 font-medium"
-                : "bg-white dark:bg-paper-50/5 text-ink-500 dark:text-ink-300 border-ink-300/30 hover:border-ink-300/60"
+                ? "bg-ember-500 text-paper-100 border-ember-500 font-medium"
+                : "bg-paper-50 text-ink-500 dark:text-ink-300 border-ink-300/30 hover:border-ink-300/60"
               }`}
           >
             Tất cả
@@ -222,8 +222,8 @@ export default function BlogPage() {
               onClick={() => setActiveTag(tag === activeTag ? null : tag)}
               className={`text-sm px-4 py-1.5 rounded-full border transition-all duration-150
                 ${activeTag === tag
-                  ? "bg-teal-500 text-white border-teal-500 font-medium"
-                  : "bg-white dark:bg-paper-50/5 text-ink-500 dark:text-ink-300 border-ink-300/30 hover:border-ink-300/60"
+                  ? "bg-ember-500 text-paper-100 border-ember-500 font-medium"
+                  : "bg-paper-50 text-ink-500 dark:text-ink-300 border-ink-300/30 hover:border-ink-300/60"
                 }`}
             >
               {tag}

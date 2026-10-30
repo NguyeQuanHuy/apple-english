@@ -9,70 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
+        display: ["var(--font-display)", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["ui-monospace", "monospace"],
       },
       colors: {
-        paper: {
-          50: "#FBF7F0",
-          100: "#F5EFE3",
-          200: "#EBE1CC",
-        },
-        ink: {
-          900: "#1A1814",
-          700: "#3A352C",
-          500: "#6B6358",
-          300: "#A89F8F",
-        },
-        ember: {
-          // warm orange accent
-          50: "#FFF4ED",
-          100: "#FFE4D1",
-          400: "#FF8A4C",
-          500: "#F26B1F",
-          600: "#D8530C",
-          700: "#A53D08",
-        },
-        teal: {
-          50: "#E8F4F2",
-          400: "#3DA89C",
-          500: "#2A8F84",
-          600: "#1F6F66",
-          700: "#155049",
-        },
-        gold: {
-          400: "#E8B84A",
-          500: "#C89A2E",
-        },
-        rose: {
-          400: "#E8678A",
-          500: "#C84A6E",
-        },
+        // nền + bề mặt (thay "paper")
+        paper: { 50: "#1e2030", 100: "#242637", 200: "#2c2e42" },
+        // chữ + viền (thay "ink")
+        ink: { 900: "#e9e9ed", 700: "#c7c7d1", 500: "#9a9aa8", 300: "#6b6b78" },
+        // accent chính duy nhất (thay "ember" và "sky")
+        ember: { 50: "#26243a", 100: "#332f4d", 400: "#a79bdf", 500: "#9184d9", 600: "#7a6cc4", 700: "#6355a8" },
+        sky: { 50: "#26243a", 100: "#332f4d", 400: "#a79bdf", 500: "#9184d9", 600: "#7a6cc4", 700: "#6355a8" },
+        teal: { 50: "#22243a", 400: "#8f9bd9", 500: "#7a87c4", 600: "#636fa8" },
+        gold: { 400: "#a79bdf", 500: "#9184d9" },
+        rose: { 400: "#a79bdf", 500: "#9184d9" },
       },
       boxShadow: {
-        card: "0 1px 0 0 rgba(26,24,20,0.04), 0 4px 12px -2px rgba(26,24,20,0.08)",
-        bump: "0 4px 0 0 currentColor",
-        bumpsm: "0 3px 0 0 currentColor",
+        card: "0 1px 0 0 rgba(0,0,0,0.2), 0 4px 12px -2px rgba(0,0,0,0.35)",
+        bump: "none",
+        bumpsm: "none",
       },
       borderRadius: {
-        chunky: "1.25rem",
+        chunky: "8px",
       },
       keyframes: {
-        wiggle: {
-          "0%, 100%": { transform: "rotate(-1deg)" },
-          "50%": { transform: "rotate(1deg)" },
-        },
-        pop: {
-          "0%": { transform: "scale(0.95)", opacity: "0" },
-          "50%": { transform: "scale(1.05)" },
-          "100%": { transform: "scale(1)", opacity: "1" },
-        },
+        wiggle: { "0%, 100%": { transform: "rotate(-1deg)" }, "50%": { transform: "rotate(1deg)" } },
+        pop: { "0%": { transform: "scale(0.95)", opacity: "0" }, "50%": { transform: "scale(1.05)" }, "100%": { transform: "scale(1)", opacity: "1" } },
       },
-      animation: {
-        wiggle: "wiggle 0.4s ease-in-out",
-        pop: "pop 0.3s ease-out",
-      },
+      animation: { wiggle: "wiggle 0.4s ease-in-out", pop: "pop 0.3s ease-out" },
     },
   },
   plugins: [],
