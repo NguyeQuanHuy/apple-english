@@ -1,86 +1,235 @@
 ﻿"use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { CheckCircle2, Circle, Lock, ChevronRight, Star, Mic, BookOpen, Zap } from "lucide-react";
-import { BEGINNER_LESSONS, BEGINNER_PATH } from "@/data/beginner-lessons";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, Check, Lock, RotateCcw } from "lucide-react";
+import { BEGINNER_LESSONS, BEGINNER_PATH, type Lesson } from "@/data/beginner-lessons";
 import { EXTRA_LESSONS, EXTRA_PATH } from "@/data/extra-lessons";
 import { useProgress } from "@/lib/store";
-import { useEffect, useState } from "react";
 
-const ALL_LESSONS = [...BEGINNER_LESSONS, ...EXTRA_LESSONS];
+const ALL_LESSONS: Lesson[] = [...BEGINNER_LESSONS, ...EXTRA_LESSONS];
 const ALL_PATH = [...BEGINNER_PATH, ...EXTRA_PATH];
+const ORDER = ALL_PATH.flatMap((u) => u.lessonIds);
+const byId = (id: string) => ALL_LESSONS.find((l) => l.id === id);
 
-const PRONUNCIATION_TOPICS = [
-  { id: "vowels", title: "Nguyên âm cơ bản", desc: "a, e, i, o, u và các biến thể", icon: "🔤", color: "bg-violet-50 border-violet-200 hover:border-violet-400", tag: "A0" },
-  { id: "consonants", title: "Phụ âm khó", desc: "/th/, /v/, /w/, /r/ lỗi hay gặp", icon: "🗣️", color: "bg-pink-50 border-pink-200 hover:border-pink-400", tag: "A1" },
-  { id: "stress", title: "Trọng âm từ", desc: "Nhấn đúng chỗ để nghe tự nhiên", icon: "🎵", color: "bg-amber-50 border-amber-200 hover:border-amber-400", tag: "A1" },
-  { id: "linking", title: "Nối âm", desc: "Bí quyết nghe người bản ngữ", icon: "🔗", color: "bg-teal-50 border-teal-200 hover:border-teal-400", tag: "A2" },
-];
+const STEP_LABEL: Record<Lesson["steps"][number]["kind"], string> = {
+  intro: "Giới thiệu",
+  vocab: "Từ vựng",
+  grammar: "Ngữ pháp",
+  quiz: "Quiz",
+  "fill-blank": "Điền từ",
+  "sentence-builder": "Xếp câu",
+  pronounce: "Luyện nói",
+};
 
-export default function BeginnerIndex() {
-  const completed = useProgress((s) => s.completedLessons);
-  const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"lessons" | "pronunciation">("lessons");
-  useEffect(() => setMounted(true), []);
-  const totalLessons = ALL_PATH.flatMap((u) => u.lessonIds).length;
-  const doneCount = mounted ? ALL_PATH.flatMap((u) => u.lessonIds).filter((id) => completed.includes(id)).length : 0;
-  const percent = Math.round((doneCount / totalLessons) * 100);
+type Status = "done" | "current" | "open" | "locked";
+
+/* ─────────── Next lesson, on a notebook page ─────────── */
+
+function NextLessonCard({ lesson, position, allDone }: { lesson: Lesson; position: number; allDone: boolean }) {
+  const kinds = Array.from(new Set(lesson.steps.map((s) => s.kind)));
   return (
-    <div className="min-h-screen bg-sky-50 pb-20">
-      <div className="bg-gradient-to-br from-sky-500 to-blue-600 text-white px-4 pt-10 pb-16">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-sky-200 mb-2">Lộ trình A0 – A2</p>
-          <h1 className="font-display text-3xl font-black mb-2">Mất gốc tiếng Anh</h1>
-          <p className="text-sky-100 text-sm mb-6">Từ chữ cái đến câu hoàn chỉnh. Mỗi bài 5–10 phút. {totalLessons} bài học đầy đủ.</p>
-          <div className="bg-white/15 rounded-xl p-4">
-            <div className="flex justify-between text-sm font-bold mb-2"><span>Tiến độ</span><span>{doneCount}/{totalLessons} bài</span></div>
-            <div className="h-2.5 bg-white/20 rounded-full overflow-hidden"><div className="h-full bg-yellow-300 rounded-full transition-all" style={{ width: `${percent}%` }} /></div>
-            <p className="text-sky-200 text-xs mt-1.5">{percent}% hoàn thành</p>
-          </div>
-        </div>
-      </div>
-      <div className="max-w-2xl mx-auto px-4 -mt-5">
-        <div className="bg-white rounded-2xl border-2 border-sky-100 shadow-card p-1.5 flex gap-1.5 mb-8">
-          <button onClick={() => setActiveTab("lessons")} className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "lessons" ? "bg-sky-500 text-white shadow-md" : "text-sky-500 hover:bg-sky-50"}`}>
-            <BookOpen size={15} /> Bài học ({totalLessons})
-          </button>
-          <button onClick={() => setActiveTab("pronunciation")} className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "pronunciation" ? "bg-sky-500 text-white shadow-md" : "text-sky-500 hover:bg-sky-50"}`}>
-            <Mic size={15} /> Phát âm
-          </button>
-        </div>
-        {activeTab === "lessons" && (<><a href="/learn/alphabet" className="flex items-center gap-3 mb-6 bg-indigo-50 border-2 border-indigo-200 hover:border-indigo-400 rounded-2xl p-4 transition-all cursor-pointer"><div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl">🔤</div><div className="flex-1"><p className="font-bold text-indigo-800">Bảng chữ cái A-Z</p><p className="text-xs text-indigo-500 mt-0.5">Nghe phát âm 26 chữ + từ ví dụ</p></div><span className="text-xs bg-indigo-200 text-indigo-700 px-2 py-0.5 rounded-full font-bold">A0</span></a>
-          <div>
-            <div className="flex items-center gap-3 mb-6"><div className="h-px flex-1 bg-sky-200" /><span className="text-xs font-bold text-sky-400 uppercase tracking-widest">Trình độ A0 – A1 (Cơ bản)</span><div className="h-px flex-1 bg-sky-200" /></div>
-            <div className="space-y-8 mb-10">{BEGINNER_PATH.map((unit, unitIdx) => { const lessons = unit.lessonIds.map((id) => ALL_LESSONS.find((l) => l.id === id)!); return <UnitSection key={unit.unit} unit={unit} lessons={lessons} unitIdx={unitIdx} completed={completed} mounted={mounted} allPath={ALL_PATH} allLessons={ALL_LESSONS} />; })}</div>
-            <div className="flex items-center gap-3 mb-6"><div className="h-px flex-1 bg-sky-200" /><span className="text-xs font-bold text-sky-400 uppercase tracking-widest flex items-center gap-1"><Star size={10} /> Trình độ A2 (Nâng cao)</span><div className="h-px flex-1 bg-sky-200" /></div>
-            <div className="space-y-8">{EXTRA_PATH.map((unit, unitIdx) => { const lessons = unit.lessonIds.map((id) => ALL_LESSONS.find((l) => l.id === id)!); return <UnitSection key={unit.unit} unit={unit} lessons={lessons} unitIdx={unitIdx + BEGINNER_PATH.length} completed={completed} mounted={mounted} allPath={ALL_PATH} allLessons={ALL_LESSONS} />; })}</div>
-          </div></>
-        )}
-        {activeTab === "pronunciation" && (
-          <div>
-            <div className="bg-white border-2 border-sky-100 rounded-2xl p-5 mb-6"><div className="flex items-start gap-3"><div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center flex-shrink-0"><Mic size={18} className="text-white" /></div><div><p className="font-black text-sky-900 text-base mb-1">Tại sao phải học phát âm?</p><p className="text-sky-500 text-sm leading-relaxed">Phát âm sai khiến người nghe không hiểu dù ngữ pháp đúng. Chỉ cần 10 phút luyện mỗi ngày — tai và miệng sẽ thay đổi rõ rệt.</p></div></div></div>
-            <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 mb-6"><p className="font-black text-amber-800 text-sm mb-3">💡 3 bước luyện phát âm hiệu quả</p><ol className="space-y-2">{["Nghe kỹ âm chuẩn từ người bản ngữ (YouTube, ELSA Speak)","Nhìn gương — quan sát hình dạng miệng và lưỡi","Ghi âm bản thân và so sánh — bước quan trọng nhất"].map((t,i)=>(<li key={i} className="flex gap-2 text-sm text-amber-700"><span className="w-5 h-5 rounded-full bg-amber-400 text-white text-xs flex items-center justify-center flex-shrink-0 font-bold">{i+1}</span><span>{t}</span></li>))}</ol></div>
-            <div className="mb-6"><p className="font-black text-sky-900 text-base mb-4 flex items-center gap-2"><Zap size={16} className="text-sky-500" /> Chủ đề luyện phát âm</p><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{PRONUNCIATION_TOPICS.map((t) => (<Link key={t.id} href="/blog/cach-phat-am-tieng-anh-ro-rang" className={`flex items-start gap-3 p-4 rounded-2xl border-2 bg-white ${t.color} transition-all hover:shadow-card group`}><span className="text-2xl flex-shrink-0">{t.icon}</span><div className="flex-1 min-w-0"><div className="flex items-center justify-between gap-2"><p className="font-black text-sky-900 text-sm">{t.title}</p><span className="text-xs font-bold text-sky-400 bg-sky-50 px-1.5 py-0.5 rounded-full">{t.tag}</span></div><p className="text-sky-500 text-xs mt-0.5">{t.desc}</p></div><ChevronRight size={14} className="text-sky-300 group-hover:text-sky-600 flex-shrink-0 mt-0.5" /></Link>))}</div></div>
-            <div className="bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-6 text-center text-white"><p className="text-2xl mb-2">🎤</p><p className="font-black text-lg mb-1">Luyện phát âm mỗi ngày</p><p className="text-violet-200 text-sm mb-4">Đọc to bài học sau khi hoàn thành.</p><button onClick={() => setActiveTab("lessons")} className="bg-white text-violet-600 font-black px-6 py-2.5 rounded-xl text-sm">Vào học bài →</button></div>
-          </div>
-        )}
+    <div className="oli-paper rounded-[22px] border border-navy-900/10 dark:border-white/10 shadow-[0_24px_60px_-30px_rgba(21,32,51,0.45)] pl-16 pr-6 sm:pr-8 py-7 rotate-[1deg]">
+      <p className="font-hand text-apple-500 text-2xl mb-1" style={{ transform: "rotate(-2deg)" }}>
+        {allDone ? "Ôn lại bài đầu nhé!" : `Bài ${position} hôm nay`}
+      </p>
+      <p className="text-sm font-semibold text-navy-400 mb-1">Chặng {lesson.unit} · {lesson.level} · +{lesson.xpReward} XP</p>
+      <h2 className="font-display text-2xl sm:text-[28px] font-extrabold text-navy-900 dark:text-white leading-tight mb-1">{lesson.title}</h2>
+      <p className="text-navy-500 dark:text-paper-200 mb-5">{lesson.subtitle}</p>
+      <p className="text-sm font-semibold text-navy-700 dark:text-paper-100 mb-2">Trong bài có {lesson.steps.length} phần:</p>
+      <ul className="flex flex-wrap gap-1.5 mb-6">
+        {kinds.map((k) => (
+          <li key={k} className="px-2.5 py-1 rounded-lg text-sm font-semibold bg-white/80 dark:bg-white/10 border border-navy-900/10 dark:border-white/10 text-navy-700 dark:text-paper-100">{STEP_LABEL[k]}</li>
+        ))}
+      </ul>
+      <Link
+        href={`/learn/beginner/${lesson.id}`}
+        className="group inline-flex items-center gap-2 bg-apple-500 hover:bg-apple-600 text-white font-bold px-6 py-3.5 rounded-2xl shadow-[0_4px_0_0_#A51F25] active:shadow-none active:translate-y-1 transition-all focus-visible:outline focus-visible:outline-4 focus-visible:outline-apple-100"
+      >
+        {allDone ? "Học lại" : position === 1 ? "Bắt đầu bài 1" : "Học bài này"}
+        <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+      </Link>
+    </div>
+  );
+}
+
+/* ─────────── Path ─────────── */
+
+function LessonRow({ lesson, n, status }: { lesson: Lesson; n: number; status: Status }) {
+  const body = (
+    <>
+      <span
+        className={`w-9 h-9 rounded-full grid place-items-center text-sm font-bold flex-shrink-0 ${
+          status === "done"
+            ? "bg-leaf-500 text-white"
+            : status === "current"
+            ? "bg-apple-500 text-white ring-4 ring-apple-100 dark:ring-apple-500/25"
+            : status === "open"
+            ? "bg-navy-900/[0.06] dark:bg-white/10 text-navy-700 dark:text-paper-100"
+            : "bg-navy-900/[0.04] dark:bg-white/[0.06] text-navy-400"
+        }`}
+      >
+        {status === "done" ? <Check className="w-4 h-4" strokeWidth={3} /> : status === "locked" ? <Lock className="w-3.5 h-3.5" /> : n}
+      </span>
+      <span className="flex-1 min-w-0">
+        <span className={`block font-bold ${status === "locked" ? "text-navy-400" : "text-navy-900 dark:text-white group-hover:text-apple-600 dark:group-hover:text-apple-500"} transition-colors`}>{lesson.title}</span>
+        <span className="block text-sm text-navy-400 truncate">{lesson.subtitle}</span>
+      </span>
+      {status === "current" && <span className="text-sm font-bold text-apple-600 dark:text-apple-500 flex items-center gap-1 flex-shrink-0">Học <ArrowRight className="w-4 h-4" /></span>}
+      {status === "done" && <span className="text-sm font-semibold text-navy-400 flex items-center gap-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"><RotateCcw className="w-3.5 h-3.5" /> Học lại</span>}
+      {status === "open" && <ArrowRight className="w-4 h-4 text-navy-400 flex-shrink-0" />}
+    </>
+  );
+  const cls = `group flex items-center gap-4 px-4 sm:px-5 py-3.5 ${status === "current" ? "bg-apple-50/70 dark:bg-apple-500/10" : ""}`;
+  if (status === "locked") {
+    return (
+      <li className={`${cls} cursor-not-allowed`} title="Học xong bài trước để mở khoá">
+        {body}
+      </li>
+    );
+  }
+  return (
+    <li>
+      <Link href={`/learn/beginner/${lesson.id}`} className={`${cls} hover:bg-navy-900/[0.025] dark:hover:bg-white/[0.04] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-apple-500`}>
+        {body}
+      </Link>
+    </li>
+  );
+}
+
+function LevelGroup({ title, desc, units, statusOf }: { title: string; desc: string; units: typeof ALL_PATH; statusOf: (id: string) => Status }) {
+  return (
+    <div>
+      <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-navy-900 dark:text-white mb-1">{title}</h2>
+      <p className="text-navy-500 dark:text-paper-200 mb-6">{desc}</p>
+      <div className="space-y-5">
+        {units.map((u) => {
+          const done = u.lessonIds.filter((id) => statusOf(id) === "done").length;
+          return (
+            <section key={u.unit} aria-labelledby={`unit-${u.unit}`} className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 overflow-hidden">
+              <header className="flex items-start justify-between gap-4 px-5 sm:px-6 pt-5 pb-3">
+                <div>
+                  <p className="text-sm font-semibold text-navy-400">Chặng {u.unit}</p>
+                  <h3 id={`unit-${u.unit}`} className="font-bold text-lg text-navy-900 dark:text-white">{u.title}</h3>
+                  <p className="text-[15px] text-navy-500 dark:text-paper-200">{u.description}</p>
+                </div>
+                <p className={`text-sm font-semibold whitespace-nowrap mt-0.5 ${done === u.lessonIds.length ? "text-leaf-600 dark:text-leaf-500" : "text-navy-400"}`}>
+                  {done}/{u.lessonIds.length} bài
+                </p>
+              </header>
+              <ul className="divide-y divide-navy-900/[0.06] dark:divide-white/[0.08] border-t border-navy-900/[0.06] dark:border-white/[0.08]">
+                {u.lessonIds.map((id) => {
+                  const l = byId(id);
+                  return l ? <LessonRow key={id} lesson={l} n={ORDER.indexOf(id) + 1} status={statusOf(id)} /> : null;
+                })}
+              </ul>
+            </section>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function UnitSection({ unit, lessons, unitIdx, completed, mounted, allPath, allLessons }: any) {
+/* ─────────── Side column: foundations ─────────── */
+
+const PRONOUNCE_TIPS = [
+  "Nghe âm mẫu, bấm nút loa nhiều lần cũng được.",
+  "Nhìn gương xem khẩu hình miệng và lưỡi.",
+  "Tự ghi âm rồi so với âm mẫu. Đây là bước quan trọng nhất.",
+];
+
+function Foundations() {
   return (
-    <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: unitIdx * 0.06 }}>
-      <div className="flex items-center gap-3 mb-3"><div className="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 text-white grid place-items-center font-black text-sm flex-shrink-0">{String(unit.unit).padStart(2, "0")}</div><div><h2 className="font-display text-lg font-bold text-sky-900 leading-tight">{unit.title}</h2><p className="text-xs text-sky-400">{unit.description}</p></div></div>
-      <div className="space-y-2 pl-12">{lessons.map((lesson: any, idx: number) => { if (!lesson) return null; const allPrev = allPath.flatMap((u: any) => u.unit < unit.unit ? u.lessonIds : u.unit === unit.unit ? u.lessonIds.slice(0, idx) : []); const locked = mounted && allPrev.length > 0 && !allPrev.every((id: string) => completed.includes(id)); const done = mounted && completed.includes(lesson.id); return <LessonRow key={lesson.id} lesson={lesson} locked={locked} done={done} />; })}</div>
-    </motion.section>
+    <div className="space-y-4">
+      <Link href="/learn/alphabet" className="group block rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 p-6 hover:border-navy-900/25 dark:hover:border-white/25 transition-colors">
+        <p className="font-display text-5xl font-extrabold text-navy-900 dark:text-white tracking-tight mb-3" aria-hidden="true">
+          A<span className="text-apple-500">b</span>C
+        </p>
+        <p className="font-bold text-lg text-navy-900 dark:text-white group-hover:text-apple-600 dark:group-hover:text-apple-500 transition-colors">Bảng chữ cái A–Z</p>
+        <p className="text-[15px] text-navy-500 dark:text-paper-200 mb-3">Nghe cách đọc 26 chữ cái, mỗi chữ có từ ví dụ. Nên xem trước bài 1.</p>
+        <span className="inline-flex items-center gap-1 text-sm font-bold text-apple-600 dark:text-apple-500">Mở bảng chữ cái <ArrowRight className="w-4 h-4" /></span>
+      </Link>
+
+      <div className="rounded-3xl bg-hl-200/60 dark:bg-hl-300/10 border border-hl-300 dark:border-hl-300/20 p-6">
+        <h2 className="font-bold text-lg text-navy-900 dark:text-white mb-1">Luyện phát âm mỗi ngày</h2>
+        <p className="text-[15px] text-navy-500 dark:text-paper-200 mb-4">Phát âm sai thì người nghe không hiểu, dù ngữ pháp đúng.</p>
+        <ol className="space-y-3 mb-4">
+          {PRONOUNCE_TIPS.map((t, i) => (
+            <li key={i} className="flex gap-3">
+              <span className="w-6 h-6 rounded-full bg-navy-900 text-white dark:bg-white dark:text-navy-900 grid place-items-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
+              <span className="text-[15px] text-navy-700 dark:text-paper-100">{t}</span>
+            </li>
+          ))}
+        </ol>
+        <div className="flex flex-col gap-1.5">
+          <Link href="/blog/cach-phat-am-tieng-anh-ro-rang" className="text-sm font-bold text-apple-600 dark:text-apple-500 hover:underline">Đọc hướng dẫn phát âm rõ ràng</Link>
+          <Link href="/tools/ipa" className="text-sm font-bold text-apple-600 dark:text-apple-500 hover:underline">Tra phiên âm IPA của một câu</Link>
+        </div>
+      </div>
+    </div>
   );
 }
 
+/* ─────────── Page ─────────── */
 
-function LessonRow({ lesson, locked, done }: { lesson: any; locked: boolean; done: boolean }) {
-  const inner = (<div className={`rounded-xl p-4 flex items-center gap-3 transition-all border-2 ${done ? "bg-sky-50 border-sky-300" : locked ? "bg-white border-sky-100 opacity-50" : "bg-white border-sky-200 hover:border-sky-400 hover:shadow-card"}`}><div className="flex-shrink-0">{done ? <CheckCircle2 className="w-6 h-6 text-sky-500" /> : locked ? <Lock className="w-6 h-6 text-sky-300" /> : <Circle className="w-6 h-6 text-sky-400" />}</div><div className="flex-1 min-w-0"><div className="flex items-center gap-2 mb-0.5"><span className="text-xs font-bold text-sky-300 uppercase">{lesson.level}</span><span className="text-xs font-bold text-sky-500">+{lesson.xpReward} XP</span></div><p className="font-bold text-sky-900 text-sm leading-tight">{lesson.title}</p><p className="text-xs text-sky-400 truncate mt-0.5">{lesson.subtitle}</p></div>{!locked && (<div className="flex items-center gap-0.5 text-xs font-bold text-sky-500 flex-shrink-0">{done ? "Học lại" : "Học"} <ChevronRight size={14} /></div>)}</div>);
-  if (locked) return <div className="cursor-not-allowed">{inner}</div>;
-  return <Link href={`/learn/beginner/${lesson.id}`}>{inner}</Link>;
+export default function BeginnerIndex() {
+  const completedLessons = useProgress((s) => s.completedLessons);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const completed = mounted ? completedLessons : [];
+
+  const { statusOf, doneCount, nextId } = useMemo(() => {
+    const done = new Set(ORDER.filter((id) => completed.includes(id)));
+    const firstOpen = ORDER.find((id) => !done.has(id)) ?? null;
+    const firstOpenIdx = firstOpen ? ORDER.indexOf(firstOpen) : ORDER.length;
+    const statusOf = (id: string): Status => {
+      if (done.has(id)) return "done";
+      if (id === firstOpen) return "current";
+      // Lessons are unlocked in order; everything after the first unfinished one stays locked
+      return ORDER.indexOf(id) < firstOpenIdx ? "open" : "locked";
+    };
+    return { statusOf, doneCount: done.size, nextId: firstOpen };
+  }, [completed]);
+
+  const allDone = nextId === null;
+  const nextLesson = byId(nextId ?? ORDER[0])!;
+  const pct = Math.round((doneCount / ORDER.length) * 100);
+
+  return (
+    <div className="pb-24 md:pb-8">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-14 md:pt-14 md:pb-20 grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-12 items-center">
+        <div>
+          <p className="text-sm font-semibold text-navy-500 dark:text-paper-200 mb-3">Lộ trình A0 → A2 · {ORDER.length} bài · {ALL_PATH.length} chặng</p>
+          <h1 className="font-display font-extrabold text-navy-900 dark:text-white text-[38px] sm:text-[48px] lg:text-[56px] leading-[1.1] tracking-[-0.025em] mb-5 [text-wrap:balance]">
+            Từ chữ cái đầu tiên đến viết được email.
+          </h1>
+          <p className="text-lg text-navy-500 dark:text-paper-200 leading-relaxed max-w-[32rem] mb-8">
+            Mỗi bài khoảng 10 phút, giải thích bằng tiếng Việt. Học xong bài này thì bài sau mở ra.
+          </p>
+          <div className="max-w-md">
+            <div className="flex justify-between text-sm font-semibold mb-2">
+              <span className="text-navy-700 dark:text-paper-100">{doneCount === 0 ? "Chưa bắt đầu" : `Đã học ${doneCount}/${ORDER.length} bài`}</span>
+              <span className="text-navy-400">{pct}%</span>
+            </div>
+            <div className="h-3 rounded-full bg-navy-900/[0.07] dark:bg-white/10 overflow-hidden flex gap-[2px]" aria-hidden="true">
+              {ORDER.map((id) => (
+                <span key={id} className={`flex-1 h-full ${statusOf(id) === "done" ? "bg-leaf-500" : statusOf(id) === "current" ? "bg-apple-500/40" : ""}`} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <NextLessonCard lesson={nextLesson} position={ORDER.indexOf(nextLesson.id) + 1} allDone={allDone} />
+      </section>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-10 lg:gap-8 items-start">
+        <div className="min-w-0 space-y-14">
+          <LevelGroup title="A0 – A1: Nền móng" desc="Chữ cái, chào hỏi, động từ to be, các thì cơ bản." units={BEGINNER_PATH} statusOf={statusOf} />
+          <LevelGroup title="A2: Lên trình" desc="So sánh, động từ khuyết thiếu, câu bị động, câu điều kiện, viết email." units={EXTRA_PATH} statusOf={statusOf} />
+        </div>
+        <aside className="lg:sticky lg:top-24 min-w-0">
+          <Foundations />
+        </aside>
+      </div>
+    </div>
+  );
 }

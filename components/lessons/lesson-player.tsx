@@ -55,7 +55,7 @@ export function LessonPlayer({ lesson }: { lesson: Lesson }) {
         </Link>
         <div className="flex-1 h-3 rounded-full bg-ink-900/8 dark:bg-paper-50/8 overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-ember-400 to-ember-600 rounded-full"
+            className="h-full bg-gradient-to-r from-apple-500 to-apple-600 rounded-full"
             initial={false}
             animate={{ width: `${progress}%` }}
             transition={{ type: "spring", stiffness: 120, damping: 18 }}
@@ -122,7 +122,7 @@ function StepView({ step, onAdvance }: { step: LessonStep; onAdvance: () => void
   if (step.kind === "vocab") {
     return (
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest text-ember-500">Từ vựng</div>
+        <div className="text-xs font-bold uppercase tracking-widest text-apple-500">Từ vựng</div>
         <h2 className="font-display text-3xl font-black mt-1">
           Học {step.items.length} từ mới
         </h2>
@@ -144,7 +144,7 @@ function StepView({ step, onAdvance }: { step: LessonStep; onAdvance: () => void
                     <span className="text-sm text-ink-500 font-mono">{it.ipa}</span>
                   )}
                 </div>
-                <div className="text-sm font-semibold text-teal-600 dark:text-teal-400 mt-0.5">
+                <div className="text-sm font-semibold text-leaf-600 dark:text-leaf-500 mt-0.5">
                   {it.vi}
                 </div>
                 {it.example && (
@@ -171,7 +171,7 @@ function StepView({ step, onAdvance }: { step: LessonStep; onAdvance: () => void
   if (step.kind === "grammar") {
     return (
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest text-ember-500">Ngữ pháp</div>
+        <div className="text-xs font-bold uppercase tracking-widest text-apple-500">Ngữ pháp</div>
         <h2 className="font-display text-3xl font-black mt-1">{step.title}</h2>
         <p className="mt-5 text-ink-700 dark:text-paper-100 leading-relaxed whitespace-pre-line">
           {step.explanation}
@@ -182,7 +182,7 @@ function StepView({ step, onAdvance }: { step: LessonStep; onAdvance: () => void
           </div>
           <div className="space-y-3">
             {step.examples.map((ex, i) => (
-              <div key={i} className="border-l-2 border-ember-500 pl-4 flex items-start gap-2">
+              <div key={i} className="border-l-2 border-apple-500 pl-4 flex items-start gap-2">
                 <AudioButton text={ex.en} size="sm" />
                 <div className="flex-1">
                   <div className="font-display text-lg font-bold">{ex.en}</div>
@@ -239,7 +239,7 @@ function QuizView({ questions, onComplete }: { questions: QuizQ[]; onComplete: (
 
   return (
     <div>
-      <div className="text-xs font-bold uppercase tracking-widest text-ember-500">
+      <div className="text-xs font-bold uppercase tracking-widest text-apple-500">
         Quiz {qIdx + 1}/{questions.length}
       </div>
       <h2 className="font-display text-2xl md:text-3xl font-black mt-2 leading-tight">
@@ -252,11 +252,11 @@ function QuizView({ questions, onComplete }: { questions: QuizQ[]; onComplete: (
           const isAnsCorrect = i === q.correctIndex;
           let cls = "card-paper p-4 text-left font-semibold w-full transition-all";
           if (showResult) {
-            if (isAnsCorrect) cls += " ring-2 ring-teal-500 bg-teal-50 dark:bg-teal-700/20";
+            if (isAnsCorrect) cls += " ring-2 ring-leaf-500 bg-leaf-50 dark:bg-leaf-700/20";
             else if (isPicked) cls += " ring-2 ring-rose-500 bg-rose-400/10";
             else cls += " opacity-60";
           } else if (isPicked) {
-            cls += " ring-2 ring-ember-500";
+            cls += " ring-2 ring-apple-500";
           } else {
             cls += " hover:-translate-y-0.5";
           }
@@ -279,7 +279,7 @@ function QuizView({ questions, onComplete }: { questions: QuizQ[]; onComplete: (
           animate={{ opacity: 1, y: 0 }}
           className={`mt-5 p-4 rounded-chunky ${
             isCorrect
-              ? "bg-teal-50 dark:bg-teal-700/20 text-teal-700 dark:text-teal-50"
+              ? "bg-leaf-50 dark:bg-leaf-700/20 text-leaf-700 dark:text-leaf-50"
               : "bg-rose-400/10 text-rose-600 dark:text-rose-400"
           }`}
         >
@@ -315,7 +315,7 @@ function CompletionScreen({ lesson, onContinue }: { lesson: Lesson; onContinue: 
         initial={{ scale: 0, rotate: -20 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.1 }}
-        className="w-24 h-24 mx-auto rounded-full bg-teal-500 grid place-items-center text-white"
+        className="w-24 h-24 mx-auto rounded-full bg-leaf-500 grid place-items-center text-white"
       >
         <CheckCircle2 className="w-12 h-12" />
       </motion.div>

@@ -59,7 +59,7 @@ export function FillBlankView({
 
   return (
     <div>
-      <div className="text-xs font-bold uppercase tracking-widest text-ember-500">
+      <div className="text-xs font-bold uppercase tracking-widest text-apple-500">
         Điền chỗ trống {idx + 1}/{items.length}
       </div>
       <h2 className="font-display text-2xl md:text-3xl font-black mt-2">
@@ -77,13 +77,13 @@ export function FillBlankView({
               onKeyDown={handleKey}
               autoFocus
               placeholder="..."
-              className="px-3 py-1 bg-ember-50 dark:bg-ember-700/20 border-b-2 border-ember-500 outline-none font-bold text-ember-700 dark:text-ember-100 min-w-[100px] rounded-t-md"
+              className="px-3 py-1 bg-apple-50 dark:bg-apple-700/20 border-b-2 border-apple-500 outline-none font-bold text-apple-700 dark:text-apple-100 min-w-[100px] rounded-t-md"
             />
           ) : (
             <span
               className={`px-3 py-1 rounded-md font-bold ${
                 result === "correct" || result === "close"
-                  ? "bg-teal-100 text-teal-700 dark:bg-teal-700/30 dark:text-teal-50"
+                  ? "bg-leaf-100 text-leaf-700 dark:bg-leaf-700/30 dark:text-leaf-50"
                   : "bg-rose-400/20 text-rose-600 dark:text-rose-400"
               }`}
             >
@@ -121,7 +121,7 @@ export function FillBlankView({
           animate={{ opacity: 1, y: 0 }}
           className={`mt-4 p-4 rounded-chunky ${
             result === "correct"
-              ? "bg-teal-50 dark:bg-teal-700/20 text-teal-700 dark:text-teal-50"
+              ? "bg-leaf-50 dark:bg-leaf-700/20 text-leaf-700 dark:text-leaf-50"
               : result === "close"
               ? "bg-gold-400/15 text-gold-500"
               : "bg-rose-400/10 text-rose-600 dark:text-rose-400"

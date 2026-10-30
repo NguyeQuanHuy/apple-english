@@ -67,15 +67,15 @@ export function SentenceBuilderView({
 
   return (
     <div>
-      <div className="text-xs font-bold uppercase tracking-widest text-ember-500">
+      <div className="text-xs font-bold uppercase tracking-widest text-apple-500">
         Xếp câu {idx + 1}/{puzzles.length}
       </div>
       <h2 className="font-display text-2xl md:text-3xl font-black mt-2">
         Sắp xếp các từ thành câu đúng
       </h2>
 
-      <div className="mt-4 card-paper p-4 border-l-4 border-teal-500">
-        <div className="text-xs font-bold uppercase tracking-widest text-teal-500 mb-1">
+      <div className="mt-4 card-paper p-4 border-l-4 border-leaf-500">
+        <div className="text-xs font-bold uppercase tracking-widest text-leaf-500 mb-1">
           Dịch nghĩa
         </div>
         <div className="font-display text-lg font-bold">"{puzzle.vi}"</div>
@@ -85,7 +85,7 @@ export function SentenceBuilderView({
       </div>
 
       {/* Built area */}
-      <div className="mt-5 min-h-[80px] card-paper p-4 flex flex-wrap gap-2 items-start border-2 border-dashed border-ember-500/40">
+      <div className="mt-5 min-h-[80px] card-paper p-4 flex flex-wrap gap-2 items-start border-2 border-dashed border-apple-500/40">
         {built.length === 0 ? (
           <div className="text-ink-300 text-sm italic w-full text-center py-2">
             Bấm các từ bên dưới để xếp câu...
@@ -97,7 +97,7 @@ export function SentenceBuilderView({
               key={`${w}-built-${i}`}
               onClick={() => unpickPiece(i)}
               disabled={!!result}
-              className="px-3 py-2 rounded-xl bg-ember-500 text-white font-bold"
+              className="px-3 py-2 rounded-xl bg-apple-500 text-white font-bold"
               style={{ boxShadow: "0 3px 0 0 #A53D08" }}
             >
               {w}
@@ -122,7 +122,7 @@ export function SentenceBuilderView({
       </div>
 
       {result === "correct" && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-5 p-4 rounded-chunky bg-teal-50 dark:bg-teal-700/20 text-teal-700 dark:text-teal-50">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-5 p-4 rounded-chunky bg-leaf-50 dark:bg-leaf-700/20 text-leaf-700 dark:text-leaf-50">
           <div className="font-bold flex items-center gap-2 mb-2">
             <CheckCircle2 className="w-4 h-4" /> Chính xác!
           </div>

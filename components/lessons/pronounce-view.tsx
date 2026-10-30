@@ -74,7 +74,7 @@ export function PronounceView({
 
   return (
     <div>
-      <div className="text-xs font-bold uppercase tracking-widest text-ember-500">
+      <div className="text-xs font-bold uppercase tracking-widest text-apple-500">
         Luyện nói {idx + 1}/{items.length}
       </div>
       <h2 className="font-display text-2xl md:text-3xl font-black mt-2">
@@ -82,7 +82,7 @@ export function PronounceView({
       </h2>
 
       <div className="mt-6 card-paper p-6 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-ember-100 to-transparent dark:from-ember-700/20 dark:to-transparent opacity-50" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-br from-apple-100 to-transparent dark:from-apple-700/20 dark:to-transparent opacity-50" aria-hidden />
         <div className="relative">
           <div className="font-display text-3xl md:text-4xl font-black">
             "{item.text}"
@@ -121,7 +121,7 @@ export function PronounceView({
                 animate={recording ? { scale: [1, 1.05, 1] } : {}}
                 transition={recording ? { repeat: Infinity, duration: 1 } : {}}
                 className={`w-24 h-24 rounded-full grid place-items-center text-white transition-all ${
-                  recording ? "bg-rose-500 shadow-lg shadow-rose-500/50" : "bg-ember-500"
+                  recording ? "bg-rose-500 shadow-lg shadow-rose-500/50" : "bg-apple-500"
                 }`}
                 style={{ boxShadow: recording ? undefined : "0 6px 0 0 #A53D08" }}
               >
@@ -151,7 +151,7 @@ export function PronounceView({
                     <span
                       className={`font-display text-3xl font-black ${
                         score >= 80
-                          ? "text-teal-500"
+                          ? "text-leaf-500"
                           : score >= 50
                           ? "text-gold-500"
                           : "text-rose-500"
@@ -167,7 +167,7 @@ export function PronounceView({
                       transition={{ duration: 0.6 }}
                       className={`h-full ${
                         score >= 80
-                          ? "bg-teal-500"
+                          ? "bg-leaf-500"
                           : score >= 50
                           ? "bg-gold-400"
                           : "bg-rose-500"
@@ -178,7 +178,7 @@ export function PronounceView({
 
                 <div className="mt-3 text-sm">
                   {score >= 80 ? (
-                    <span className="text-teal-600 dark:text-teal-400 font-bold flex items-center gap-1">
+                    <span className="text-leaf-600 dark:text-leaf-500 font-bold flex items-center gap-1">
                       <CheckCircle2 className="w-4 h-4" /> Xuất sắc! Phát âm rõ ràng.
                     </span>
                   ) : score >= 50 ? (

@@ -38,8 +38,8 @@ export function AudioButton({
     <button
       onClick={handleClick}
       aria-label={`Phát âm: ${text}`}
-      className={`shrink-0 grid place-items-center rounded-full bg-teal-50 text-teal-600 dark:bg-teal-700/30 dark:text-teal-100 hover:bg-teal-100 dark:hover:bg-teal-700/50 transition-all ${
-        playing ? "ring-2 ring-teal-500 animate-pop" : ""
+      className={`shrink-0 grid place-items-center rounded-full bg-leaf-50 text-leaf-600 dark:bg-leaf-700/30 dark:text-leaf-100 hover:bg-leaf-100 dark:hover:bg-leaf-700/50 transition-all ${
+        playing ? "ring-2 ring-leaf-500 animate-pop" : ""
       } ${sizeMap[size]} ${className}`}
     >
       <Volume2 />

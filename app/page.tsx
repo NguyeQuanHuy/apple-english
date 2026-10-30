@@ -3,7 +3,12 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, Flame, Gamepad2, Target, Globe, AudioLines, BookOpen, Lock } from "lucide-react";
 import { useProgress, getLevel } from "@/lib/store";
-import { BEGINNER_LESSONS, BEGINNER_PATH } from "@/data/beginner-lessons";
+import { BEGINNER_LESSONS as A1_LESSONS, BEGINNER_PATH as A1_PATH } from "@/data/beginner-lessons";
+import { EXTRA_LESSONS, EXTRA_PATH } from "@/data/extra-lessons";
+
+// Full A0 → A2 path: units 1–5 (A0–A1) plus 6–10 (A2)
+const BEGINNER_LESSONS = [...A1_LESSONS, ...EXTRA_LESSONS];
+const BEGINNER_PATH = [...A1_PATH, ...EXTRA_PATH];
 import { TOPICS } from "@/data/topics";
 import { BLOG_POSTS } from "@/data/blog";
 import { SpeakButton } from "@/components/SpeakButton";
@@ -269,7 +274,7 @@ function BeginnerRoadmap({ completed }: { completed: string[] }) {
           const firstOpen = unit.lessonIds.find((id) => !completed.includes(id)) ?? unit.lessonIds[0];
           const isLast = ui === BEGINNER_PATH.length - 1;
           return (
-            <li key={unit.unit} className="relative flex gap-4 sm:gap-5 pb-6 last:pb-0">
+            <li key={unit.unit} className="relative flex gap-4 sm:gap-5 pb-4 last:pb-0">
               {!isLast && (
                 <span className={`absolute left-[19px] top-11 bottom-0 w-[2px] ${unitDone ? "bg-leaf-500" : "bg-navy-900/10 dark:bg-white/10"}`} aria-hidden="true" />
               )}
@@ -285,7 +290,7 @@ function BeginnerRoadmap({ completed }: { completed: string[] }) {
                   <p className="font-bold text-navy-900 dark:text-white">Chặng {unit.unit}: {unit.title}</p>
                   <p className="text-sm text-navy-400">{unit.lessonIds.length} bài</p>
                 </div>
-                <p className="text-[15px] text-navy-500 dark:text-paper-200">{unit.description}</p>
+                {isCurrent && <p className="text-[15px] text-navy-500 dark:text-paper-200">{unit.description}</p>}
                 {isCurrent && (
                   <Link
                     href={`/learn/beginner/${firstOpen}`}
