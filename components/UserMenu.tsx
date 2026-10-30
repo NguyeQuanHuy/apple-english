@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { loadFromCloud, syncToCloud } from "@/lib/sync";
@@ -40,8 +40,8 @@ export function UserMenu() {
   }, [progress.xp, progress.streak, user]);
   if (!user) return (
     <>
-      <button onClick={() => setShowModal(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold transition-all">
-        <User className="w-4 h-4" />Đăng nhập
+      <button onClick={() => setShowModal(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-navy-900 hover:bg-navy-700 dark:bg-white dark:text-navy-900 dark:hover:bg-paper-100 text-white text-sm font-semibold transition-colors">
+        <User className="w-4 h-4" /><span className="hidden sm:inline">Đăng nhập</span>
       </button>
       {showModal && <AuthModal onClose={() => setShowModal(false)} />}
     </>
@@ -53,7 +53,7 @@ export function UserMenu() {
       <button onClick={() => setShowMenu(!showMenu)} className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
         {avatar
           ? <img src={avatar} className="w-7 h-7 rounded-full object-cover" alt={name} />
-          : <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center text-white text-xs font-bold">{name[0].toUpperCase()}</div>}
+          : <div className="w-7 h-7 rounded-full bg-apple-500 flex items-center justify-center text-white text-xs font-bold">{name[0].toUpperCase()}</div>}
         <span className="hidden sm:block text-sm font-medium text-zinc-700 dark:text-zinc-300 max-w-[100px] truncate">{name}</span>
       </button>
       {showMenu && (

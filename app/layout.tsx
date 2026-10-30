@@ -1,12 +1,20 @@
 ﻿import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Be_Vietnam_Pro, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TopBar } from "@/components/top-bar";
 import { ReadingProgress } from "@/components/reading-progress";
+import { MobileNav } from "@/components/mobile-nav";
 
-const display = Fraunces({ subsets: ["latin", "vietnamese"], variable: "--font-display", display: "swap" });
-const sans = Plus_Jakarta_Sans({ subsets: ["latin", "vietnamese"], variable: "--font-sans", display: "swap" });
+// Be Vietnam Pro: designed for Vietnamese diacritics. Used for both headings and body.
+const sans = Be_Vietnam_Pro({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
+// Patrick Hand: only for the teacher's red-pen corrections
+const hand = Patrick_Hand({ subsets: ["latin", "vietnamese"], weight: "400", variable: "--font-hand", display: "swap" });
 
 export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
@@ -15,67 +23,49 @@ export const metadata: Metadata = {
 };
 
 function Footer() {
+  const learn = [
+    { href: "/learn/beginner", label: "Lộ trình mất gốc" },
+    { href: "/learn/toeic", label: "Luyện TOEIC" },
+    { href: "/learn/topics", label: "Từ vựng theo chủ đề" },
+    { href: "/games", label: "Mini games" },
+    { href: "/dashboard", label: "Tiến độ của tôi" },
+  ];
+  const read = [
+    { href: "/blog/tai-sao-hoc-tieng-anh-mai-khong-gioi", label: "Tại sao học mãi không giỏi?" },
+    { href: "/blog/toeic-450-trong-2-thang", label: "TOEIC 450 trong 2 tháng" },
+    { href: "/blog/hoc-tieng-anh-qua-phim", label: "Học tiếng Anh qua phim" },
+    { href: "/blog", label: "Tất cả bài viết" },
+  ];
   return (
-    <footer className="bg-white dark:bg-ink-900 border-t border-sky-100 dark:border-sky-900 mt-auto">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-          <div className="col-span-1 sm:col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 grid place-items-center shadow-md flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="white" strokeWidth="1.5" fill="none"/><ellipse cx="11" cy="11" rx="4" ry="9" stroke="white" strokeWidth="1.2" fill="none"/><line x1="2" y1="11" x2="20" y2="11" stroke="white" strokeWidth="1.2"/><line x1="4" y1="7" x2="18" y2="7" stroke="white" strokeWidth="1"/><line x1="4" y1="15" x2="18" y2="15" stroke="white" strokeWidth="1"/><circle cx="14" cy="5" r="3.5" fill="#4ade80"/></svg>
-              </div>
-              <span className="font-display text-lg font-black"><span className="text-sky-600">Apple</span> <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">English</span></span>
-            </div>
-            <p className="text-sm text-ink-500 dark:text-paper-200 leading-relaxed mb-4">Nền tảng học tiếng Anh miễn phí cho người Việt mất gốc. Từ A0 lên giao tiếp tự tin.</p>
-            <div className="flex items-center gap-2">
-              <span className="px-3 py-1 bg-sky-50 text-sky-600 text-xs font-bold rounded-full">🇹🇻 Việt Nam</span>
-              <span className="px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full">🆓 Miễn phí</span>
-            </div>
-          </div>
-          <div>
-            <p className="font-black text-xs text-sky-900 dark:text-paper-50 uppercase tracking-widest mb-4">Học</p>
-            <ul className="space-y-2.5">
-              {[
-                { href: "/learn/beginner", label: "Mất gốc A0→A2" },
-                { href: "/learn/toeic", label: "Luyện TOEIC" },
-                { href: "/learn/topics", label: "Chủ đề thực tế" },
-                { href: "/games", label: "Mini Games" },
-                { href: "/dashboard", label: "Tiến độ" },
-              ].map((item) => (
-                <li key={item.href}><a href={item.href} className="text-sm text-ink-500 dark:text-paper-200 hover:text-sky-600 transition-colors">{item.label}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="font-black text-xs text-sky-900 dark:text-paper-50 uppercase tracking-widest mb-4">Bài viết</p>
-            <ul className="space-y-2.5">
-              {[
-                { href: "/blog/tai-sao-hoc-tieng-anh-mai-khong-gioi", label: "Tại sao mãi không giỏi?" },
-                { href: "/blog/toeic-450-trong-2-thang", label: "TOEIC 450 trong 2 tháng" },
-                { href: "/blog/hoc-tieng-anh-qua-phim", label: "Học qua phim" },
-                { href: "/blog/30-thanh-ngu-pho-bien-tieng-anh", label: "30 thành ngữ phổ biến" },
-                { href: "/blog", label: "Xem tất cả →" },
-              ].map((item) => (
-                <li key={item.href}><a href={item.href} className="text-sm text-ink-500 dark:text-paper-200 hover:text-sky-600 transition-colors">{item.label}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="font-black text-xs text-sky-900 dark:text-paper-50 uppercase tracking-widest mb-4">Thông tin</p>
-            <ul className="space-y-2.5">
-              {["🇾🇳 Dành cho người Việt", "🇩🇪 Đã học ở Đức", "📚 Nội dung tiếng Việt", "🚀 Cập nhật liên tục"].map((t, i) => (
-                <li key={i} className="text-sm text-ink-500 dark:text-paper-200">{t}</li>
-              ))}
-            </ul>
-          </div>
+    <footer className="border-t border-navy-900/10 dark:border-white/10 bg-white dark:bg-navy-900 mt-auto mb-16 md:mb-0">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <p className="font-display text-xl font-extrabold text-navy-900 dark:text-white mb-2">
+            <span className="text-apple-500">Apple</span> English
+          </p>
+          <p className="text-[15px] text-navy-500 dark:text-paper-200 leading-relaxed max-w-xs">
+            Học tiếng Anh miễn phí cho người Việt mất gốc, từ chữ cái đầu tiên đến giao tiếp tự tin.
+          </p>
         </div>
-        <div className="pt-6 border-t border-sky-100 dark:border-sky-900 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-ink-300">© 2026 Apple English. Miễn phí mãi mãi ❤️</p>
-          <div className="flex items-center gap-4">
-            <span className="text-xs text-ink-300">Made with ❤️ for người Việt</span>
-            <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div><span className="text-xs text-green-500 font-semibold">Online</span></div>
-          </div>
-        </div>
+        <nav aria-label="Học">
+          <p className="font-bold text-navy-900 dark:text-white mb-3">Học</p>
+          <ul className="space-y-2">
+            {learn.map((i) => (
+              <li key={i.href}><a href={i.href} className="text-[15px] text-navy-500 dark:text-paper-200 hover:text-apple-600 dark:hover:text-apple-500 transition-colors">{i.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Bài viết">
+          <p className="font-bold text-navy-900 dark:text-white mb-3">Bài viết</p>
+          <ul className="space-y-2">
+            {read.map((i) => (
+              <li key={i.href}><a href={i.href} className="text-[15px] text-navy-500 dark:text-paper-200 hover:text-apple-600 dark:hover:text-apple-500 transition-colors">{i.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 border-t border-navy-900/10 dark:border-white/10 text-sm text-navy-400">
+        © 2026 Apple English. Làm với ❤️ cho người Việt.
       </div>
     </footer>
   );
@@ -83,21 +73,14 @@ function Footer() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={` `}  suppressHydrationWarning>
+    <html lang="vi" className={`${sans.variable} ${hand.variable}`} suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col">
         <ThemeProvider>
           <ReadingProgress />
           <TopBar />
           <main className="flex-1">{children}</main>
-          <a href="/learn/beginner" title="Ngữ pháp cơ bản" className="fixed bottom-24 left-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white dark:bg-ink-900 border border-sky-200 dark:border-sky-800 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
-            <span className="text-2xl">📚</span>
-            <span className="text-sm font-bold text-sky-600 dark:text-sky-400 hidden sm:block">Ngữ pháp</span>
-          </a>
-          <a href="/learn/topics" title="Từ vựng theo chủ đề" className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white dark:bg-ink-900 border border-sky-200 dark:border-sky-800 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 group">
-            <span className="text-2xl">📚</span>
-            <span className="text-sm font-bold text-sky-600 dark:text-sky-400 hidden sm:block">Từ vựng</span>
-          </a>
           <Footer />
+          <MobileNav />
         </ThemeProvider>
       </body>
     </html>

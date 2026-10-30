@@ -9,7 +9,7 @@ export function SpeakButton({ text, size = "md", className = "" }: Props) {
   return (
     <button
       onClick={() => (isSpeaking ? stop() : speak(text))}
-      aria-label={isSpeaking ? "Dung" : "Phat am"}
+      aria-label={isSpeaking ? "Dừng" : "Phát âm"}
       className={`inline-flex items-center justify-center rounded-full border transition-all duration-150 ${sizeMap[size]} ${isSpeaking ? "bg-amber-500 border-amber-500 text-white scale-110 shadow-md" : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-amber-400 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950"} ${className}`}
     >
       {isSpeaking ? (

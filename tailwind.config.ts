@@ -9,9 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
+        display: ["var(--font-sans)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["ui-monospace", "monospace"],
+        hand: ["var(--font-hand)", "cursive"],
       },
       colors: {
         paper: {
@@ -41,6 +42,11 @@ const config: Config = {
           600: "#1F6F66",
           700: "#155049",
         },
+        // Apple English brand (vở ô li palette)
+        apple: { 50: "#FFF1F1", 100: "#FFDCDC", 500: "#E5484D", 600: "#CC2F35", 700: "#A51F25" },
+        leaf: { 50: "#EDF8F1", 100: "#D3EEDD", 500: "#2F9E5B", 600: "#23814A", 700: "#1A6339" },
+        navy: { 400: "#5B6B85", 500: "#3B4A63", 700: "#22304A", 900: "#152033" },
+        hl: { 200: "#FFF1A8", 300: "#FFE066" },
         gold: {
           400: "#E8B84A",
           500: "#C89A2E",

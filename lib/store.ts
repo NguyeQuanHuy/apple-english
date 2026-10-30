@@ -29,6 +29,9 @@ type State = {
   testScores: Record<string, { score: number; total: number; takenAt: number }>;
   gamesPlayed: number;
   achievements: Achievement[];
+  dailyXp: number;
+  dailyXpDate: string | null;
+  activeDays: string[]; // YYYY-MM-DD, last 60 days
   // actions
   addXp: (amount: number, reason?: string) => void;
   markLessonComplete: (lessonId: string) => void;
@@ -39,7 +42,9 @@ type State = {
 };
 
 function todayStr() {
-  return new Date().toISOString().slice(0, 10);
+  // Local date (not UTC) so a Vietnamese learner's day resets at their midnight
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 function dayDiff(a: string, b: string) {
@@ -58,9 +63,18 @@ export const useProgress = create<State>()(
       testScores: {},
       gamesPlayed: 0,
       achievements: [],
+      dailyXp: 0,
+      dailyXpDate: null,
+      activeDays: [],
 
       addXp: (amount) => {
-        set({ xp: get().xp + amount });
+        const today = todayStr();
+        const sameDay = get().dailyXpDate === today;
+        set({
+          xp: get().xp + amount,
+          dailyXp: (sameDay ? get().dailyXp : 0) + amount,
+          dailyXpDate: today,
+        });
         get().pingDailyActivity();
         checkAchievements(set, get);
       },
@@ -98,6 +112,8 @@ export const useProgress = create<State>()(
       pingDailyActivity: () => {
         const today = todayStr();
         const last = get().lastActiveDate;
+        const days = get().activeDays || [];
+        if (!days.includes(today)) set({ activeDays: [...days, today].slice(-60) });
         if (last === today) return;
         if (!last) {
           set({ streak: 1, lastActiveDate: today });
@@ -118,6 +134,9 @@ export const useProgress = create<State>()(
           testScores: {},
           gamesPlayed: 0,
           achievements: [],
+          dailyXp: 0,
+          dailyXpDate: null,
+          activeDays: [],
         }),
     }),
     { name: "englishstart-progress" }

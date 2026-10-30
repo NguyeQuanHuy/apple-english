@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --bg: 251 247 240;
-    --fg: 26 24 20;
+    --bg: 247 249 252;
+    --fg: 21 32 51;
   }
 
   .dark {
-    --bg: 22 20 17;
-    --fg: 245 239 227;
+    --bg: 15 21 32;
+    --fg: 232 237 245;
   }
 
   html {
@@ -21,15 +21,8 @@
   body {
     background-color: rgb(var(--bg));
     color: rgb(var(--fg));
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(26, 24, 20, 0.04) 1px, transparent 0);
-    background-size: 24px 24px;
   }
 
-  .dark body {
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
-  }
 }
 
 @layer components {
@@ -73,6 +66,41 @@
     box-shadow: 0 4px 0 0 rgba(255, 255, 255, 0.08);
   }
 
+  /* Vở ô li: faint blue grid + red margin line, like a Vietnamese school notebook */
+  .oli-paper {
+    background-color: #FFFFFF;
+    background-image:
+      linear-gradient(to right, transparent 46px, rgba(229, 72, 77, 0.55) 46px, rgba(229, 72, 77, 0.55) 48px, transparent 48px),
+      linear-gradient(rgba(91, 135, 200, 0.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91, 135, 200, 0.12) 1px, transparent 1px),
+      linear-gradient(rgba(91, 135, 200, 0.12) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 32px, 8px 8px, 8px 8px;
+  }
+  .dark .oli-paper {
+    background-color: #1C2536;
+    background-image:
+      linear-gradient(to right, transparent 46px, rgba(229, 72, 77, 0.5) 46px, rgba(229, 72, 77, 0.5) 48px, transparent 48px),
+      linear-gradient(rgba(140, 170, 220, 0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140, 170, 220, 0.07) 1px, transparent 1px),
+      linear-gradient(rgba(140, 170, 220, 0.07) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 32px, 8px 8px, 8px 8px;
+  }
+  .hl-mark {
+    background-image: linear-gradient(transparent 55%, #FFE066 55%, #FFE066 90%, transparent 90%);
+  }
+  .dark .hl-mark {
+    background-image: linear-gradient(transparent 55%, rgba(255, 224, 102, 0.35) 55%, rgba(255, 224, 102, 0.35) 90%, transparent 90%);
+  }
+  @keyframes pen-draw { from { stroke-dashoffset: var(--len, 200); } to { stroke-dashoffset: 0; } }
+  @keyframes pen-write { from { opacity: 0; transform: translateY(4px) rotate(-3deg); } to { opacity: 1; transform: translateY(0) rotate(-3deg); } }
+  .pen-strike { stroke-dasharray: var(--len, 200); stroke-dashoffset: var(--len, 200); animation: pen-draw 0.5s ease-out 0.6s forwards; }
+  .pen-word { opacity: 0; animation: pen-write 0.45s ease-out 1.1s forwards; }
+  .pen-note { opacity: 0; animation: pen-write 0.45s ease-out 1.6s forwards; }
+  @media (prefers-reduced-motion: reduce) {
+    .pen-strike { animation: none; stroke-dashoffset: 0; }
+    .pen-word, .pen-note { animation: none; opacity: 1; }
+  }
+
   .card-paper {
     @apply rounded-chunky bg-paper-50 border shadow-card;
     /* Sử dụng biến --fg (màu ink) với độ mờ 8% */
@@ -93,7 +121,7 @@
   }
 }
 /* Blog prose */
-.prose-blog h2{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--ink);margin-top:2.5rem;margin-bottom:.75rem}.prose-blog h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--ink);margin-top:2rem;margin-bottom:.5rem}.prose-blog p{color:var(--ink);line-height:1.8;margin-bottom:1.25rem}.prose-blog strong{font-weight:700}.prose-blog em{font-style:italic;color:var(--ink-muted)}.prose-blog ul{margin:1rem 0 1.25rem 1.5rem;list-style:disc}.prose-blog li{color:var(--ink);line-height:1.8;margin-bottom:.3rem}.prose-blog blockquote{border-left:4px solid var(--teal);padding-left:1rem;color:var(--ink-muted);font-style:italic;margin:1.5rem 0}.prose-blog table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem}.prose-blog th{background:var(--ember-light);color:var(--ember);font-weight:700;padding:.6rem 1rem;text-align:left;border:1px solid var(--paper-border)}.prose-blog td{padding:.6rem 1rem;border:1px solid var(--paper-border);color:var(--ink)}.prose-blog tr:nth-child(even) td{background:var(--paper)}
+.prose-blog h2{font-family:var(--font-sans);font-size:1.5rem;font-weight:700;color:var(--ink);margin-top:2.5rem;margin-bottom:.75rem}.prose-blog h3{font-family:var(--font-sans);font-size:1.2rem;font-weight:700;color:var(--ink);margin-top:2rem;margin-bottom:.5rem}.prose-blog p{color:var(--ink);line-height:1.8;margin-bottom:1.25rem}.prose-blog strong{font-weight:700}.prose-blog em{font-style:italic;color:var(--ink-muted)}.prose-blog ul{margin:1rem 0 1.25rem 1.5rem;list-style:disc}.prose-blog li{color:var(--ink);line-height:1.8;margin-bottom:.3rem}.prose-blog blockquote{border-left:4px solid var(--teal);padding-left:1rem;color:var(--ink-muted);font-style:italic;margin:1.5rem 0}.prose-blog table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem}.prose-blog th{background:var(--ember-light);color:var(--ember);font-weight:700;padding:.6rem 1rem;text-align:left;border:1px solid var(--paper-border)}.prose-blog td{padding:.6rem 1rem;border:1px solid var(--paper-border);color:var(--ink)}.prose-blog tr:nth-child(even) td{background:var(--paper)}
 
 .prose-blog .callout{display:flex;gap:.75rem;background:var(--ember-light);border-left:4px solid var(--ember);border-radius:.75rem;padding:1rem 1.25rem;margin:1.5rem 0;color:var(--ink)}.prose-blog .compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}.prose-blog .compare-left,.prose-blog .compare-right{padding:1rem;border-radius:.75rem;font-size:.9rem}.prose-blog .compare-left{background:#fff0f0;border:1px solid #fecaca}.prose-blog .compare-right{background:#f0fdf4;border:1px solid #bbf7d0}.prose-blog .compare-label{font-weight:700;font-size:.75rem;margin-bottom:.5rem}
 
