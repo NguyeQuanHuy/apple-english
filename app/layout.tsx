@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -17,9 +17,15 @@ const sans = Be_Vietnam_Pro({
 const hand = Patrick_Hand({ subsets: ["latin", "vietnamese"], weight: "400", variable: "--font-hand", display: "swap" });
 
 export const metadata: Metadata = {
-  icons: { icon: "/favicon.svg" },
   title: "Apple English — Học tiếng Anh từ con số 0",
   description: "Nền tảng học tiếng Anh cho người Việt mất gốc. Lộ trình A0→A2, TOEIC, và mini games để học mỗi ngày 10 phút.",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F7F9FC" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F1520" },
+  ],
 };
 
 function Footer() {
