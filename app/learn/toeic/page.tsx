@@ -1,249 +1,323 @@
-﻿import Link from "next/link";
+﻿"use client";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, Check, Clock, Headphones, BookOpenText, RotateCcw } from "lucide-react";
 import { TOEIC_THEMES, TOEIC_TESTS } from "@/data/toeic";
-import { Clock, Hash, ChevronRight, Target, BookOpen, FileText, Zap } from "lucide-react";
+import { useProgress } from "@/lib/store";
 
-function ThemeIcon({ id }: { id: string }) {
-  const icons: Record<string, JSX.Element> = {
-    office: (
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center shadow-md">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <rect x="4" y="8" width="20" height="15" rx="2" stroke="white" strokeWidth="1.8" fill="rgba(255,255,255,0.15)"/>
-          <path d="M9 13 L19 13 M9 16.5 L15 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-          <rect x="11" y="4" width="6" height="5" rx="1" stroke="white" strokeWidth="1.5" fill="rgba(255,255,255,0.2)"/>
-        </svg>
+const PHRASE_THEME_IDS = ["idioms", "phrasal-verbs", "collocations"];
+const themeDoneKey = (id: string) => `toeic-theme-${id}`;
+
+/* ─────────── Answer-sheet progress card (the page's signature element) ─────────── */
+
+function Bubble({ filled, label, title }: { filled: boolean; label: string; title: string }) {
+  return (
+    <span
+      title={title}
+      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full grid place-items-center text-[11px] font-bold border-[1.5px] transition-colors ${
+        filled ? "bg-navy-900 border-navy-900 text-white dark:bg-white dark:border-white dark:text-navy-900" : "border-navy-400/50 text-navy-400"
+      }`}
+    >
+      {label}
+    </span>
+  );
+}
+
+function AnswerSheet({ doneThemes, testScores }: { doneThemes: string[]; testScores: Record<string, { score: number; total: number }> }) {
+  const letters = ["A", "B", "C", "D"];
+  return (
+    <div className="relative rounded-[22px] bg-white dark:bg-navy-900 border border-navy-900/10 dark:border-white/10 shadow-[0_24px_60px_-30px_rgba(21,32,51,0.45)] overflow-hidden rotate-[-1deg]">
+      <div className="flex items-center justify-between px-6 py-3 bg-apple-500 text-white">
+        <p className="font-bold">Phiếu tiến độ của bạn</p>
+        <p className="text-sm text-white/80">TOEIC L&amp;R</p>
       </div>
-    ),
-    finance: (
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-md">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <circle cx="14" cy="14" r="9" stroke="white" strokeWidth="1.8" fill="rgba(255,255,255,0.1)"/>
-          <path d="M14 8 L14 20 M11 10.5 C11 10.5 11 9 14 9 C17 9 17 11 14 12 C11 13 11 15 14 15 C17 15 17 17 14 17" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
+      <div className="px-6 py-5">
+        <div className="flex items-baseline justify-between gap-3 mb-3">
+          <p className="text-sm font-semibold text-navy-500 dark:text-paper-200">
+            Chủ đề từ vựng · {doneThemes.length}/{TOEIC_THEMES.length}
+          </p>
+          <p className="text-xs text-navy-400 flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-navy-900 dark:bg-white inline-block" /> đã học
+          </p>
+        </div>
+        <div className="grid grid-cols-5 gap-x-3 gap-y-2.5 mb-6">
+          {TOEIC_THEMES.map((t, i) => (
+            <div key={t.id} className="flex items-center gap-1.5">
+              <span className="w-5 text-right text-[11px] font-semibold text-navy-400 tabular-nums">{i + 1}</span>
+              <Bubble filled={doneThemes.includes(t.id)} label={letters[i % 4]} title={t.title} />
+            </div>
+          ))}
+        </div>
+        <p className="text-sm font-semibold text-navy-500 dark:text-paper-200 mb-3">Đề mini</p>
+        <ul className="space-y-2">
+          {TOEIC_TESTS.map((t, i) => {
+            const r = testScores[t.id];
+            const pct = r ? Math.round((r.score / r.total) * 100) : 0;
+            return (
+              <li key={t.id} className="flex items-center gap-3">
+                <span className="text-sm font-semibold text-navy-700 dark:text-paper-100 w-14">Đề {i + 1}</span>
+                <span className="flex-1 h-2 rounded-full bg-navy-900/[0.07] dark:bg-white/10 overflow-hidden">
+                  <span className={`block h-full rounded-full ${pct >= 80 ? "bg-leaf-500" : "bg-apple-500"}`} style={{ width: `${pct}%` }} />
+                </span>
+                <span className="text-sm font-semibold tabular-nums w-12 text-right text-navy-500 dark:text-paper-200">{r ? `${r.score}/${r.total}` : "—"}</span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-    ),
-    travel: (
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center shadow-md">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M5 18 L14 6 L23 18" stroke="white" strokeWidth="1.8" strokeLinejoin="round" fill="rgba(255,255,255,0.15)"/>
-          <path d="M5 18 L23 18" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="14" cy="13" r="2.5" fill="white" opacity="0.9"/>
-          <path d="M10 18 L10 22 M18 18 L18 22" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
-      </div>
-    ),
-  };
-  return icons[id] ?? (
-    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center shadow-md">
-      <BookOpen size={20} className="text-white" />
     </div>
   );
 }
 
-export default function ToeicIndex() {
-  return (
-    <div className="min-h-screen bg-sky-50 pb-20">
+/* ─────────── Vocabulary themes ─────────── */
 
-      {/* Hero */}
-      <div className="bg-gradient-to-br from-sky-500 via-blue-500 to-indigo-600 text-white px-4 pt-14 pb-24">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-widest">
-            <Target size={12} /> TOEIC Prep
-          </div>
-          <h1 className="font-display text-5xl md:text-6xl font-black mb-4 leading-tight">
-            Luyện <span className="text-yellow-300">TOEIC</span>
-          </h1>
-          <p className="text-sky-100 text-lg max-w-lg mx-auto leading-relaxed mb-10">
-            Học từ vựng theo chủ đề công sở, luyện đề mini có bấm giờ.<br/>Phù hợp band <strong className="text-white">400–700</strong>.
+function ThemeRow({ t, done }: { t: (typeof TOEIC_THEMES)[number]; done: boolean }) {
+  return (
+    <li>
+      <Link
+        href={`/learn/toeic/theme/${t.id}`}
+        className="group flex items-center gap-4 px-4 sm:px-5 py-4 hover:bg-navy-900/[0.025] dark:hover:bg-white/[0.04] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-apple-500"
+      >
+        <span className="text-2xl w-9 text-center flex-shrink-0" aria-hidden="true">{t.emoji ?? "📘"}</span>
+        <span className="flex-1 min-w-0">
+          <span className="flex items-baseline gap-2">
+            <span className="font-bold text-navy-900 dark:text-white group-hover:text-apple-600 dark:group-hover:text-apple-500 transition-colors">{t.title}</span>
+            <span className="text-sm text-navy-400 whitespace-nowrap">{t.words?.length ?? 0} từ</span>
+          </span>
+          <span className="block text-sm text-navy-500 dark:text-paper-200 truncate">{t.description}</span>
+        </span>
+        {done ? (
+          <span className="flex items-center gap-1 text-sm font-semibold text-leaf-600 dark:text-leaf-500 flex-shrink-0">
+            <Check className="w-4 h-4" strokeWidth={3} /> <span className="hidden sm:inline">Đã học</span>
+          </span>
+        ) : (
+          <ArrowRight className="w-5 h-5 text-navy-400 flex-shrink-0 group-hover:translate-x-0.5 group-hover:text-apple-500 transition-all" />
+        )}
+      </Link>
+    </li>
+  );
+}
+
+function ThemeList({ title, desc, themes, doneThemes }: { title: string; desc: string; themes: typeof TOEIC_THEMES; doneThemes: string[] }) {
+  const done = themes.filter((t) => doneThemes.includes(t.id)).length;
+  return (
+    <div className="min-w-0">
+      <div className="flex items-end justify-between gap-3 mb-3">
+        <div>
+          <h3 className="font-bold text-lg text-navy-900 dark:text-white">{title}</h3>
+          <p className="text-sm text-navy-500 dark:text-paper-200">{desc}</p>
+        </div>
+        <p className="text-sm font-semibold text-navy-400 whitespace-nowrap">{done}/{themes.length}</p>
+      </div>
+      <ul className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 divide-y divide-navy-900/[0.07] dark:divide-white/10 overflow-hidden">
+        {themes.map((t) => (
+          <ThemeRow key={t.id} t={t} done={doneThemes.includes(t.id)} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ─────────── Mini tests ─────────── */
+
+function partOf(title: string) {
+  const m = title.match(/Part\s*(\d)/i);
+  return m ? Number(m[1]) : null;
+}
+
+function TestCard({ t, index, result }: { t: (typeof TOEIC_TESTS)[number]; index: number; result?: { score: number; total: number } }) {
+  const part = partOf(t.title);
+  const isListening = part !== null && part <= 4;
+  const pct = result ? Math.round((result.score / result.total) * 100) : null;
+  const cleanTitle = t.title.replace(/^Mini Test \d+\s*[—-]\s*/, "");
+  return (
+    <Link
+      href={`/learn/toeic/test/${t.id}`}
+      className="group rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 p-5 sm:p-6 flex flex-col hover:border-navy-900/25 dark:hover:border-white/25 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-apple-500"
+    >
+      <div className="flex items-center justify-between mb-4">
+        <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full ${isListening ? "bg-leaf-50 text-leaf-700 dark:bg-leaf-500/15 dark:text-leaf-500" : "bg-navy-900/[0.06] text-navy-700 dark:bg-white/10 dark:text-paper-100"}`}>
+          {isListening ? <Headphones className="w-3.5 h-3.5" /> : <BookOpenText className="w-3.5 h-3.5" />}
+          {isListening ? "Listening" : "Reading"}{part ? ` · Part ${part}` : ""}
+        </span>
+        <span className="text-sm font-semibold text-navy-400">Đề {index + 1}</span>
+      </div>
+      <p className="font-bold text-lg text-navy-900 dark:text-white leading-snug mb-1">{cleanTitle}</p>
+      <p className="text-sm text-navy-500 dark:text-paper-200 mb-5">
+        {t.questions.length} câu · <Clock className="inline w-3.5 h-3.5 -mt-0.5" /> {Math.round(t.timeLimitSec / 60)} phút
+      </p>
+      <div className="mt-auto flex items-center justify-between gap-3">
+        {pct !== null ? (
+          <p className="text-sm text-navy-500 dark:text-paper-200">
+            Lần gần nhất <span className={`font-bold ${pct >= 80 ? "text-leaf-600 dark:text-leaf-500" : "text-apple-600 dark:text-apple-500"}`}>{result!.score}/{result!.total}</span>
           </p>
-          <div className="flex justify-center gap-8">
-            <div className="text-center">
-              <p className="text-4xl font-black">{TOEIC_THEMES.length}</p>
-              <p className="text-sky-200 text-sm mt-1">Chủ đề</p>
-            </div>
-            <div className="w-px bg-white/20" />
-            <div className="text-center">
-              <p className="text-4xl font-black">{TOEIC_THEMES.reduce((a, t) => a + (t.words?.length ?? 0), 0)}</p>
-              <p className="text-sky-200 text-sm mt-1">Từ vựng</p>
-            </div>
-            <div className="w-px bg-white/20" />
-            <div className="text-center">
-              <p className="text-4xl font-black">{TOEIC_TESTS.length}</p>
-              <p className="text-sky-200 text-sm mt-1">Đề thi</p>
-            </div>
-          </div>
+        ) : (
+          <p className="text-sm text-navy-400">Chưa làm</p>
+        )}
+        <span className={`inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-xl transition-colors ${pct !== null ? "text-navy-700 dark:text-paper-100 bg-navy-900/[0.06] dark:bg-white/10 group-hover:bg-navy-900/10" : "bg-apple-500 text-white group-hover:bg-apple-600"}`}>
+          {pct !== null ? <><RotateCcw className="w-4 h-4" /> Làm lại</> : "Làm đề"}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+/* ─────────── Exam structure & plan ─────────── */
+
+const PARTS = [
+  { part: 1, skill: "Listening", name: "Mô tả tranh", q: 6, tip: "Nhìn tranh trước khi nghe, đoán sẵn động từ và vật xuất hiện." },
+  { part: 2, skill: "Listening", name: "Hỏi – đáp", q: 25, tip: "Bắt từ để hỏi đầu câu (Where, When, Who…) để loại đáp án lệch." },
+  { part: 3, skill: "Listening", name: "Hội thoại", q: 39, tip: "Đọc 3 câu hỏi trước khi băng chạy, nghe có chủ đích." },
+  { part: 4, skill: "Listening", name: "Bài nói ngắn", q: 30, tip: "Thông báo, quảng cáo: chú ý mục đích ở 1–2 câu đầu." },
+  { part: 5, skill: "Reading", name: "Điền câu", q: 30, tip: "Khoảng 20 giây mỗi câu. Nhìn từ loại cần điền, không cần dịch cả câu." },
+  { part: 6, skill: "Reading", name: "Điền đoạn văn", q: 16, tip: "Đọc câu trước và sau chỗ trống để chọn từ nối hợp lý." },
+  { part: 7, skill: "Reading", name: "Đọc hiểu", q: 54, tip: "Đọc câu hỏi trước rồi quét bài tìm từ khoá." },
+];
+
+const PLAN = [
+  { weeks: "Tuần 1–2", focus: "Từ vựng công sở, nghe Part 1–2", link: "/learn/toeic/theme/office" },
+  { weeks: "Tuần 3–4", focus: "Ngữ pháp Part 5, làm đề mini mỗi ngày", link: "/learn/toeic/test/toeic-mini-1" },
+  { weeks: "Tuần 5–6", focus: "Đọc hiểu Part 7: đọc nhanh, tìm ý", link: "/learn/toeic/test/toeic-mini-2" },
+  { weeks: "Tuần 7–8", focus: "Làm đề đủ 200 câu có bấm giờ, ôn câu sai", link: null },
+];
+
+function ExamGuide() {
+  return (
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20">
+      <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-navy-900 dark:text-white mb-2">Hiểu đề để không mất điểm oan</h2>
+      <p className="text-navy-500 dark:text-paper-200 mb-7 max-w-2xl">200 câu trong 120 phút, tối đa 990 điểm. Không bị trừ điểm khi sai, nên câu nào cũng phải chọn đáp án.</p>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4 items-start">
+        <div className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 overflow-hidden">
+          <table className="w-full text-left">
+            <caption className="sr-only">Cấu trúc đề TOEIC Listening và Reading</caption>
+            <thead>
+              <tr className="text-sm text-navy-400 border-b border-navy-900/[0.07] dark:border-white/10">
+                <th scope="col" className="font-semibold px-4 sm:px-5 py-3">Part</th>
+                <th scope="col" className="font-semibold px-2 py-3 sm:w-48">Nội dung</th>
+                <th scope="col" className="font-semibold px-4 sm:px-5 py-3 hidden sm:table-cell">Mẹo</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-navy-900/[0.07] dark:divide-white/10">
+              {PARTS.map((p) => (
+                <tr key={p.part} className={p.part === 5 ? "border-t-2 border-navy-900/15 dark:border-white/20" : ""}>
+                  <td className="px-4 sm:px-5 py-3.5 align-top">
+                    <span className={`w-8 h-8 rounded-full grid place-items-center font-bold text-sm ${p.skill === "Listening" ? "bg-leaf-50 text-leaf-700 dark:bg-leaf-500/15 dark:text-leaf-500" : "bg-navy-900/[0.06] text-navy-700 dark:bg-white/10 dark:text-paper-100"}`}>
+                      {p.part}
+                    </span>
+                  </td>
+                  <td className="px-2 py-3.5 align-top">
+                    <p className="font-bold text-navy-900 dark:text-white">{p.name}</p>
+                    <p className="text-sm text-navy-400 whitespace-nowrap">{p.skill} · {p.q} câu</p>
+                    <p className="text-sm text-navy-500 dark:text-paper-200 mt-1 sm:hidden">{p.tip}</p>
+                  </td>
+                  <td className="px-4 sm:px-5 py-3.5 align-top text-[15px] text-navy-500 dark:text-paper-200 leading-relaxed hidden sm:table-cell">{p.tip}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-3xl bg-hl-200/60 dark:bg-hl-300/10 border border-hl-300 dark:border-hl-300/20 p-6">
+          <h3 className="font-bold text-lg text-navy-900 dark:text-white mb-1">Lộ trình 8 tuần lên 450+</h3>
+          <p className="text-sm text-navy-500 dark:text-paper-200 mb-5">Mỗi ngày 15–20 phút là đủ, quan trọng là đều đặn.</p>
+          <ol className="space-y-4">
+            {PLAN.map((s, i) => (
+              <li key={s.weeks} className="flex gap-3">
+                <span className="w-7 h-7 rounded-full bg-navy-900 text-white dark:bg-white dark:text-navy-900 grid place-items-center text-sm font-bold flex-shrink-0">{i + 1}</span>
+                <div>
+                  <p className="font-bold text-navy-900 dark:text-white">{s.weeks}</p>
+                  <p className="text-[15px] text-navy-700 dark:text-paper-100">{s.focus}</p>
+                  {s.link && (
+                    <Link href={s.link} className="text-sm font-bold text-apple-600 hover:text-apple-700 dark:text-apple-500">Bắt đầu phần này</Link>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
+    </section>
+  );
+}
 
-      <div className="max-w-3xl mx-auto px-4 -mt-8 space-y-10">
+/* ─────────── Page ─────────── */
 
-        {/* Lộ trình */}
-        <div className="bg-white border-2 border-sky-100 rounded-2xl p-6 shadow-card">
-          <p className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-4">📌 Lộ trình gợi ý</p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex-1 flex items-center gap-3 p-3 bg-sky-50 rounded-xl">
-              <div className="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-black text-sm flex-shrink-0">1</div>
-              <div><p className="font-bold text-sky-900 text-sm">Học từ vựng theo chủ đề</p><p className="text-sky-400 text-xs">Nắm chắc 30+ từ hay gặp</p></div>
-            </div>
-            <div className="hidden sm:flex items-center text-sky-300"><ChevronRight size={20}/></div>
-            <div className="flex-1 flex items-center gap-3 p-3 bg-indigo-50 rounded-xl">
-              <div className="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-black text-sm flex-shrink-0">2</div>
-              <div><p className="font-bold text-sky-900 text-sm">Làm đề mini có giờ</p><p className="text-sky-400 text-xs">Luyện tốc độ và chiến thuật</p></div>
-            </div>
-            <div className="hidden sm:flex items-center text-sky-300"><ChevronRight size={20}/></div>
-            <div className="flex-1 flex items-center gap-3 p-3 bg-green-50 rounded-xl">
-              <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-black text-sm flex-shrink-0">3</div>
-              <div><p className="font-bold text-sky-900 text-sm">Ôn sai và lặp lại</p><p className="text-sky-400 text-xs">Mỗi ngày 15–20 phút</p></div>
-            </div>
-          </div>
-        </div>
+export default function ToeicIndex() {
+  const { completedLessons, testScores } = useProgress();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-        {/* Từ vựng */}
+  const doneThemes = useMemo(
+    () => (mounted ? TOEIC_THEMES.filter((t) => completedLessons.includes(themeDoneKey(t.id))).map((t) => t.id) : []),
+    [mounted, completedLessons]
+  );
+  const scores = mounted ? testScores : {};
+
+  const officeThemes = TOEIC_THEMES.filter((t) => !PHRASE_THEME_IDS.includes(t.id));
+  const phraseThemes = TOEIC_THEMES.filter((t) => PHRASE_THEME_IDS.includes(t.id));
+  const totalWords = TOEIC_THEMES.reduce((a, t) => a + (t.words?.length ?? 0), 0);
+
+  // Next step: first unlearned theme; after 3 themes, nudge toward an untaken test
+  const nextTheme = TOEIC_THEMES.find((t) => !doneThemes.includes(t.id));
+  const nextTest = TOEIC_TESTS.find((t) => !scores[t.id]);
+  let next: { href: string; label: string; detail: string };
+  if (nextTest && (doneThemes.length >= 3 || !nextTheme)) {
+    next = { href: `/learn/toeic/test/${nextTest.id}`, label: "Làm đề tiếp theo", detail: nextTest.title.replace(/^Mini Test \d+\s*[—-]\s*/, "") };
+  } else if (nextTheme) {
+    next = { href: `/learn/toeic/theme/${nextTheme.id}`, label: doneThemes.length ? "Học chủ đề tiếp theo" : "Bắt đầu với chủ đề đầu tiên", detail: `${nextTheme.title} · ${nextTheme.words?.length ?? 0} từ` };
+  } else {
+    next = { href: `/learn/toeic/test/${TOEIC_TESTS[0].id}`, label: "Ôn lại đề mini", detail: "Bạn đã học hết chủ đề và làm hết đề" };
+  }
+
+  return (
+    <div className="pb-24 md:pb-8">
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-14 md:pt-14 md:pb-20 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 items-center">
         <div>
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-9 h-9 rounded-xl bg-sky-500 flex items-center justify-center flex-shrink-0">
-              <BookOpen size={18} className="text-white" />
-            </div>
-            <div>
-              <h2 className="font-display text-xl font-black text-sky-900">Từ vựng theo chủ đề</h2>
-              <p className="text-sky-400 text-xs">Học flashcard + mini quiz cho từng chủ đề</p>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {TOEIC_THEMES.map((t) => (
-              <Link key={t.id} href={`/learn/toeic/theme/${t.id}`}
-                className="bg-white border-2 border-sky-100 rounded-2xl p-5 hover:border-sky-400 hover:shadow-card hover:-translate-y-0.5 transition-all active:scale-95 group">
-                <ThemeIcon id={t.id} />
-                <p className="font-black text-sky-900 text-base mt-3 mb-1">{t.title}</p>
-                <p className="text-sky-500 text-xs leading-relaxed mb-3">{t.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1 bg-sky-50 text-sky-600 text-xs font-bold px-2 py-1 rounded-full">
-                    <Hash size={10} /> {t.words?.length ?? 0} từ
-                  </span>
-                  <ChevronRight size={14} className="text-sky-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all" />
-                </div>
-              </Link>
-            ))}
-          </div>
+          <p className="text-sm font-semibold text-navy-500 dark:text-paper-200 mb-3">Dành cho mục tiêu 400–700 điểm</p>
+          <h1 className="font-display font-extrabold text-navy-900 dark:text-white text-[38px] sm:text-[48px] lg:text-[56px] leading-[1.1] tracking-[-0.025em] mb-5 [text-wrap:balance]">
+            Luyện TOEIC mỗi ngày, từng chủ đề một.
+          </h1>
+          <p className="text-lg text-navy-500 dark:text-paper-200 leading-relaxed max-w-[34rem] mb-8">
+            {totalWords} từ vựng công sở chia theo {TOEIC_THEMES.length} chủ đề, cùng {TOEIC_TESTS.length} đề mini có bấm giờ và giải thích tiếng Việt.
+          </p>
+          <Link
+            href={next.href}
+            className="group inline-flex items-center gap-4 bg-apple-500 hover:bg-apple-600 text-white pl-6 pr-5 py-4 rounded-2xl shadow-[0_4px_0_0_#A51F25] active:shadow-none active:translate-y-1 transition-all focus-visible:outline focus-visible:outline-4 focus-visible:outline-apple-100"
+          >
+            <span className="text-left">
+              <span className="block font-bold text-base">{next.label}</span>
+              <span className="block text-sm text-white/80">{next.detail}</span>
+            </span>
+            <ArrowRight size={20} className="transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
+        <AnswerSheet doneThemes={doneThemes} testScores={scores} />
+      </section>
 
-        {/* Đề thi */}
-        <div>
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-9 h-9 rounded-xl bg-indigo-500 flex items-center justify-center flex-shrink-0">
-              <FileText size={18} className="text-white" />
-            </div>
-            <div>
-              <h2 className="font-display text-xl font-black text-sky-900">Đề mini có bấm giờ</h2>
-              <p className="text-sky-400 text-xs">Luyện tốc độ làm bài, sát với đề thật</p>
-            </div>
-          </div>
-          <div className="space-y-3">
-            {TOEIC_TESTS.map((t, i) => (
-              <Link key={t.id} href={`/learn/toeic/test/${t.id}`}
-                className="bg-white border-2 border-sky-100 rounded-2xl p-5 flex items-center gap-4 hover:border-indigo-400 hover:shadow-card transition-all active:scale-95 group">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-400 to-blue-600 text-white grid place-items-center font-display text-2xl font-black flex-shrink-0 shadow-md">
-                  {i + 1}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-black text-sky-900 text-base">{t.title}</p>
-                  <p className="text-sky-400 text-sm mt-0.5 truncate">{t.description}</p>
-                  <div className="flex gap-4 mt-2">
-                    <span className="flex items-center gap-1 text-xs font-semibold text-sky-400"><Hash size={11} /> {t.questions.length} câu</span>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-sky-400"><Clock size={11} /> {Math.round(t.timeLimitSec / 60)} phút</span>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-green-500"><Zap size={11} /> +{t.questions.length * 5} XP</span>
-                  </div>
-                </div>
-                <div className="flex-shrink-0 px-4 py-2 bg-indigo-500 text-white text-sm font-bold rounded-xl group-hover:bg-indigo-600 transition-colors">
-                  Làm đề
-                </div>
-              </Link>
-            ))}
-          </div>
+      {/* Vocabulary */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20">
+        <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-navy-900 dark:text-white mb-2">Từ vựng theo chủ đề</h2>
+        <p className="text-navy-500 dark:text-paper-200 mb-7 max-w-2xl">Lật flashcard, nghe phát âm, xem ví dụ. Học hết một chủ đề được +15 XP và tick vào phiếu tiến độ.</p>
+        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 items-start">
+          <ThemeList title="Chủ đề công sở" desc="Từ hay gặp trong Part 3, 4 và 7" themes={officeThemes} doneThemes={doneThemes} />
+          <ThemeList title="Cụm từ nâng cao" desc="Idioms, phrasal verbs, collocations" themes={phraseThemes} doneThemes={doneThemes} />
         </div>
+      </section>
 
-        {/* Tips */}
-        <div className="bg-gradient-to-br from-yellow-50 to-amber-50 border-2 border-amber-200 rounded-2xl p-6">
-          <p className="font-black text-amber-800 mb-3">💡 Mẹo học TOEIC hiệu quả</p>
-          <ul className="space-y-2">
-            <li className="flex gap-2 text-sm text-amber-700"><span>•</span><span>Học từ vựng theo chủ đề giúp nhớ lâu hơn học riêng lẻ</span></li>
-            <li className="flex gap-2 text-sm text-amber-700"><span>•</span><span>Làm đề có bấm giờ để quen với áp lực thời gian thật</span></li>
-            <li className="flex gap-2 text-sm text-amber-700"><span>•</span><span>Mỗi ngày 15–20 phút, kiên trì 2 tháng là đủ để đạt 450+</span></li>
-          </ul>
-        </div>
-
-
-        {/* TOEIC Advice */}
-        <div className="space-y-4">
-          <h2 className="font-display text-xl font-black text-sky-900">📋 Lời khuyên thi TOEIC từ A → Z</h2>
-
-          {[
-            {
-              icon: "📚",
-              title: "1. Hiểu rõ cấu trúc đề thi",
-              color: "from-sky-50 to-blue-50 border-sky-200",
-              titleColor: "text-sky-800",
-              textColor: "text-sky-700",
-              items: [
-                "TOEIC gồm 2 phần: Listening (100 câu) và Reading (100 câu), tổng 200 câu trong 120 phút.",
-                "Listening: Part 1 (Photographs), Part 2 (Question-Response), Part 3 (Conversations), Part 4 (Talks).",
-                "Reading: Part 5 (Incomplete Sentences), Part 6 (Text Completion), Part 7 (Reading Comprehension).",
-                "Mỗi câu trả lời đúng khoảng 5 điểm. Điểm tối đa 990.",
-              ],
-            },
-            {
-              icon: "⏰",
-              title: "2. Chiến lược quản lý thời gian",
-              color: "from-indigo-50 to-violet-50 border-indigo-200",
-              titleColor: "text-indigo-800",
-              textColor: "text-indigo-700",
-              items: [
-                "Part 5: trung bình 20 giây/câu — không được dừng lâu, đoán và đi tiếp.",
-                "Part 7: đọc câu hỏi trước, sau đó mới lướt qua bài để tìm đáp án.",
-                "Nếu không chắc, đánh dấu và bỏ qua — không để một câu ăn hết thời gian.",
-                "Luôn điền đáp án dù không biết — không có điểm trừ trong TOEIC.",
-              ],
-            },
-            {
-              icon: "🧠",
-              title: "3. Mẹo tăng điểm nhanh",
-              color: "from-emerald-50 to-teal-50 border-emerald-200",
-              titleColor: "text-emerald-800",
-              textColor: "text-emerald-700",
-              items: [
-                "Học 500 từ TOEIC thông dụng trước — chúng xuất hiện lặp đi lặp lại trong đề.",
-                "Part 2 Listening: chú ý từ WH đầu câu (Where/When/Who...) để loại đáp án sai nhanh.",
-                "Part 5 Grammar: nhận diện dạng câu (từ loại, thì, mệnh đề) rồi đánh đáp án đúng mà không cần dịch.",
-                "Nghe Listening mỗi ngày 15 phút, đặc biệt giọng Mỹ và Anh.",
-              ],
-            },
-            {
-              icon: "📅",
-              title: "4. Lộ trình 2 tháng lên 450+",
-              color: "from-rose-50 to-pink-50 border-rose-200",
-              titleColor: "text-rose-800",
-              textColor: "text-rose-700",
-              items: [
-                "Tuần 1–2: Nạp từ vựng chủ đề (văn phòng, du lịch, tài chính) + nghe Part 1–2.",
-                "Tuần 3–4: Luyện grammar Part 5, làm mini test có bấm giờ mỗi ngày.",
-                "Tuần 5–6: Tập trung Part 7 — đọc nhanh, tìm ý chính, trả lời câu hỏi.",
-                "Tuần 7–8: Giải đề full 200 câu có thiếu thời gian, rút kinh nghiệm.",
-              ],
-            },
-          ].map((block) => (
-            <div key={block.title} className={`bg-gradient-to-br ${block.color} border-2 rounded-2xl p-5`}>
-              <p className={`font-black ${block.titleColor} mb-3 text-base`}>{block.icon} {block.title}</p>
-              <ul className="space-y-2">
-                {block.items.map((item, i) => (
-                  <li key={i} className={`flex gap-2 text-sm ${block.textColor}`}>
-                    <span className="mt-0.5 flex-shrink-0">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* Tests */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20">
+        <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-navy-900 dark:text-white mb-2">Đề mini có bấm giờ</h2>
+        <p className="text-navy-500 dark:text-paper-200 mb-7 max-w-2xl">Mỗi đề tập trung một Part, làm trong vài phút. Xong được chấm điểm và xem giải thích từng câu.</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {TOEIC_TESTS.map((t, i) => (
+            <TestCard key={t.id} t={t} index={i} result={scores[t.id]} />
           ))}
         </div>
-      </div>
+      </section>
+
+      <ExamGuide />
     </div>
   );
 }

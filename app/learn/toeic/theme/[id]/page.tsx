@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
@@ -14,6 +14,7 @@ export default function ThemePage() {
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const addXp = useProgress((s) => s.addXp);
+  const markLessonComplete = useProgress((s) => s.markLessonComplete);
   const router = useRouter();
 
   if (!theme) return <div className="p-8">Không tìm thấy chủ đề.</div>;
@@ -23,7 +24,7 @@ export default function ThemePage() {
 
   function next() {
     setFlipped(false);
-    if (isLast) { addXp(15, `toeic-theme:`); router.push("/learn/toeic"); }
+    if (isLast) { addXp(15, `toeic-theme:${theme!.id}`); markLessonComplete(`toeic-theme-${theme!.id}`); router.push("/learn/toeic"); }
     else setIdx(idx + 1);
   }
   function prev() {
