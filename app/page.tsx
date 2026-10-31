@@ -10,7 +10,7 @@ import { EXTRA_LESSONS, EXTRA_PATH } from "@/data/extra-lessons";
 const BEGINNER_LESSONS = [...A1_LESSONS, ...EXTRA_LESSONS];
 const BEGINNER_PATH = [...A1_PATH, ...EXTRA_PATH];
 import { TOPICS } from "@/data/topics";
-import { BLOG_POSTS } from "@/data/blog";
+import { POSTS } from "@/lib/blog";
 import { SpeakButton } from "@/components/SpeakButton";
 
 const DAILY_GOAL = 30; // XP per day
@@ -365,7 +365,7 @@ function Promises() {
 }
 
 function BlogStrip() {
-  const posts = BLOG_POSTS.slice(0, 3);
+  const posts = POSTS.slice(0, 3);
   if (posts.length === 0) return null;
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20">

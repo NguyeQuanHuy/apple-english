@@ -48,7 +48,7 @@ export const BLOG_POSTS: BlogPost[] = [
     content: [
       { type: "paragraph", text: "TOEIC có khoảng 600-800 từ vựng hay xuất hiện." },
       { type: "vocab", word: "schedule", meaning: "lịch trình", example: "Please schedule a meeting for Monday." },
-      { type: "vocab", word: "deadline", meaning: "hạn chật", example: "The deadline is this Friday." },
+      { type: "vocab", word: "deadline", meaning: "hạn chót", example: "The deadline is this Friday." },
       { type: "vocab", word: "submit", meaning: "nộp, gửi", example: "Please submit your report by 5 PM." },
       { type: "vocab", word: "budget", meaning: "ngân sách", example: "We need to cut the budget this quarter." },
       { type: "vocab", word: "invoice", meaning: "hóa đơn", example: "Please send the invoice to accounting." },
@@ -187,14 +187,14 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
-    title: "T\u1EA1i sao n\u00E3o b\u1EA1n qu\u00EAn t\u1EEB v\u1EFDng sau 24 gi\u1EDD \u2014 v\u00E0 c\u00E1ch kh\u1EAFc ph\u1EE5c",
+    title: "T\u1EA1i sao n\u00E3o b\u1EA1n qu\u00EAn t\u1EEB v\u1EF1ng sau 24 gi\u1EDD \u2014 v\u00E0 c\u00E1ch kh\u1EAFc ph\u1EE5c",
     emoji: "\uD83E\uDDE0",
     summary: "H\u1ECDc 20 t\u1EEB h\u00F4m nay, s\u00E1ng mai qu\u00EAn s\u1EA1ch? \u0110\u00E2y kh\u00F4ng ph\u1EA3i l\u1ED7i c\u1EE7a b\u1EA1n \u2014 \u0111\u00E2y l\u00E0 c\u00E1ch n\u00E3o ho\u1EA1t \u0111\u1ED9ng.",
-    tags: ["Ph\u01B0\u01A1ng ph\u00E1p", "T\u1EEB v\u1EFDng"],
+    tags: ["Ph\u01B0\u01A1ng ph\u00E1p", "T\u1EEB v\u1EF1ng"],
     date: "07/06/2026",
     readingTime: "6 ph\u00FAt \u0111\u1ECDc",
     content: [
-      { type: "paragraph", text: "B\u1EA1n \u0111\u00E3 t\u1EEBng ng\u1ED3i h\u1ECDc 30 t\u1EEB v\u1EFDng bu\u1ED5i t\u1ED1i, c\u1EA3m gi\u00E1c nh\u1EDB h\u1EBFt r\u1ED3i \u2014 r\u1ED3i s\u00E1ng h\u00F4m sau m\u1EDF v\u1EDF ra nh\u00ECn nh\u01B0 ng\u01B0\u1EDDi ch\u01B0a h\u1ECDc bao gi\u1EDD?" },
+      { type: "paragraph", text: "B\u1EA1n \u0111\u00E3 t\u1EEBng ng\u1ED3i h\u1ECDc 30 t\u1EEB v\u1EF1ng bu\u1ED5i t\u1ED1i, c\u1EA3m gi\u00E1c nh\u1EDB h\u1EBFt r\u1ED3i \u2014 r\u1ED3i s\u00E1ng h\u00F4m sau m\u1EDF v\u1EDF ra nh\u00ECn nh\u01B0 ng\u01B0\u1EDDi ch\u01B0a h\u1ECDc bao gi\u1EDD?" },
       { type: "heading", text: "\u0110\u01B0\u1EDDng cong qu\u00EAn l\u00E3ng" },
       { type: "paragraph", text: "N\u0103m 1885, Ebbinghaus ph\u00E1t hi\u1EC7n: sau 24h b\u1EA1n qu\u00EAn ~70%, sau 1 tu\u1EA7n m\u1EA5t ~90% n\u1EBFu kh\u00F4ng \u00F4n. \u0110\u00E2y kh\u00F4ng ph\u1EA3i b\u1EA1n h\u1ECDc k\u00E9m \u2014 \u0111\u00E2y l\u00E0 sinh h\u1ECDc." },
       { type: "heading", text: "T\u1EA1i sao n\u00E3o l\u00E0m v\u1EADy?" },
@@ -206,34 +206,13 @@ export const BLOG_POSTS: BlogPost[] = [
     ]
   },
   {
-    slug: "tai-sao-nao-ban-quen-tu-vung-sau-24-gio",
-    title: "Tai sao nao ban quen tu vung sau 24 gio va cach khac phuc",
-    emoji: "🧠",
-    summary: "Hoc 20 tu hom nay, sang mai quen sach? Day khong phai loi cua ban.",
-    tags: ["Phuong phap","Tu vung"],
-    date: "07/06/2026",
-    readingTime: "6 phut doc",
-    content: [
-      { type: "paragraph", text: "Bạn đã từng ngồi học 30 từ vỽng buổi tối, nhớ hết rồi — rồi sáng hôm sau mở vở ra như người chưa học bao giờ?" },
-      { type: "heading", text: "Đường cong quên lãng" },
-      { type: "paragraph", text: "Năm 1885, Ebbinghaus phát hiện: sau 24h bạn quên ~70%, sau 1 tuần mất ~90% nếu không ôn. Đây không phải bạn học kém — đây là sinh học." },
-      { type: "heading", text: "Tại sao não làm vậy?" },
-      { type: "paragraph", text: "Não được thiết kế để lọc những gì quan trọng. Nếu không thấy từ nhiều lần, nó xóa đi." },
-      { type: "heading", text: "4 cách khắc phục" },
-      { type: "list", items: ["Ôn Spaced Repetition: 20 phút → 1 ngày → 3 ngày → 1 tuần.", "Mỗi từ mới viết 1 câu về cuộc sống bạn.", "Đọc + nghe + viết + nói to.", "Ngủ đủ 7-8 tiếng."] },
-      { type: "callout", emoji: "💡", text: "Bắt đầu ngay: Học 10 từ, ôn sau 20 phút, ngày mai ôn tiếp." },
-      { type: "quote", text: "Bạn không cần học nhiều hơn — cần học đúng cách hơn." }
-    ]
-  }
-,
-  {
     "slug": "50-cau-tieng-anh-dau-tien-cho-nguoi-mat-goc",
     "title": "Học tiếng Anh từ A0: 50 câu đầu tiên cần nhớ",
     "emoji": "💬",
     "summary": "Chưa biết bắt đầu từ đâu? Đây là 50 câu tiếng Anh cơ bản nhất — đủ để chào hỏi, tự giới thiệu, mua đồ và sống sót trong mọi tình huống cơ bản.",
     "tags": [
       "Mất gốc",
-      "Từ vỽng"
+      "Từ vựng"
     ],
     "date": "07/06/2026",
     "readingTime": "8 phút đọc",

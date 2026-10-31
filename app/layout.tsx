@@ -39,7 +39,7 @@ function Footer() {
   const read = [
     { href: "/blog/tai-sao-hoc-tieng-anh-mai-khong-gioi", label: "Tại sao học mãi không giỏi?" },
     { href: "/blog/toeic-450-trong-2-thang", label: "TOEIC 450 trong 2 tháng" },
-    { href: "/blog/hoc-tieng-anh-qua-phim", label: "Học tiếng Anh qua phim" },
+    { href: "/blog/50-cau-tieng-anh-dau-tien-cho-nguoi-mat-goc", label: "50 câu tiếng Anh đầu tiên" },
     { href: "/blog", label: "Tất cả bài viết" },
   ];
   return (
