@@ -1,107 +1,133 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { FAST_QUIZ } from "@/data/games";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowRight, Check, X } from "lucide-react";
 import { useProgress } from "@/lib/store";
+import { makeQuickQuiz, type QuickQuestion } from "@/lib/games";
+import { SpeakButton } from "@/components/SpeakButton";
+import { GameHeader, GameResult, ProgressDots } from "@/components/games/game-shell";
 
-const PER_Q_SEC = 8;
+const N = 10;
+const PER_Q = 8;
 
-export default function FastQuizGame() {
+function Game({ onReplay }: { onReplay: () => void }) {
   const addXp = useProgress((s) => s.addXp);
-  const inc = useProgress((s) => s.incrementGamesPlayed);
+  const recordGame = useProgress((s) => s.recordGame);
+  const best = useProgress((s) => (s.gameBest || {})["fast-quiz"]);
+
+  const [qs] = useState<QuickQuestion[]>(() => makeQuickQuiz(N));
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [reveal, setReveal] = useState(false);
+  const [t, setT] = useState(PER_Q);
   const [score, setScore] = useState(0);
-  const [t, setT] = useState(PER_Q_SEC);
-  const [done, setDone] = useState(false);
+  const [gained, setGained] = useState(0);
+  const [results, setResults] = useState<(boolean | null)[]>(() => Array(N).fill(null));
+  const [done, setDone] = useState<{ xp: number; newBest: boolean; correct: number } | null>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => { inc(); /* eslint-disable-next-line */ }, []);
+  const q = qs[idx];
 
-  const q = FAST_QUIZ[idx];
+  const answer = useCallback(
+    (i: number | null) => {
+      if (reveal) return;
+      const ok = i === q.correctIndex;
+      const pts = ok ? Math.max(1, t) : 0;
+      setPicked(i);
+      setReveal(true);
+      setGained(pts);
+      setScore((s) => s + pts);
+      setResults((r) => r.map((x, j) => (j === idx ? ok : x)));
+    },
+    [reveal, q, t, idx]
+  );
 
   useEffect(() => {
     if (reveal || done) return;
     if (t <= 0) {
-      setReveal(true);
+      answer(null);
       return;
     }
-    const i = setInterval(() => setT((x) => x - 1), 1000);
-    return () => clearInterval(i);
-  }, [t, reveal, done]);
+    const id = setTimeout(() => setT((x) => x - 1), 1000);
+    return () => clearTimeout(id);
+  }, [t, reveal, done, answer]);
 
-  function pick(i: number) {
-    if (reveal) return;
-    setPicked(i);
-    setReveal(true);
-    if (i === q.correctIndex) {
-      const bonus = Math.max(1, t); // faster = more XP
-      setScore((s) => s + bonus);
-    }
-  }
+  useEffect(() => {
+    if (reveal) nextRef.current?.focus();
+  }, [reveal]);
 
-  function nextQ() {
-    if (idx < FAST_QUIZ.length - 1) {
+  // Keys 1–4 choose an answer, Enter moves on
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (done) return;
+      if (!reveal && ["1", "2", "3", "4"].includes(e.key)) answer(Number(e.key) - 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [answer, reveal, done]);
+
+  function next() {
+    if (idx < N - 1) {
       setIdx(idx + 1);
       setPicked(null);
       setReveal(false);
-      setT(PER_Q_SEC);
+      setT(PER_Q);
     } else {
-      addXp(score);
-      setDone(true);
+      const correct = results.filter(Boolean).length;
+      const xp = score;
+      if (xp > 0) addXp(xp, "game:fast-quiz");
+      setDone({ xp, newBest: recordGame("fast-quiz", score), correct });
     }
   }
 
   if (done) {
     return (
-      <div className="max-w-md mx-auto px-4 pt-16 text-center">
-        <div className="text-6xl mb-4">⚡</div>
-        <h1 className="font-display text-4xl font-black">Hoàn thành!</h1>
-        <p className="text-ink-500 mt-2">Bạn kiếm được {score} XP</p>
-        <div className="mt-10 flex justify-center gap-3">
-          <Link href="/games" className="btn-bump-ghost">Game khác</Link>
-          <button onClick={() => location.reload()} className="btn-bump-ember">Chơi lại</button>
-        </div>
-      </div>
+      <GameResult
+        gameId="fast-quiz"
+        score={score}
+        max={N * PER_Q}
+        xp={done.xp}
+        best={best}
+        newBest={done.newBest}
+        note={`Đúng ${done.correct}/${N} từ. Mỗi câu đúng được số điểm bằng số giây còn lại.`}
+        onReplay={onReplay}
+      />
     );
   }
 
+  const urgent = !reveal && t <= 3;
+
   return (
-    <div className="max-w-xl mx-auto px-4 sm:px-6 pt-6">
-      <div className="flex items-center justify-between mb-6">
-        <Link href="/games" className="text-sm font-bold text-ink-500 inline-flex items-center gap-1">
-          <ArrowLeft className="w-4 h-4" /> Games
-        </Link>
-        <div className="text-sm font-bold text-ink-500">
-          {idx + 1}/{FAST_QUIZ.length} • {score} XP
+    <>
+      <GameHeader title="Quiz tốc độ" hint="Chọn nghĩa đúng trước khi hết giờ. Có thể bấm phím 1–4." stat={`${score} điểm`} />
+      <ProgressDots total={N} current={idx} results={results} />
+
+      <div className="rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 p-6 sm:p-8 mb-5">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm font-semibold text-navy-400">Từ {idx + 1}/{N}</span>
+          <span className={`w-11 h-11 rounded-full grid place-items-center text-lg font-extrabold tabular-nums transition-colors ${urgent ? "bg-apple-500 text-white" : "bg-navy-900/[0.06] dark:bg-white/10 text-navy-900 dark:text-white"}`} aria-label={`Còn ${t} giây`}>
+            {reveal ? "–" : t}
+          </span>
         </div>
+        <div className="flex items-center gap-3">
+          <p className="font-display text-4xl sm:text-5xl font-extrabold tracking-[-0.02em] text-navy-900 dark:text-white break-words min-w-0">{q.prompt}</p>
+          {q.speak && <SpeakButton text={q.speak} size="md" className="flex-shrink-0" />}
+        </div>
+        <p className="text-navy-500 dark:text-paper-200 mt-1">nghĩa là gì?</p>
       </div>
 
-      <div className="relative h-2 rounded-full bg-ink-900/8 dark:bg-paper-50/8 overflow-hidden mb-6">
-        <motion.div
-          key={idx}
-          initial={{ width: "100%" }}
-          animate={{ width: `${(t / PER_Q_SEC) * 100}%` }}
-          transition={{ duration: 1, ease: "linear" }}
-          className={`h-full ${t <= 2 ? "bg-rose-500" : "bg-ember-500"}`}
-        />
-      </div>
-
-      <h1 className="font-display text-2xl md:text-3xl font-black">{q.prompt}</h1>
-      <div className="mt-5 space-y-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
         {q.options.map((opt, i) => {
+          const isAns = i === q.correctIndex;
           const isPicked = picked === i;
-          const isCorrect = i === q.correctIndex;
-          let cls = "card-paper p-4 text-left font-bold w-full transition-all";
-          if (reveal) {
-            if (isCorrect) cls += " ring-2 ring-teal-500 bg-teal-50 dark:bg-teal-700/20";
-            else if (isPicked) cls += " ring-2 ring-rose-500 bg-rose-400/10";
-            else cls += " opacity-50";
-          } else cls += " hover:-translate-y-0.5";
+          let cls = "border-navy-900/10 dark:border-white/15 bg-white dark:bg-navy-900 text-navy-900 dark:text-white hover:border-navy-900/30 dark:hover:border-white/30";
+          if (reveal && isAns) cls = "border-leaf-500 bg-leaf-50 dark:bg-leaf-500/15 text-leaf-700 dark:text-leaf-500";
+          else if (reveal && isPicked) cls = "border-apple-500 bg-apple-50 dark:bg-apple-500/15 text-apple-700 dark:text-apple-500";
+          else if (reveal) cls = "border-navy-900/10 dark:border-white/10 bg-white dark:bg-navy-900 text-navy-400 opacity-60";
           return (
-            <button key={i} onClick={() => pick(i)} disabled={reveal} className={cls}>
+            <button key={i} disabled={reveal} onClick={() => answer(i)} className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left font-semibold transition-colors ${cls}`}>
+              <span className="w-7 h-7 rounded-lg bg-navy-900/[0.06] dark:bg-white/10 grid place-items-center text-sm font-bold flex-shrink-0">
+                {reveal && isAns ? <Check className="w-4 h-4" strokeWidth={3} /> : reveal && isPicked ? <X className="w-4 h-4" strokeWidth={3} /> : i + 1}
+              </span>
               {opt}
             </button>
           );
@@ -109,12 +135,26 @@ export default function FastQuizGame() {
       </div>
 
       {reveal && (
-        <div className="mt-6 flex justify-end">
-          <button onClick={nextQ} className="btn-bump-teal">
-            {idx < FAST_QUIZ.length - 1 ? "Câu tiếp" : "Xem kết quả"}
+        <div className="mt-5 flex items-center justify-between gap-4">
+          <p className={`font-bold ${picked === q.correctIndex ? "text-leaf-600 dark:text-leaf-500" : "text-apple-600 dark:text-apple-500"}`}>
+            {picked === q.correctIndex ? `Đúng! +${gained} điểm` : picked === null ? "Hết giờ rồi" : "Chưa đúng"}
+          </p>
+          <button ref={nextRef} onClick={next} className="btn-bump-teal">
+            {idx < N - 1 ? "Từ tiếp" : "Xem kết quả"} <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       )}
+    </>
+  );
+}
+
+export default function FastQuizPage() {
+  const [run, setRun] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return (
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-24 md:pb-12">
+      {mounted && <Game key={run} onReplay={() => setRun((r) => r + 1)} />}
     </div>
   );
 }

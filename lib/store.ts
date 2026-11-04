@@ -32,11 +32,14 @@ type State = {
   dailyXp: number;
   dailyXpDate: string | null;
   activeDays: string[]; // YYYY-MM-DD, last 60 days
+  gameBest: Record<string, number>; // best score per mini game
   // actions
   addXp: (amount: number, reason?: string) => void;
   markLessonComplete: (lessonId: string) => void;
   recordTestScore: (testId: string, score: number, total: number) => void;
   incrementGamesPlayed: () => void;
+  /** Finish a mini game: counts the game, keeps the best score. Returns true for a new best. */
+  recordGame: (gameId: string, score: number) => boolean;
   pingDailyActivity: () => void;
   reset: () => void;
 };
@@ -66,6 +69,7 @@ export const useProgress = create<State>()(
       dailyXp: 0,
       dailyXpDate: null,
       activeDays: [],
+      gameBest: {},
 
       addXp: (amount) => {
         const today = todayStr();
@@ -109,6 +113,18 @@ export const useProgress = create<State>()(
         }
       },
 
+      recordGame: (gameId, score) => {
+        const prev = (get().gameBest || {})[gameId];
+        const isBest = prev === undefined || score > prev;
+        set({
+          gamesPlayed: get().gamesPlayed + 1,
+          gameBest: isBest ? { ...(get().gameBest || {}), [gameId]: score } : get().gameBest || {},
+        });
+        if (get().gamesPlayed >= 10) unlockAchievement(set, get, "game-master");
+        get().pingDailyActivity();
+        return isBest && prev !== undefined;
+      },
+
       pingDailyActivity: () => {
         const today = todayStr();
         const last = get().lastActiveDate;
@@ -137,6 +153,7 @@ export const useProgress = create<State>()(
           dailyXp: 0,
           dailyXpDate: null,
           activeDays: [],
+          gameBest: {},
         }),
     }),
     { name: "englishstart-progress" }
