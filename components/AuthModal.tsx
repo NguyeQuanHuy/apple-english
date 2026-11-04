@@ -25,6 +25,8 @@ export function authErrorVi(raw: unknown): string {
     return "Bạn thử quá nhiều lần. Đợi khoảng một phút rồi thử lại.";
   if (m.includes("provider is not enabled") || m.includes("unsupported provider")) return "Đăng nhập bằng Google chưa được bật.";
   if (m.includes("signups not allowed")) return "Hiện chưa mở đăng ký tài khoản mới.";
+  if (m.includes("email address not authorized") || m.includes("error sending") || m.includes("sending confirmation") || m.includes("sending recovery"))
+    return "Hệ thống chưa gửi được email tới địa chỉ này. Thử lại sau, hoặc liên hệ Apple English để được hỗ trợ.";
   return msg ? `Có lỗi xảy ra: ${msg}` : "Có lỗi xảy ra. Thử lại sau nhé.";
 }
 

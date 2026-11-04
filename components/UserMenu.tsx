@@ -4,9 +4,35 @@ import { useEffect, useRef, useState } from "react";
 import { BarChart2, LogOut, User } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
-import { loadFromCloud, syncToCloud } from "@/lib/sync";
+import { loadFromCloud, syncToCloud, type CloudProgress } from "@/lib/sync";
 import { useProgress } from "@/lib/store";
 import { AuthModal } from "./AuthModal";
+
+type Local = ReturnType<typeof useProgress.getState>;
+
+/** Combine this browser's progress with the account's: never lose a lesson, score or day. */
+function mergeProgress(local: Local, cloud: CloudProgress) {
+  const scores = { ...cloud.testScores };
+  for (const [id, r] of Object.entries(local.testScores || {})) {
+    if (!scores[id] || (r.takenAt ?? 0) > (scores[id].takenAt ?? 0)) scores[id] = r;
+  }
+  const best: Record<string, number> = { ...cloud.gameBest };
+  for (const [id, v] of Object.entries(local.gameBest || {})) best[id] = Math.max(v, best[id] ?? 0);
+  const achievements = [...cloud.achievements];
+  for (const a of local.achievements || []) if (!achievements.some((x) => x.id === a.id)) achievements.push(a);
+  const localNewer = (local.lastActiveDate ?? "") >= (cloud.lastActiveDate ?? "");
+  return {
+    xp: Math.max(local.xp, cloud.xp),
+    streak: localNewer ? local.streak : cloud.streak,
+    lastActiveDate: localNewer ? local.lastActiveDate : cloud.lastActiveDate,
+    completedLessons: Array.from(new Set([...cloud.completedLessons, ...(local.completedLessons || [])])),
+    testScores: scores,
+    gamesPlayed: Math.max(local.gamesPlayed, cloud.gamesPlayed),
+    achievements,
+    activeDays: Array.from(new Set([...cloud.activeDays, ...(local.activeDays || [])])).sort().slice(-60),
+    gameBest: best,
+  };
+}
 
 export function UserMenu() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
@@ -20,30 +46,22 @@ export function UserMenu() {
       .getUser()
       .then(({ data: { user } }) => setUser(user))
       .catch(() => setUser(null));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       const u = session?.user ?? null;
       setUser(u);
-      if (!u) return;
-      try {
-        const local = useProgress.getState();
-        const cloud = await loadFromCloud();
-        if (cloud && cloud.xp >= local.xp) {
-          // Cloud has more progress: take it, but keep days learned on this device too
-          useProgress.setState({
-            xp: cloud.xp,
-            streak: cloud.streak,
-            lastActiveDate: cloud.lastActiveDate,
-            completedLessons: Array.from(new Set([...cloud.completedLessons, ...local.completedLessons])),
-            testScores: { ...local.testScores, ...cloud.testScores },
-            gamesPlayed: Math.max(cloud.gamesPlayed, local.gamesPlayed),
-            achievements: cloud.achievements,
-          });
-        } else if (local.xp > 0) {
-          await syncToCloud(local);
+      if (!u || (event !== "SIGNED_IN" && event !== "INITIAL_SESSION")) return;
+      // Calling Supabase inside this callback can deadlock the auth client, so run it on the next tick
+      setTimeout(async () => {
+        try {
+          const local = useProgress.getState();
+          const cloud = await loadFromCloud();
+          if (cloud) useProgress.setState(mergeProgress(local, cloud));
+          // Push the merged (or local-only) progress so both sides match
+          await syncToCloud(useProgress.getState());
+        } catch {
+          // Offline or server unreachable: keep learning locally
         }
-      } catch {
-        // Offline or server unreachable: keep learning locally
-      }
+      }, 0);
     });
     return () => subscription.unsubscribe();
   }, []);
@@ -53,7 +71,7 @@ export function UserMenu() {
     if (!user) return;
     const t = setTimeout(() => syncToCloud(useProgress.getState()).catch(() => {}), 2000);
     return () => clearTimeout(t);
-  }, [progress.xp, progress.streak, progress.completedLessons.length, user]);
+  }, [progress.xp, progress.streak, progress.completedLessons.length, progress.gamesPlayed, Object.keys(progress.testScores).length, user]);
 
   // Close the menu on outside click or Escape
   useEffect(() => {
