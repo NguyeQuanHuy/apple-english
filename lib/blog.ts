@@ -1,4 +1,5 @@
 import { BLOG_POSTS } from "@/data/blog";
+import { BLOG_EXTRA } from "@/data/blog-extra";
 import type { BlogPost } from "@/data/blog.d";
 
 export type Block =
@@ -24,10 +25,10 @@ export function formatPostDate(raw?: string) {
   return d ? d.toLocaleDateString("vi-VN", { day: "numeric", month: "long", year: "numeric" }) : raw ?? "";
 }
 
-/** All posts, newest first, de-duplicated by slug. */
+/** All posts, newest first, de-duplicated by slug (blog-extra wins over blog). */
 export const POSTS: BlogPost[] = (() => {
   const seen = new Set<string>();
-  return [...BLOG_POSTS]
+  return [...BLOG_EXTRA, ...BLOG_POSTS]
     .filter((p) => (seen.has(p.slug) ? false : (seen.add(p.slug), true)))
     .sort((a, b) => (parsePostDate(b.date)?.getTime() ?? 0) - (parsePostDate(a.date)?.getTime() ?? 0));
 })();

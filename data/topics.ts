@@ -1,3 +1,5 @@
+import { TOPIC_EXTRAS } from "./topic-phrases";
+
 export interface VocabItem {
   en: string;
   vi: string;
@@ -520,11 +522,13 @@ const RAW_TOPICS: RawTopic[] = [
   },
 ];
 
-// First 10 words of each topic are "basic", the rest "advanced"
+// First 10 words of each topic are "basic", the rest "advanced".
+// Phrases and tips live in topic-phrases.ts.
 export const TOPICS: Topic[] = RAW_TOPICS.map((t) => ({
   ...t,
+  tip: t.tip ?? TOPIC_EXTRAS[t.id]?.tip,
   basicVocab: t.vocab.slice(0, 10),
   advancedVocab: t.vocab.slice(10),
-  phrases: t.phrases ?? [],
+  phrases: t.phrases ?? TOPIC_EXTRAS[t.id]?.phrases ?? [],
   quiz: t.miniQuiz,
 }));

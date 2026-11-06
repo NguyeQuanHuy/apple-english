@@ -103,28 +103,6 @@ export const BLOG_POSTS: BlogPost[] = [
     ]
   },
   {
-    slug: "30-thanh-ngu-pho-bien-tieng-anh",
-    title: "30 thành ngữ phổ biến nhất trong tiếng Anh",
-    emoji: "💬",
-    summary: "Học 30 thành ngữ này để hiểu phim, nhạc và giao tiếp tự nhiên hơn.",
-    tags: ["Từ vựng", "Giao tiếp"],
-    date: "03/06/2026",
-    readingTime: "7 phút đọc",
-    content: [
-      { type: "vocab", word: "Break a leg", meaning: "Chúc may mắn!", example: "You have an interview? Break a leg!" },
-      { type: "vocab", word: "Hit the sack", meaning: "Đi ngủ", example: "I am exhausted. Time to hit the sack." },
-      { type: "vocab", word: "Under the weather", meaning: "Cảm thấy ốm", example: "I am feeling under the weather today." },
-      { type: "vocab", word: "Beat around the bush", meaning: "Vòng vo, không nói thẳng", example: "Stop beating around the bush." },
-      { type: "vocab", word: "Back to the drawing board", meaning: "Làm lại từ đầu", example: "The plan failed. Back to the drawing board." },
-      { type: "vocab", word: "On the same page", meaning: "Hiểu ý nhau", example: "Let us make sure we are on the same page." },
-      { type: "vocab", word: "A piece of cake", meaning: "Rất dễ", example: "The exam was a piece of cake." },
-      { type: "vocab", word: "Cost an arm and a leg", meaning: "Rất đắt", example: "That phone costs an arm and a leg." },
-      { type: "vocab", word: "Spill the beans", meaning: "Tiết lộ bí mật", example: "Who spilled the beans?" },
-      { type: "vocab", word: "The ball is in your court", meaning: "Đến lượt bạn quyết định", example: "The ball is in your court now." },
-      { type: "quote", text: "Biết thành ngữ là dấu hiệu bạn đã vượt qua ngưỡng học tiếng Anh cơ bản." }
-    ]
-  },
-  {
     slug: "cach-phat-am-tieng-anh-ro-rang",
     title: "Cách phát âm tiếng Anh rõ ràng",
     emoji: "🎤",

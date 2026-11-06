@@ -82,5 +82,5 @@ export const GAMES: {
   { id: "match", href: "/games/match", title: "Ghép từ", skill: "Từ vựng", desc: "Nối từ tiếng Anh với nghĩa tiếng Việt, 2 vòng mỗi vòng 6 cặp.", length: "45 giây", scoreLabel: "cặp" },
   { id: "fast-quiz", href: "/games/fast-quiz", title: "Quiz tốc độ", skill: "Phản xạ", desc: "10 từ, mỗi từ 8 giây để chọn nghĩa. Trả lời càng nhanh càng nhiều điểm.", length: "khoảng 1 phút", scoreLabel: "điểm" },
   { id: "sentence", href: "/games/sentence", title: "Xếp câu", skill: "Ngữ pháp", desc: "Bấm các từ theo đúng thứ tự để thành câu hoàn chỉnh.", length: "6 câu", scoreLabel: "câu đúng" },
-  { id: "fill-blank", href: "/games/fill-blank", title: "Điền từ", skill: "Ngữ pháp", desc: "Chọn từ đúng cho chỗ trống: am, is, are, động từ thêm -s…", length: "8 câu", scoreLabel: "câu đúng" },
+  { id: "fill-blank", href: "/games/fill-blank", title: "Điền từ", skill: "Ngữ pháp", desc: "Chọn từ đúng cho chỗ trống: am, is, are, giới từ, thì quá khứ, so sánh…", length: "8 câu", scoreLabel: "câu đúng" },
 ];
