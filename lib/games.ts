@@ -84,3 +84,9 @@ export const GAMES: {
   { id: "sentence", href: "/games/sentence", title: "Xếp câu", skill: "Ngữ pháp", desc: "Bấm các từ theo đúng thứ tự để thành câu hoàn chỉnh.", length: "6 câu", scoreLabel: "câu đúng" },
   { id: "fill-blank", href: "/games/fill-blank", title: "Điền từ", skill: "Ngữ pháp", desc: "Chọn từ đúng cho chỗ trống: am, is, are, giới từ, thì quá khứ, so sánh…", length: "8 câu", scoreLabel: "câu đúng" },
 ];
+
+/** Shuffle an item's options and move correctIndex with them, so answers aren't always in the same slot. */
+export function shuffleOptions<T extends { options: readonly string[]; correctIndex: number }>(item: T): T {
+  const order = shuffle(item.options.map((_, i) => i));
+  return { ...item, options: order.map((i) => item.options[i]), correctIndex: order.indexOf(item.correctIndex) } as T;
+}

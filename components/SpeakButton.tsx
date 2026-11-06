@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useTTS } from "@/lib/useTTS";
 type Props = { text: string; size?: "sm" | "md" | "lg"; className?: string };
 const sizeMap = { sm: "w-7 h-7", md: "w-9 h-9", lg: "w-11 h-11" };
@@ -10,7 +10,7 @@ export function SpeakButton({ text, size = "md", className = "" }: Props) {
     <button
       onClick={() => (isSpeaking ? stop() : speak(text))}
       aria-label={isSpeaking ? "Dừng" : "Phát âm"}
-      className={`inline-flex items-center justify-center rounded-full border transition-all duration-150 ${sizeMap[size]} ${isSpeaking ? "bg-amber-500 border-amber-500 text-white scale-110 shadow-md" : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-amber-400 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950"} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full border transition-all duration-150 ${sizeMap[size]} ${isSpeaking ? "bg-apple-500 border-apple-500 text-white scale-110 shadow-md" : "bg-white dark:bg-navy-900 border-navy-900/15 dark:border-white/20 text-navy-500 dark:text-paper-200 hover:border-apple-500 hover:text-apple-600 hover:bg-apple-50 dark:hover:bg-apple-500/15"} ${className}`}
     >
       {isSpeaking ? (
         <span className="flex items-end gap-px h-4">

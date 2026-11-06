@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Clock, ArrowLeft, ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 import { TOEIC_TESTS } from "@/data/toeic";
 import { useProgress } from "@/lib/store";
+import { MINI_TEST_EXPLAIN } from "@/data/toeic-practice";
+import { SpeakButton } from "@/components/SpeakButton";
 
 export default function TestPage() {
   const params = useParams<{ id: string }>();
@@ -54,13 +56,13 @@ export default function TestPage() {
   if (!started) {
     return (
       <div className="max-w-xl mx-auto px-4 sm:px-6 pt-12 text-center">
-        <div className="text-xs font-bold uppercase tracking-widest text-teal-500">TOEIC Mini Test</div>
+        <div className="text-sm font-semibold text-navy-400">TOEIC Mini Test</div>
         <h1 className="font-display text-4xl font-black mt-2">{test.title}</h1>
-        <p className="mt-3 text-ink-500">{test.description}</p>
+        <p className="mt-3 text-navy-500">{test.description}</p>
 
         <div className="card-paper p-6 mt-8 text-left">
           <h3 className="font-bold mb-3">Quy tắc:</h3>
-          <ul className="text-sm space-y-2 text-ink-700 dark:text-paper-100">
+          <ul className="text-sm space-y-2 text-navy-700 dark:text-paper-100">
             <li>• Đồng hồ bắt đầu đếm ngay khi bạn vào đề.</li>
             <li>• Hết giờ → tự động nộp bài.</li>
             <li>• Có thể quay lại sửa câu trước khi nộp.</li>
@@ -85,7 +87,7 @@ export default function TestPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 pb-32">
       <div className="flex items-center justify-between mb-6">
-        <Link href="/learn/toeic" className="text-sm text-ink-500 font-bold inline-flex items-center gap-1">
+        <Link href="/learn/toeic" className="text-sm text-navy-500 font-bold inline-flex items-center gap-1">
           <ArrowLeft className="w-4 h-4" /> Thoát
         </Link>
         <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono font-bold ${
@@ -104,10 +106,10 @@ export default function TestPage() {
             onClick={() => setCurrentIdx(i)}
             className={`h-8 rounded text-xs font-bold transition-colors ${
               i === currentIdx
-                ? "bg-teal-500 text-white"
+                ? "bg-navy-900 text-white dark:bg-white dark:text-navy-900"
                 : answers[qq.id] !== undefined
-                ? "bg-teal-50 text-teal-700 dark:bg-teal-700/30 dark:text-teal-50"
-                : "bg-ink-900/5 dark:bg-paper-50/5 text-ink-500"
+                ? "bg-leaf-50 text-leaf-700 dark:bg-leaf-500/15 dark:text-leaf-500"
+                : "bg-ink-900/5 dark:bg-paper-50/5 text-navy-500"
             }`}
           >
             {i + 1}
@@ -124,17 +126,31 @@ export default function TestPage() {
           transition={{ duration: 0.2 }}
         >
           {q.passage && (
-            <div className="card-paper p-4 text-sm whitespace-pre-wrap text-ink-700 dark:text-paper-100 mb-5 font-mono leading-relaxed max-h-72 overflow-y-auto">
+            <div className="card-paper p-4 text-sm whitespace-pre-wrap text-navy-700 dark:text-paper-100 mb-5 leading-relaxed max-h-72 overflow-y-auto">
               {q.passage}
             </div>
           )}
 
-          <div className="text-xs font-bold uppercase tracking-widest text-teal-500">
-            Câu {currentIdx + 1} • Part {q.part}
+          <div className="text-sm font-semibold text-navy-400">
+            Câu {currentIdx + 1} · Part {q.part}{q.part === 2 ? " · Nghe" : ""}
           </div>
-          <h2 className="font-display text-xl md:text-2xl font-bold mt-1.5 leading-snug">
-            {q.question}
-          </h2>
+          {q.part === 2 ? (
+            <div className="mt-3 flex items-center gap-4 rounded-2xl bg-navy-900 text-white p-5">
+              <SpeakButton
+                key={q.id}
+                text={`${q.question} ... ${q.options.map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`).join(" ... ")}`}
+                size="lg"
+              />
+              <div>
+                <p className="font-bold">Nghe câu hỏi và các đáp án</p>
+                <p className="text-sm text-white/60">Chữ sẽ hiện ra khi bạn nộp bài, như thi thật.</p>
+              </div>
+            </div>
+          ) : (
+            <h2 className="font-display text-xl md:text-2xl font-bold mt-1.5 leading-snug">
+              {q.question}
+            </h2>
+          )}
 
           <div className="mt-5 space-y-2.5">
             {q.options.map((opt, i) => {
@@ -144,16 +160,16 @@ export default function TestPage() {
                   key={i}
                   onClick={() => setAnswers({ ...answers, [q.id]: i })}
                   className={`card-paper p-3.5 text-left w-full font-semibold transition-all ${
-                    picked ? "ring-2 ring-teal-500" : "hover:-translate-y-0.5"
+                    picked ? "ring-2 ring-apple-500" : "hover:-translate-y-0.5"
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <span className={`w-6 h-6 rounded-md grid place-items-center text-xs font-black ${
-                      picked ? "bg-teal-500 text-white" : "bg-ink-900/8 dark:bg-paper-50/8"
+                      picked ? "bg-navy-900 text-white dark:bg-white dark:text-navy-900" : "bg-ink-900/8 dark:bg-paper-50/8"
                     }`}>
                       {String.fromCharCode(65 + i)}
                     </span>
-                    <span>{opt}</span>
+                    <span>{q.part === 2 ? `Đáp án ${String.fromCharCode(65 + i)}` : opt}</span>
                   </div>
                 </button>
               );
@@ -162,16 +178,16 @@ export default function TestPage() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="fixed bottom-0 inset-x-0 bg-paper-50/95 dark:bg-ink-900/95 backdrop-blur border-t border-ink-900/8 dark:border-paper-50/8 py-4">
+      <div className="fixed bottom-0 inset-x-0 bg-white/95 dark:bg-navy-900/95 backdrop-blur border-t border-ink-900/8 dark:border-paper-50/8 py-4">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
           <button
             onClick={() => setCurrentIdx(Math.max(0, currentIdx - 1))}
             disabled={currentIdx === 0}
-            className="inline-flex items-center gap-1 text-sm font-bold text-ink-500 disabled:opacity-30"
+            className="inline-flex items-center gap-1 text-sm font-bold text-navy-500 disabled:opacity-30"
           >
             <ArrowLeft className="w-4 h-4" /> Trước
           </button>
-          <div className="text-xs font-bold text-ink-500">
+          <div className="text-xs font-bold text-navy-500">
             {answered}/{test.questions.length} câu
           </div>
           {currentIdx < test.questions.length - 1 ? (
@@ -213,11 +229,11 @@ function ReviewScreen({
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-10 pb-16">
       <div className="text-center mb-10">
-        <div className="text-xs font-bold uppercase tracking-widest text-teal-500">Kết quả</div>
+        <div className="text-sm font-semibold text-navy-400">Kết quả</div>
         <div className="font-display text-7xl md:text-8xl font-black mt-4">
-          {score}<span className="text-ink-300">/{total}</span>
+          {score}<span className="text-navy-400">/{total}</span>
         </div>
-        <div className="mt-2 text-ink-500">
+        <div className="mt-2 text-navy-500">
           {pct}% • +{score * 5 + 20} XP
         </div>
       </div>
@@ -226,7 +242,7 @@ function ReviewScreen({
         <div className="card-paper p-6 text-center">
           <div className="text-4xl mb-2">🎯</div>
           <div className="font-display text-xl font-bold">Hoàn hảo!</div>
-          <div className="text-sm text-ink-500 mt-1">Không có câu nào sai.</div>
+          <div className="text-sm text-navy-500 mt-1">Không có câu nào sai.</div>
         </div>
       ) : (
         <div>
@@ -236,7 +252,7 @@ function ReviewScreen({
           <div className="space-y-4">
             {wrong.map((q) => (
               <div key={q.id} className="card-paper p-4">
-                <div className="text-xs font-bold uppercase tracking-widest text-rose-500 mb-2">
+                <div className="text-sm font-semibold text-apple-600 dark:text-apple-500 mb-2">
                   Part {q.part}
                 </div>
                 <div className="font-semibold">{q.question}</div>
@@ -245,13 +261,13 @@ function ReviewScreen({
                     <XCircle className="w-4 h-4 mt-0.5 shrink-0" />
                     <span>Bạn chọn: {answers[q.id] !== undefined ? q.options[answers[q.id]] : "Chưa trả lời"}</span>
                   </div>
-                  <div className="flex items-start gap-2 text-teal-500 mt-1">
+                  <div className="flex items-start gap-2 text-leaf-600 mt-1">
                     <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" />
                     <span>Đáp án đúng: {q.options[q.correctIndex]}</span>
                   </div>
                 </div>
-                {q.explain && (
-                  <div className="text-sm text-ink-500 mt-2 italic">{q.explain}</div>
+                {(MINI_TEST_EXPLAIN[q.id] ?? q.explain) && (
+                  <div className="text-sm text-navy-500 dark:text-paper-200 mt-2">{MINI_TEST_EXPLAIN[q.id] ?? q.explain}</div>
                 )}
               </div>
             ))}

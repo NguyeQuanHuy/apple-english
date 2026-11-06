@@ -500,7 +500,7 @@ export const TOEIC_TESTS: ToeicTest[] = [
       { id: "t3-2", part: 2, question: "When will the package arrive?", options: ["By tomorrow morning.", "At the post office.", "From the supplier.", "It weighs 5 kg."], correctIndex: 0 },
       { id: "t3-3", part: 2, question: "Who is responsible for the budget?", options: ["Last quarter.", "The finance team.", "In the main office.", "Yes, it was approved."], correctIndex: 1 },
       { id: "t3-4", part: 2, question: "How did you get to the conference?", options: ["It was very informative.", "I took the subway.", "Next Monday.", "About 200 people."], correctIndex: 1 },
-      { id: "t3-5", part: 2, question: "Could you send me the report?", options: ["Yes, I will email it now.", "It is on my desk.", "No, I did not write it.", "The report was late."], correctIndex: 0 },
+      { id: "t3-5", part: 2, question: "Could you send me the report?", options: ["Yes, I will email it now.", "He reports to the director.", "No, I did not write it.", "The report was late."], correctIndex: 0 },
       { id: "t3-6", part: 2, question: "Why was the meeting postponed?", options: ["In the conference room.", "Because the manager is traveling.", "At 2 PM tomorrow.", "For one hour."], correctIndex: 1 },
       { id: "t3-7", part: 2, question: "Have you reviewed the contract yet?", options: ["Yes, I finished it this morning.", "The contract is 10 pages.", "No, the meeting is tomorrow.", "It was signed last week."], correctIndex: 0 },
       { id: "t3-8", part: 2, question: "Which printer should I use?", options: ["It needs more paper.", "Use the one on the third floor.", "I printed 50 copies.", "The printer was repaired."], correctIndex: 1 },

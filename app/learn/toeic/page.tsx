@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, Clock, Headphones, BookOpenText, RotateCcw } from "lucide-react";
 import { TOEIC_THEMES, TOEIC_TESTS } from "@/data/toeic";
+import { PART2, PART5, PART5_CATEGORIES } from "@/data/toeic-practice";
 import { useProgress } from "@/lib/store";
 
 const PHRASE_THEME_IDS = ["idioms", "phrasal-verbs", "collocations"];
@@ -241,10 +242,72 @@ function ExamGuide() {
   );
 }
 
+/* ─────────── Practice rooms ─────────── */
+
+function PracticeRooms({ stats, wrong }: { stats: Record<string, { right: number; total: number }>; wrong: string[] }) {
+  const p2 = stats["part2"];
+  const p5 = PART5_CATEGORIES.reduce(
+    (a, c) => ({ right: a.right + (stats[c.id]?.right ?? 0), total: a.total + (stats[c.id]?.total ?? 0) }),
+    { right: 0, total: 0 }
+  );
+  const weakest = PART5_CATEGORIES.map((c) => ({ c, s: stats[c.id] }))
+    .filter((x) => x.s && x.s.total >= 4)
+    .sort((a, b) => a.s!.right / a.s!.total - b.s!.right / b.s!.total)[0];
+  const wrong2 = PART2.filter((q) => wrong.includes(q.id)).length;
+  const wrong5 = PART5.filter((q) => wrong.includes(q.id)).length;
+  const pct = (s?: { right: number; total: number }) => (s && s.total ? `${Math.round((s.right / s.total) * 100)}% đúng` : null);
+
+  const rooms = [
+    {
+      href: "/learn/toeic/listening",
+      Icon: Headphones,
+      title: "Luyện nghe Part 2",
+      desc: `${PART2.length} câu hỏi – đáp chỉ có tiếng như thi thật, giải thích từng bẫy bằng tiếng Việt.`,
+      stat: pct(p2),
+      extra: wrong2 ? `${wrong2} câu sai cần ôn` : null,
+      tint: "bg-leaf-50 text-leaf-700 dark:bg-leaf-500/15 dark:text-leaf-500",
+    },
+    {
+      href: "/learn/toeic/part5",
+      Icon: BookOpenText,
+      title: "Luyện Part 5 theo dạng",
+      desc: `${PART5.length} câu chia 6 dạng: từ loại, thì, giới từ, liên từ, đại từ, từ vựng. Biết ngay mình yếu dạng nào.`,
+      stat: pct(p5.total ? p5 : undefined),
+      extra: weakest ? `Yếu nhất: ${weakest.c.title}` : wrong5 ? `${wrong5} câu sai cần ôn` : null,
+      tint: "bg-navy-900/[0.06] text-navy-700 dark:bg-white/10 dark:text-paper-100",
+    },
+  ];
+
+  return (
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20">
+      <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-navy-900 dark:text-white mb-2">Phòng luyện tập</h2>
+      <p className="text-navy-500 dark:text-paper-200 mb-7 max-w-2xl">Luyện không giới hạn, mỗi vòng ngẫu nhiên. Câu nào sai được lưu lại để ôn cho tới khi làm đúng.</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {rooms.map(({ href, Icon, title, desc, stat, extra, tint }) => (
+          <Link key={href} href={href} className="group rounded-3xl bg-white dark:bg-navy-900 border border-navy-900/[0.08] dark:border-white/10 p-6 flex gap-5 hover:border-navy-900/25 dark:hover:border-white/25 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-apple-500">
+            <span className={`w-14 h-14 rounded-2xl grid place-items-center flex-shrink-0 ${tint}`}><Icon className="w-7 h-7" /></span>
+            <span className="flex-1 min-w-0 flex flex-col">
+              <span className="font-bold text-xl text-navy-900 dark:text-white group-hover:text-apple-600 dark:group-hover:text-apple-500 transition-colors mb-1">{title}</span>
+              <span className="text-[15px] text-navy-500 dark:text-paper-200 leading-relaxed mb-4">{desc}</span>
+              <span className="mt-auto flex items-center justify-between gap-3 text-sm">
+                <span className="text-navy-400">
+                  {stat ? <span className="font-bold text-navy-900 dark:text-white">{stat}</span> : "Chưa luyện"}
+                  {extra && <span className="text-apple-600 dark:text-apple-500 font-semibold"> · {extra}</span>}
+                </span>
+                <span className="inline-flex items-center gap-1 font-bold text-apple-600 dark:text-apple-500 whitespace-nowrap">Vào luyện <ArrowRight className="w-4 h-4" /></span>
+              </span>
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ─────────── Page ─────────── */
 
 export default function ToeicIndex() {
-  const { completedLessons, testScores } = useProgress();
+  const { completedLessons, testScores, toeicStats, toeicWrong } = useProgress();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -295,6 +358,8 @@ export default function ToeicIndex() {
         </div>
         <AnswerSheet doneThemes={doneThemes} testScores={scores} />
       </section>
+
+      <PracticeRooms stats={mounted ? toeicStats || {} : {}} wrong={mounted ? toeicWrong || [] : []} />
 
       {/* Vocabulary */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20">

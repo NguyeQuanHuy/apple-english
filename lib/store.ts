@@ -33,6 +33,8 @@ type State = {
   dailyXpDate: string | null;
   activeDays: string[]; // YYYY-MM-DD, last 60 days
   gameBest: Record<string, number>; // best score per mini game
+  toeicStats: Record<string, { right: number; total: number }>; // per Part 5 category / "part2"
+  toeicWrong: string[]; // ids of practice questions answered wrong, not yet fixed
   // actions
   addXp: (amount: number, reason?: string) => void;
   markLessonComplete: (lessonId: string) => void;
@@ -40,6 +42,8 @@ type State = {
   incrementGamesPlayed: () => void;
   /** Finish a mini game: counts the game, keeps the best score. Returns true for a new best. */
   recordGame: (gameId: string, score: number) => boolean;
+  /** Record one TOEIC practice answer: updates the category stats and the mistakes notebook. */
+  recordToeicAnswer: (questionId: string, category: string, correct: boolean) => void;
   pingDailyActivity: () => void;
   reset: () => void;
 };
@@ -70,6 +74,8 @@ export const useProgress = create<State>()(
       dailyXpDate: null,
       activeDays: [],
       gameBest: {},
+      toeicStats: {},
+      toeicWrong: [],
 
       addXp: (amount) => {
         const today = todayStr();
@@ -125,6 +131,17 @@ export const useProgress = create<State>()(
         return isBest && prev !== undefined;
       },
 
+      recordToeicAnswer: (questionId, category, correct) => {
+        const stats = { ...(get().toeicStats || {}) };
+        const cur = stats[category] ?? { right: 0, total: 0 };
+        stats[category] = { right: cur.right + (correct ? 1 : 0), total: cur.total + 1 };
+        const wrong = new Set(get().toeicWrong || []);
+        if (correct) wrong.delete(questionId);
+        else wrong.add(questionId);
+        set({ toeicStats: stats, toeicWrong: Array.from(wrong) });
+        get().pingDailyActivity();
+      },
+
       pingDailyActivity: () => {
         const today = todayStr();
         const last = get().lastActiveDate;
@@ -154,6 +171,8 @@ export const useProgress = create<State>()(
           dailyXpDate: null,
           activeDays: [],
           gameBest: {},
+          toeicStats: {},
+          toeicWrong: [],
         }),
     }),
     { name: "englishstart-progress" }
