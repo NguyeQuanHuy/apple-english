@@ -1,10 +1,15 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useTTS } from "@/lib/useTTS";
 type Props = { text: string; size?: "sm" | "md" | "lg"; className?: string };
 const sizeMap = { sm: "w-7 h-7", md: "w-9 h-9", lg: "w-11 h-11" };
 export function SpeakButton({ text, size = "md", className = "" }: Props) {
-  const { speak, stop, state, currentWord, supported } = useTTS({ rate: 0.85 });
-  if (!supported) return null;
+  const { speak, stop, state, currentWord } = useTTS({ rate: 0.85 });
+  // Speech support is only known in the browser; decide after mount so server and client HTML match
+  const [canSpeak, setCanSpeak] = useState<boolean | null>(null);
+  useEffect(() => setCanSpeak("speechSynthesis" in window), []);
+  if (canSpeak === null) return <span className={`inline-block ${sizeMap[size]} ${className}`} aria-hidden="true" />;
+  if (!canSpeak) return null;
   const isSpeaking = state === "speaking" && currentWord === text;
   return (
     <button

@@ -93,7 +93,7 @@ export function UserMenu() {
       <>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-navy-900 hover:bg-navy-700 dark:bg-white dark:text-navy-900 dark:hover:bg-paper-100 text-white text-sm font-semibold transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-navy-900 hover:bg-navy-700 dark:bg-white dark:text-navy-900 dark:hover:bg-paper-100 text-white text-sm font-semibold whitespace-nowrap transition-colors"
         >
           <User className="w-4 h-4" />
           <span className="hidden sm:inline">Đăng nhập</span>

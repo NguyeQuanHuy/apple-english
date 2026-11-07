@@ -31,6 +31,7 @@ export const viewport: Viewport = {
 function Footer() {
   const learn = [
     { href: "/learn/beginner", label: "Lộ trình mất gốc" },
+    { href: "/learn/school", label: "Học sinh lớp 3–12" },
     { href: "/learn/toeic", label: "Luyện TOEIC" },
     { href: "/learn/topics", label: "Từ vựng theo chủ đề" },
     { href: "/games", label: "Mini games" },

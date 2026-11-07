@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Flame, Lock, RotateCcw } from "lucide-react";
@@ -7,6 +7,7 @@ import { BEGINNER_PATH } from "@/data/beginner-lessons";
 import { EXTRA_PATH } from "@/data/extra-lessons";
 import { TOEIC_TESTS, TOEIC_THEMES } from "@/data/toeic";
 import { TOPICS } from "@/data/topics";
+import { SCHOOL_GRADES, unitKey } from "@/data/school";
 
 const PATH_IDS = [...BEGINNER_PATH, ...EXTRA_PATH].flatMap((u) => u.lessonIds);
 
@@ -18,6 +19,10 @@ function localDateStr(d: Date) {
 function describeScore(id: string): { name: string; href: string; kind: string } | null {
   const test = TOEIC_TESTS.find((t) => t.id === id);
   if (test) return { name: test.title.replace(/^Mini Test \d+\s*[—-]\s*/, ""), href: `/learn/toeic/test/${id}`, kind: "Đề TOEIC" };
+  if (id.startsWith("school-")) {
+    for (const g of SCHOOL_GRADES) for (const u of g.units)
+      if (unitKey(g.grade, u.id) === id) return { name: `Lớp ${g.grade}: ${u.title}`, href: `/learn/school/${g.grade}/${u.id}`, kind: "Bài học ở trường" };
+  }
   if (id.startsWith("topic-")) {
     const topic = TOPICS.find((t) => `topic-${t.id}` === id);
     if (topic) return { name: `${topic.emoji} ${topic.title}`, href: `/learn/topics/${topic.id}`, kind: "Quiz chủ đề" };
@@ -157,6 +162,11 @@ export default function DashboardPage() {
       { name: "Lộ trình mất gốc", detail: "20 bài từ A0 đến A2", done: lessonsDone, total: PATH_IDS.length, href: nextLesson ? `/learn/beginner/${nextLesson}` : "/learn/beginner", cta: lessonsDone ? "Học tiếp" : "Bắt đầu" },
       { name: "Từ vựng TOEIC", detail: "Flashcard theo chủ đề công sở", done: themesDone, total: TOEIC_THEMES.length, href: "/learn/toeic", cta: themesDone ? "Học tiếp" : "Bắt đầu" },
       { name: "Đề TOEIC mini", detail: "Đề có bấm giờ theo Part", done: testsDone, total: testIds.length, grade: avg(testIds), href: "/learn/toeic", cta: testsDone ? "Làm thêm" : "Làm đề" },
+      (() => {
+        const ids = SCHOOL_GRADES.flatMap((g) => g.units.map((u) => unitKey(g.grade, u.id)));
+        const done = ids.filter((id) => completed.includes(id)).length;
+        return { name: "Học sinh lớp 3–12", detail: "Bài theo lớp, qua bài khi đúng 3/4", done, total: ids.length, grade: avg(ids), href: "/learn/school", cta: done ? "Học tiếp" : "Chọn lớp" };
+      })(),
       { name: "Chủ đề đời sống", detail: "Quiz cuối mỗi chủ đề", done: topicsDone, total: topicIds.length, grade: avg(topicIds), href: "/learn/topics", cta: topicsDone ? "Học tiếp" : "Bắt đầu" },
     ];
   }, [completed, tests]);

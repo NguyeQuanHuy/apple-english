@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Moon, Sparkles, Sun, Menu, X, BookOpen, Target, Globe, Gamepad2, BarChart2, FileText, Home } from "lucide-react";
+import { Flame, Moon, Sparkles, Sun, Menu, X, BookOpen, Target, Globe, Gamepad2, BarChart2, FileText, Home, GraduationCap } from "lucide-react";
 import { useTheme } from "./theme-provider";
 import { UserMenu } from "./UserMenu";
 import { useProgress } from "@/lib/store";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 const NAV = [
   { href: "/", label: "Trang chủ", short: "Trang chủ", Icon: Home },
   { href: "/learn/beginner", label: "Lộ trình mất gốc", short: "Mất gốc", Icon: BookOpen },
+  { href: "/learn/school", label: "Học sinh lớp 3–12", short: "Học sinh", Icon: GraduationCap },
   { href: "/learn/toeic", label: "Luyện TOEIC", short: "TOEIC", Icon: Target },
   { href: "/learn/topics", label: "Từ vựng theo chủ đề", short: "Chủ đề", Icon: Globe },
   { href: "/games", label: "Mini games", short: "Games", Icon: Gamepad2 },
@@ -26,7 +27,7 @@ function Logo() {
         <path d="M18.3 6.3c2.2-2.6 5.6-2.4 7.4-1.3-1.4 2.2-4.6 3.4-7.4 1.3Z" fill="#2F9E5B" />
         <path d="M10.8 15.4c.5-1.6 1.7-2.6 3-2.9" stroke="white" strokeOpacity=".6" strokeWidth="1.8" strokeLinecap="round" fill="none" />
       </svg>
-      <span className="font-display text-[20px] font-extrabold tracking-[-0.01em] text-navy-900 dark:text-white">
+      <span className="font-display text-[20px] font-extrabold whitespace-nowrap tracking-[-0.01em] text-navy-900 dark:text-white">
         Apple <span className="text-apple-500">English</span>
       </span>
     </Link>
@@ -50,13 +51,13 @@ export function TopBar() {
       <header className="sticky top-0 z-40 backdrop-blur-md bg-[rgb(var(--bg)/0.85)] border-b border-navy-900/[0.07] dark:border-white/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           <Logo />
-          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Điều hướng chính">
+          <nav className="hidden xl:flex items-center gap-0.5" aria-label="Điều hướng chính">
             {NAV.slice(1).map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
                 aria-current={isActive(n.href) ? "page" : undefined}
-                className={`px-3 py-2 rounded-xl text-[15px] font-semibold transition-colors ${
+                className={`px-3 py-2 rounded-xl text-[15px] font-semibold whitespace-nowrap transition-colors ${
                   isActive(n.href)
                     ? "text-navy-900 bg-navy-900/[0.06] dark:text-white dark:bg-white/10"
                     : "text-navy-500 hover:text-navy-900 dark:text-paper-200 dark:hover:text-white"
@@ -81,7 +82,7 @@ export function TopBar() {
             <button onClick={toggle} aria-label={theme === "light" ? "Bật giao diện tối" : "Bật giao diện sáng"} className="p-2 rounded-xl text-navy-500 dark:text-paper-200 hover:bg-navy-900/5 dark:hover:bg-white/10 transition-colors">
               {theme === "light" ? <Moon className="w-[18px] h-[18px]" /> : <Sun className="w-[18px] h-[18px]" />}
             </button>
-            <button onClick={() => setMenuOpen(true)} className="lg:hidden p-2 rounded-xl text-navy-700 dark:text-paper-100 hover:bg-navy-900/5 dark:hover:bg-white/10 transition-colors" aria-label="Mở menu">
+            <button onClick={() => setMenuOpen(true)} className="xl:hidden p-2 rounded-xl text-navy-700 dark:text-paper-100 hover:bg-navy-900/5 dark:hover:bg-white/10 transition-colors" aria-label="Mở menu">
               <Menu className="w-5 h-5" />
             </button>
           </div>

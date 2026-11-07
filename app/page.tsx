@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Check, Flame, Gamepad2, Target, Globe, AudioLines, BookOpen, Lock } from "lucide-react";
+import { ArrowRight, Check, Flame, Gamepad2, Target, Globe, AudioLines, BookOpen, Lock, GraduationCap } from "lucide-react";
 import { useProgress, getLevel } from "@/lib/store";
 import { BEGINNER_LESSONS as A1_LESSONS, BEGINNER_PATH as A1_PATH } from "@/data/beginner-lessons";
 import { EXTRA_LESSONS, EXTRA_PATH } from "@/data/extra-lessons";
@@ -309,6 +309,7 @@ function BeginnerRoadmap({ completed }: { completed: string[] }) {
 }
 
 const OTHER_TRACKS = [
+  { href: "/learn/school", Icon: GraduationCap, title: "Học sinh lớp 3–12", desc: "Học theo lớp: 4 bài mỗi lớp, từ vựng, ngữ pháp và bài luyện tập bám sát chương trình.", tint: "text-apple-600 bg-apple-50 dark:text-apple-500 dark:bg-apple-500/15" },
   { href: "/learn/toeic", Icon: Target, title: "Luyện TOEIC", desc: "Từ vựng công sở theo chủ đề và đề thi thử có bấm giờ, chấm điểm từng part.", tint: "text-navy-700 bg-navy-900/[0.06] dark:text-white dark:bg-white/10" },
   { href: "/learn/topics", Icon: Globe, title: "Từ vựng theo chủ đề", desc: `${TOPICS.length} chủ đề đời sống: du lịch, công việc, mua sắm… mỗi chủ đề có quiz ngắn.`, tint: "text-leaf-700 bg-leaf-50 dark:text-leaf-500 dark:bg-leaf-500/15" },
   { href: "/games", Icon: Gamepad2, title: "Mini games", desc: "Ghép từ, xếp câu, quiz tốc độ. Mỗi ván khoảng 1 phút, ăn XP nhanh.", tint: "text-apple-600 bg-apple-50 dark:text-apple-500 dark:bg-apple-500/15" },
